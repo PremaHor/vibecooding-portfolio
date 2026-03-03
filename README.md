@@ -1,20 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# VibeCooding Portfolio
 
-# Run and deploy your AI Studio app
+Portfolio web vytvořený v React + Vite + Tailwind CSS.
 
-This contains everything you need to run your app locally.
+## Spuštění lokálně
 
-View your app in AI Studio: https://ai.studio/apps/56ba1ce4-8fb8-4fdf-888a-4acf7dbcfb71
+1. Nainstalujte závislosti:
+   ```bash
+   npm install
+   ```
 
-## Run Locally
+2. Spusťte dev server:
+   ```bash
+   npm run dev
+   ```
 
-**Prerequisites:**  Node.js
+3. Otevřete [http://localhost:3000](http://localhost:3000)
 
+## Build pro produkci
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm run build
+```
+
+## Technologie
+
+- React 19
+- Vite
+- Tailwind CSS 4
+- Motion (Framer Motion)
+- React Router
+- Lenis (smooth scroll)
