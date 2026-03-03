@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Anton", sans-serif;
+  --font-display: "Montserrat", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   --color-vibe-orange: #F27D26;
@@ -74,6 +74,11 @@
 
 .animate-float {
   animation: float 8s ease-in-out infinite;
+}
+
+/* Display font - Montserrat bold for headings */
+.font-display {
+  font-weight: 700;
 }
 
 /* Editorial Typography Utilities */
