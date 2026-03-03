@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useVelocity } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
 import Lenis from '@studio-freight/lenis';
 import { 
   Code2, 
@@ -327,21 +327,13 @@ const WorkSection = () => {
     offset: ["start start", "end end"]
   });
 
-  // Even softer, more "natural" spring for that Apple-like feel
+  // Lehčí spring pro plynulejší odezvu při scrollu
   const smoothProgress = useSpring(scrollYProgress, {
-    damping: 65,
-    stiffness: 70,
-    mass: 1.2,
-    restDelta: 0.0001
+    damping: 30,
+    stiffness: 100,
+    mass: 0.5,
+    restDelta: 0.001
   });
-
-  const scrollVelocity = useVelocity(smoothProgress);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 60,
-    stiffness: 300
-  });
-  
-  const skewVelocity = useTransform(smoothVelocity, [-0.1, 0.1], [-4, 4]);
   
   // Map scroll to horizontal movement - postupné zobrazení všech 3 projektů
   // Rozložení scrollu: 0-30% první projekt, 30-60% druhý, 60-90% třetí, 90-100% konec
@@ -373,10 +365,10 @@ const WorkSection = () => {
           </motion.div>
         </div>
 
-        {/* Horizontal Scroll Track with Skew */}
+        {/* Horizontal Scroll Track */}
         <motion.div 
-          style={{ x, skewX: skewVelocity, opacity: useTransform(smoothProgress, [0, 0.1, 0.9, 1], [1, 1, 1, 0]) }} 
-          className="flex gap-[20vw] sm:gap-[22vw] md:gap-[25vw] px-[8vw] sm:px-[10vw] md:px-[12vw] items-center relative z-10"
+          style={{ x, opacity: useTransform(smoothProgress, [0, 0.1, 0.9, 1], [1, 1, 1, 0]) }} 
+          className="flex gap-[20vw] sm:gap-[22vw] md:gap-[25vw] px-[8vw] sm:px-[10vw] md:px-[12vw] items-center relative z-10 will-change-transform"
         >
           {PROJECTS.map((project, idx) => (
             <ProjectCard 
@@ -417,8 +409,8 @@ const WorkSection = () => {
 function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { project: Project, index: number, scrollYProgress: any, onHoverChange?: (hovered: boolean) => void, key?: React.Key }) {
   const cardRef = useRef(null);
   
-  // Individual parallax for each image
-  const yParallax = useTransform(scrollYProgress, [0, 1], [0, index % 2 === 0 ? -100 : 100]);
+  // Jemný parallax pro obrázek - redukovaný pro plynulejší scroll
+  const yParallax = useTransform(scrollYProgress, [0, 1], [0, index % 2 === 0 ? -30 : 30]);
   
   return (
     <motion.div 
@@ -879,10 +871,11 @@ export default function App() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.8, // Slightly slower for that "nature" feel
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
     });
 
     function raf(time: number) {
@@ -901,30 +894,33 @@ export default function App() {
       setIsHovering(!!isInteractive);
     };
 
+    let scrollTicking = false;
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 80;
+      if (scrollTicking) return;
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        const scrollPos = window.scrollY + 80;
+        const workSection = document.getElementById('work');
+        const servicesSection = document.getElementById('services');
+        const contactSection = document.getElementById('contact');
 
-      const workSection = document.getElementById('work');
-      const servicesSection = document.getElementById('services');
-      const contactSection = document.getElementById('contact');
-
-      let currentTheme: 'light' | 'dark' = 'dark';
-
-      if (contactSection && scrollPos >= contactSection.offsetTop) {
-        currentTheme = 'light';
-      } else if (servicesSection && scrollPos >= servicesSection.offsetTop) {
-        currentTheme = 'dark';
-      } else if (workSection && scrollPos >= workSection.offsetTop) {
-        currentTheme = 'light';
-      } else {
-        currentTheme = 'dark';
-      }
-
-      setNavTheme(currentTheme);
+        let currentTheme: 'light' | 'dark' = 'dark';
+        if (contactSection && scrollPos >= contactSection.offsetTop) {
+          currentTheme = 'light';
+        } else if (servicesSection && scrollPos >= servicesSection.offsetTop) {
+          currentTheme = 'dark';
+        } else if (workSection && scrollPos >= workSection.offsetTop) {
+          currentTheme = 'light';
+        } else {
+          currentTheme = 'dark';
+        }
+        setNavTheme(currentTheme);
+        scrollTicking = false;
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     return () => {

@@ -25,7 +25,7 @@
   html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
-    scroll-behavior: smooth;
+    /* scroll-behavior vynechán - konfliktuje s Lenis smooth scroll */
   }
 
   body {
