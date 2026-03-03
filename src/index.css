@@ -9,12 +9,23 @@
   --color-vibe-orange: #F27D26;
   --color-vibe-green: #00FF00;
   --color-vibe-black: #050505;
+
+  /* Spacing scale - 8px base */
+  --space-section-y: 6rem;      /* 96px */
+  --space-section-y-md: 8rem;  /* 128px */
+  --space-section-y-lg: 10rem; /* 160px */
+  --space-section-x: 1rem;     /* 16px */
+  --space-section-x-md: 1.5rem;/* 24px */
+  --space-section-x-lg: 2rem;  /* 32px */
+  --space-flow: 1.5;           /* line-height body */
+  --space-flow-tight: 1.25;    /* line-height headings */
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -89,4 +100,11 @@
 
 .text-reveal span {
   display: block;
+}
+
+/* Improved focus states for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-vibe-orange);
+  outline-offset: 2px;
 }

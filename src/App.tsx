@@ -14,7 +14,8 @@ import {
   ArrowLeft,
   ChevronRight,
   Menu,
-  X
+  X,
+  Cookie
 } from 'lucide-react';
 
 // --- Types ---
@@ -130,8 +131,8 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 sm:py-6 flex justify-between items-center transition-all duration-500 safe-area-inset-top ${
-        scrolled ? 'bg-black/10 backdrop-blur-xl py-3 sm:py-4' : 'bg-transparent'
+      <nav className={`fixed top-0 left-0 w-full z-50 px-5 sm:px-8 py-4 sm:py-5 flex justify-between items-center transition-all duration-500 safe-area-inset-top ${
+        scrolled ? 'bg-black/10 backdrop-blur-xl py-3' : 'bg-transparent'
       } ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         <Link to="/" className="flex items-center gap-2 group">
           <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${
@@ -212,7 +213,7 @@ const Hero = () => {
   const rotate = useTransform(scrollY, [0, 500], [0, 15]);
 
   return (
-    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-4 sm:px-6 pt-24 sm:pt-20 pb-12 overflow-hidden safe-area-inset">
+    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-5 sm:px-8 md:px-12 pt-28 sm:pt-24 pb-16 sm:pb-20 overflow-hidden safe-area-inset">
       {/* Animated Background Blobs */}
       <motion.div 
         style={{ y: y1, rotate }}
@@ -229,12 +230,12 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 border border-white/10 rounded-full text-[9px] sm:text-[10px] uppercase tracking-[0.3em] font-bold mb-8 sm:mb-12 text-white/40 bg-white/5 backdrop-blur-sm">
+          <span className="inline-block px-4 py-2 border border-white/10 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold mb-10 sm:mb-14 text-white/50 bg-white/5 backdrop-blur-sm">
             Dostupný pro nové projekty 2026
           </span>
         </motion.div>
         
-        <h1 className="font-display text-[14vw] sm:text-[12vw] md:text-[13vw] leading-[1.1] uppercase tracking-tighter mb-10 sm:mb-16">
+        <h1 className="font-display text-[14vw] sm:text-[12vw] md:text-[13vw] leading-[1.08] uppercase tracking-[-0.02em] mb-12 sm:mb-20">
           <div className="text-reveal">
             <motion.span 
               initial={{ y: "100%" }}
@@ -256,26 +257,26 @@ const Hero = () => {
           </div>
         </h1>
 
-        <div className="grid md:grid-cols-2 gap-10 sm:gap-16 items-end">
+        <div className="grid md:grid-cols-2 gap-12 sm:gap-20 lg:gap-24 items-end">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="space-y-6 sm:space-y-8"
+            className="space-y-8 sm:space-y-10"
           >
-            <p className="text-base sm:text-xl md:text-2xl font-light text-white/50 max-w-xl leading-snug">
+            <p className="text-base sm:text-lg md:text-xl font-light text-white/55 max-w-lg leading-[1.7]">
               Pomáhám vizionářům a startupům stavět digitální produkty, které vyčnívají. 
               Kombinuji technickou preciznost s kreativním flow.
             </p>
-            <div className="flex flex-wrap gap-4 sm:gap-8 items-center">
-               <div className="flex -space-x-4">
+            <div className="flex flex-wrap gap-5 sm:gap-10 items-center">
+               <div className="flex -space-x-3">
                   {[1,2,3].map(i => (
-                    <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-[var(--color-vibe-black)] bg-gray-800 overflow-hidden">
-                       <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="Client" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <div key={i} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-[var(--color-vibe-black)] bg-gray-800 overflow-hidden">
+                       <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="Client" width={100} height={100} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </div>
                   ))}
                </div>
-               <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest opacity-40">Důvěřují mi lídři v oboru</p>
+               <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] opacity-50">Důvěřují mi lídři v oboru</p>
             </div>
           </motion.div>
           
@@ -283,7 +284,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="flex justify-center md:justify-end mt-8 md:mt-0"
+            className="flex justify-center md:justify-end mt-12 md:mt-0"
           >
             <button 
               onClick={() => {
@@ -356,16 +357,16 @@ const WorkSection = () => {
 
   return (
     <section id="work" ref={targetRef} className="relative h-[500vh] sm:h-[600vh] md:h-[800vh] bg-white text-black">
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-20 sm:py-24 md:py-32 px-0">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-24 sm:py-28 md:py-36 px-0">
         {/* Editorial Header - Fades out as we scroll deep OR hover the first project */}
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 absolute top-12 sm:top-16 md:top-24 left-0 right-0 z-20">
+        <div className="max-w-7xl mx-auto w-full px-5 sm:px-8 md:px-12 absolute top-14 sm:top-20 md:top-28 left-0 right-0 z-20">
           <motion.div 
             animate={{ opacity: headerOpacity }}
             style={{ opacity: scrollOpacity }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col md:flex-row justify-between items-baseline gap-8 sm:gap-12"
           >
-            <h2 className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-[14vw] uppercase tracking-tighter leading-[1.1]">
+            <h2 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[12vw] uppercase tracking-tighter leading-[1.08]">
               Vybraná<br/>
               <span className="text-[var(--color-vibe-orange)]">Práce</span>
             </h2>
@@ -375,7 +376,7 @@ const WorkSection = () => {
         {/* Horizontal Scroll Track with Skew */}
         <motion.div 
           style={{ x, skewX: skewVelocity, opacity: useTransform(smoothProgress, [0, 0.1, 0.9, 1], [1, 1, 1, 0]) }} 
-          className="flex gap-[20vw] sm:gap-[22vw] md:gap-[25vw] px-[10vw] sm:px-[12vw] md:px-[15vw] items-center relative z-10"
+          className="flex gap-[20vw] sm:gap-[22vw] md:gap-[25vw] px-[8vw] sm:px-[10vw] md:px-[12vw] items-center relative z-10"
         >
           {PROJECTS.map((project, idx) => (
             <ProjectCard 
@@ -396,7 +397,7 @@ const WorkSection = () => {
         </motion.div>
 
         {/* Progress Indicator */}
-        <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 w-48 sm:w-64 h-1 bg-black/5 rounded-full overflow-hidden px-4">
+        <div className="absolute bottom-10 sm:bottom-14 left-1/2 -translate-x-1/2 w-52 sm:w-72 h-1 bg-black/5 rounded-full overflow-hidden px-4">
           <motion.div 
             style={{ scaleX: smoothProgress, originX: 0 }}
             className="h-full bg-[var(--color-vibe-orange)]"
@@ -436,11 +437,16 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
           0{index + 1}
         </div>
 
-        <div className="relative aspect-[16/10] md:aspect-[1.2/1] overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] mb-8 sm:mb-12 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
+        <div className="relative aspect-[16/10] md:aspect-[1.2/1] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-10 sm:mb-14 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
           <motion.img 
             style={{ y: yParallax, scale: 1.2 }}
             src={project.image} 
             alt={project.title}
+            width={1200}
+            height={800}
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchPriority={index === 0 ? "high" : undefined}
+            decoding="async"
             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.25]"
             referrerPolicy="no-referrer"
           />
@@ -462,22 +468,22 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-10">
           <div className="max-w-md">
-            <div className="flex items-center gap-3 mb-3 sm:mb-4">
-              <span className="w-6 sm:w-8 h-px bg-[var(--color-vibe-orange)]" />
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--color-vibe-orange)]">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="w-8 h-px bg-[var(--color-vibe-orange)]" />
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)]">
                 {project.category}
               </span>
             </div>
             
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display uppercase tracking-tighter leading-none mb-4 sm:mb-6 group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display uppercase tracking-tighter leading-[1.05] mb-5 sm:mb-6 group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500">
               {project.title}
             </h3>
             
-            <div className="flex gap-1.5 sm:gap-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap">
               {project.tags.map(tag => (
-                <span key={tag} className="text-[9px] px-4 py-1.5 border border-black/10 rounded-full font-mono uppercase tracking-widest bg-white group-hover:bg-black group-hover:text-white group-hover:border-black transition-all duration-300">
+                <span key={tag} className="text-[10px] px-4 py-2 border border-black/10 rounded-full font-mono uppercase tracking-[0.15em] bg-white group-hover:bg-black group-hover:text-white group-hover:border-black transition-all duration-300">
                   {tag}
                 </span>
               ))}
@@ -495,20 +501,20 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
 }
 
 const ServicesSection = () => (
-  <section id="services" className="py-24 sm:py-32 md:py-40 lg:py-48 px-4 sm:px-6 relative overflow-hidden">
+  <section id="services" className="py-24 sm:py-32 md:py-40 lg:py-48 px-5 sm:px-8 md:px-12 relative overflow-hidden">
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
     
     <div className="max-w-7xl mx-auto relative z-10">
-      <div className="grid lg:grid-cols-2 gap-16 sm:gap-24 lg:gap-32 items-center">
+      <div className="grid lg:grid-cols-2 gap-20 sm:gap-28 lg:gap-36 items-center">
         <div>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-9xl uppercase tracking-tighter mb-10 sm:mb-16 leading-[1.1]">
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-tighter mb-12 sm:mb-20 leading-[1.08]">
             Co Vám<br/><span className="text-white/20 italic">Nabízím</span>
           </h2>
-          <p className="text-base sm:text-xl md:text-2xl text-white/50 mb-10 sm:mb-16 max-w-md font-light leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-white/55 mb-14 sm:mb-20 max-w-lg font-light leading-[1.7]">
             Nejsem jen další vývojář. Jsem váš partner v digitální transformaci. 
             Můj přístup spojuje rychlost, kvalitu a moderní estetiku.
           </p>
-          <div className="grid gap-4 sm:gap-6">
+          <div className="grid gap-5 sm:gap-6">
             {SERVICES.map((service, idx) => (
               <motion.div 
                 key={idx}
@@ -516,14 +522,14 @@ const ServicesSection = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="group flex gap-4 sm:gap-6 md:gap-8 p-5 sm:p-6 md:p-8 border border-white/5 rounded-[1.5rem] sm:rounded-[2rem] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500"
+                className="group flex gap-5 sm:gap-6 md:gap-8 p-6 sm:p-7 md:p-8 border border-white/5 rounded-2xl hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500"
               >
                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0 group-hover:bg-[var(--color-vibe-orange)] group-hover:text-black transition-all duration-500">
                   {service.icon}
                 </div>
                 <div className="min-w-0">
-                  <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 tracking-tight">{service.title}</h4>
-                  <p className="text-white/40 text-sm sm:text-base leading-relaxed group-hover:text-white/60 transition-colors">{service.description}</p>
+                  <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 tracking-tight">{service.title}</h4>
+                  <p className="text-white/45 text-sm sm:text-base leading-[1.6] group-hover:text-white/65 transition-colors">{service.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -536,7 +542,7 @@ const ServicesSection = () => (
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="sticky top-24 lg:top-32 aspect-[4/5] rounded-[2rem] lg:rounded-[3rem] border border-white/5 bg-white/[0.02] p-8 sm:p-12 lg:p-16 flex flex-col justify-between overflow-hidden backdrop-blur-sm"
+            className="sticky top-28 lg:top-36 aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-8 sm:p-10 lg:p-14 flex flex-col justify-between overflow-hidden backdrop-blur-sm"
           >
             <div className="absolute -top-40 -right-40 w-96 h-96 bg-[var(--color-vibe-orange)]/10 rounded-full blur-[100px]" />
             <div className="relative z-10">
@@ -550,7 +556,7 @@ const ServicesSection = () => (
               </div>
               
               <Terminal className="w-12 h-12 sm:w-16 sm:h-16 mb-8 lg:mb-12 text-[var(--color-vibe-orange)]" />
-              <div className="font-mono text-sm sm:text-base lg:text-lg space-y-3 sm:space-y-4 text-white/30">
+              <div className="font-mono text-sm sm:text-base lg:text-lg space-y-4 text-white/35">
                 <p className="text-[var(--color-vibe-orange)]/80">$ vibecooding --init</p>
                 <p className="animate-pulse">Initializing creative flow...</p>
                 <p>Optimizing for performance...</p>
@@ -562,9 +568,9 @@ const ServicesSection = () => (
               </div>
             </div>
             
-            <div className="relative z-10 border-t border-white/5 pt-8 lg:pt-12">
-              <div className="text-[8vw] lg:text-[10vw] font-display opacity-5 select-none leading-none">FLOW</div>
-              <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.5em] opacity-20 mt-2 sm:mt-4">VibeCooding Engine v2.6</p>
+            <div className="relative z-10 border-t border-white/5 pt-10 lg:pt-14">
+              <div className="text-[8vw] lg:text-[9vw] font-display opacity-5 select-none leading-none">FLOW</div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-25 mt-4">VibeCooding Engine v2.6</p>
             </div>
           </motion.div>
         </div>
@@ -574,7 +580,7 @@ const ServicesSection = () => (
 );
 
 const ContactSection = () => (
-  <section id="contact" className="py-24 sm:py-32 md:py-40 lg:py-48 px-4 sm:px-6 bg-[var(--color-vibe-orange)] text-black relative overflow-hidden">
+  <section id="contact" className="py-24 sm:py-32 md:py-40 lg:py-48 px-5 sm:px-8 md:px-12 bg-[var(--color-vibe-orange)] text-black relative overflow-hidden">
     {/* Decorative Elements */}
     <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/5 to-transparent" />
     <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-black/10 rounded-full blur-3xl" />
@@ -586,17 +592,17 @@ const ContactSection = () => (
         viewport={{ once: true }}
         transition={{ duration: 1 }}
       >
-        <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[13vw] uppercase tracking-tight leading-[1.1] mb-12 sm:mb-16 md:mb-20">
-          Máte Nápad?<br/>Pojďme Ho<br/><span className="italic opacity-80">Oživit.</span>
+        <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[12vw] uppercase tracking-tight leading-[1.08] mb-16 sm:mb-20 md:mb-24">
+          Máte Nápad?<br/>Pojďme Ho<br/><span className="italic opacity-90">Oživit.</span>
         </h2>
       </motion.div>
 
-      <div className="flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-12 mb-20 sm:mb-24 md:mb-32">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-10 sm:gap-14 mb-24 sm:mb-28 md:mb-36">
         <motion.a 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
           href="mailto:hello@vibecooding.dev" 
-          className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold border-b-4 border-black pb-2 hover:text-white hover:border-white transition-all duration-500 break-all text-center"
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-all duration-500 break-all text-center"
         >
           hello@vibecooding.dev
         </motion.a>
@@ -607,13 +613,13 @@ const ContactSection = () => (
           whileHover={{ scale: 1.05, rotate: -2 }}
           whileTap={{ scale: 0.95 }}
           href="mailto:hello@vibecooding.dev"
-          className="bg-black text-white px-8 sm:px-10 md:px-12 py-4 sm:py-5 md:py-6 rounded-full text-base sm:text-lg md:text-xl font-bold uppercase tracking-widest shadow-2xl hover:bg-white hover:text-black transition-all duration-500 text-center"
+          className="bg-black text-white px-10 sm:px-12 md:px-14 py-5 sm:py-6 rounded-full text-base sm:text-lg md:text-xl font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-all duration-500 text-center"
         >
           Rezervovat Konzultaci
         </motion.a>
       </div>
       
-      <div className="flex flex-wrap justify-center gap-6 sm:gap-10 md:gap-16 border-t border-black/20 pt-12 sm:pt-16">
+      <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-20 border-t border-black/20 pt-16 sm:pt-20">
         {[
           { name: 'LinkedIn', icon: <Linkedin className="w-5 h-5" />, url: 'https://linkedin.com' },
           { name: 'Behance', icon: (
@@ -645,10 +651,79 @@ const ContactSection = () => (
 );
 
 const Footer = () => (
-  <footer className="py-8 sm:py-12 px-4 sm:px-6 border-t border-white/5 text-center text-white/30 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] font-bold">
+  <footer id="privacy" className="py-12 sm:py-16 px-5 sm:px-8 border-t border-white/5 text-center text-white/35 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
     © 2026 VIBECOODING - VYTVOŘENO S VÁŠNÍ PRO KÓD
   </footer>
 );
+
+const COOKIE_CONSENT_KEY = 'vibecooding-cookie-consent';
+
+const CookieBar = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+    if (!consent) {
+      const timer = setTimeout(() => setIsVisible(true), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const acceptAll = () => {
+    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ essential: true, analytics: true, marketing: true, timestamp: Date.now() }));
+    setIsVisible(false);
+  };
+
+  const declineOptional = () => {
+    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ essential: true, analytics: false, marketing: false, timestamp: Date.now() }));
+    setIsVisible(false);
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 100, opacity: 0 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        className="fixed bottom-0 left-0 right-0 z-[200] p-4 sm:p-6 safe-area-inset-bottom"
+      >
+        <div className="max-w-4xl mx-auto rounded-2xl sm:rounded-[1.5rem] bg-[var(--color-vibe-black)]/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/40 overflow-hidden">
+          <div className="p-5 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-5 lg:gap-8 lg:items-center">
+            <div className="flex gap-4 flex-1">
+              <div className="shrink-0 w-12 h-12 rounded-xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center">
+                <Cookie className="w-6 h-6 text-[var(--color-vibe-orange)]" />
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-1">Soubory cookies</h3>
+                <p className="text-sm text-white/70 leading-relaxed">
+                  Používáme cookies pro zajištění funkčnosti webu a lepší uživatelskou zkušenost.{' '}
+                  <a href="#privacy" className="text-[var(--color-vibe-orange)] hover:underline">Více informací</a>
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <button
+                onClick={declineOptional}
+                className="px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-colors"
+              >
+                Jen nutné
+              </button>
+              <button
+                onClick={acceptAll}
+                className="px-6 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider bg-[var(--color-vibe-orange)] text-white hover:bg-[var(--color-vibe-orange)]/90 transition-colors shadow-lg"
+              >
+                Přijmout vše
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
 
 // --- Pages ---
 
@@ -690,9 +765,9 @@ const ProjectPage = () => {
       
       <main className="pt-24 sm:pt-28 md:pt-32 pb-0">
         {/* Project Hero */}
-        <section className="px-4 sm:px-6 mb-20 sm:mb-24 md:mb-32">
+        <section className="px-5 sm:px-8 md:px-12 mb-24 sm:mb-28 md:mb-36">
           <div className="max-w-7xl mx-auto">
-            <div className="overflow-hidden mb-6 sm:mb-8">
+            <div className="overflow-hidden mb-8">
               <motion.span 
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
@@ -707,7 +782,7 @@ const ProjectPage = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[12vw] uppercase tracking-tighter leading-[1.1] mb-10 sm:mb-16"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-tighter leading-[1.08] mb-12 sm:mb-20"
             >
               {project.title}
             </motion.h1>
@@ -716,11 +791,15 @@ const ProjectPage = () => {
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              className="aspect-[16/9] w-full rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-white/5 shadow-2xl"
+              className="aspect-[16/9] w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl"
             >
               <img 
                 src={project.image} 
                 alt={project.title} 
+                width={1200}
+                height={800}
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -729,15 +808,15 @@ const ProjectPage = () => {
         </section>
 
         {/* Project Info */}
-        <section className="px-4 sm:px-6 mb-24 sm:mb-32 md:mb-48">
-          <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 sm:gap-24 md:gap-32">
+        <section className="px-5 sm:px-8 md:px-12 mb-28 sm:mb-36 md:mb-48">
+          <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-20 sm:gap-28 md:gap-36">
             <div className="md:col-span-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase tracking-tight mb-8 sm:mb-12">O projektu</h2>
-              <p className="text-base sm:text-xl md:text-2xl text-white/50 leading-relaxed mb-10 sm:mb-16 font-light">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase tracking-tight mb-10 sm:mb-14">O projektu</h2>
+              <p className="text-base sm:text-lg md:text-xl text-white/55 leading-[1.7] mb-12 sm:mb-20 font-light">
                 {project.fullDescription}
               </p>
               
-              <div className="grid grid-cols-2 gap-8 sm:gap-12 md:gap-16 border-t border-white/5 pt-10 sm:pt-16">
+              <div className="grid grid-cols-2 gap-10 sm:gap-14 md:gap-20 border-t border-white/5 pt-14 sm:pt-20">
                 <div>
                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/30 mb-3 sm:mb-4">Klient</h4>
                   <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{project.client}</p>
@@ -772,12 +851,12 @@ const ProjectPage = () => {
         </section>
 
         {/* Next Project CTA */}
-        <Link to={`/project/${nextProject.slug}`} className="group block relative py-24 sm:py-32 md:py-48 px-4 sm:px-6 bg-white text-black overflow-hidden">
+        <Link to={`/project/${nextProject.slug}`} className="group block relative py-28 sm:py-36 md:py-52 px-5 sm:px-8 md:px-12 bg-white text-black overflow-hidden">
            <div className="absolute inset-0 bg-[var(--color-vibe-orange)] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]" />
            
            <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.4em] sm:tracking-[0.5em] mb-6 sm:mb-8 opacity-40 group-hover:text-white group-hover:opacity-100 transition-all">Další Projekt</span>
-              <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-[12vw] uppercase tracking-tighter leading-none mb-8 sm:mb-12 group-hover:text-white transition-colors">
+              <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-8 opacity-50 group-hover:text-white group-hover:opacity-100 transition-all">Další Projekt</span>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-tighter leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
                 {nextProject.title}
               </h2>
               <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border border-black/10 flex items-center justify-center group-hover:border-white/20 group-hover:scale-110 transition-all duration-500">
@@ -893,6 +972,8 @@ export default function App() {
           </Routes>
         </motion.div>
       </AnimatePresence>
+
+      <CookieBar />
     </div>
   );
 }
