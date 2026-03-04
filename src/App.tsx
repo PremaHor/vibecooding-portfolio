@@ -45,7 +45,7 @@ const PROJECTS: Project[] = [
     category: "PWA",
     description: "Bezpečnostní a organizační PWA pro terénní sociální pracovníky. Evidence klientů, rizika, SOS tlačítko, časovač návštěv a týmový chat v jedné aplikaci.",
     fullDescription: "RiskLight spojuje ochranu života s přehlednou evidencí. Sociální pracovníci v terénu mají v mobilu nejen evidenci klientů a rizik, ale i nouzové SOS, chytrý časovač návštěvy a týmovou spolupráci v reálném čase. Aplikace běží na Supabase a byla vyvinuta ve spolupráci s lidmi z praxe. Cíl: jistota pro terénní tým, klid pro vedení.",
-    image: "https://picsum.photos/seed/risklight/1200/800",
+    image: "/images/projects/risklight.png",
     tags: ["React", "TypeScript", "Supabase", "Tailwind", "Vite"],
     year: "2025",
     client: "RiskLight",
