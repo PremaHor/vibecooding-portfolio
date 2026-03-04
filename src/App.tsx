@@ -40,15 +40,15 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     id: 1,
-    slug: "neon-velocity",
-    title: "NEON VELOCITY",
-    category: "Web App",
-    description: "Vysokorychlostní dashboard pro real-time analýzu dat s pohlcujícím vizuálem.",
-    fullDescription: "Neon Velocity je revoluční platforma pro vizualizaci dat v reálném čase. Cílem bylo vytvořit rozhraní, které nejen poskytuje kritické informace, ale také uživatele pohltí svou estetikou. Využili jsme pokročilé WebGL techniky pro plynulé animace a okamžitou odezvu na příchozí streamy dat.",
-    image: "https://picsum.photos/seed/neon/1200/800",
-    tags: ["React", "Three.js", "WebSockets"],
-    year: "2024",
-    client: "Velocity Corp",
+    slug: "risklight",
+    title: "RiskLight",
+    category: "PWA",
+    description: "Bezpečnostní a organizační PWA pro terénní sociální pracovníky. Evidence klientů, rizika, SOS tlačítko, časovač návštěv a týmový chat v jedné aplikaci.",
+    fullDescription: "RiskLight spojuje ochranu života s přehlednou evidencí. Sociální pracovníci v terénu mají v mobilu nejen evidenci klientů a rizik, ale i nouzové SOS, chytrý časovač návštěvy a týmovou spolupráci v reálném čase. Aplikace běží na Supabase a byla vyvinuta ve spolupráci s lidmi z praxe. Cíl: jistota pro terénní tým, klid pro vedení.",
+    image: "https://picsum.photos/seed/risklight/1200/800",
+    tags: ["React", "TypeScript", "Supabase", "Tailwind", "Vite"],
+    year: "2025",
+    client: "RiskLight",
     role: "Lead Developer & Designer"
   },
   {
