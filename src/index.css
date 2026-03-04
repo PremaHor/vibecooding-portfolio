@@ -10,15 +10,23 @@
   --color-vibe-green: #00FF00;
   --color-vibe-black: #050505;
 
-  /* Spacing scale - 8px base */
-  --space-section-y: 6rem;      /* 96px */
-  --space-section-y-md: 8rem;  /* 128px */
-  --space-section-y-lg: 10rem; /* 160px */
-  --space-section-x: 1rem;     /* 16px */
-  --space-section-x-md: 1.5rem;/* 24px */
-  --space-section-x-lg: 2rem;  /* 32px */
-  --space-flow: 1.5;           /* line-height body */
-  --space-flow-tight: 1.25;    /* line-height headings */
+  /* WCAG AA compliant text colors - min 4.5:1 contrast on #050505 */
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.6);
+
+  /* 8px spacing scale */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;    /* 16px */
+  --space-3: 1.5rem; /* 24px */
+  --space-4: 2rem;   /* 32px */
+  --space-5: 2.5rem; /* 40px */
+  --space-6: 3rem;   /* 48px */
+  --space-8: 4rem;   /* 64px */
+  --space-10: 5rem;  /* 80px */
+  --space-12: 6rem;  /* 96px */
+  --space-16: 8rem;  /* 128px */
+  --space-20: 10rem; /* 160px */
 }
 
 @layer base {
@@ -32,6 +40,21 @@
     @apply bg-[var(--color-vibe-black)] text-white font-sans selection:bg-[var(--color-vibe-orange)] selection:text-black antialiased;
     overflow-x: hidden;
   }
+
+  /* Prevent awkward word breaks - prefer font scaling on mobile */
+  h1, h2, h3, h4, p, li {
+    overflow-wrap: normal;
+    word-wrap: normal;
+    hyphens: manual;
+  }
+
+  /* Type scale ratio ~1.25 */
+  .text-scale-xs { font-size: 0.75rem; }   /* 12px */
+  .text-scale-sm { font-size: 0.875rem; }  /* 14px */
+  .text-scale-base { font-size: 1rem; }   /* 16px */
+  .text-scale-lg { font-size: 1.125rem; } /* 18px */
+  .text-scale-xl { font-size: 1.25rem; }  /* 20px */
+  .text-scale-2xl { font-size: 1.5rem; }  /* 24px */
 
   /* Safe area for notched devices (iPhone X+, etc.) */
   .safe-area-inset {

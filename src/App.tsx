@@ -15,7 +15,10 @@ import {
   ChevronRight,
   Menu,
   X,
-  Cookie
+  Cookie,
+  Rocket,
+  Palette,
+  Settings
 } from 'lucide-react';
 
 // --- Types ---
@@ -78,19 +81,29 @@ const PROJECTS: Project[] = [
 
 const SERVICES = [
   {
-    icon: <Zap className="w-6 h-6" />,
-    title: "Rychlý Prototyping",
-    description: "Od nápadu k funkčnímu kódu během dnů, ne týdnů. VibeCooding je o flow."
-  },
-  {
     icon: <Globe className="w-6 h-6" />,
-    title: "Moderní Web Stack",
-    description: "Používám nejnovější technologie jako React, Tailwind a AI nástroje pro maximální efektivitu."
+    title: "Webové stránky a prezentace",
+    description: "Moderní weby, které ukážou vaši hodnotu a podpoří prodej. Přehledně, rychle, účinně."
   },
   {
-    icon: <Sparkles className="w-6 h-6" />,
-    title: "Unikátní Design",
-    description: "Vaše aplikace nebude vypadat jako další šablona. Každý pixel má svůj vibe."
+    icon: <Rocket className="w-6 h-6" />,
+    title: "Landing pages",
+    description: "Stránky, které konvertují. Pro kampaně, validaci nápadu nebo konkrétní nabídku."
+  },
+  {
+    icon: <Zap className="w-6 h-6" />,
+    title: "Prototypy a MVP",
+    description: "Funkční model produktu dřív, než investujete velké peníze. Ověřte trh rychle."
+  },
+  {
+    icon: <Palette className="w-6 h-6" />,
+    title: "UI/UX návrh",
+    description: "Rozhraní, které zákazníci pochopí na první pohled. Funkční a přehledné."
+  },
+  {
+    icon: <Settings className="w-6 h-6" />,
+    title: "Automatizace procesů",
+    description: "Propojíme nástroje, zautomatizujeme rutinu. Méně práce, více času na to důležité."
   }
 ];
 
@@ -131,7 +144,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 px-5 sm:px-8 py-4 sm:py-5 flex justify-between items-center transition-all duration-500 safe-area-inset-top ${
+      <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center transition-all duration-500 safe-area-inset-top ${
         scrolled ? 'bg-black/10 backdrop-blur-xl py-3' : 'bg-transparent'
       } ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         <Link to="/" className="flex items-center gap-2 group">
@@ -143,8 +156,8 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           <span className="font-display text-xl sm:text-2xl tracking-tighter">VIBECOODING</span>
         </Link>
         
-        <div className={`hidden md:flex gap-8 lg:gap-10 text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-500 ${
-          theme === 'dark' ? 'text-white/50' : 'text-black/50'
+        <div className={`hidden md:flex gap-6 lg:gap-8 text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-500 ${
+          theme === 'dark' ? 'text-white/70' : 'text-black/70'
         }`}>
           {navLinks}
         </div>
@@ -188,15 +201,15 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           initial={{ x: '100%' }}
           animate={{ x: mobileMenuOpen ? 0 : '100%' }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="absolute top-0 right-0 bottom-0 w-[min(320px,85vw)] bg-[var(--color-vibe-black)] border-l border-white/10 p-8 pt-24 flex flex-col gap-8 text-white safe-area-inset-top"
+          className="absolute top-0 right-0 bottom-0 w-[min(320px,85vw)] bg-[var(--color-vibe-black)] border-l border-white/10 p-6 pt-20 flex flex-col gap-6 text-white safe-area-inset-top"
         >
-          <div className="flex flex-col gap-6 text-sm font-bold tracking-[0.3em] uppercase text-white/70">
+          <div className="flex flex-col gap-6 text-sm font-bold tracking-[0.3em] uppercase text-white/90">
             {navLinks}
           </div>
           <a 
             href="mailto:hello@vibecooding.dev"
             onClick={closeMobileMenu}
-            className="mt-auto px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black text-center"
+            className="mt-auto px-6 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black text-center"
           >
             Začněme
           </a>
@@ -213,7 +226,7 @@ const Hero = () => {
   const rotate = useTransform(scrollY, [0, 500], [0, 15]);
 
   return (
-    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-5 sm:px-8 md:px-12 pt-28 sm:pt-24 pb-16 sm:pb-20 overflow-hidden safe-area-inset">
+    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 pt-24 sm:pt-28 pb-12 sm:pb-16 md:pb-20 overflow-hidden safe-area-inset">
       {/* Animated Background Blobs */}
       <motion.div 
         style={{ y: y1, rotate }}
@@ -230,12 +243,12 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="inline-block px-4 py-2 border border-white/10 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold mb-10 sm:mb-14 text-white/50 bg-white/5 backdrop-blur-sm">
+          <span className="inline-block px-4 py-2 border border-white/20 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold mb-8 sm:mb-12 text-white/70 bg-white/5 backdrop-blur-sm">
             Dostupný pro nové projekty 2026
           </span>
         </motion.div>
         
-        <h1 className="font-display text-[14vw] sm:text-[12vw] md:text-[13vw] leading-[1.08] uppercase tracking-[-0.02em] mb-12 sm:mb-20">
+        <h1 className="font-display text-[12vw] sm:text-[11vw] md:text-[10vw] lg:text-[8rem] leading-[1.08] uppercase tracking-[-0.02em] mb-6 sm:mb-8">
           <div className="text-reveal">
             <motion.span 
               initial={{ y: "100%" }}
@@ -256,17 +269,19 @@ const Hero = () => {
             </motion.span>
           </div>
         </h1>
+        <p className="text-base sm:text-lg md:text-xl font-bold text-white/95 mb-10 sm:mb-16 md:mb-20 max-w-xl">
+          Landing page do 7 dnů. MVP do 14 dnů.
+        </p>
 
-        <div className="grid md:grid-cols-2 gap-12 sm:gap-20 lg:gap-24 items-end">
+        <div className="grid md:grid-cols-2 gap-10 sm:gap-16 md:gap-20 lg:gap-24 items-end">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
             className="space-y-8 sm:space-y-10"
           >
-            <p className="text-base sm:text-lg md:text-xl font-light text-white/55 max-w-lg leading-[1.7]">
-              Pomáhám vizionářům a startupům stavět digitální produkty, které vyčnívají. 
-              Kombinuji technickou preciznost s kreativním flow.
+            <p className="text-sm sm:text-base md:text-lg font-light text-white/80 max-w-lg leading-[1.7]">
+              Stavím weby a aplikace, které prodávají. Jasně ukážou vaši hodnotu a přivedou zákazníky. Žádná zbytečná složitost, jen výsledek.
             </p>
             <div className="flex flex-wrap gap-5 sm:gap-10 items-center">
                <div className="flex -space-x-3">
@@ -276,7 +291,7 @@ const Hero = () => {
                     </div>
                   ))}
                </div>
-               <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] opacity-50">Důvěřují mi lídři v oboru</p>
+               <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Spolupracovali se mnou</p>
             </div>
           </motion.div>
           
@@ -349,16 +364,16 @@ const WorkSection = () => {
 
   return (
     <section id="work" ref={targetRef} className="relative h-[500vh] sm:h-[600vh] md:h-[800vh] bg-white text-black">
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-24 sm:py-28 md:py-36 px-0">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-16 sm:py-20 md:py-24 lg:py-32 px-0">
         {/* Editorial Header - Fades out as we scroll deep OR hover the first project */}
-        <div className="max-w-7xl mx-auto w-full px-5 sm:px-8 md:px-12 absolute top-14 sm:top-20 md:top-28 left-0 right-0 z-20">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 absolute top-12 sm:top-16 md:top-20 lg:top-28 left-0 right-0 z-20">
           <motion.div 
             animate={{ opacity: headerOpacity }}
             style={{ opacity: scrollOpacity }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col md:flex-row justify-between items-baseline gap-8 sm:gap-12"
           >
-            <h2 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[12vw] uppercase tracking-tighter leading-[1.08]">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] uppercase tracking-tighter leading-[1.08]">
               Vybraná<br/>
               <span className="text-[var(--color-vibe-orange)]">Práce</span>
             </h2>
@@ -383,7 +398,7 @@ const WorkSection = () => {
           {/* Large spacer at the end */}
           <div className="shrink-0 w-[30vw] sm:w-[35vw] md:w-[40vw] h-16 sm:h-20 flex items-center">
              <div className="w-full h-px bg-black/10 relative">
-                <div className="absolute right-0 -top-4 text-[8px] sm:text-[10px] font-bold uppercase tracking-widest opacity-30">End of Gallery</div>
+                <div className="absolute right-0 -top-4 text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-black/50">End of Gallery</div>
              </div>
           </div>
         </motion.div>
@@ -394,7 +409,7 @@ const WorkSection = () => {
             style={{ scaleX: smoothProgress, originX: 0 }}
             className="h-full bg-[var(--color-vibe-orange)]"
           />
-          <div className="absolute -bottom-5 sm:-bottom-6 left-0 right-0 flex justify-between text-[7px] sm:text-[8px] font-bold uppercase tracking-widest opacity-40">
+          <div className="absolute -bottom-5 sm:-bottom-6 left-0 right-0 flex justify-between text-[7px] sm:text-[8px] font-bold uppercase tracking-widest text-black/50">
             <span>Start</span>
             <span className="hidden sm:inline">Scroll to Explore</span>
             <span className="sm:hidden">Scroll</span>
@@ -483,7 +498,7 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
           </div>
           
           <div className="hidden md:block text-right">
-             <div className="text-[10px] font-bold opacity-30 uppercase tracking-widest mb-1">Timeline</div>
+             <div className="text-[10px] font-bold text-black/50 uppercase tracking-widest mb-1">Timeline</div>
              <div className="text-2xl font-display">{project.year}</div>
           </div>
         </div>
@@ -493,18 +508,17 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
 }
 
 const ServicesSection = () => (
-  <section id="services" className="py-24 sm:py-32 md:py-40 lg:py-48 px-5 sm:px-8 md:px-12 relative overflow-hidden">
+  <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
     
     <div className="max-w-7xl mx-auto relative z-10">
       <div className="grid lg:grid-cols-2 gap-20 sm:gap-28 lg:gap-36 items-center">
         <div>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-tighter mb-12 sm:mb-20 leading-[1.08]">
-            Co Vám<br/><span className="text-white/20 italic">Nabízím</span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase tracking-tighter mb-10 sm:mb-16 leading-[1.08]">
+            Co Vám<br/><span className="text-white/30 italic">Nabízím</span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/55 mb-14 sm:mb-20 max-w-lg font-light leading-[1.7]">
-            Nejsem jen další vývojář. Jsem váš partner v digitální transformaci. 
-            Můj přístup spojuje rychlost, kvalitu a moderní estetiku.
+          <p className="text-sm sm:text-base md:text-lg text-white/80 mb-12 sm:mb-16 max-w-lg font-light leading-[1.7]">
+            Weby, landing pages, MVP i automatizace. Konkrétní řešení, které vám pomůže růst. Bez zbytečného balastu.
           </p>
           <div className="grid gap-5 sm:gap-6">
             {SERVICES.map((service, idx) => (
@@ -514,17 +528,39 @@ const ServicesSection = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="group flex gap-5 sm:gap-6 md:gap-8 p-6 sm:p-7 md:p-8 border border-white/5 rounded-2xl hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500"
+                className="group flex gap-4 sm:gap-6 md:gap-8 p-5 sm:p-6 md:p-8 border border-white/10 rounded-2xl hover:bg-white/[0.03] hover:border-white/20 transition-all duration-500"
               >
                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0 group-hover:bg-[var(--color-vibe-orange)] group-hover:text-black transition-all duration-500">
                   {service.icon}
                 </div>
                 <div className="min-w-0">
-                  <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 tracking-tight">{service.title}</h4>
-                  <p className="text-white/45 text-sm sm:text-base leading-[1.6] group-hover:text-white/65 transition-colors">{service.description}</p>
+                  <h4 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 tracking-tight text-white/95">{service.title}</h4>
+                  <p className="text-white/75 text-sm sm:text-base leading-[1.6] group-hover:text-white/90 transition-colors">{service.description}</p>
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Jak pracuji */}
+          <div className="mt-16 sm:mt-20 lg:mt-28">
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase tracking-tight mb-6 sm:mb-10 text-white/95">Jak pracuji</h3>
+            <ul className="space-y-4 text-white/80 font-light leading-[1.7]">
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> Výsledek před složitostí. Vždy.</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> Řešení šitá na míru vašemu rozpočtu.</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> Moderní nástroje, rychlá realizace.</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> Jasná komunikace. Žádný technický žargon.</li>
+            </ul>
+          </div>
+
+          {/* Pro koho */}
+          <div className="mt-12 sm:mt-16 lg:mt-24">
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase tracking-tight mb-6 sm:mb-10 text-white/95">Pro koho</h3>
+            <p className="text-white/80 font-light leading-[1.7] mb-4">Spolupracuji s těmi, kdo:</p>
+            <ul className="space-y-3 text-white/85">
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> chtějí rychle spustit projekt</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> potřebují zjednodušit to, co už mají</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> hledají flexibilitu místo velké agentury</li>
+            </ul>
           </div>
         </div>
         
@@ -548,7 +584,7 @@ const ServicesSection = () => (
               </div>
               
               <Terminal className="w-12 h-12 sm:w-16 sm:h-16 mb-8 lg:mb-12 text-[var(--color-vibe-orange)]" />
-              <div className="font-mono text-sm sm:text-base lg:text-lg space-y-4 text-white/35">
+              <div className="font-mono text-sm sm:text-base lg:text-lg space-y-4 text-white/60">
                 <p className="text-[var(--color-vibe-orange)]/80">$ vibecooding --init</p>
                 <p className="animate-pulse">Initializing creative flow...</p>
                 <p>Optimizing for performance...</p>
@@ -562,7 +598,7 @@ const ServicesSection = () => (
             
             <div className="relative z-10 border-t border-white/5 pt-10 lg:pt-14">
               <div className="text-[8vw] lg:text-[9vw] font-display opacity-5 select-none leading-none">FLOW</div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-25 mt-4">VibeCooding Engine v2.6</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mt-4">VibeCooding Engine v2.6</p>
             </div>
           </motion.div>
         </div>
@@ -572,7 +608,7 @@ const ServicesSection = () => (
 );
 
 const ContactSection = () => (
-  <section id="contact" className="py-24 sm:py-32 md:py-40 lg:py-48 px-5 sm:px-8 md:px-12 bg-[var(--color-vibe-orange)] text-black relative overflow-hidden">
+  <section id="contact" className="py-24 sm:py-32 md:py-40 lg:py-52 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-orange)] text-black relative overflow-hidden">
     {/* Decorative Elements */}
     <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/5 to-transparent" />
     <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-black/10 rounded-full blur-3xl" />
@@ -584,17 +620,20 @@ const ContactSection = () => (
         viewport={{ once: true }}
         transition={{ duration: 1 }}
       >
-        <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[12vw] uppercase tracking-tight leading-[1.08] mb-16 sm:mb-20 md:mb-24">
-          Máte Nápad?<br/>Pojďme Ho<br/><span className="italic opacity-90">Oživit.</span>
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase tracking-tight leading-[1.08] mb-8 sm:mb-10">
+          Pojďme to probrat
         </h2>
+        <p className="text-base sm:text-lg md:text-xl font-light mb-12 sm:mb-16 md:mb-20 max-w-2xl mx-auto">
+          Máte nápad? Konkrétní potřebu? Napište. Společně najdeme cestu, jak ji proměnit v realitu.
+        </p>
       </motion.div>
 
-      <div className="flex flex-col md:flex-row justify-center items-center gap-10 sm:gap-14 mb-24 sm:mb-28 md:mb-36">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-12 mb-20 sm:mb-24 md:mb-32">
         <motion.a 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
           href="mailto:hello@vibecooding.dev" 
-          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-all duration-500 break-all text-center"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-all duration-500 break-all text-center"
         >
           hello@vibecooding.dev
         </motion.a>
@@ -605,13 +644,13 @@ const ContactSection = () => (
           whileHover={{ scale: 1.05, rotate: -2 }}
           whileTap={{ scale: 0.95 }}
           href="mailto:hello@vibecooding.dev"
-          className="bg-black text-white px-10 sm:px-12 md:px-14 py-5 sm:py-6 rounded-full text-base sm:text-lg md:text-xl font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-all duration-500 text-center"
+          className="bg-black text-white px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-all duration-500 text-center"
         >
-          Rezervovat Konzultaci
+          Napsat zprávu
         </motion.a>
       </div>
       
-      <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-20 border-t border-black/20 pt-16 sm:pt-20">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-10 md:gap-16 border-t border-black/20 pt-12 sm:pt-16">
         {[
           { name: 'LinkedIn', icon: <Linkedin className="w-5 h-5" />, url: 'https://linkedin.com' },
           { name: 'Behance', icon: (
@@ -643,7 +682,7 @@ const ContactSection = () => (
 );
 
 const Footer = () => (
-  <footer id="privacy" className="py-12 sm:py-16 px-5 sm:px-8 border-t border-white/5 text-center text-white/35 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
+  <footer id="privacy" className="py-8 sm:py-12 px-4 sm:px-6 md:px-8 border-t border-white/10 text-center text-white/60 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
     © 2026 VIBECOODING - VYTVOŘENO S VÁŠNÍ PRO KÓD
   </footer>
 );
@@ -683,14 +722,14 @@ const CookieBar = () => {
         className="fixed bottom-0 left-0 right-0 z-[200] p-4 sm:p-6 safe-area-inset-bottom"
       >
         <div className="max-w-4xl mx-auto rounded-2xl sm:rounded-[1.5rem] bg-[var(--color-vibe-black)]/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/40 overflow-hidden">
-          <div className="p-5 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-5 lg:gap-8 lg:items-center">
+          <div className="p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-4 lg:gap-6 lg:items-center">
             <div className="flex gap-4 flex-1">
               <div className="shrink-0 w-12 h-12 rounded-xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center">
                 <Cookie className="w-6 h-6 text-[var(--color-vibe-orange)]" />
               </div>
               <div>
                 <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-1">Soubory cookies</h3>
-                <p className="text-sm text-white/70 leading-relaxed">
+                <p className="text-sm text-white/85 leading-relaxed">
                   Používáme cookies pro zajištění funkčnosti webu a lepší uživatelskou zkušenost.{' '}
                   <a href="#privacy" className="text-[var(--color-vibe-orange)] hover:underline">Více informací</a>
                 </p>
@@ -699,13 +738,13 @@ const CookieBar = () => {
             <div className="flex flex-col sm:flex-row gap-3 shrink-0">
               <button
                 onClick={declineOptional}
-                className="px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-colors"
+                className="px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-colors"
               >
                 Jen nutné
               </button>
               <button
                 onClick={acceptAll}
-                className="px-6 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider bg-[var(--color-vibe-orange)] text-white hover:bg-[var(--color-vibe-orange)]/90 transition-colors shadow-lg"
+                className="px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-wider bg-[var(--color-vibe-orange)] text-white hover:bg-[var(--color-vibe-orange)]/90 transition-colors shadow-lg"
               >
                 Přijmout vše
               </button>
@@ -757,7 +796,7 @@ const ProjectPage = () => {
       
       <main className="pt-24 sm:pt-28 md:pt-32 pb-0">
         {/* Project Hero */}
-        <section className="px-5 sm:px-8 md:px-12 mb-24 sm:mb-28 md:mb-36">
+        <section className="px-4 sm:px-6 md:px-8 lg:px-12 mb-20 sm:mb-24 md:mb-32">
           <div className="max-w-7xl mx-auto">
             <div className="overflow-hidden mb-8">
               <motion.span 
@@ -800,21 +839,21 @@ const ProjectPage = () => {
         </section>
 
         {/* Project Info */}
-        <section className="px-5 sm:px-8 md:px-12 mb-28 sm:mb-36 md:mb-48">
+        <section className="px-4 sm:px-6 md:px-8 lg:px-12 mb-24 sm:mb-32 md:mb-40">
           <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-20 sm:gap-28 md:gap-36">
             <div className="md:col-span-2">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase tracking-tight mb-10 sm:mb-14">O projektu</h2>
-              <p className="text-base sm:text-lg md:text-xl text-white/55 leading-[1.7] mb-12 sm:mb-20 font-light">
+              <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] mb-10 sm:mb-16 font-light">
                 {project.fullDescription}
               </p>
               
               <div className="grid grid-cols-2 gap-10 sm:gap-14 md:gap-20 border-t border-white/5 pt-14 sm:pt-20">
                 <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/30 mb-3 sm:mb-4">Klient</h4>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">Klient</h4>
                   <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{project.client}</p>
                 </div>
                 <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/30 mb-3 sm:mb-4">Role</h4>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">Role</h4>
                   <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{project.role}</p>
                 </div>
               </div>
@@ -822,7 +861,7 @@ const ProjectPage = () => {
             
             <div className="space-y-8 sm:space-y-12">
                <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/30 mb-4 sm:mb-6">Technologie</h4>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">Technologie</h4>
                   <div className="flex flex-wrap gap-2 sm:gap-3">
                     {project.tags.map(tag => (
                       <span key={tag} className="px-3 sm:px-5 py-1.5 sm:py-2 border border-white/10 rounded-full text-[10px] sm:text-xs font-mono uppercase tracking-widest bg-white/5">
@@ -834,7 +873,7 @@ const ProjectPage = () => {
                
                <div className="p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10">
                   <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-[var(--color-vibe-orange)] mb-3 sm:mb-4" />
-                  <p className="text-xs sm:text-sm text-white/60 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed italic">
                     "Tento projekt byl výzvou v oblasti výkonu a vizuální věrnosti. Výsledek předčil očekávání klienta."
                   </p>
                </div>
@@ -843,11 +882,11 @@ const ProjectPage = () => {
         </section>
 
         {/* Next Project CTA */}
-        <Link to={`/project/${nextProject.slug}`} className="group block relative py-28 sm:py-36 md:py-52 px-5 sm:px-8 md:px-12 bg-white text-black overflow-hidden">
+        <Link to={`/project/${nextProject.slug}`} className="group block relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-8 lg:px-12 bg-white text-black overflow-hidden">
            <div className="absolute inset-0 bg-[var(--color-vibe-orange)] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]" />
            
            <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
-              <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-8 opacity-50 group-hover:text-white group-hover:opacity-100 transition-all">Další Projekt</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">Další Projekt</span>
               <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-tighter leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
                 {nextProject.title}
               </h2>
