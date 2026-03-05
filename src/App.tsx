@@ -82,6 +82,19 @@ const PROJECTS: Project[] = [
     year: "2024",
     client: "Open Source Project",
     role: "UI Engineer"
+  },
+  {
+    id: 4,
+    slug: "adcalc",
+    title: "AdCalc",
+    category: "Aplikace",
+    description: "Kalkulačka a nástroje pro reklamní kampaně.",
+    fullDescription: "AdCalc je aplikace pro výpočty a plánování reklamních kampaní. Umožňuje rychlé výpočty rozpočtů, reach a dalších metrik potřebných pro efektivní reklamní strategie.",
+    image: "/images/projects/AdCalc.webp",
+    tags: ["React", "TypeScript", "Tailwind"],
+    year: "2025",
+    client: "AdCalc",
+    role: "Lead Developer"
   }
 ];
 
@@ -355,12 +368,11 @@ const WorkSection = () => {
     restDelta: 0.001
   });
   
-  // Map scroll to horizontal movement - postupné zobrazení všech 3 projektů
-  // Rozložení scrollu: 0-30% první projekt, 30-60% druhý, 60-90% třetí, 90-100% konec
+  // Map scroll to horizontal movement - postupné zobrazení všech 4 projektů
   const x = useTransform(
     smoothProgress, 
-    [0, 0.33, 0.66, 0.95, 1], 
-    ["0%", "-35%", "-70%", "-95%", "-95%"]
+    [0, 0.25, 0.5, 0.75, 0.95, 1], 
+    ["0%", "-30%", "-60%", "-90%", "-95%", "-95%"]
   );
   
   return (
