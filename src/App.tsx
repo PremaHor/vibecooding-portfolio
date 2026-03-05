@@ -144,7 +144,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
     </>
   ) : (
     <Link to="/" onClick={closeMobileMenu} className={`hover:text-current transition-colors flex items-center gap-2 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>
-      <ArrowLeft className="w-4 h-4" /> Zpět na domů
+      <ArrowLeft className="w-4 h-4" /> Zpět domů
     </Link>
   );
 
