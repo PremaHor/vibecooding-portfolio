@@ -61,14 +61,17 @@ const PROJECTS: Project[] = [
     id: 2,
     slug: "adcalc",
     title: "AdCalc",
-    category: "Aplikace",
-    description: "Kalkulačka a nástroje pro reklamní kampaně.",
-    fullDescription: "AdCalc je aplikace pro výpočty a plánování reklamních kampaní. Umožňuje rychlé výpočty rozpočtů, reach a dalších metrik potřebných pro efektivní reklamní strategie.",
+    category: "Prototyp",
+    description: "Prototyp kalkulačky pro kalkulace reklamní výroby. Rychlé cenové nabídky, materiály a výrobní náklady na jednom místě.",
+    fullDescription: "AdCalc je funkční prototyp nástroje pro kalkulace v reklamní výrobě. Umožňuje sestavovat cenové nabídky podle materiálů, formátů a výrobních technologií. Cíl: zrychlit přípravu nabídek a sjednotit kalkulační procesy v reklamní agentuře.",
     image: "/images/projects/AdCalc.webp",
     tags: ["React", "TypeScript", "Tailwind"],
     year: "2025",
-    client: "AdCalc",
-    role: "Lead Developer"
+    client: "Rekly",
+    role: "Lead Developer",
+    websiteUrls: [
+      { label: "rekly.vercel.app", url: "https://rekly.vercel.app/" },
+    ],
   },
   {
     id: 3,
@@ -436,11 +439,6 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
       className="group shrink-0 w-[85vw] min-w-[280px] sm:w-[75vw] md:w-[600px] lg:w-[700px] relative"
     >
       <Link to={`/project/${project.slug}`} className="block relative">
-        {/* Project Number */}
-        <div className="absolute -top-12 sm:-top-20 -left-4 sm:-left-10 font-display text-[12vw] sm:text-[15vw] text-black/[0.03] pointer-events-none group-hover:text-[var(--color-vibe-orange)]/5 transition-colors duration-700">
-          0{index + 1}
-        </div>
-
         <div className="relative aspect-[16/10] md:aspect-[1.2/1] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-10 sm:mb-14 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
           <motion.img 
             style={{ y: yParallax, scale: 1.2 }}
