@@ -7,6 +7,7 @@ import {
   Zap, 
   Globe, 
   ArrowRight, 
+  ExternalLink,
   Linkedin, 
   Github,
   Terminal,
@@ -34,6 +35,7 @@ interface Project {
   year: string;
   client: string;
   role: string;
+  websiteUrls?: { label: string; url: string }[];
 }
 
 // --- Constants ---
@@ -49,7 +51,11 @@ const PROJECTS: Project[] = [
     tags: ["React", "TypeScript", "Supabase", "Tailwind", "Vite"],
     year: "2025",
     client: "RiskLight",
-    role: "Lead Developer & Designer"
+    role: "Lead Developer & Designer",
+    websiteUrls: [
+      { label: "risklight.cz", url: "https://risklight.cz" },
+      { label: "risklight.app", url: "https://risklight.app" },
+    ],
   },
   {
     id: 2,
@@ -336,7 +342,6 @@ const Hero = () => {
 
 const WorkSection = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
-  const [isFirstHovered, setIsFirstHovered] = useState(false);
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"]
@@ -358,28 +363,9 @@ const WorkSection = () => {
     ["0%", "-35%", "-70%", "-95%", "-95%"]
   );
   
-  // Combine scroll-based fade with hover-based fade for the header
-  const scrollOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
-  const headerOpacity = isFirstHovered ? 0 : 1;
-
   return (
     <section id="work" ref={targetRef} className="relative h-[500vh] sm:h-[600vh] md:h-[800vh] bg-white text-black">
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-16 sm:py-20 md:py-24 lg:py-32 px-0">
-        {/* Editorial Header - Fades out as we scroll deep OR hover the first project */}
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 absolute top-12 sm:top-16 md:top-20 lg:top-28 left-0 right-0 z-20">
-          <motion.div 
-            animate={{ opacity: headerOpacity }}
-            style={{ opacity: scrollOpacity }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col md:flex-row justify-between items-baseline gap-8 sm:gap-12"
-          >
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] uppercase tracking-tighter leading-[1.08]">
-              Vybraná<br/>
-              <span className="text-[var(--color-vibe-orange)]">Práce</span>
-            </h2>
-          </motion.div>
-        </div>
-
         {/* Horizontal Scroll Track */}
         <motion.div 
           style={{ x, opacity: useTransform(smoothProgress, [0, 0.1, 0.9, 1], [1, 1, 1, 0]) }} 
@@ -391,7 +377,6 @@ const WorkSection = () => {
               project={project} 
               index={idx} 
               scrollYProgress={smoothProgress}
-              onHoverChange={idx === 0 ? setIsFirstHovered : undefined}
             />
           ))}
           
@@ -870,6 +855,25 @@ const ProjectPage = () => {
                     ))}
                   </div>
                </div>
+               {project.websiteUrls && project.websiteUrls.length > 0 && (
+                 <div>
+                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">Web projektu</h4>
+                   <div className="flex flex-wrap gap-3">
+                     {project.websiteUrls.map(({ label, url }) => (
+                       <a
+                         key={url}
+                         href={url}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 border border-white/20 rounded-full text-sm font-mono text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition-all"
+                       >
+                         {label}
+                         <ExternalLink className="w-3.5 h-3.5" />
+                       </a>
+                     ))}
+                   </div>
+                 </div>
+               )}
                
                <div className="p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10">
                   <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-[var(--color-vibe-orange)] mb-3 sm:mb-4" />
