@@ -59,6 +59,19 @@ const PROJECTS: Project[] = [
   },
   {
     id: 2,
+    slug: "adcalc",
+    title: "AdCalc",
+    category: "Aplikace",
+    description: "Kalkulačka a nástroje pro reklamní kampaně.",
+    fullDescription: "AdCalc je aplikace pro výpočty a plánování reklamních kampaní. Umožňuje rychlé výpočty rozpočtů, reach a dalších metrik potřebných pro efektivní reklamní strategie.",
+    image: "/images/projects/AdCalc.webp",
+    tags: ["React", "TypeScript", "Tailwind"],
+    year: "2025",
+    client: "AdCalc",
+    role: "Lead Developer"
+  },
+  {
+    id: 3,
     slug: "cyber-garden",
     title: "CYBER GARDEN",
     category: "E-commerce",
@@ -71,7 +84,7 @@ const PROJECTS: Project[] = [
     role: "Fullstack Architect"
   },
   {
-    id: 3,
+    id: 4,
     slug: "void-interface",
     title: "VOID INTERFACE",
     category: "UI/UX",
@@ -82,19 +95,6 @@ const PROJECTS: Project[] = [
     year: "2024",
     client: "Open Source Project",
     role: "UI Engineer"
-  },
-  {
-    id: 4,
-    slug: "adcalc",
-    title: "AdCalc",
-    category: "Aplikace",
-    description: "Kalkulačka a nástroje pro reklamní kampaně.",
-    fullDescription: "AdCalc je aplikace pro výpočty a plánování reklamních kampaní. Umožňuje rychlé výpočty rozpočtů, reach a dalších metrik potřebných pro efektivní reklamní strategie.",
-    image: "/images/projects/AdCalc.webp",
-    tags: ["React", "TypeScript", "Tailwind"],
-    year: "2025",
-    client: "AdCalc",
-    role: "Lead Developer"
   }
 ];
 
@@ -371,8 +371,8 @@ const WorkSection = () => {
   // Map scroll to horizontal movement - postupné zobrazení všech 4 projektů
   const x = useTransform(
     smoothProgress, 
-    [0, 0.25, 0.5, 0.75, 0.95, 1], 
-    ["0%", "-30%", "-60%", "-90%", "-95%", "-95%"]
+    [0, 0.2, 0.4, 0.6, 0.85, 1], 
+    ["0%", "-35%", "-70%", "-105%", "-140%", "-140%"]
   );
   
   return (
