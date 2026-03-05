@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
 import Lenis from '@studio-freight/lenis';
-import { RisklightMockups } from './components/RisklightMockups';
 import { 
   Code2, 
   Zap, 
@@ -46,7 +45,7 @@ const PROJECTS: Project[] = [
     category: "PWA",
     description: "Bezpečnostní a organizační PWA pro terénní sociální pracovníky. Evidence klientů, rizika, SOS tlačítko, časovač návštěv a týmový chat v jedné aplikaci.",
     fullDescription: "RiskLight spojuje ochranu života s přehlednou evidencí. Sociální pracovníci v terénu mají v mobilu nejen evidenci klientů a rizik, ale i nouzové SOS, chytrý časovač návštěvy a týmovou spolupráci v reálném čase. Aplikace běží na Supabase a byla vyvinuta ve spolupráci s lidmi z praxe. Cíl: jistota pro terénní tým, klid pro vedení.",
-    image: "/images/projects/risklight.png",
+    image: "/images/projects/5.webp",
     tags: ["React", "TypeScript", "Supabase", "Tailwind", "Vite"],
     year: "2025",
     client: "RiskLight",
@@ -446,27 +445,18 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
         </div>
 
         <div className="relative aspect-[16/10] md:aspect-[1.2/1] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-10 sm:mb-14 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
-          {project.slug === 'risklight' ? (
-            <motion.div
-              style={{ y: yParallax, scale: 1.2 }}
-              className="w-full h-full transition-transform duration-1000 group-hover:scale-[1.25]"
-            >
-              <RisklightMockups variant="card" fallbackImage={project.image} />
-            </motion.div>
-          ) : (
-            <motion.img 
-              style={{ y: yParallax, scale: 1.2 }}
-              src={project.image} 
-              alt={project.title}
-              width={1200}
-              height={800}
-              loading={index === 0 ? "eager" : "lazy"}
-              fetchPriority={index === 0 ? "high" : undefined}
-              decoding="async"
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.25]"
-              referrerPolicy="no-referrer"
-            />
-          )}
+          <motion.img 
+            style={{ y: yParallax, scale: 1.2 }}
+            src={project.image} 
+            alt={project.title}
+            width={1200}
+            height={800}
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchPriority={index === 0 ? "high" : undefined}
+            decoding="async"
+            className="w-full h-full object-cover rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] transition-transform duration-1000 group-hover:scale-[1.25]"
+            referrerPolicy="no-referrer"
+          />
           
           {/* Hover Overlay */}
           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-700 flex flex-col items-center justify-center backdrop-blur-[2px]">
@@ -834,20 +824,16 @@ const ProjectPage = () => {
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="aspect-[16/9] w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl"
             >
-              {project.slug === 'risklight' ? (
-                <RisklightMockups variant="hero" fallbackImage={project.image} />
-              ) : (
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  width={1200}
-                  height={800}
-                  fetchPriority="high"
-                  decoding="async"
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-              )}
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                width={1200}
+                height={800}
+                fetchPriority="high"
+                decoding="async"
+                className="w-full h-full object-cover rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]"
+                referrerPolicy="no-referrer"
+              />
             </motion.div>
           </div>
         </section>
