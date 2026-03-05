@@ -28,8 +28,16 @@ export function RisklightMockups({
   const isHero = variant === 'hero';
 
   const sizes = isHero
-    ? { center: 'clamp(180px, 38%, 320px)', side: 'clamp(120px, 26%, 220px)' }
+    ? { center: 'clamp(280px, 55%, 450px)', side: 'clamp(200px, 42%, 380px)' }
     : { center: 'clamp(100px, 35%, 200px)', side: 'clamp(70px, 24%, 140px)' };
+
+  // Card: fly in from left/right. Hero: floating isometric.
+  const cardInitialX = (i: number) => (i === 0 ? -200 : i === 2 ? 200 : 0);
+  const cardTransition = (i: number) => ({
+    duration: 0.9,
+    delay: i * 0.15,
+    ease: [0.16, 1, 0.3, 1] as const,
+  });
 
   return (
     <div
@@ -49,6 +57,9 @@ export function RisklightMockups({
             <motion.div
               key={i}
               className="absolute flex items-center justify-center"
+              initial={isHero ? undefined : { x: cardInitialX(i), opacity: 0 }}
+              animate={isHero ? undefined : { x: 0, opacity: 1 }}
+              transition={isHero ? undefined : cardTransition(i)}
               style={{
                 width: isCenter ? sizes.center : sizes.side,
                 left: isLeft ? '5%' : isCenter ? '50%' : undefined,
@@ -58,24 +69,36 @@ export function RisklightMockups({
               }}
             >
               <motion.div
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                animate={{
-                  opacity: 1,
-                  y: [0, -8, 0],
-                  scale: 1,
-                  rotateY: ROTATIONS[i],
-                }}
-                transition={{
-                  opacity: { duration: 0.8, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] },
-                  y: {
-                    repeat: Infinity,
-                    duration: 3,
-                    delay: FLOAT_DELAYS[i],
-                    ease: 'easeInOut',
-                  },
-                  scale: { duration: 0.8, delay: i * 0.2 },
-                  rotateY: { duration: 0.8, delay: i * 0.2 },
-                }}
+                initial={
+                  isHero
+                    ? { opacity: 0, y: 30, scale: 0.9 }
+                    : { opacity: 1 }
+                }
+                animate={
+                  isHero
+                    ? {
+                        opacity: 1,
+                        y: [0, -8, 0],
+                        scale: 1,
+                        rotateY: ROTATIONS[i],
+                      }
+                    : { opacity: 1 }
+                }
+                transition={
+                  isHero
+                    ? {
+                        opacity: { duration: 0.8, delay: i * 0.2, ease: [0.16, 1, 0.3, 1] },
+                        y: {
+                          repeat: Infinity,
+                          duration: 3,
+                          delay: FLOAT_DELAYS[i],
+                          ease: 'easeInOut',
+                        },
+                        scale: { duration: 0.8, delay: i * 0.2 },
+                        rotateY: { duration: 0.8, delay: i * 0.2 },
+                      }
+                    : {}
+                }
                 style={{ transformStyle: 'preserve-3d', width: '100%' }}
               >
                 <img
