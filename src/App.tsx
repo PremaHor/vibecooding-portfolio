@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import Lenis from '@studio-freight/lenis';
 import { fixCzechTypography } from './utils/czechTypography';
 import { useLanguage } from './i18n/LanguageContext';
@@ -78,16 +78,21 @@ const PROJECTS: Project[] = [
   },
   {
     id: 3,
-    slug: "cyber-garden",
-    title: "CYBER GARDEN",
-    category: "E-commerce",
-    description: "Experimentální obchod s digitálními aktivy využívající brutalistní design.",
-    fullDescription: "Cyber Garden boří konvence tradičního e-commerce. Místo čistých bílých ploch jsme zvolili syrový, brutalistní přístup, který rezonuje s komunitou digitálních umělců. Celý systém je postaven na headless architektuře pro maximální rychlost a flexibilitu.",
-    image: "https://picsum.photos/seed/garden/1200/800",
-    tags: ["Next.js", "Tailwind", "Stripe"],
-    year: "2023",
-    client: "Digital Bloom",
-    role: "Fullstack Architect"
+    slug: "ddu-olomouc",
+    title: "DDÚ Olomouc",
+    category: "Redesign webu",
+    description: "Kompletní redesign webu Dětského diagnostického ústavu v Olomouci. Moderní, přehledný a přístupný web pro instituci pečující o děti a mládež.",
+    fullDescription: "Redesign webu DDÚ Olomouc přináší novou vizuální identitu a přehlednější strukturu informací. Zařízení poskytuje diagnostickou, poradenskou a výchovně vzdělávací péči pro děti ve věku 3–18 let. Cílem bylo vytvořit web, který rodičům a pedagogům usnadní orientaci v nabízených službách a zároveň působí důvěryhodně a profesionálně. Společně jsme navrhli čistý layout, srozumitelnou navigaci a responzivní řešení pro všechny typy zařízení. Redesignem jsme dosáhli: moderního vzhledu místo zastaralého table layoutu, přehledné hierarchie informací (škola, SVP, jídelna), rychlého přístupu k často hledaným sekcím (Pro rodiče, Dokumenty, Kontakt), plné responzivity pro mobily a tablety, srozumitelné navigace s jasným odlišením sekcí, výrazně rychlejšího načítání díky lehkému HTML/CSS kódu, lepšího SEO a vyhledávatelnosti v Google, vyšší přístupnosti pro čtečky obrazovky a slabozraké a přehlednějšího uspořádání kontaktních údajů.",
+    image: "/images/projects/ddu-olomouc.webp",
+    tags: ["HTML", "CSS"],
+    year: "2026",
+    client: "DDÚ Olomouc",
+    role: "Developer & Designer",
+    websiteUrls: [
+      { label: "dduolomouc.cz (původní)", url: "https://www.dduolomouc.cz/" },
+      { label: "ddu-olomouc-web.vercel.app (návrh)", url: "https://ddu-olomouc-web.vercel.app/" },
+    ],
+    quote: "Spolupráce na redesignu byla příjemná – důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
   },
   {
     id: 4,
@@ -357,103 +362,43 @@ const Hero = () => {
 };
 
 const WorkSection = () => {
-  const { t } = useLanguage();
-  const targetRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start start", "end end"]
-  });
-
-  // Lehčí spring pro plynulejší odezvu při scrollu
-  const smoothProgress = useSpring(scrollYProgress, {
-    damping: 30,
-    stiffness: 100,
-    mass: 0.5,
-    restDelta: 0.001
-  });
-  
-  // Map scroll to horizontal movement - postupné zobrazení všech 4 projektů
-  const x = useTransform(
-    smoothProgress, 
-    [0, 0.2, 0.4, 0.6, 0.85, 1], 
-    ["0%", "-35%", "-70%", "-105%", "-140%", "-140%"]
-  );
-  
   return (
-    <section id="work" ref={targetRef} className="relative h-[500vh] sm:h-[600vh] md:h-[800vh] bg-white text-black">
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-16 sm:py-20 md:py-24 lg:py-32 px-0">
-        {/* Horizontal Scroll Track */}
-        <motion.div 
-          style={{ x, opacity: useTransform(smoothProgress, [0, 0.1, 0.9, 1], [1, 1, 1, 0]) }} 
-          className="flex gap-[20vw] sm:gap-[22vw] md:gap-[25vw] px-[8vw] sm:px-[10vw] md:px-[12vw] items-center relative z-10 will-change-transform"
-        >
+    <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-20 md:gap-24 lg:gap-32">
           {PROJECTS.map((project, idx) => (
-            <ProjectCard 
-              key={project.id} 
-              project={project} 
-              index={idx} 
-              scrollYProgress={smoothProgress}
-            />
+            <ProjectCard key={project.id} project={project} index={idx} />
           ))}
-          
-          {/* Large spacer at the end */}
-          <div className="shrink-0 w-[30vw] sm:w-[35vw] md:w-[40vw] h-16 sm:h-20 flex items-center">
-             <div className="w-full h-px bg-black/10 relative">
-                <div className="absolute right-0 -top-4 text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-black/50">{t.work.endOfGallery}</div>
-             </div>
-          </div>
-        </motion.div>
-
-        {/* Progress Indicator */}
-        <div className="absolute bottom-10 sm:bottom-14 left-1/2 -translate-x-1/2 w-52 sm:w-72 h-1 bg-black/5 rounded-full overflow-hidden px-4">
-          <motion.div 
-            style={{ scaleX: smoothProgress, originX: 0 }}
-            className="h-full bg-[var(--color-vibe-orange)]"
-          />
-          <div className="absolute -bottom-5 sm:-bottom-6 left-0 right-0 flex justify-between text-[7px] sm:text-[8px] font-bold uppercase tracking-widest text-black/50">
-            <span>{t.work.start}</span>
-            <span className="hidden sm:inline">{t.work.scrollToExplore}</span>
-            <span className="sm:hidden">{t.work.scroll}</span>
-            <span>{t.work.finish}</span>
-          </div>
         </div>
       </div>
     </section>
   );
 };
 
-function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { project: Project, index: number, scrollYProgress: any, onHoverChange?: (hovered: boolean) => void, key?: React.Key }) {
+function ProjectCard({ project, index }: { project: Project, index: number }) {
   const { t } = useLanguage();
-  const cardRef = useRef(null);
   const tr = t.projects[project.slug as keyof typeof t.projects];
   const category = tr?.category ?? project.category;
   
-  // Jemný parallax pro obrázek - redukovaný pro plynulejší scroll
-  const yParallax = useTransform(scrollYProgress, [0, 1], [0, index % 2 === 0 ? -30 : 30]);
-  
   return (
-    <motion.div 
-      ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
+    <motion.article 
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, margin: "-50px" }}
-      transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={() => onHoverChange?.(true)}
-      onMouseLeave={() => onHoverChange?.(false)}
-      className="group shrink-0 w-[85vw] min-w-[280px] sm:w-[75vw] md:w-[600px] lg:w-[700px] relative"
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative"
     >
       <Link to={`/project/${project.slug}`} className="block relative">
-        <div className="relative aspect-[16/10] md:aspect-[1.2/1] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-10 sm:mb-14 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
-          <motion.img 
-            style={{ y: yParallax, scale: 1.2 }}
+        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-6 sm:mb-8 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
+          <img 
             src={project.image} 
             alt={project.title}
             width={1200}
             height={800}
-            loading={index === 0 ? "eager" : "lazy"}
+            loading={index < 2 ? "eager" : "lazy"}
             fetchPriority={index === 0 ? "high" : undefined}
             decoding="async"
-            className="w-full h-full object-cover rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] transition-transform duration-1000 group-hover:scale-[1.25]"
+            className="w-full h-full object-cover rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] transition-transform duration-700 group-hover:scale-[1.08]"
             referrerPolicy="no-referrer"
           />
           
@@ -474,35 +419,29 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-10">
-          <div className="max-w-md">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="w-8 h-px bg-[var(--color-vibe-orange)]" />
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)]">
-                {category}
-              </span>
-            </div>
-            
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display uppercase leading-[1.05] mb-5 sm:mb-6 group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500">
-              {project.title}
-            </h3>
-            
-            <div className="flex gap-2 flex-wrap">
-              {project.tags.map(tag => (
-                <span key={tag} className="text-[10px] px-4 py-2 border border-black/10 rounded-full font-mono uppercase tracking-[0.15em] bg-white group-hover:bg-black group-hover:text-white group-hover:border-black transition-all duration-300">
-                  {tag}
-                </span>
-              ))}
-            </div>
+        <div className="flex flex-col gap-4 sm:gap-5">
+          <div className="flex items-center gap-4">
+            <span className="w-8 h-px bg-[var(--color-vibe-orange)]" />
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)]">
+              {category}
+            </span>
           </div>
           
-          <div className="hidden md:block text-right">
-             <div className="text-[10px] font-bold text-black/50 uppercase tracking-widest mb-1">{t.work.timeline}</div>
-             <div className="text-2xl font-display">{project.year}</div>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase leading-[1.05] group-hover:translate-x-2 transition-transform duration-300">
+            {project.title}
+          </h3>
+          
+          <div className="flex flex-wrap items-center gap-3">
+            {project.tags.map(tag => (
+              <span key={tag} className="text-[10px] px-3 py-1.5 border border-black/10 rounded-full font-mono uppercase tracking-[0.15em] bg-white group-hover:bg-black group-hover:text-white group-hover:border-black transition-all duration-300">
+                {tag}
+              </span>
+            ))}
+            <span className="text-[10px] font-bold text-black/50 uppercase tracking-widest ml-auto">{project.year}</span>
           </div>
         </div>
       </Link>
-    </motion.div>
+    </motion.article>
   );
 }
 
