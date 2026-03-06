@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
 import Lenis from '@studio-freight/lenis';
 import { fixCzechTypography } from './utils/czechTypography';
+import { useLanguage } from './i18n/LanguageContext';
 import { 
   Code2, 
   Zap, 
@@ -103,37 +104,12 @@ const PROJECTS: Project[] = [
   }
 ];
 
-const SERVICES = [
-  {
-    icon: <Globe className="w-6 h-6" />,
-    title: "Webové stránky a prezentace",
-    description: "Moderní weby, které ukážou vaši hodnotu a podpoří prodej. Přehledně, rychle, účinně."
-  },
-  {
-    icon: <Rocket className="w-6 h-6" />,
-    title: "Landing pages",
-    description: "Stránky, které konvertují. Pro kampaně, validaci nápadu nebo konkrétní nabídku."
-  },
-  {
-    icon: <Zap className="w-6 h-6" />,
-    title: "Prototypy a MVP",
-    description: "Funkční model produktu dřív, než investujete velké peníze. Ověřte trh rychle."
-  },
-  {
-    icon: <Palette className="w-6 h-6" />,
-    title: "UI/UX návrh",
-    description: "Rozhraní, které zákazníci pochopí na první pohled. Funkční a přehledné."
-  },
-  {
-    icon: <Settings className="w-6 h-6" />,
-    title: "Automatizace procesů",
-    description: "Propojíme nástroje, zautomatizujeme rutinu. Méně práce, více času na to důležité."
-  }
-];
+const SERVICE_ICONS = [Globe, Rocket, Zap, Palette, Settings];
 
 // --- Components ---
 
 const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPage?: boolean }) => {
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -156,13 +132,13 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
   const navLinks = !isProjectPage ? (
     <>
-      <a href="#work" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>Práce</a>
-      <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>Služby</a>
-      <a href="#contact" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>Kontakt</a>
+      <a href="#work" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{t.nav.work}</a>
+      <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{t.nav.services}</a>
+      <a href="#contact" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{t.nav.contact}</a>
     </>
   ) : (
     <Link to="/" onClick={closeMobileMenu} className={`hover:text-current transition-colors flex items-center gap-2 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>
-      <ArrowLeft className="w-4 h-4" /> Zpět domů
+      <ArrowLeft className="w-4 h-4" /> {t.nav.backHome}
     </Link>
   );
 
@@ -199,14 +175,14 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
                 : 'bg-black text-white hover:bg-[var(--color-vibe-orange)]'
             }`}
           >
-            Začněme
+            {t.nav.start}
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={`md:hidden p-2 -mr-2 rounded-lg transition-colors ${
               theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-black/10'
             }`}
-            aria-label={mobileMenuOpen ? 'Zavřít menu' : 'Otevřít menu'}
+            aria-label={mobileMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -236,18 +212,18 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
             {!isProjectPage ? (
               <>
                 <a href="#work" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  Práce
+                  {t.nav.work}
                 </a>
                 <a href="#services" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  Služby
+                  {t.nav.services}
                 </a>
                 <a href="#contact" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  Kontakt
+                  {t.nav.contact}
                 </a>
               </>
             ) : (
               <Link to="/" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" /> Zpět domů
+                <ArrowLeft className="w-4 h-4" /> {t.nav.backHome}
               </Link>
             )}
           </nav>
@@ -256,7 +232,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
             onClick={closeMobileMenu}
             className="mt-4 block py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black text-center hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all"
           >
-            Začněme
+            {t.nav.start}
           </a>
         </motion.div>
       </div>
@@ -265,6 +241,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 };
 
 const Hero = () => {
+  const { t, lang } = useLanguage();
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
@@ -289,7 +266,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <span className="inline-block px-4 py-2 border border-white/20 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold mb-8 sm:mb-12 text-white/70 bg-white/5 backdrop-blur-sm">
-            Dostupný pro nové projekty 2026
+            {t.hero.available}
           </span>
         </motion.div>
         
@@ -300,7 +277,7 @@ const Hero = () => {
               animate={{ y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             >
-              Kóduji
+              {t.hero.codeWith}
             </motion.span>
           </div>
           <div className="text-reveal">
@@ -310,12 +287,12 @@ const Hero = () => {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
               className="text-[var(--color-vibe-orange)]"
             >
-              S Vibem.
+              {t.hero.withVibe}
             </motion.span>
           </div>
         </h1>
         <p className="text-base sm:text-lg md:text-xl font-bold text-white/95 mb-10 sm:mb-16 md:mb-20 max-w-xl">
-          {fixCzechTypography("Landing page do 7 dnů. MVP do 14 dnů.")}
+          {lang === 'cs' ? fixCzechTypography(t.hero.landingMvp) : t.hero.landingMvp}
         </p>
 
         <div className="grid md:grid-cols-2 gap-10 sm:gap-16 md:gap-20 lg:gap-24 items-end">
@@ -326,7 +303,7 @@ const Hero = () => {
             className="space-y-8 sm:space-y-10"
           >
             <p className="text-sm sm:text-base md:text-lg font-light text-white/80 max-w-lg leading-[1.7]">
-              {fixCzechTypography("Stavím weby a aplikace, které prodávají. Jasně ukážou vaši hodnotu a přivedou zákazníky. Žádná zbytečná složitost, jen výsledek.")}
+              {lang === 'cs' ? fixCzechTypography(t.hero.intro) : t.hero.intro}
             </p>
             <div className="flex flex-wrap gap-5 sm:gap-10 items-center">
                <div className="flex -space-x-3">
@@ -336,7 +313,7 @@ const Hero = () => {
                     </div>
                   ))}
                </div>
-               <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Spolupracovali se mnou</p>
+               <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">{t.hero.workedWith}</p>
             </div>
           </motion.div>
           
@@ -369,7 +346,7 @@ const Hero = () => {
                 <div className="absolute inset-3 sm:inset-4 border border-dashed border-white/5 rounded-full animate-[spin_20s_linear_infinite]" />
               </div>
               <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 bg-[var(--color-vibe-orange)] text-black font-bold text-[9px] sm:text-[10px] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full uppercase tracking-[0.2em] shadow-xl">
-                Explore
+                {t.hero.explore}
               </div>
             </button>
           </motion.div>
@@ -380,6 +357,7 @@ const Hero = () => {
 };
 
 const WorkSection = () => {
+  const { t } = useLanguage();
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -421,7 +399,7 @@ const WorkSection = () => {
           {/* Large spacer at the end */}
           <div className="shrink-0 w-[30vw] sm:w-[35vw] md:w-[40vw] h-16 sm:h-20 flex items-center">
              <div className="w-full h-px bg-black/10 relative">
-                <div className="absolute right-0 -top-4 text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-black/50">End of Gallery</div>
+                <div className="absolute right-0 -top-4 text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-black/50">{t.work.endOfGallery}</div>
              </div>
           </div>
         </motion.div>
@@ -433,10 +411,10 @@ const WorkSection = () => {
             className="h-full bg-[var(--color-vibe-orange)]"
           />
           <div className="absolute -bottom-5 sm:-bottom-6 left-0 right-0 flex justify-between text-[7px] sm:text-[8px] font-bold uppercase tracking-widest text-black/50">
-            <span>Start</span>
-            <span className="hidden sm:inline">Scroll to Explore</span>
-            <span className="sm:hidden">Scroll</span>
-            <span>Finish</span>
+            <span>{t.work.start}</span>
+            <span className="hidden sm:inline">{t.work.scrollToExplore}</span>
+            <span className="sm:hidden">{t.work.scroll}</span>
+            <span>{t.work.finish}</span>
           </div>
         </div>
       </div>
@@ -445,7 +423,10 @@ const WorkSection = () => {
 };
 
 function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { project: Project, index: number, scrollYProgress: any, onHoverChange?: (hovered: boolean) => void, key?: React.Key }) {
+  const { t } = useLanguage();
   const cardRef = useRef(null);
+  const tr = t.projects[project.slug as keyof typeof t.projects];
+  const category = tr?.category ?? project.category;
   
   // Jemný parallax pro obrázek - redukovaný pro plynulejší scroll
   const yParallax = useTransform(scrollYProgress, [0, 1], [0, index % 2 === 0 ? -30 : 30]);
@@ -484,7 +465,7 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
                 whileHover={{ y: 0 }}
                 className="text-white text-xs font-bold uppercase tracking-[0.5em]"
               >
-                View Case Study
+                {t.work.viewCaseStudy}
               </motion.div>
             </div>
             <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275)">
@@ -498,7 +479,7 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
             <div className="flex items-center gap-4 mb-4">
               <span className="w-8 h-px bg-[var(--color-vibe-orange)]" />
               <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)]">
-                {project.category}
+                {category}
               </span>
             </div>
             
@@ -516,7 +497,7 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
           </div>
           
           <div className="hidden md:block text-right">
-             <div className="text-[10px] font-bold text-black/50 uppercase tracking-widest mb-1">Timeline</div>
+             <div className="text-[10px] font-bold text-black/50 uppercase tracking-widest mb-1">{t.work.timeline}</div>
              <div className="text-2xl font-display">{project.year}</div>
           </div>
         </div>
@@ -525,7 +506,13 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
   );
 }
 
-const ServicesSection = () => (
+const ServicesSection = () => {
+  const { t, lang } = useLanguage();
+  const services = t.servicesList.map((s, idx) => {
+    const Icon = SERVICE_ICONS[idx];
+    return { ...s, icon: <Icon className="w-6 h-6" /> };
+  });
+  return (
   <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
     
@@ -533,13 +520,13 @@ const ServicesSection = () => (
       <div className="grid lg:grid-cols-2 gap-20 sm:gap-28 lg:gap-36 items-center">
         <div>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase mb-10 sm:mb-16 leading-[1.08]">
-            Co Vám<br/><span className="text-white/30 italic">Nabízím</span>
+            {t.services.title}<br/><span className="text-white/30 italic">{t.services.titleItalic}</span>
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-white/80 mb-12 sm:mb-16 max-w-lg font-light leading-[1.7]">
-            {fixCzechTypography("Weby, landing pages, MVP i automatizace. Konkrétní řešení, které vám pomůže růst. Bez zbytečného balastu.")}
+            {lang === 'cs' ? fixCzechTypography(t.services.intro) : t.services.intro}
           </p>
           <div className="grid gap-5 sm:gap-6">
-            {SERVICES.map((service, idx) => (
+            {services.map((service, idx) => (
               <motion.div 
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
@@ -553,7 +540,7 @@ const ServicesSection = () => (
                 </div>
                 <div className="min-w-0">
                   <h4 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 text-white/95">{service.title}</h4>
-                  <p className="text-white/75 text-sm sm:text-base leading-[1.6] group-hover:text-white/90 transition-colors">{fixCzechTypography(service.description)}</p>
+                  <p className="text-white/75 text-sm sm:text-base leading-[1.6] group-hover:text-white/90 transition-colors">{lang === 'cs' ? fixCzechTypography(service.description) : service.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -561,23 +548,23 @@ const ServicesSection = () => (
 
           {/* Jak pracuji */}
           <div className="mt-16 sm:mt-20 lg:mt-28">
-            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-6 sm:mb-10 text-white/95">Jak pracuji</h3>
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-6 sm:mb-10 text-white/95">{t.services.howIWork}</h3>
             <ul className="space-y-4 text-white/80 font-light leading-[1.7]">
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {fixCzechTypography("Výsledek před složitostí. Vždy.")}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {fixCzechTypography("Řešení šitá na míru vašemu rozpočtu.")}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {fixCzechTypography("Moderní nástroje, rychlá realizace.")}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {fixCzechTypography("Jasná komunikace. Žádný technický žargon.")}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {lang === 'cs' ? fixCzechTypography(t.services.bullet1) : t.services.bullet1}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {lang === 'cs' ? fixCzechTypography(t.services.bullet2) : t.services.bullet2}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {lang === 'cs' ? fixCzechTypography(t.services.bullet3) : t.services.bullet3}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {lang === 'cs' ? fixCzechTypography(t.services.bullet4) : t.services.bullet4}</li>
             </ul>
           </div>
 
           {/* Pro koho */}
           <div className="mt-12 sm:mt-16 lg:mt-24">
-            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-6 sm:mb-10 text-white/95">Pro koho</h3>
-            <p className="text-white/80 font-light leading-[1.7] mb-4">{fixCzechTypography("Spolupracuji s těmi, kdo:")}</p>
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-6 sm:mb-10 text-white/95">{t.services.forWhom}</h3>
+            <p className="text-white/80 font-light leading-[1.7] mb-4">{lang === 'cs' ? fixCzechTypography(t.services.forWhomIntro) : t.services.forWhomIntro}</p>
             <ul className="space-y-3 text-white/85">
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {fixCzechTypography("chtějí rychle spustit projekt")}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {fixCzechTypography("potřebují zjednodušit to, co už mají")}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {fixCzechTypography("hledají flexibilitu místo velké agentury")}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {lang === 'cs' ? fixCzechTypography(t.services.forWhom1) : t.services.forWhom1}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {lang === 'cs' ? fixCzechTypography(t.services.forWhom2) : t.services.forWhom2}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {lang === 'cs' ? fixCzechTypography(t.services.forWhom3) : t.services.forWhom3}</li>
             </ul>
           </div>
         </div>
@@ -623,9 +610,12 @@ const ServicesSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
-const ContactSection = () => (
+const ContactSection = () => {
+  const { t, lang } = useLanguage();
+  return (
   <section id="contact" className="py-24 sm:py-32 md:py-40 lg:py-52 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-orange)] text-black relative overflow-hidden">
     {/* Decorative Elements */}
     <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/5 to-transparent" />
@@ -639,10 +629,10 @@ const ContactSection = () => (
         transition={{ duration: 1 }}
       >
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-[1.08] mb-8 sm:mb-10">
-          Pojďme to probrat
+          {t.contact.title}
         </h2>
         <p className="text-base sm:text-lg md:text-xl font-light mb-12 sm:mb-16 md:mb-20 max-w-2xl mx-auto">
-          {fixCzechTypography("Máte nápad? Konkrétní potřebu? Napište. Společně najdeme cestu, jak ji proměnit v realitu.")}
+          {lang === 'cs' ? fixCzechTypography(t.contact.intro) : t.contact.intro}
         </p>
       </motion.div>
 
@@ -664,7 +654,7 @@ const ContactSection = () => (
           href="mailto:horakpremysl85@gmail.com"
           className="bg-black text-white px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-all duration-500 text-center"
         >
-          Napsat zprávu
+          {t.contact.writeMessage}
         </motion.a>
       </div>
       
@@ -697,17 +687,22 @@ const ContactSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
-const Footer = () => (
+const Footer = () => {
+  const { t, lang } = useLanguage();
+  return (
   <footer id="privacy" className="py-8 sm:py-12 px-4 sm:px-6 md:px-8 border-t border-white/10 text-center text-white/60 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
-    {fixCzechTypography("© 2026 VIBECOODING - VYTVOŘENO S VÁŠNÍ PRO KÓD")}
+    {lang === 'cs' ? fixCzechTypography(t.footer.copyright) : t.footer.copyright}
   </footer>
-);
+  );
+};
 
 const COOKIE_CONSENT_KEY = 'vibecooding-cookie-consent';
 
 const CookieBar = () => {
+  const { t, lang } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -746,10 +741,10 @@ const CookieBar = () => {
                 <Cookie className="w-6 h-6 text-[var(--color-vibe-orange)]" />
               </div>
               <div>
-                <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-1">Soubory cookies</h3>
+                <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-1">{t.cookie.title}</h3>
                 <p className="text-sm text-white/85 leading-relaxed">
-                  {fixCzechTypography("Používáme cookies pro zajištění funkčnosti webu a lepší uživatelskou zkušenost.")}{' '}
-                  <a href="#privacy" className="text-[var(--color-vibe-orange)] hover:underline">Více informací</a>
+                  {lang === 'cs' ? fixCzechTypography(t.cookie.text) : t.cookie.text}{' '}
+                  <a href="#privacy" className="text-[var(--color-vibe-orange)] hover:underline">{t.cookie.moreInfo}</a>
                 </p>
               </div>
             </div>
@@ -758,13 +753,13 @@ const CookieBar = () => {
                 onClick={declineOptional}
                 className="px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-colors"
               >
-                Jen nutné
+                {t.cookie.essentialOnly}
               </button>
               <button
                 onClick={acceptAll}
                 className="px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-wider bg-[var(--color-vibe-orange)] text-white hover:bg-[var(--color-vibe-orange)]/90 transition-colors shadow-lg"
               >
-                Přijmout vše
+                {t.cookie.acceptAll}
               </button>
             </div>
           </div>
@@ -792,15 +787,17 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
 const ProjectPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const { t, lang } = useLanguage();
   const projectIndex = PROJECTS.findIndex(p => p.slug === slug);
   const project = PROJECTS[projectIndex];
   const nextProject = PROJECTS[(projectIndex + 1) % PROJECTS.length];
+  const tr = project ? t.projects[project.slug as keyof typeof t.projects] : null;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  if (!project) return <div>Project not found</div>;
+  if (!project) return <div>{t.project.notFound}</div>;
 
   return (
     <motion.div 
@@ -823,7 +820,7 @@ const ProjectPage = () => {
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="text-[var(--color-vibe-orange)] font-mono text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.4em] block"
               >
-                {project.category} / {project.year}
+                {(tr?.category ?? project.category)} / {project.year}
               </motion.span>
             </div>
             
@@ -860,18 +857,18 @@ const ProjectPage = () => {
         <section className="px-4 sm:px-6 md:px-8 lg:px-12 mb-24 sm:mb-32 md:mb-40">
           <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-20 sm:gap-28 md:gap-36">
             <div className="md:col-span-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase mb-10 sm:mb-14">O projektu</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase mb-10 sm:mb-14">{t.project.about}</h2>
               <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] mb-10 sm:mb-16 font-light">
-                {fixCzechTypography(project.fullDescription)}
+                {lang === 'cs' ? fixCzechTypography(tr?.fullDescription ?? project.fullDescription) : (tr?.fullDescription ?? project.fullDescription)}
               </p>
               
               <div className="grid grid-cols-2 gap-10 sm:gap-14 md:gap-20 border-t border-white/5 pt-14 sm:pt-20">
                 <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">Klient</h4>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">{t.project.client}</h4>
                   <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{project.client}</p>
                 </div>
                 <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">Role</h4>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">{t.project.role}</h4>
                   <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{project.role}</p>
                 </div>
               </div>
@@ -879,7 +876,7 @@ const ProjectPage = () => {
             
             <div className="space-y-8 sm:space-y-12">
                <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">Technologie</h4>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{t.project.tech}</h4>
                   <div className="flex flex-wrap gap-2 sm:gap-3">
                     {project.tags.map(tag => (
                       <span key={tag} className="px-3 sm:px-5 py-1.5 sm:py-2 border border-white/10 rounded-full text-[10px] sm:text-xs font-mono uppercase tracking-widest bg-white/5">
@@ -890,7 +887,7 @@ const ProjectPage = () => {
                </div>
                {project.websiteUrls && project.websiteUrls.length > 0 && (
                  <div>
-                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">Web projektu</h4>
+                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{t.project.website}</h4>
                    <div className="flex flex-wrap gap-3">
                      {project.websiteUrls.map(({ label, url }) => (
                        <a
@@ -910,7 +907,7 @@ const ProjectPage = () => {
                
                <div className="p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10">
                   <p className="text-xs sm:text-sm text-white/80 leading-relaxed italic">
-                    "{fixCzechTypography(project.quote ?? "Tento projekt byl výzvou v oblasti výkonu a vizuální věrnosti. Výsledek předčil očekávání klienta.")}"
+                    "{lang === 'cs' ? fixCzechTypography(tr?.quote ?? project.quote ?? t.project.defaultQuote) : (tr?.quote ?? project.quote ?? t.project.defaultQuote)}"
                   </p>
                </div>
             </div>
@@ -922,7 +919,7 @@ const ProjectPage = () => {
            <div className="absolute inset-0 bg-[var(--color-vibe-orange)] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]" />
            
            <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
-              <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">Další Projekt</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">{t.project.nextProject}</span>
               <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
                 {nextProject.title}
               </h2>
