@@ -309,7 +309,7 @@ const Hero = () => {
                <div className="flex -space-x-3">
                   {[1,2,3].map(i => (
                     <div key={i} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-[var(--color-vibe-black)] bg-gray-800 overflow-hidden">
-                       <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="Client" width={100} height={100} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                       <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="" width={100} height={100} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </div>
                   ))}
                </div>
