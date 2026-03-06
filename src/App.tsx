@@ -12,7 +12,6 @@ import {
   Linkedin, 
   Github,
   Terminal,
-  Sparkles,
   ArrowLeft,
   ChevronRight,
   Menu,
@@ -172,7 +171,11 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
       <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center transition-all duration-500 safe-area-inset-top ${
         scrolled ? 'bg-black/10 backdrop-blur-xl py-3' : 'bg-transparent'
       } ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link 
+          to="/" 
+          className="flex items-center gap-2 group"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${
             theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'
           }`}>
@@ -210,31 +213,48 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu - compact bottom sheet */}
       <div 
         className={`fixed inset-0 z-40 md:hidden transition-opacity duration-300 ${
           mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
         <div 
-          className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
             mobileMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
           onClick={closeMobileMenu}
         />
         <motion.div
-          initial={{ x: '100%' }}
-          animate={{ x: mobileMenuOpen ? 0 : '100%' }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="absolute top-0 right-0 bottom-0 w-[min(320px,85vw)] bg-[var(--color-vibe-black)] border-l border-white/10 p-6 pt-20 flex flex-col gap-6 text-white safe-area-inset-top"
+          initial={{ y: '100%' }}
+          animate={{ y: mobileMenuOpen ? 0 : '100%' }}
+          transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+          className="absolute bottom-0 left-0 right-0 bg-[var(--color-vibe-black)] border-t border-white/10 rounded-t-2xl p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] text-white safe-area-inset-bottom"
         >
-          <div className="flex flex-col gap-6 text-sm font-bold tracking-[0.3em] uppercase text-white/90">
-            {navLinks}
-          </div>
+          <div className="w-10 h-1 rounded-full bg-white/20 mx-auto mb-5" aria-hidden />
+          <nav className="flex flex-col gap-1">
+            {!isProjectPage ? (
+              <>
+                <a href="#work" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  Práce
+                </a>
+                <a href="#services" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  Služby
+                </a>
+                <a href="#contact" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  Kontakt
+                </a>
+              </>
+            ) : (
+              <Link to="/" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> Zpět domů
+              </Link>
+            )}
+          </nav>
           <a 
             href="mailto:hello@vibecooding.dev"
             onClick={closeMobileMenu}
-            className="mt-auto px-6 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black text-center"
+            className="mt-4 block py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black text-center hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all"
           >
             Začněme
           </a>
@@ -889,7 +909,6 @@ const ProjectPage = () => {
                )}
                
                <div className="p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10">
-                  <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-[var(--color-vibe-orange)] mb-3 sm:mb-4" />
                   <p className="text-xs sm:text-sm text-white/80 leading-relaxed italic">
                     "{fixCzechTypography(project.quote ?? "Tento projekt byl výzvou v oblasti výkonu a vizuální věrnosti. Výsledek předčil očekávání klienta.")}"
                   </p>
@@ -924,6 +943,10 @@ export default function App() {
   const [navTheme, setNavTheme] = useState<'light' | 'dark'>('dark');
   const [isHovering, setIsHovering] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
 
   useEffect(() => {
     const lenis = new Lenis({
