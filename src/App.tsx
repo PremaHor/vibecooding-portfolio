@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
 import Lenis from '@studio-freight/lenis';
+import { fixCzechTypography } from './utils/czechTypography';
 import { 
   Code2, 
   Zap, 
@@ -36,6 +37,7 @@ interface Project {
   client: string;
   role: string;
   websiteUrls?: { label: string; url: string }[];
+  quote?: string;
 }
 
 // --- Constants ---
@@ -72,6 +74,7 @@ const PROJECTS: Project[] = [
     websiteUrls: [
       { label: "rekly.vercel.app", url: "https://rekly.vercel.app/" },
     ],
+    quote: "Tento projekt byl výzvou především v zadání všech materiálů od dodavatelů tak, aby kalkulace fungovaly spolehlivě a přesně. Výsledek přinesl přehledný systém, který zrychluje přípravu nabídek.",
   },
   {
     id: 3,
@@ -175,7 +178,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           }`}>
             <Code2 className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <span className="font-display text-xl sm:text-2xl tracking-tighter">VIBECOODING</span>
+          <span className="font-display text-xl sm:text-2xl">VIBECOODING</span>
         </Link>
         
         <div className={`hidden md:flex gap-6 lg:gap-8 text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-500 ${
@@ -270,7 +273,7 @@ const Hero = () => {
           </span>
         </motion.div>
         
-        <h1 className="font-display text-[12vw] sm:text-[11vw] md:text-[10vw] lg:text-[8rem] leading-[1.08] uppercase tracking-[-0.02em] mb-6 sm:mb-8">
+        <h1 className="font-display text-[12vw] sm:text-[11vw] md:text-[10vw] lg:text-[8rem] leading-[1.08] uppercase mb-6 sm:mb-8">
           <div className="text-reveal">
             <motion.span 
               initial={{ y: "100%" }}
@@ -292,7 +295,7 @@ const Hero = () => {
           </div>
         </h1>
         <p className="text-base sm:text-lg md:text-xl font-bold text-white/95 mb-10 sm:mb-16 md:mb-20 max-w-xl">
-          Landing page do 7 dnů. MVP do 14 dnů.
+          {fixCzechTypography("Landing page do 7 dnů. MVP do 14 dnů.")}
         </p>
 
         <div className="grid md:grid-cols-2 gap-10 sm:gap-16 md:gap-20 lg:gap-24 items-end">
@@ -303,7 +306,7 @@ const Hero = () => {
             className="space-y-8 sm:space-y-10"
           >
             <p className="text-sm sm:text-base md:text-lg font-light text-white/80 max-w-lg leading-[1.7]">
-              Stavím weby a aplikace, které prodávají. Jasně ukážou vaši hodnotu a přivedou zákazníky. Žádná zbytečná složitost, jen výsledek.
+              {fixCzechTypography("Stavím weby a aplikace, které prodávají. Jasně ukážou vaši hodnotu a přivedou zákazníky. Žádná zbytečná složitost, jen výsledek.")}
             </p>
             <div className="flex flex-wrap gap-5 sm:gap-10 items-center">
                <div className="flex -space-x-3">
@@ -479,7 +482,7 @@ function ProjectCard({ project, index, scrollYProgress, onHoverChange }: { proje
               </span>
             </div>
             
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display uppercase tracking-tighter leading-[1.05] mb-5 sm:mb-6 group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display uppercase leading-[1.05] mb-5 sm:mb-6 group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-500">
               {project.title}
             </h3>
             
@@ -509,11 +512,11 @@ const ServicesSection = () => (
     <div className="max-w-7xl mx-auto relative z-10">
       <div className="grid lg:grid-cols-2 gap-20 sm:gap-28 lg:gap-36 items-center">
         <div>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase tracking-tighter mb-10 sm:mb-16 leading-[1.08]">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase mb-10 sm:mb-16 leading-[1.08]">
             Co Vám<br/><span className="text-white/30 italic">Nabízím</span>
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-white/80 mb-12 sm:mb-16 max-w-lg font-light leading-[1.7]">
-            Weby, landing pages, MVP i automatizace. Konkrétní řešení, které vám pomůže růst. Bez zbytečného balastu.
+            {fixCzechTypography("Weby, landing pages, MVP i automatizace. Konkrétní řešení, které vám pomůže růst. Bez zbytečného balastu.")}
           </p>
           <div className="grid gap-5 sm:gap-6">
             {SERVICES.map((service, idx) => (
@@ -529,8 +532,8 @@ const ServicesSection = () => (
                   {service.icon}
                 </div>
                 <div className="min-w-0">
-                  <h4 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 tracking-tight text-white/95">{service.title}</h4>
-                  <p className="text-white/75 text-sm sm:text-base leading-[1.6] group-hover:text-white/90 transition-colors">{service.description}</p>
+                  <h4 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 text-white/95">{service.title}</h4>
+                  <p className="text-white/75 text-sm sm:text-base leading-[1.6] group-hover:text-white/90 transition-colors">{fixCzechTypography(service.description)}</p>
                 </div>
               </motion.div>
             ))}
@@ -538,23 +541,23 @@ const ServicesSection = () => (
 
           {/* Jak pracuji */}
           <div className="mt-16 sm:mt-20 lg:mt-28">
-            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase tracking-tight mb-6 sm:mb-10 text-white/95">Jak pracuji</h3>
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-6 sm:mb-10 text-white/95">Jak pracuji</h3>
             <ul className="space-y-4 text-white/80 font-light leading-[1.7]">
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> Výsledek před složitostí. Vždy.</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> Řešení šitá na míru vašemu rozpočtu.</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> Moderní nástroje, rychlá realizace.</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> Jasná komunikace. Žádný technický žargon.</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {fixCzechTypography("Výsledek před složitostí. Vždy.")}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {fixCzechTypography("Řešení šitá na míru vašemu rozpočtu.")}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {fixCzechTypography("Moderní nástroje, rychlá realizace.")}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {fixCzechTypography("Jasná komunikace. Žádný technický žargon.")}</li>
             </ul>
           </div>
 
           {/* Pro koho */}
           <div className="mt-12 sm:mt-16 lg:mt-24">
-            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase tracking-tight mb-6 sm:mb-10 text-white/95">Pro koho</h3>
-            <p className="text-white/80 font-light leading-[1.7] mb-4">Spolupracuji s těmi, kdo:</p>
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-6 sm:mb-10 text-white/95">Pro koho</h3>
+            <p className="text-white/80 font-light leading-[1.7] mb-4">{fixCzechTypography("Spolupracuji s těmi, kdo:")}</p>
             <ul className="space-y-3 text-white/85">
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> chtějí rychle spustit projekt</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> potřebují zjednodušit to, co už mají</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> hledají flexibilitu místo velké agentury</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {fixCzechTypography("chtějí rychle spustit projekt")}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {fixCzechTypography("potřebují zjednodušit to, co už mají")}</li>
+              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {fixCzechTypography("hledají flexibilitu místo velké agentury")}</li>
             </ul>
           </div>
         </div>
@@ -615,11 +618,11 @@ const ContactSection = () => (
         viewport={{ once: true }}
         transition={{ duration: 1 }}
       >
-        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase tracking-tight leading-[1.08] mb-8 sm:mb-10">
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-[1.08] mb-8 sm:mb-10">
           Pojďme to probrat
         </h2>
         <p className="text-base sm:text-lg md:text-xl font-light mb-12 sm:mb-16 md:mb-20 max-w-2xl mx-auto">
-          Máte nápad? Konkrétní potřebu? Napište. Společně najdeme cestu, jak ji proměnit v realitu.
+          {fixCzechTypography("Máte nápad? Konkrétní potřebu? Napište. Společně najdeme cestu, jak ji proměnit v realitu.")}
         </p>
       </motion.div>
 
@@ -678,7 +681,7 @@ const ContactSection = () => (
 
 const Footer = () => (
   <footer id="privacy" className="py-8 sm:py-12 px-4 sm:px-6 md:px-8 border-t border-white/10 text-center text-white/60 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
-    © 2026 VIBECOODING - VYTVOŘENO S VÁŠNÍ PRO KÓD
+    {fixCzechTypography("© 2026 VIBECOODING - VYTVOŘENO S VÁŠNÍ PRO KÓD")}
   </footer>
 );
 
@@ -725,7 +728,7 @@ const CookieBar = () => {
               <div>
                 <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-1">Soubory cookies</h3>
                 <p className="text-sm text-white/85 leading-relaxed">
-                  Používáme cookies pro zajištění funkčnosti webu a lepší uživatelskou zkušenost.{' '}
+                  {fixCzechTypography("Používáme cookies pro zajištění funkčnosti webu a lepší uživatelskou zkušenost.")}{' '}
                   <a href="#privacy" className="text-[var(--color-vibe-orange)] hover:underline">Více informací</a>
                 </p>
               </div>
@@ -808,7 +811,7 @@ const ProjectPage = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-tighter leading-[1.08] mb-12 sm:mb-20"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.08] mb-12 sm:mb-20"
             >
               {project.title}
             </motion.h1>
@@ -837,9 +840,9 @@ const ProjectPage = () => {
         <section className="px-4 sm:px-6 md:px-8 lg:px-12 mb-24 sm:mb-32 md:mb-40">
           <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-20 sm:gap-28 md:gap-36">
             <div className="md:col-span-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase tracking-tight mb-10 sm:mb-14">O projektu</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase mb-10 sm:mb-14">O projektu</h2>
               <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] mb-10 sm:mb-16 font-light">
-                {project.fullDescription}
+                {fixCzechTypography(project.fullDescription)}
               </p>
               
               <div className="grid grid-cols-2 gap-10 sm:gap-14 md:gap-20 border-t border-white/5 pt-14 sm:pt-20">
@@ -888,7 +891,7 @@ const ProjectPage = () => {
                <div className="p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10">
                   <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-[var(--color-vibe-orange)] mb-3 sm:mb-4" />
                   <p className="text-xs sm:text-sm text-white/80 leading-relaxed italic">
-                    "Tento projekt byl výzvou v oblasti výkonu a vizuální věrnosti. Výsledek předčil očekávání klienta."
+                    "{fixCzechTypography(project.quote ?? "Tento projekt byl výzvou v oblasti výkonu a vizuální věrnosti. Výsledek předčil očekávání klienta.")}"
                   </p>
                </div>
             </div>
@@ -901,7 +904,7 @@ const ProjectPage = () => {
            
            <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
               <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">Další Projekt</span>
-              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase tracking-tighter leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
                 {nextProject.title}
               </h2>
               <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border border-black/10 flex items-center justify-center group-hover:border-white/20 group-hover:scale-110 transition-all duration-500">
