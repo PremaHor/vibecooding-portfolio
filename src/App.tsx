@@ -192,7 +192,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         
         <div className="flex items-center gap-2 sm:gap-4">
           <a 
-            href="mailto:hello@vibecooding.dev"
+            href="mailto:horakpremysl85@gmail.com"
             className={`hidden sm:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg ${
               theme === 'dark' 
                 ? 'bg-white text-black hover:bg-[var(--color-vibe-orange)] hover:text-white' 
@@ -252,7 +252,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
             )}
           </nav>
           <a 
-            href="mailto:hello@vibecooding.dev"
+            href="mailto:horakpremysl85@gmail.com"
             onClick={closeMobileMenu}
             className="mt-4 block py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black text-center hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all"
           >
@@ -650,10 +650,10 @@ const ContactSection = () => (
         <motion.a 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
-          href="mailto:hello@vibecooding.dev" 
+          href="mailto:horakpremysl85@gmail.com" 
           className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-all duration-500 break-all text-center"
         >
-          hello@vibecooding.dev
+          horakpremysl85@gmail.com
         </motion.a>
         
         <div className="hidden md:block w-3 h-3 bg-black rounded-full animate-pulse shrink-0" />
@@ -661,7 +661,7 @@ const ContactSection = () => (
         <motion.a 
           whileHover={{ scale: 1.05, rotate: -2 }}
           whileTap={{ scale: 0.95 }}
-          href="mailto:hello@vibecooding.dev"
+          href="mailto:horakpremysl85@gmail.com"
           className="bg-black text-white px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-all duration-500 text-center"
         >
           Napsat zprávu
