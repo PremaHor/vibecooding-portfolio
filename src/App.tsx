@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import Lenis from '@studio-freight/lenis';
-import { fixCzechTypography } from './utils/czechTypography';
+import { fixCzechTypography, fixDashes } from './utils/czechTypography';
 import { useLanguage } from './i18n/LanguageContext';
 import { 
   Code2, 
@@ -141,26 +141,26 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
   const navLinks = !isProjectPage ? (
     <>
-      <a href="#work" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.work) : t.nav.work}</a>
-      <a href="#about" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.about) : t.nav.about}</a>
-      <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : t.nav.services}</a>
-      <a href="#pricing" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.pricing) : t.nav.pricing}</a>
-      <a href="#contact" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.contact) : t.nav.contact}</a>
+      <a href="#work" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</a>
+      <a href="#about" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}</a>
+      <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}</a>
+      <a href="#pricing" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.pricing) : fixDashes(t.nav.pricing)}</a>
+      <a href="#contact" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}</a>
     </>
   ) : (
     <Link to="/" onClick={closeMobileMenu} className={`hover:text-current transition-colors flex items-center gap-2 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>
-      <ArrowLeft className="w-4 h-4" /> {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : t.nav.backHome}
+      <ArrowLeft className="w-4 h-4" /> {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
     </Link>
   );
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center transition-all duration-500 safe-area-inset-top ${
+      <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center gap-2 transition-all duration-500 safe-area-inset-top min-w-0 ${
         scrolled ? 'bg-black/10 backdrop-blur-xl py-3' : 'bg-transparent'
       } ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         <Link 
           to="/" 
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2 group min-w-0 shrink"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${
@@ -168,7 +168,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           }`}>
             <Code2 className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <span className="font-display text-xl sm:text-2xl">VIBECOODING</span>
+          <span className="font-display text-xl sm:text-2xl truncate">VIBECOODING</span>
         </Link>
         
         <div className={`hidden md:flex gap-6 lg:gap-8 text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-500 ${
@@ -186,14 +186,14 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
                 : 'bg-black text-white hover:bg-[var(--color-vibe-orange)]'
             }`}
           >
-            {lang === 'cs' ? fixCzechTypography(t.nav.start) : t.nav.start}
+            {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`md:hidden p-2 -mr-2 rounded-lg transition-colors ${
+            className={`md:hidden p-3 -mr-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors ${
               theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-black/10'
             }`}
-            aria-label={mobileMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
+            aria-label={lang === 'cs' ? (mobileMenuOpen ? fixCzechTypography(t.nav.closeMenu) : fixCzechTypography(t.nav.openMenu)) : (mobileMenuOpen ? fixDashes(t.nav.closeMenu) : fixDashes(t.nav.openMenu))}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -222,34 +222,34 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           <nav className="flex flex-col gap-1">
             {!isProjectPage ? (
               <>
-                <a href="#work" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.work) : t.nav.work}
+                <a href="#work" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
                 </a>
-                <a href="#about" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.about) : t.nav.about}
+                <a href="#about" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  {lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}
                 </a>
-                <a href="#services" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.services) : t.nav.services}
+                <a href="#services" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  {lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}
                 </a>
-                <a href="#pricing" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.pricing) : t.nav.pricing}
+                <a href="#pricing" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  {lang === 'cs' ? fixCzechTypography(t.nav.pricing) : fixDashes(t.nav.pricing)}
                 </a>
-                <a href="#contact" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.contact) : t.nav.contact}
+                <a href="#contact" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  {lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}
                 </a>
               </>
             ) : (
-              <Link to="/" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" /> {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : t.nav.backHome}
+              <Link to="/" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors gap-2">
+                <ArrowLeft className="w-4 h-4" /> {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
               </Link>
             )}
           </nav>
           <a 
             href="mailto:horakpremysl85@gmail.com"
             onClick={closeMobileMenu}
-            className="mt-4 block py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black text-center hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all"
+            className="mt-4 flex min-h-[44px] items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black text-center hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all"
           >
-            {lang === 'cs' ? fixCzechTypography(t.nav.start) : t.nav.start}
+            {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
           </a>
         </motion.div>
       </div>
@@ -282,7 +282,7 @@ const Hero = () => {
   const rotate = useTransform(scrollY, [0, 500], [0, 15]);
 
   return (
-    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 pt-24 sm:pt-28 pb-12 sm:pb-16 md:pb-20 overflow-hidden safe-area-inset">
+    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-12 sm:pb-16 md:pb-20 overflow-hidden">
       {/* Animated Background Blobs - parallax disabled on mobile for smooth scroll */}
       {isMobile ? (
         <>
@@ -322,7 +322,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <span className="inline-block px-4 py-2 border border-white/20 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold mb-8 sm:mb-12 text-white/70 bg-white/5 backdrop-blur-sm">
-            {lang === 'cs' ? fixCzechTypography(t.hero.available) : t.hero.available}
+            {lang === 'cs' ? fixCzechTypography(t.hero.available) : fixDashes(t.hero.available)}
           </span>
         </motion.div>
         
@@ -333,7 +333,7 @@ const Hero = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="block"
           >
-            {lang === 'cs' ? fixCzechTypography(t.hero.h1) : t.hero.h1}
+            {lang === 'cs' ? fixCzechTypography(t.hero.h1) : fixDashes(t.hero.h1)}
           </motion.span>
         </h1>
         <motion.p 
@@ -342,7 +342,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-base sm:text-lg md:text-xl font-light text-white/90 mb-10 sm:mb-12 max-w-2xl leading-[1.6]"
         >
-          {lang === 'cs' ? fixCzechTypography(t.hero.subheadline) : t.hero.subheadline}
+          {lang === 'cs' ? fixCzechTypography(t.hero.subheadline) : fixDashes(t.hero.subheadline)}
         </motion.p>
 
         <motion.div 
@@ -355,14 +355,14 @@ const Hero = () => {
             href="#contact"
             className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all shadow-lg"
           >
-            {lang === 'cs' ? fixCzechTypography(t.hero.ctaPrimary) : t.hero.ctaPrimary}
+            {lang === 'cs' ? fixCzechTypography(t.hero.ctaPrimary) : fixDashes(t.hero.ctaPrimary)}
             <ArrowRight className="w-4 h-4" />
           </a>
           <a 
             href="#pricing"
             className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all"
           >
-            {lang === 'cs' ? fixCzechTypography(t.hero.ctaSecondary) : t.hero.ctaSecondary}
+            {lang === 'cs' ? fixCzechTypography(t.hero.ctaSecondary) : fixDashes(t.hero.ctaSecondary)}
           </a>
         </motion.div>
 
@@ -379,7 +379,7 @@ const Hero = () => {
               </div>
             ))}
           </div>
-          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">{lang === 'cs' ? fixCzechTypography(t.hero.workedWith) : t.hero.workedWith}</p>
+          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">{lang === 'cs' ? fixCzechTypography(t.hero.workedWith) : fixDashes(t.hero.workedWith)}</p>
         </motion.div>
       </div>
     </section>
@@ -401,7 +401,7 @@ const WorkSection = () => {
 };
 
 function ProjectCard({ project, index }: { project: Project, index: number }) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const tr = t.projects[project.slug as keyof typeof t.projects];
   const category = tr?.category ?? project.category;
   
@@ -417,7 +417,7 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
         <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-6 sm:mb-8 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
           <img 
             src={project.image} 
-            alt={project.title}
+            alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
             width={1200}
             height={800}
             loading={index < 2 ? "eager" : "lazy"}
@@ -435,7 +435,7 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
                 whileHover={{ y: 0 }}
                 className="text-white text-xs font-bold uppercase tracking-[0.5em]"
               >
-                {t.work.viewCaseStudy}
+                {lang === 'cs' ? fixCzechTypography(t.work.viewCaseStudy) : fixDashes(t.work.viewCaseStudy)}
               </motion.div>
             </div>
             <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275)">
@@ -448,12 +448,12 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
           <div className="flex items-center gap-4">
             <span className="w-8 h-px bg-[var(--color-vibe-orange)]" />
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)]">
-              {category}
+              {lang === 'cs' ? fixCzechTypography(category) : fixDashes(category)}
             </span>
           </div>
           
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase leading-[1.05] group-hover:translate-x-2 transition-transform duration-300">
-            {project.title}
+            {lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
           </h3>
           
           <div className="flex flex-wrap items-center gap-3">
@@ -493,7 +493,7 @@ const ServicesPricingSection = () => {
           transition={{ duration: 0.6 }}
           className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase mb-16 sm:mb-20 md:mb-24 leading-[1.08] text-white"
         >
-          {lang === 'cs' ? fixCzechTypography(t.services.title) : t.services.title}
+          {lang === 'cs' ? fixCzechTypography(t.services.title) : fixDashes(t.services.title)}
         </motion.h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -528,13 +528,13 @@ const ServicesPricingSection = () => {
                     </motion.div>
                   </div>
                   <h3 className="font-display text-lg sm:text-xl md:text-2xl uppercase mt-4 text-white/95">
-                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Title`]) : t.services[`${key}Title`]}
+                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Title`]) : fixDashes(t.services[`${key}Title`])}
                   </h3>
                   <p className="text-sm text-white/70 mt-2 leading-[1.5]">
-                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Subtitle`]) : t.services[`${key}Subtitle`]}
+                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Subtitle`]) : fixDashes(t.services[`${key}Subtitle`])}
                   </p>
                   <p className="text-[var(--color-vibe-orange)] font-bold text-lg sm:text-xl mt-4">
-                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Price`]) : t.services[`${key}Price`]}
+                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Price`]) : fixDashes(t.services[`${key}Price`])}
                   </p>
                 </div>
 
@@ -549,21 +549,23 @@ const ServicesPricingSection = () => {
                     >
                       <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-4 border-t border-white/10">
                         <p className="text-white/80 text-sm sm:text-base leading-[1.7] mb-4">
-                          {lang === 'cs' ? fixCzechTypography(t.services[`${key}Detail`]) : t.services[`${key}Detail`]}
+                          {lang === 'cs' ? fixCzechTypography(t.services[`${key}Detail`]) : fixDashes(t.services[`${key}Detail`])}
                         </p>
                         {key === 'card2' && (
                           <p className="text-white/70 text-sm leading-[1.6] mb-6">
-                            {lang === 'cs' ? fixCzechTypography(t.services.card2Bonus) : t.services.card2Bonus}
+                            {lang === 'cs' ? fixCzechTypography(t.services.card2Bonus) : fixDashes(t.services.card2Bonus)}
                           </p>
                         )}
-                        <a
-                          href="#contact"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-3 rounded-full text-[11px] sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all whitespace-nowrap mt-4"
-                        >
-                          {lang === 'cs' ? fixCzechTypography(t.services[`${key}Cta`]) : t.services[`${key}Cta`]}
-                          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                        </a>
+                        <div className="mt-4 flex justify-start">
+                          <a
+                            href="#contact"
+                            onClick={(e) => e.stopPropagation()}
+                            className="inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full text-[11px] sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all whitespace-nowrap w-fit"
+                          >
+                            {lang === 'cs' ? fixCzechTypography(t.services[`${key}Cta`]) : fixDashes(t.services[`${key}Cta`])}
+                            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                          </a>
+                        </div>
                       </div>
                     </motion.div>
                   )}
@@ -613,25 +615,25 @@ const AboutSection = () => {
             className="order-1 md:order-2 space-y-6 sm:space-y-8"
           >
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.1]">
-              {lang === 'cs' ? fixCzechTypography(t.about.title) : t.about.title}
+              {lang === 'cs' ? fixCzechTypography(t.about.title) : fixDashes(t.about.title)}
             </h2>
             <p className="text-base sm:text-lg md:text-xl font-bold text-black/90 leading-[1.5]">
-              {lang === 'cs' ? fixCzechTypography(t.about.subtitle) : t.about.subtitle}
+              {lang === 'cs' ? fixCzechTypography(t.about.subtitle) : fixDashes(t.about.subtitle)}
             </p>
             <p className="text-sm sm:text-base md:text-lg text-black/80 leading-[1.7] font-light">
-              {lang === 'cs' ? fixCzechTypography(t.about.p1) : t.about.p1}
+              {lang === 'cs' ? fixCzechTypography(t.about.p1) : fixDashes(t.about.p1)}
             </p>
             <p className="text-sm sm:text-base md:text-lg text-black/80 leading-[1.7] font-light">
-              {lang === 'cs' ? fixCzechTypography(t.about.p2) : t.about.p2}
+              {lang === 'cs' ? fixCzechTypography(t.about.p2) : fixDashes(t.about.p2)}
             </p>
             <div>
               <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold text-black/60 mb-3 sm:mb-4">
-                {lang === 'cs' ? fixCzechTypography(t.about.valuesTitle) : t.about.valuesTitle}
+                {lang === 'cs' ? fixCzechTypography(t.about.valuesTitle) : fixDashes(t.about.valuesTitle)}
               </h3>
               <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-black/80 leading-[1.6] font-light list-disc list-inside marker:text-[var(--color-vibe-orange)]">
-                <li>{lang === 'cs' ? fixCzechTypography(t.about.value1) : t.about.value1}</li>
-                <li>{lang === 'cs' ? fixCzechTypography(t.about.value2) : t.about.value2}</li>
-                <li>{lang === 'cs' ? fixCzechTypography(t.about.value3) : t.about.value3}</li>
+                <li>{lang === 'cs' ? fixCzechTypography(t.about.value1) : fixDashes(t.about.value1)}</li>
+                <li>{lang === 'cs' ? fixCzechTypography(t.about.value2) : fixDashes(t.about.value2)}</li>
+                <li>{lang === 'cs' ? fixCzechTypography(t.about.value3) : fixDashes(t.about.value3)}</li>
               </ul>
             </div>
           </motion.div>
@@ -653,7 +655,7 @@ const CtaSection = () => {
           transition={{ duration: 0.6 }}
           className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase mb-6 sm:mb-8 leading-[1.12]"
         >
-          {lang === 'cs' ? fixCzechTypography(t.cta.title) : t.cta.title}
+          {lang === 'cs' ? fixCzechTypography(t.cta.title) : fixDashes(t.cta.title)}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -662,7 +664,7 @@ const CtaSection = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-base sm:text-lg text-white/80 mb-12 sm:mb-16 leading-[1.7]"
         >
-          {lang === 'cs' ? fixCzechTypography(t.cta.text) : t.cta.text}
+          {lang === 'cs' ? fixCzechTypography(t.cta.text) : fixDashes(t.cta.text)}
         </motion.p>
         <motion.a
           href="#contact"
@@ -672,7 +674,7 @@ const CtaSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all"
         >
-          {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : t.contact.writeMessage}
+          {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : fixDashes(t.contact.writeMessage)}
           <ArrowRight className="w-4 h-4" />
         </motion.a>
       </div>
@@ -696,10 +698,10 @@ const ContactSection = () => {
         transition={{ duration: 1 }}
       >
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-[1.08] mb-8 sm:mb-10">
-          {lang === 'cs' ? fixCzechTypography(t.contact.title) : t.contact.title}
+          {lang === 'cs' ? fixCzechTypography(t.contact.title) : fixDashes(t.contact.title)}
         </h2>
         <p className="text-base sm:text-lg md:text-xl font-light mb-12 sm:mb-16 md:mb-20 max-w-2xl mx-auto">
-          {lang === 'cs' ? fixCzechTypography(t.contact.intro) : t.contact.intro}
+          {lang === 'cs' ? fixCzechTypography(t.contact.intro) : fixDashes(t.contact.intro)}
         </p>
       </motion.div>
 
@@ -721,7 +723,7 @@ const ContactSection = () => {
           href="mailto:horakpremysl85@gmail.com"
           className="bg-black text-white px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-all duration-500 text-center"
         >
-          {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : t.contact.writeMessage}
+          {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : fixDashes(t.contact.writeMessage)}
         </motion.a>
       </div>
       
@@ -761,7 +763,7 @@ const Footer = () => {
   const { t, lang } = useLanguage();
   return (
   <footer id="privacy" className="py-8 sm:py-12 px-4 sm:px-6 md:px-8 border-t border-white/10 text-center text-white/60 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
-    {lang === 'cs' ? fixCzechTypography(t.footer.copyright) : t.footer.copyright}
+    {lang === 'cs' ? fixCzechTypography(t.footer.copyright) : fixDashes(t.footer.copyright)}
   </footer>
   );
 };
@@ -808,25 +810,25 @@ const CookieBar = () => {
                 <Cookie className="w-6 h-6 text-[var(--color-vibe-orange)]" />
               </div>
               <div>
-                <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-1">{lang === 'cs' ? fixCzechTypography(t.cookie.title) : t.cookie.title}</h3>
+                <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-1">{lang === 'cs' ? fixCzechTypography(t.cookie.title) : fixDashes(t.cookie.title)}</h3>
                 <p className="text-sm text-white/85 leading-relaxed">
-                  {lang === 'cs' ? fixCzechTypography(t.cookie.text) : t.cookie.text}{' '}
-                  <a href="#privacy" className="text-[var(--color-vibe-orange)] hover:underline">{lang === 'cs' ? fixCzechTypography(t.cookie.moreInfo) : t.cookie.moreInfo}</a>
+                  {lang === 'cs' ? fixCzechTypography(t.cookie.text) : fixDashes(t.cookie.text)}{' '}
+                  <a href="#privacy" className="text-[var(--color-vibe-orange)] hover:underline">{lang === 'cs' ? fixCzechTypography(t.cookie.moreInfo) : fixDashes(t.cookie.moreInfo)}</a>
                 </p>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 shrink-0">
               <button
                 onClick={declineOptional}
-                className="px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-colors"
+                className="min-h-[44px] px-5 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-colors touch-manipulation"
               >
-                {lang === 'cs' ? fixCzechTypography(t.cookie.essentialOnly) : t.cookie.essentialOnly}
+                {lang === 'cs' ? fixCzechTypography(t.cookie.essentialOnly) : fixDashes(t.cookie.essentialOnly)}
               </button>
               <button
                 onClick={acceptAll}
-                className="px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-wider bg-[var(--color-vibe-orange)] text-white hover:bg-[var(--color-vibe-orange)]/90 transition-colors shadow-lg"
+                className="min-h-[44px] px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider bg-[var(--color-vibe-orange)] text-white hover:bg-[var(--color-vibe-orange)]/90 transition-colors shadow-lg touch-manipulation"
               >
-                {lang === 'cs' ? fixCzechTypography(t.cookie.acceptAll) : t.cookie.acceptAll}
+                {lang === 'cs' ? fixCzechTypography(t.cookie.acceptAll) : fixDashes(t.cookie.acceptAll)}
               </button>
             </div>
           </div>
@@ -838,33 +840,37 @@ const CookieBar = () => {
 
 // --- Project Structured Content (RiskLight, DDÚ, etc.) ---
 const renderWithBold = (text: string, lang: 'cs' | 'en'): React.ReactNode => {
-  const raw = lang === 'cs' ? fixCzechTypography(text) : text;
-  const parts = (raw as string).split(/(\*\*[^*]+\*\*)/g);
-  return parts.map((part, i) =>
-    part.startsWith('**') && part.endsWith('**') ? (
-      <strong key={i} className="font-semibold text-white/95">{part.slice(2, -2)}</strong>
-    ) : (
-      part
-    )
-  );
+  const lines = text.split('\n');
+  const processedLines = lang === 'cs' ? lines.map((l) => fixCzechTypography(l)) : lines.map((l) => fixDashes(l));
+  return processedLines.flatMap((line, lineIdx) => {
+    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+    const content = parts.map((part, i) =>
+      part.startsWith('**') && part.endsWith('**') ? (
+        <strong key={`${lineIdx}-${i}`} className="font-semibold text-white/95">{part.slice(2, -2)}</strong>
+      ) : (
+        part
+      )
+    );
+    return lineIdx === 0 ? content : [<br key={`br-${lineIdx}`} />, ...content];
+  });
 };
 
 const ProjectStructuredContent = ({ tr, lang }: { tr: { goalTitle: string; goal: string; solutionTitle: string; solution: string; benefitsTitle: string; benefits: string[] }; lang: 'cs' | 'en' }) => (
   <div className="space-y-8 sm:space-y-10 mb-10 sm:mb-16">
     <div>
-      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.goalTitle) : tr.goalTitle}</h3>
+      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.goalTitle) : fixDashes(tr.goalTitle)}</h3>
       <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] font-light">
         {renderWithBold(tr.goal, lang)}
       </p>
     </div>
     <div>
-      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.solutionTitle) : tr.solutionTitle}</h3>
+      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.solutionTitle) : fixDashes(tr.solutionTitle)}</h3>
       <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] font-light">
         {renderWithBold(tr.solution, lang)}
       </p>
     </div>
     <div>
-      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.benefitsTitle) : tr.benefitsTitle}</h3>
+      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.benefitsTitle) : fixDashes(tr.benefitsTitle)}</h3>
       <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base md:text-lg text-white/80 leading-[1.6] font-light list-disc list-inside marker:text-[var(--color-vibe-orange)]">
         {tr.benefits.map((item, i) => (
           <li key={i}>{renderWithBold(item, lang)}</li>
@@ -904,7 +910,7 @@ const ProjectPage = () => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  if (!project) return <div>{lang === 'cs' ? fixCzechTypography(t.project.notFound) : t.project.notFound}</div>;
+  if (!project) return <div>{lang === 'cs' ? fixCzechTypography(t.project.notFound) : fixDashes(t.project.notFound)}</div>;
 
   return (
     <motion.div 
@@ -916,7 +922,7 @@ const ProjectPage = () => {
     >
       <Navbar theme="dark" isProjectPage />
       
-      <main className="pt-24 sm:pt-28 md:pt-32 pb-0">
+      <main className="pt-nav-safe pb-0">
         {/* Project Hero */}
         <section className="px-4 sm:px-6 md:px-8 lg:px-12 mb-20 sm:mb-24 md:mb-32">
           <div className="max-w-7xl mx-auto">
@@ -927,7 +933,7 @@ const ProjectPage = () => {
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="text-[var(--color-vibe-orange)] font-mono text-xs sm:text-sm uppercase tracking-[0.3em] sm:tracking-[0.4em] block"
               >
-                {(tr?.category ?? project.category)} / {project.year}
+                {lang === 'cs' ? fixCzechTypography(tr?.category ?? project.category) : fixDashes(tr?.category ?? project.category ?? '')} / {project.year}
               </motion.span>
             </div>
             
@@ -935,9 +941,9 @@ const ProjectPage = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.08] mb-12 sm:mb-20"
+              className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.08] mb-12 sm:mb-20 break-words"
             >
-              {project.title}
+              {lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
             </motion.h1>
             
             <motion.div 
@@ -948,7 +954,7 @@ const ProjectPage = () => {
             >
               <img 
                 src={project.image} 
-                alt={project.title} 
+                alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)} 
                 width={1200}
                 height={800}
                 fetchPriority="high"
@@ -964,30 +970,30 @@ const ProjectPage = () => {
         <section className="px-4 sm:px-6 md:px-8 lg:px-12 mb-24 sm:mb-32 md:mb-40">
           <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-20 sm:gap-28 md:gap-36">
             <div className="md:col-span-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase mb-10 sm:mb-14">{lang === 'cs' ? fixCzechTypography(t.project.about) : t.project.about}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase mb-10 sm:mb-14">{lang === 'cs' ? fixCzechTypography(t.project.about) : fixDashes(t.project.about)}</h2>
               {tr && 'structured' in tr && tr.structured ? (
                 <ProjectStructuredContent tr={tr.structured} lang={lang} />
               ) : (
                 <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] mb-10 sm:mb-16 font-light">
-                  {lang === 'cs' ? fixCzechTypography(tr?.fullDescription ?? project.fullDescription) : (tr?.fullDescription ?? project.fullDescription)}
+                  {lang === 'cs' ? fixCzechTypography(tr?.fullDescription ?? project.fullDescription) : fixDashes(tr?.fullDescription ?? project.fullDescription ?? '')}
                 </p>
               )}
               
               <div className="grid grid-cols-2 gap-10 sm:gap-14 md:gap-20 border-t border-white/5 pt-14 sm:pt-20">
                 <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(t.project.client) : t.project.client}</h4>
-                  <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{lang === 'cs' ? fixCzechTypography(project.client) : project.client}</p>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(t.project.client) : fixDashes(t.project.client)}</h4>
+                  <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{lang === 'cs' ? fixCzechTypography(project.client) : fixDashes(project.client)}</p>
                 </div>
                 <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(t.project.role) : t.project.role}</h4>
-                  <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{lang === 'cs' ? fixCzechTypography(project.role) : project.role}</p>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(t.project.role) : fixDashes(t.project.role)}</h4>
+                  <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{lang === 'cs' ? fixCzechTypography(project.role) : fixDashes(project.role)}</p>
                 </div>
               </div>
             </div>
             
             <div className="space-y-8 sm:space-y-12">
                <div>
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{lang === 'cs' ? fixCzechTypography(t.project.tech) : t.project.tech}</h4>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{lang === 'cs' ? fixCzechTypography(t.project.tech) : fixDashes(t.project.tech)}</h4>
                   <div className="flex flex-wrap gap-2 sm:gap-3">
                     {project.tags.map(tag => (
                       <span key={tag} className="px-3 sm:px-5 py-1.5 sm:py-2 border border-white/10 rounded-full text-[10px] sm:text-xs font-mono uppercase tracking-widest bg-white/5">
@@ -998,7 +1004,7 @@ const ProjectPage = () => {
                </div>
                {project.websiteUrls && project.websiteUrls.length > 0 && (
                  <div>
-                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{lang === 'cs' ? fixCzechTypography(t.project.website) : t.project.website}</h4>
+                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{lang === 'cs' ? fixCzechTypography(t.project.website) : fixDashes(t.project.website)}</h4>
                    <div className="flex flex-wrap gap-3">
                      {project.websiteUrls.map(({ label, url }) => (
                        <a
@@ -1006,10 +1012,10 @@ const ProjectPage = () => {
                          href={url}
                          target="_blank"
                          rel="noopener noreferrer"
-                         className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 border border-white/20 rounded-full text-sm font-mono text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition-all"
+                         className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-2.5 min-h-[44px] border border-white/20 rounded-full text-sm font-mono text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition-all break-words max-w-full"
                        >
-                         {label}
-                         <ExternalLink className="w-3.5 h-3.5" />
+                         <span className="break-all">{label}</span>
+                         <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                        </a>
                      ))}
                    </div>
@@ -1018,7 +1024,7 @@ const ProjectPage = () => {
                
                <div className="p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10">
                   <p className="text-xs sm:text-sm text-white/80 leading-relaxed italic">
-                    "{lang === 'cs' ? fixCzechTypography(tr?.quote ?? project.quote ?? t.project.defaultQuote) : (tr?.quote ?? project.quote ?? t.project.defaultQuote)}"
+                    "{lang === 'cs' ? fixCzechTypography(tr?.quote ?? project.quote ?? t.project.defaultQuote) : fixDashes(tr?.quote ?? project.quote ?? t.project.defaultQuote ?? '')}"
                   </p>
                </div>
             </div>
@@ -1030,9 +1036,9 @@ const ProjectPage = () => {
            <div className="absolute inset-0 bg-[var(--color-vibe-orange)] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]" />
            
            <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
-              <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">{lang === 'cs' ? fixCzechTypography(t.project.nextProject) : t.project.nextProject}</span>
-              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
-                {nextProject.title}
+              <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">{lang === 'cs' ? fixCzechTypography(t.project.nextProject) : fixDashes(t.project.nextProject)}</span>
+              <h2 className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors break-words">
+                {lang === 'cs' ? fixCzechTypography(nextProject.title) : fixDashes(nextProject.title)}
               </h2>
               <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border border-black/10 flex items-center justify-center group-hover:border-white/20 group-hover:scale-110 transition-all duration-500">
                 <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 group-hover:text-white transition-colors" />

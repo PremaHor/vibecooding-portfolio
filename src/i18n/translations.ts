@@ -150,7 +150,7 @@ export const translations = {
         quote: 'Spolupráce na redesignu byla příjemná – důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.',
         structured: {
           goalTitle: 'Cíl projektu',
-          goal: 'Zařízení poskytuje diagnostickou, poradenskou a výchovně vzdělávací péči pro děti ve věku **3–18 let**. Cílem bylo vytvořit web, který rodičům a pedagogům usnadní orientaci v nabízených službách a zároveň působí **důvěryhodně a profesionálně**.',
+          goal: 'Zařízení poskytuje diagnostickou, poradenskou a výchovně vzdělávací péči pro děti ve věku\n**3–18 let**. Cílem bylo vytvořit web, který rodičům a pedagogům usnadní orientaci v nabízených službách a zároveň působí **důvěryhodně a profesionálně**.',
           solutionTitle: 'Řešení',
           solution: 'Navrhl jsem **čistý layout**, **srozumitelnou navigaci** a **responzivní řešení** pro všechny typy zařízení.',
           benefitsTitle: 'Výsledky',
@@ -319,7 +319,7 @@ export const translations = {
         quote: 'Collaborating on the redesign was pleasant – the emphasis on clarity and accessibility for parents and educators was reflected in every detail.',
         structured: {
           goalTitle: 'Project goal',
-          goal: 'The facility provides diagnostic, counselling and educational care for children aged **3–18**. The goal was to create a website that helps parents and educators navigate the services offered while appearing **trustworthy and professional**.',
+          goal: 'The facility provides diagnostic, counselling and educational care for children aged\n**3–18**. The goal was to create a website that helps parents and educators navigate the services offered while appearing **trustworthy and professional**.',
           solutionTitle: 'Solution',
           solution: 'I designed a **clean layout**, **clear navigation** and a **responsive solution** for all devices.',
           benefitsTitle: 'Results',

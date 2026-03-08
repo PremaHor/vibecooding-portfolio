@@ -34,11 +34,14 @@
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
     /* scroll-behavior vynechán - konfliktuje s Lenis smooth scroll */
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
   }
 
   body {
     @apply bg-[var(--color-vibe-black)] text-white font-sans selection:bg-[var(--color-vibe-orange)] selection:text-black antialiased;
     overflow-x: hidden;
+    touch-action: manipulation; /* Removes 300ms tap delay on mobile */
   }
 
   /* Prevent awkward word breaks - prefer font scaling on mobile */
@@ -70,6 +73,21 @@
 
   .safe-area-inset-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* Main content padding below fixed nav - accounts for safe area on notched devices */
+  .pt-nav-safe {
+    padding-top: calc(6rem + env(safe-area-inset-top, 0px));
+  }
+  @media (min-width: 640px) {
+    .pt-nav-safe {
+      padding-top: calc(7rem + env(safe-area-inset-top, 0px));
+    }
+  }
+  @media (min-width: 768px) {
+    .pt-nav-safe {
+      padding-top: calc(8rem + env(safe-area-inset-top, 0px));
+    }
   }
 
   /* Custom Scrollbar */
