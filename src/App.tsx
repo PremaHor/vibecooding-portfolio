@@ -115,8 +115,16 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 50);
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -249,8 +257,25 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
   );
 };
 
+const MOBILE_BREAKPOINT = 768;
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(() => 
+    typeof window !== 'undefined' ? window.innerWidth < MOBILE_BREAKPOINT : true
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+  return isMobile;
+};
+
 const Hero = () => {
   const { t, lang } = useLanguage();
+  const isMobile = useIsMobile();
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
@@ -258,15 +283,37 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 pt-24 sm:pt-28 pb-12 sm:pb-16 md:pb-20 overflow-hidden safe-area-inset">
-      {/* Animated Background Blobs */}
-      <motion.div 
-        style={{ y: y1, rotate }}
-        className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[100px] sm:blur-[120px] opacity-20 animate-pulse" 
-      />
-      <motion.div 
-        style={{ y: y2 }}
-        className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[100px] sm:blur-[120px] opacity-10" 
-      />
+      {/* Animated Background Blobs - parallax disabled on mobile for smooth scroll */}
+      {isMobile ? (
+        <>
+          <div 
+            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[60px] sm:blur-[80px] opacity-20"
+            style={{ transform: 'translate3d(0,0,0)', willChange: 'auto' }}
+          />
+          <div 
+            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[60px] sm:blur-[80px] opacity-10"
+            style={{ transform: 'translate3d(0,0,0)', willChange: 'auto' }}
+          />
+        </>
+      ) : (
+        <>
+          <motion.div 
+            style={{ 
+              y: y1, 
+              rotate,
+              willChange: 'transform',
+            }}
+            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[100px] sm:blur-[120px] opacity-20"
+          />
+          <motion.div 
+            style={{ 
+              y: y2,
+              willChange: 'transform',
+            }}
+            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[100px] sm:blur-[120px] opacity-10"
+          />
+        </>
+      )}
       
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <motion.div
