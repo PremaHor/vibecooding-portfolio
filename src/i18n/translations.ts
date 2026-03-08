@@ -75,7 +75,7 @@ export const translations = {
       item3Note: 'Podle složitosti.',
     },
     about: {
-      title: 'Kdo stojí za Vibecoding?',
+      title: 'Kdo stojí za Vibecooding?',
       subtitle: 'Jsem Přemysl Horák, nezávislý vývojář, který mění dobré nápady v ještě lepší digitální produkty.',
       p1: 'Nehraju si na velkou agenturu. Když mi napíšete, jednáte přímo se mnou. Kódu a designu se věnuji do hloubky, abych vám dodal výsledek, který nejen skvěle vypadá, ale hlavně bezchybně funguje a přináší zákazníky.',
       p2: 'Zakládám si na čistém kódu, férové a rychlé komunikaci a na tom, že složité technologické věci vám vysvětlím lidsky. Vy rozumíte svému byznysu, já rozumím webům. Společně to propojíme.',
@@ -121,7 +121,27 @@ export const translations = {
       { title: 'Automatizace procesů', description: 'Propojím nástroje, zautomatizuju rutinu. Méně práce, více času na to důležité.' },
     ],
     projects: {
-      risklight: { category: 'PWA', description: 'Bezpečnostní a organizační PWA pro terénní sociální pracovníky. Evidence klientů, rizika, SOS tlačítko, časovač návštěv a týmový chat v jedné aplikaci.', fullDescription: 'RiskLight spojuje ochranu života s přehlednou evidencí. Sociální pracovníci v terénu mají v mobilu nejen evidenci klientů a rizik, ale i nouzové SOS, chytrý časovač návštěvy a týmovou spolupráci v reálném čase. Aplikace běží na Supabase a byla vyvinuta ve spolupráci s lidmi z praxe. Cíl: jistota pro terénní tým, klid pro vedení.' },
+      risklight: {
+        category: 'PWA',
+        description: 'Bezpečnostní a organizační PWA pro terénní sociální pracovníky. Evidence klientů, rizika, SOS tlačítko, časovač návštěv a týmový chat v jedné aplikaci.',
+        fullDescription: 'RiskLight spojuje ochranu života s přehlednou evidencí.',
+        quote: 'Aplikace vznikla ve spolupráci s lidmi z praxe – každý detail byl ověřen v reálném terénu.',
+        structured: {
+          goalTitle: 'Cíl projektu',
+          goal: 'RiskLight spojuje **ochranu života** s **přehlednou evidencí**. Sociální pracovníci v terénu potřebují nástroj, který jim dá jistotu při práci s klienty a zároveň umožní vedení mít přehled o aktuální situaci.',
+          solutionTitle: 'Řešení',
+          solution: 'Vyvinul jsem **PWA aplikaci** běžící na **Supabase**, vytvořenou ve spolupráci s lidmi z praxe. Aplikace se chová jako nativní mobilní aplikace a funguje offline.',
+          benefitsTitle: 'Klíčové funkce',
+          benefits: [
+            '**evidence klientů a rizik** na jednom místě',
+            '**nouzové SOS tlačítko** pro okamžitou pomoc',
+            '**chytrý časovač návštěvy** pro bezpečnost pracovníků',
+            '**týmový chat v reálném čase** pro koordinaci',
+            '**přehled pro vedení** – aktuální stav celého týmu',
+            '**jistota pro terénní tým** a klid pro management',
+          ],
+        },
+      },
       adcalc: { category: 'Prototyp', description: 'Prototyp kalkulačky pro kalkulace reklamní výroby. Rychlé cenové nabídky, materiály a výrobní náklady na jednom místě.', fullDescription: 'AdCalc je funkční prototyp nástroje pro kalkulace v reklamní výrobě. Umožňuje sestavovat cenové nabídky podle materiálů, formátů a výrobních technologií. Cíl: zrychlit přípravu nabídek a sjednotit kalkulační procesy v reklamní agentuře.', quote: 'Tento projekt byl výzvou především v zadání všech materiálů od dodavatelů tak, aby kalkulace fungovaly spolehlivě a přesně. Výsledek přinesl přehledný systém, který zrychluje přípravu nabídek.' },
       'ddu-olomouc': {
         category: 'Redesign webu',
@@ -224,7 +244,7 @@ export const translations = {
       item3Note: 'Depending on complexity.',
     },
     about: {
-      title: 'Who stands behind Vibecoding?',
+      title: 'Who stands behind Vibecooding?',
       subtitle: 'I\'m Přemysl Horák, an independent developer who turns good ideas into even better digital products.',
       p1: 'I don\'t pretend to be a big agency. When you write to me, you deal directly with me. I dive deep into code and design to deliver results that not only look great but, above all, work flawlessly and bring in customers.',
       p2: 'I pride myself on clean code, fair and fast communication, and explaining complex technical things in plain language. You understand your business, I understand the web. Together we\'ll connect them.',
@@ -270,7 +290,27 @@ export const translations = {
       { title: 'Process automation', description: 'I connect tools and automate routine. Less work, more time for what matters.' },
     ],
     projects: {
-      risklight: { category: 'PWA', description: 'Security and organizational PWA for field social workers. Client records, risks, SOS button, visit timer and team chat in one app.', fullDescription: 'RiskLight combines life safety with clear record-keeping. Field social workers have not only client and risk records on their phones, but also emergency SOS, a smart visit timer and real-time team collaboration. The app runs on Supabase and was developed in collaboration with practitioners. Goal: confidence for the field team, peace of mind for management.' },
+      risklight: {
+        category: 'PWA',
+        description: 'Security and organizational PWA for field social workers. Client records, risks, SOS button, visit timer and team chat in one app.',
+        fullDescription: 'RiskLight combines life safety with clear record-keeping.',
+        quote: 'The app was developed in collaboration with practitioners – every detail was validated in real field conditions.',
+        structured: {
+          goalTitle: 'Project goal',
+          goal: 'RiskLight combines **life safety** with **clear record-keeping**. Field social workers need a tool that gives them confidence when working with clients while allowing management to keep track of the current situation.',
+          solutionTitle: 'Solution',
+          solution: 'I developed a **PWA application** running on **Supabase**, created in collaboration with practitioners. The app behaves like a native mobile app and works offline.',
+          benefitsTitle: 'Key features',
+          benefits: [
+            '**client and risk records** in one place',
+            '**emergency SOS button** for immediate help',
+            '**smart visit timer** for worker safety',
+            '**real-time team chat** for coordination',
+            '**management dashboard** – current status of the entire team',
+            '**confidence for the field team** and peace of mind for management',
+          ],
+        },
+      },
       adcalc: { category: 'Prototype', description: 'Calculator prototype for advertising production quotes. Fast price quotes, materials and production costs in one place.', fullDescription: 'AdCalc is a functional prototype tool for advertising production calculations. It lets you build price quotes by materials, formats and production technologies. Goal: speed up quote preparation and unify calculation processes in the agency.', quote: 'This project was a challenge mainly in entering all materials from suppliers so that calculations work reliably and accurately. The result is a clear system that speeds up quote preparation.' },
       'ddu-olomouc': {
         category: 'Web redesign',

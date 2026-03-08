@@ -18,8 +18,7 @@ import {
   Menu,
   X,
   Cookie,
-  Rocket,
-  User
+  Rocket
 } from 'lucide-react';
 
 // --- Types ---
@@ -545,8 +544,16 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
             className="order-2 md:order-1"
           >
-            <div className="aspect-square max-w-sm mx-auto md:mx-0 rounded-2xl overflow-hidden bg-gray-100 shadow-xl shadow-black/10 flex items-center justify-center">
-              <User className="w-24 h-24 sm:w-32 sm:h-32 text-gray-300" strokeWidth={1} />
+            <div className="aspect-square max-w-sm mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-xl shadow-black/10">
+              <img
+                src="/images/projects/FOTKA.webp"
+                alt="Přemysl Horák"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
             </div>
           </motion.div>
 
@@ -782,7 +789,7 @@ const CookieBar = () => {
   );
 };
 
-// --- DDÚ Structured Content ---
+// --- Project Structured Content (RiskLight, DDÚ, etc.) ---
 const renderWithBold = (text: string, lang: 'cs' | 'en'): React.ReactNode => {
   const raw = lang === 'cs' ? fixCzechTypography(text) : text;
   const parts = (raw as string).split(/(\*\*[^*]+\*\*)/g);
@@ -795,7 +802,7 @@ const renderWithBold = (text: string, lang: 'cs' | 'en'): React.ReactNode => {
   );
 };
 
-const DduProjectContent = ({ tr, lang }: { tr: { goalTitle: string; goal: string; solutionTitle: string; solution: string; benefitsTitle: string; benefits: string[] }; lang: 'cs' | 'en' }) => (
+const ProjectStructuredContent = ({ tr, lang }: { tr: { goalTitle: string; goal: string; solutionTitle: string; solution: string; benefitsTitle: string; benefits: string[] }; lang: 'cs' | 'en' }) => (
   <div className="space-y-8 sm:space-y-10 mb-10 sm:mb-16">
     <div>
       <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.goalTitle) : tr.goalTitle}</h3>
@@ -911,8 +918,8 @@ const ProjectPage = () => {
           <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-20 sm:gap-28 md:gap-36">
             <div className="md:col-span-2">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase mb-10 sm:mb-14">{lang === 'cs' ? fixCzechTypography(t.project.about) : t.project.about}</h2>
-              {project.slug === 'ddu-olomouc' && tr && 'structured' in tr && tr.structured ? (
-                <DduProjectContent tr={tr.structured} lang={lang} />
+              {tr && 'structured' in tr && tr.structured ? (
+                <ProjectStructuredContent tr={tr.structured} lang={lang} />
               ) : (
                 <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] mb-10 sm:mb-16 font-light">
                   {lang === 'cs' ? fixCzechTypography(tr?.fullDescription ?? project.fullDescription) : (tr?.fullDescription ?? project.fullDescription)}
