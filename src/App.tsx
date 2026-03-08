@@ -465,7 +465,7 @@ const ServicesPricingSection = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
-    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
+    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
       <div id="pricing" className="absolute top-0 left-0 -translate-y-24" aria-hidden />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
       
@@ -475,7 +475,7 @@ const ServicesPricingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-display text-[clamp(1.5rem,6vw,1.875rem)] sm:text-4xl md:text-5xl lg:text-6xl uppercase mb-16 sm:mb-20 md:mb-24 leading-[1.12] text-white break-words max-w-full"
+          className="font-display text-[clamp(1.5rem,6vw,1.875rem)] sm:text-4xl md:text-5xl lg:text-6xl uppercase mb-16 sm:mb-20 md:mb-24 leading-[1.12] text-white"
         >
           {lang === 'cs' ? fixCzechTypography(t.services.title) : fixDashes(t.services.title)}
         </motion.h2>
@@ -866,7 +866,7 @@ const ContactSection = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
           href="mailto:horakpremysl85@gmail.com" 
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-all duration-500 break-all text-center"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-all duration-500 text-center break-words"
         >
           horakpremysl85@gmail.com
         </motion.a>
@@ -1099,7 +1099,7 @@ const ProjectPage = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.08] mb-12 sm:mb-20 break-words"
+              className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.08] mb-12 sm:mb-20"
             >
               {lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
             </motion.h1>
@@ -1195,7 +1195,7 @@ const ProjectPage = () => {
            
            <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
               <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">{lang === 'cs' ? fixCzechTypography(t.project.nextProject) : fixDashes(t.project.nextProject)}</span>
-              <h2 className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors break-words">
+              <h2 className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
                 {lang === 'cs' ? fixCzechTypography(nextProject.title) : fixDashes(nextProject.title)}
               </h2>
               <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border border-black/10 flex items-center justify-center group-hover:border-white/20 group-hover:scale-110 transition-all duration-500">

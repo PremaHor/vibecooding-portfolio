@@ -44,10 +44,10 @@
     touch-action: manipulation; /* Removes 300ms tap delay on mobile */
   }
 
-  /* Prevent awkward word breaks - prefer font scaling on mobile */
+  /* Prefer natural wrapping at word boundaries, break long words only when necessary */
   h1, h2, h3, h4, p, li {
-    overflow-wrap: normal;
-    word-wrap: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
     hyphens: manual;
   }
 
