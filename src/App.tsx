@@ -12,15 +12,12 @@ import {
   ExternalLink,
   Linkedin, 
   Github,
-  Terminal,
   ArrowLeft,
   ChevronRight,
   Menu,
   X,
   Cookie,
-  Rocket,
-  Palette,
-  Settings
+  Rocket
 } from 'lucide-react';
 
 // --- Types ---
@@ -109,8 +106,6 @@ const PROJECTS: Project[] = [
   }
 ];
 
-const SERVICE_ICONS = [Globe, Rocket, Zap, Palette, Settings];
-
 // --- Components ---
 
 const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPage?: boolean }) => {
@@ -139,6 +134,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
     <>
       <a href="#work" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{t.nav.work}</a>
       <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{t.nav.services}</a>
+      <a href="#pricing" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{t.nav.pricing}</a>
       <a href="#contact" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{t.nav.contact}</a>
     </>
   ) : (
@@ -222,6 +218,9 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
                 <a href="#services" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
                   {t.nav.services}
                 </a>
+                <a href="#pricing" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  {t.nav.pricing}
+                </a>
                 <a href="#contact" onClick={closeMobileMenu} className="py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
                   {t.nav.contact}
                 </a>
@@ -275,57 +274,67 @@ const Hero = () => {
           </span>
         </motion.div>
         
-        <h1 className="font-display text-[12vw] sm:text-[11vw] md:text-[10vw] lg:text-[8rem] leading-[1.08] uppercase mb-6 sm:mb-8">
-          <div className="text-reveal">
-            <motion.span 
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            >
-              {t.hero.codeWith}
-            </motion.span>
-          </div>
-          <div className="text-reveal">
-            <motion.span 
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-              className="text-[var(--color-vibe-orange)]"
-            >
-              {t.hero.withVibe}
-            </motion.span>
-          </div>
+        <h1 className="font-display text-[clamp(1.75rem,5vw,3rem)] sm:text-[clamp(2rem,6vw,3.5rem)] md:text-[clamp(2.25rem,5vw,4rem)] leading-[1.15] mb-6 sm:mb-8 max-w-4xl">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="block"
+          >
+            {lang === 'cs' ? fixCzechTypography(t.hero.h1) : t.hero.h1}
+          </motion.span>
         </h1>
-        <p className="text-base sm:text-lg md:text-xl font-bold text-white/95 mb-10 sm:mb-16 md:mb-20 max-w-xl">
-          {lang === 'cs' ? fixCzechTypography(t.hero.landingMvp) : t.hero.landingMvp}
-        </p>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-base sm:text-lg md:text-xl font-light text-white/90 mb-10 sm:mb-12 max-w-2xl leading-[1.6]"
+        >
+          {lang === 'cs' ? fixCzechTypography(t.hero.subheadline) : t.hero.subheadline}
+        </motion.p>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-16 sm:mb-20"
+        >
+          <a 
+            href="#contact"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all shadow-lg"
+          >
+            {t.hero.ctaPrimary}
+            <ArrowRight className="w-4 h-4" />
+          </a>
+          <a 
+            href="#pricing"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all"
+          >
+            {t.hero.ctaSecondary}
+          </a>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-10 sm:gap-16 md:gap-20 lg:gap-24 items-end">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="space-y-8 sm:space-y-10"
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex flex-wrap gap-5 sm:gap-10 items-center"
           >
-            <p className="text-sm sm:text-base md:text-lg font-light text-white/80 max-w-lg leading-[1.7]">
-              {lang === 'cs' ? fixCzechTypography(t.hero.intro) : t.hero.intro}
-            </p>
-            <div className="flex flex-wrap gap-5 sm:gap-10 items-center">
-               <div className="flex -space-x-3">
-                  {[1,2,3].map(i => (
-                    <div key={i} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-[var(--color-vibe-black)] bg-gray-800 overflow-hidden">
-                       <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="" width={100} height={100} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                    </div>
-                  ))}
-               </div>
-               <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">{t.hero.workedWith}</p>
+            <div className="flex -space-x-3">
+              {[1,2,3].map(i => (
+                <div key={i} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-[var(--color-vibe-black)] bg-gray-800 overflow-hidden">
+                  <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="" width={100} height={100} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                </div>
+              ))}
             </div>
+            <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">{t.hero.workedWith}</p>
           </motion.div>
           
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="flex justify-center md:justify-end mt-12 md:mt-0"
           >
             <button 
@@ -346,8 +355,6 @@ const Hero = () => {
                 >
                   <ArrowRight className="w-10 h-10 sm:w-12 sm:h-12 md:w-20 md:h-20 rotate-90 transition-transform duration-700 group-hover:scale-110 group-hover:text-[var(--color-vibe-orange)]" />
                 </motion.div>
-                
-                {/* Circular Text (Simulated) */}
                 <div className="absolute inset-3 sm:inset-4 border border-dashed border-white/5 rounded-full animate-[spin_20s_linear_infinite]" />
               </div>
               <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 bg-[var(--color-vibe-orange)] text-black font-bold text-[9px] sm:text-[10px] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full uppercase tracking-[0.2em] shadow-xl">
@@ -445,110 +452,142 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
   );
 }
 
+const SERVICES_CARDS = [
+  { icon: Zap, key: 'card1' as const },
+  { icon: Globe, key: 'card2' as const },
+  { icon: Rocket, key: 'card3' as const },
+];
+
 const ServicesSection = () => {
   const { t, lang } = useLanguage();
-  const services = t.servicesList.map((s, idx) => {
-    const Icon = SERVICE_ICONS[idx];
-    return { ...s, icon: <Icon className="w-6 h-6" /> };
-  });
   return (
   <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
     
     <div className="max-w-7xl mx-auto relative z-10">
-      <div className="grid lg:grid-cols-2 gap-20 sm:gap-28 lg:gap-36 items-center">
-        <div>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase mb-10 sm:mb-16 leading-[1.08]">
-            {t.services.title}<br/><span className="text-white/30 italic">{t.services.titleItalic}</span>
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-white/80 mb-12 sm:mb-16 max-w-lg font-light leading-[1.7]">
-            {lang === 'cs' ? fixCzechTypography(t.services.intro) : t.services.intro}
-          </p>
-          <div className="grid gap-5 sm:gap-6">
-            {services.map((service, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="group flex gap-4 sm:gap-6 md:gap-8 p-5 sm:p-6 md:p-8 border border-white/10 rounded-2xl hover:bg-white/[0.03] hover:border-white/20 transition-all duration-500"
-              >
-                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0 group-hover:bg-[var(--color-vibe-orange)] group-hover:text-black transition-all duration-500">
-                  {service.icon}
-                </div>
-                <div className="min-w-0">
-                  <h4 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 text-white/95">{service.title}</h4>
-                  <p className="text-white/75 text-sm sm:text-base leading-[1.6] group-hover:text-white/90 transition-colors">{lang === 'cs' ? fixCzechTypography(service.description) : service.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Jak pracuji */}
-          <div className="mt-16 sm:mt-20 lg:mt-28">
-            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-6 sm:mb-10 text-white/95">{t.services.howIWork}</h3>
-            <ul className="space-y-4 text-white/80 font-light leading-[1.7]">
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {lang === 'cs' ? fixCzechTypography(t.services.bullet1) : t.services.bullet1}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {lang === 'cs' ? fixCzechTypography(t.services.bullet2) : t.services.bullet2}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {lang === 'cs' ? fixCzechTypography(t.services.bullet3) : t.services.bullet3}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)] shrink-0">•</span> {lang === 'cs' ? fixCzechTypography(t.services.bullet4) : t.services.bullet4}</li>
-            </ul>
-          </div>
-
-          {/* Pro koho */}
-          <div className="mt-12 sm:mt-16 lg:mt-24">
-            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-6 sm:mb-10 text-white/95">{t.services.forWhom}</h3>
-            <p className="text-white/80 font-light leading-[1.7] mb-4">{lang === 'cs' ? fixCzechTypography(t.services.forWhomIntro) : t.services.forWhomIntro}</p>
-            <ul className="space-y-3 text-white/85">
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {lang === 'cs' ? fixCzechTypography(t.services.forWhom1) : t.services.forWhom1}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {lang === 'cs' ? fixCzechTypography(t.services.forWhom2) : t.services.forWhom2}</li>
-              <li className="flex gap-3"><span className="text-[var(--color-vibe-orange)]">•</span> {lang === 'cs' ? fixCzechTypography(t.services.forWhom3) : t.services.forWhom3}</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="relative hidden md:block">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="sticky top-28 lg:top-36 aspect-[4/5] rounded-2xl lg:rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-8 sm:p-10 lg:p-14 flex flex-col justify-between overflow-hidden backdrop-blur-sm"
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase mb-16 sm:mb-20 md:mb-24 leading-[1.08] text-white"
+      >
+        {t.services.title}
+      </motion.h2>
+      
+      <div className="grid md:grid-cols-3 gap-8 sm:gap-10 md:gap-12">
+        {SERVICES_CARDS.map(({ icon: Icon, key }, idx) => (
+          <motion.article
+            key={key}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: idx * 0.1 }}
+            className="group flex flex-col p-6 sm:p-8 md:p-10 border border-white/10 rounded-2xl lg:rounded-[1.75rem] hover:bg-white/[0.03] hover:border-white/20 transition-all duration-500"
           >
-            <div className="absolute -top-40 -right-40 w-96 h-96 bg-[var(--color-vibe-orange)]/10 rounded-full blur-[100px]" />
-            <div className="relative z-10">
-              <div className="items-center gap-4 mb-8 lg:mb-12 flex">
-                <div className="flex gap-1.5">
-                   <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/50" />
-                   <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/50" />
-                   <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/50" />
-                </div>
-                <div className="h-px flex-1 bg-white/5" />
-              </div>
-              
-              <Terminal className="w-12 h-12 sm:w-16 sm:h-16 mb-8 lg:mb-12 text-[var(--color-vibe-orange)]" />
-              <div className="font-mono text-sm sm:text-base lg:text-lg space-y-4 text-white/60">
-                <p className="text-[var(--color-vibe-orange)]/80">$ vibecooding --init</p>
-                <p className="animate-pulse">Initializing creative flow...</p>
-                <p>Optimizing for performance...</p>
-                <p>Injecting visual soul...</p>
-                <div className="flex items-center gap-3">
-                   <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
-                   <p className="text-green-400">System: Ready to build.</p>
-                </div>
-              </div>
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0 mb-6 group-hover:bg-[var(--color-vibe-orange)] group-hover:text-black transition-all duration-500">
+              <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
             </div>
-            
-            <div className="relative z-10 border-t border-white/5 pt-10 lg:pt-14">
-              <div className="text-[8vw] lg:text-[9vw] font-display opacity-5 select-none leading-none">FLOW</div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mt-4">VibeCooding Engine v2.6</p>
-            </div>
-          </motion.div>
-        </div>
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-2 text-white/95">
+              {t.services[`${key}Title`]}
+            </h3>
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)] mb-4 block">
+              {t.services[`${key}Subtitle`]}
+            </span>
+            <p className="text-white/75 text-sm sm:text-base leading-[1.6] flex-1">
+              {lang === 'cs' ? fixCzechTypography(t.services[`${key}Desc`]) : t.services[`${key}Desc`]}
+            </p>
+          </motion.article>
+        ))}
       </div>
     </div>
   </section>
+  );
+};
+
+const PricingSection = () => {
+  const { t } = useLanguage();
+  const items = [
+    { title: t.pricing.item1, price: t.pricing.item1Price, note: t.pricing.item1Note },
+    { title: t.pricing.item2, price: t.pricing.item2Price, note: t.pricing.item2Note },
+    { title: t.pricing.item3, price: t.pricing.item3Price, note: t.pricing.item3Note },
+  ];
+  return (
+    <section id="pricing" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 bg-white text-black relative overflow-hidden">
+      <div className="max-w-4xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase mb-16 sm:mb-20 leading-[1.12] text-center"
+        >
+          {t.pricing.title}
+        </motion.h2>
+        <div className="space-y-6 sm:space-y-8">
+          {items.map((item, idx) => (
+            <motion.a
+              key={idx}
+              href="#contact"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-6 sm:p-8 border border-black/10 rounded-2xl hover:bg-black/[0.02] hover:border-[var(--color-vibe-orange)]/30 transition-all duration-300 group"
+            >
+              <div>
+                <h3 className="font-display text-lg sm:text-xl md:text-2xl uppercase group-hover:text-[var(--color-vibe-orange)] transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-black/60 mt-1">{item.note}</p>
+              </div>
+              <span className="text-xl sm:text-2xl font-bold text-[var(--color-vibe-orange)] shrink-0">
+                {item.price}
+              </span>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CtaSection = () => {
+  const { t, lang } = useLanguage();
+  return (
+    <section id="cta" className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)] text-white relative overflow-hidden">
+      <div className="max-w-3xl mx-auto text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase mb-6 sm:mb-8 leading-[1.12]"
+        >
+          {t.cta.title}
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-base sm:text-lg text-white/80 mb-12 sm:mb-16 leading-[1.7]"
+        >
+          {lang === 'cs' ? fixCzechTypography(t.cta.text) : t.cta.text}
+        </motion.p>
+        <motion.a
+          href="#contact"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all"
+        >
+          {t.contact.writeMessage}
+          <ArrowRight className="w-4 h-4" />
+        </motion.a>
+      </div>
+    </section>
   );
 };
 
@@ -717,6 +756,8 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
       <Hero />
       <WorkSection />
       <ServicesSection />
+      <PricingSection />
+      <CtaSection />
       <ContactSection />
     </main>
     <Footer />
@@ -917,10 +958,16 @@ export default function App() {
         const scrollPos = window.scrollY + 80;
         const workSection = document.getElementById('work');
         const servicesSection = document.getElementById('services');
+        const pricingSection = document.getElementById('pricing');
         const contactSection = document.getElementById('contact');
 
+        const ctaSection = document.getElementById('cta');
         let currentTheme: 'light' | 'dark' = 'dark';
         if (contactSection && scrollPos >= contactSection.offsetTop) {
+          currentTheme = 'light';
+        } else if (ctaSection && scrollPos >= ctaSection.offsetTop) {
+          currentTheme = 'dark';
+        } else if (pricingSection && scrollPos >= pricingSection.offsetTop) {
           currentTheme = 'light';
         } else if (servicesSection && scrollPos >= servicesSection.offsetTop) {
           currentTheme = 'dark';
