@@ -93,19 +93,6 @@ const PROJECTS: Project[] = [
       { label: "ddu-olomouc-web.vercel.app (návrh)", url: "https://ddu-olomouc-web.vercel.app/" },
     ],
     quote: "Spolupráce na redesignu byla příjemná – důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
-  },
-  {
-    id: 4,
-    slug: "void-interface",
-    title: "VOID INTERFACE",
-    category: "UI/UX",
-    description: "Minimalistický operační systém v prohlížeči pro kreativní kodéry.",
-    fullDescription: "Void Interface je experiment v oblasti uživatelského rozhraní. Jde o kompletní pracovní prostředí běžící v prohlížeči, které se zaměřuje na eliminaci vyrušení. Každý prvek byl navržen s ohledem na 'flow state' vývojáře.",
-    image: "https://picsum.photos/seed/void/1200/800",
-    tags: ["TypeScript", "Canvas API", "Motion"],
-    year: "2024",
-    client: "Open Source Project",
-    role: "UI Engineer"
   }
 ];
 
@@ -497,7 +484,7 @@ const ServicesPricingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase mb-16 sm:mb-20 md:mb-24 leading-[1.08] text-white"
+          className="font-display text-[clamp(1.5rem,6vw,1.875rem)] sm:text-4xl md:text-5xl lg:text-6xl uppercase mb-16 sm:mb-20 md:mb-24 leading-[1.12] text-white break-words max-w-full"
         >
           {lang === 'cs' ? fixCzechTypography(t.services.title) : fixDashes(t.services.title)}
         </motion.h2>

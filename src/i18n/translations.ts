@@ -190,7 +190,6 @@ export const translations = {
           ],
         },
       },
-      'void-interface': { category: 'UI/UX', description: 'Minimalistický operační systém v prohlížeči pro kreativní kodéry.', fullDescription: 'Void Interface je experiment v oblasti uživatelského rozhraní. Jde o kompletní pracovní prostředí běžící v prohlížeči, které se zaměřuje na eliminaci vyrušení. Každý prvek byl navržen s ohledem na \'flow state\' vývojáře.' },
     },
   },
   en: {
@@ -382,7 +381,6 @@ export const translations = {
           ],
         },
       },
-      'void-interface': { category: 'UI/UX', description: 'Minimalist operating system in the browser for creative coders.', fullDescription: 'Void Interface is an experiment in user interface. A complete workspace running in the browser, focused on eliminating distractions. Every element was designed with the developer\'s flow state in mind.' },
     },
   },
 } as const;
