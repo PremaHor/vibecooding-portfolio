@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import Lenis from '@studio-freight/lenis';
 import { fixCzechTypography, fixDashes } from './utils/czechTypography';
 import { useLanguage } from './i18n/LanguageContext';
@@ -20,7 +20,8 @@ import {
   Cookie,
   Rocket,
   ShieldCheck,
-  Brain
+  Brain,
+  ClipboardCheck
 } from 'lucide-react';
 
 // --- Types ---
@@ -265,41 +266,31 @@ const useIsMobile = () => {
 const Hero = () => {
   const { t, lang } = useLanguage();
   const isMobile = useIsMobile();
+  const prefersReducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-  const rotate = useTransform(scrollY, [0, 500], [0, 15]);
+  // Delší scroll range pro plynulejší přechod, na mobilu jemnější hodnoty
+  const scrollRange = isMobile ? [0, 400] : [0, 600];
+  const y1 = useTransform(scrollY, scrollRange, isMobile ? [0, 80] : [0, 180]);
+  const y2 = useTransform(scrollY, scrollRange, isMobile ? [0, -60] : [0, -140]);
+  const rotate = useTransform(scrollY, scrollRange, isMobile ? [0, 6] : [0, 12]);
 
   return (
     <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-12 sm:pb-16 md:pb-20 overflow-hidden">
-      {/* Animated Background Blobs - parallax disabled on mobile for smooth scroll */}
-      {isMobile ? (
+      {/* Parallax blobs - plynulé na desktopu i mobilu, respektuje prefers-reduced-motion */}
+      {prefersReducedMotion ? (
         <>
-          <div 
-            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[60px] sm:blur-[80px] opacity-20"
-            style={{ transform: 'translate3d(0,0,0)', willChange: 'auto' }}
-          />
-          <div 
-            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[60px] sm:blur-[80px] opacity-10"
-            style={{ transform: 'translate3d(0,0,0)', willChange: 'auto' }}
-          />
+          <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[60px] sm:blur-[100px] md:blur-[120px] opacity-20" />
+          <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[60px] sm:blur-[100px] md:blur-[120px] opacity-10" />
         </>
       ) : (
         <>
           <motion.div 
-            style={{ 
-              y: y1, 
-              rotate,
-              willChange: 'transform',
-            }}
-            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[100px] sm:blur-[120px] opacity-20"
+            style={{ y: y1, rotate, willChange: 'transform' }}
+            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[60px] sm:blur-[100px] md:blur-[120px] opacity-20"
           />
           <motion.div 
-            style={{ 
-              y: y2,
-              willChange: 'transform',
-            }}
-            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[100px] sm:blur-[120px] opacity-10"
+            style={{ y: y2, willChange: 'transform' }}
+            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[60px] sm:blur-[100px] md:blur-[120px] opacity-10"
           />
         </>
       )}
@@ -567,6 +558,32 @@ const ServicesPricingSection = () => {
             );
           })}
         </div>
+
+        {/* Rychlý audit zdarma - lead magnet */}
+        <motion.a
+          href="#contact"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-30px' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-all duration-300 group"
+        >
+          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
+            <ClipboardCheck className="w-6 h-6 sm:w-7 sm:h-7" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="font-display text-lg sm:text-xl uppercase text-white mb-1">
+              {lang === 'cs' ? fixCzechTypography(t.services.auditTitle) : fixDashes(t.services.auditTitle)}
+            </h3>
+            <p className="text-sm sm:text-base text-white/75 leading-[1.6]">
+              {lang === 'cs' ? fixCzechTypography(t.services.auditSubtitle) : fixDashes(t.services.auditSubtitle)}
+            </p>
+          </div>
+          <span className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3.5 rounded-full text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black group-hover:bg-[var(--color-vibe-orange)]/90 transition-colors shrink-0 min-h-[44px]">
+            {lang === 'cs' ? fixCzechTypography(t.services.auditCta) : fixDashes(t.services.auditCta)}
+            <ArrowRight className="w-4 h-4" />
+          </span>
+        </motion.a>
       </div>
     </section>
   );
