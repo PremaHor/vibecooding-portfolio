@@ -18,7 +18,9 @@ import {
   Menu,
   X,
   Cookie,
-  Rocket
+  Rocket,
+  ShieldCheck,
+  Brain
 } from 'lucide-react';
 
 // --- Types ---
@@ -682,6 +684,152 @@ const CtaSection = () => {
   );
 };
 
+// --- Competitive Advantage + FAQ Block ---
+const COMPETITIVE_CARDS = [
+  { icon: Zap, key: 'card1' as const },
+  { icon: Brain, key: 'card2' as const },
+  { icon: ShieldCheck, key: 'card3' as const },
+];
+
+const CompetitiveAdvantageSection = () => {
+  const { t, lang } = useLanguage();
+  return (
+    <section id="competitive-advantage" className="relative py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden">
+      {/* Gradient background + glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-vibe-black)] via-[#0a0a0a] to-[var(--color-vibe-black)]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,var(--color-vibe-orange)/8_0%,transparent_70%)] pointer-events-none" />
+      <div className="absolute inset-0 border border-white/5 rounded-3xl mx-4 sm:mx-6 md:mx-8 lg:mx-12 pointer-events-none" />
+      
+      <div className="relative z-10 max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7 }}
+        >
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.12] mb-6 sm:mb-8 text-white">
+            {lang === 'cs' ? fixCzechTypography(t.competitiveAdvantage.title) : fixDashes(t.competitiveAdvantage.title)}
+          </h2>
+          <p className="text-lg sm:text-xl md:text-2xl font-bold text-[var(--color-vibe-orange)] mb-6 leading-[1.4]">
+            {lang === 'cs' ? fixCzechTypography(t.competitiveAdvantage.subtitle) : fixDashes(t.competitiveAdvantage.subtitle)}
+          </p>
+          <p className="text-base sm:text-lg text-white/85 leading-[1.7] mb-16 sm:mb-20">
+            {lang === 'cs' ? fixCzechTypography(t.competitiveAdvantage.paragraph) : fixDashes(t.competitiveAdvantage.paragraph)}
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {COMPETITIVE_CARDS.map(({ icon: Icon, key }, idx) => (
+            <motion.article
+              key={key}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="group relative p-6 sm:p-8 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[var(--color-vibe-orange)]/30 hover:bg-white/[0.05] transition-all duration-500"
+            >
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 group-hover:scale-110 transition-transform duration-300">
+                <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+              </div>
+              <h3 className="font-display text-lg sm:text-xl uppercase text-white mb-3">
+                {lang === 'cs' ? fixCzechTypography(t.competitiveAdvantage[`${key}Title`]) : fixDashes(t.competitiveAdvantage[`${key}Title`])}
+              </h3>
+              <p className="text-sm sm:text-base text-white/75 leading-[1.6]">
+                {lang === 'cs' ? fixCzechTypography(t.competitiveAdvantage[`${key}Text`]) : fixDashes(t.competitiveAdvantage[`${key}Text`])}
+              </p>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const FAQSection = () => {
+  const { t, lang } = useLanguage();
+  const [openId, setOpenId] = useState<number | null>(null);
+
+  const items = [
+    { q: t.faq.q1, a: t.faq.a1 },
+    { q: t.faq.q2, a: t.faq.a2 },
+    { q: t.faq.q3, a: t.faq.a3 },
+    { q: t.faq.q4, a: t.faq.a4 },
+  ];
+
+  return (
+    <section id="faq" className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)]">
+      <div className="max-w-3xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 sm:mb-16"
+        >
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl uppercase leading-[1.12] text-white mb-4">
+            {lang === 'cs' ? fixCzechTypography(t.faq.title) : fixDashes(t.faq.title)}
+          </h2>
+          <p className="text-white/70 text-base sm:text-lg">
+            {lang === 'cs' ? fixCzechTypography(t.faq.subtitle) : fixDashes(t.faq.subtitle)}
+          </p>
+        </motion.div>
+
+        <div className="space-y-3">
+          {items.map((item, idx) => {
+            const isOpen = openId === idx;
+            return (
+              <motion.div
+                key={idx}
+                layout
+                className="rounded-xl border border-white/10 overflow-hidden bg-white/[0.02] hover:border-white/20 transition-colors duration-300"
+              >
+                <button
+                  onClick={() => setOpenId(isOpen ? null : idx)}
+                  className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 sm:py-5 text-left min-h-[44px] sm:min-h-0"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${idx}`}
+                  id={`faq-question-${idx}`}
+                >
+                  <span className="font-display text-sm sm:text-base uppercase text-white/95 pr-4">
+                    {lang === 'cs' ? fixCzechTypography(item.q) : fixDashes(item.q)}
+                  </span>
+                  <motion.span
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="shrink-0 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)]"
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </motion.span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`faq-answer-${idx}`}
+                      role="region"
+                      aria-labelledby={`faq-question-${idx}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
+                        <p className="text-white/80 text-sm sm:text-base leading-[1.7]">
+                          {lang === 'cs' ? fixCzechTypography(item.a) : fixDashes(item.a)}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ContactSection = () => {
   const { t, lang } = useLanguage();
   return (
@@ -891,6 +1039,8 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
       <AboutSection />
       <ServicesPricingSection />
       <CtaSection />
+      <CompetitiveAdvantageSection />
+      <FAQSection />
       <ContactSection />
     </main>
     <Footer />
