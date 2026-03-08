@@ -530,7 +530,7 @@ const ServicesPricingSection = () => {
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0 border-t border-white/10">
+                      <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-4 border-t border-white/10">
                         <p className="text-white/80 text-sm sm:text-base leading-[1.7] mb-4">
                           {lang === 'cs' ? fixCzechTypography(t.services[`${key}Detail`]) : t.services[`${key}Detail`]}
                         </p>
@@ -542,10 +542,10 @@ const ServicesPricingSection = () => {
                         <a
                           href="#contact"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all w-fit"
+                          className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-3 rounded-full text-[11px] sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all whitespace-nowrap"
                         >
                           {t.services[`${key}Cta`]}
-                          <ArrowRight className="w-4 h-4" />
+                          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                         </a>
                       </div>
                     </motion.div>

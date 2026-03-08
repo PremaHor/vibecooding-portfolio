@@ -1,0 +1,42 @@
+---
+description: Všechny nové texty musí být v i18n – cs + en překlady, nikdy hardcodovat
+alwaysApply: true
+---
+
+# i18n – Všechny texty v překladech
+
+**Pravidlo:** Každý nový text v UI musí být v překladech. Nikdy ne hardcodovat text přímo v komponentách.
+
+## Postup při přidávání nového textu
+
+1. **Přidat klíče** do `src/i18n/translations.ts` pro oba jazyky:
+   - `translations.cs.section.key`
+   - `translations.en.section.key`
+
+2. **V komponentě** volat `const { t, lang } = useLanguage();`
+
+3. **Zobrazovat** text jako `{t.section.key}`
+
+4. **Pro delší české texty** (odstavce, věty): použít `fixCzechTypography()`:
+   ```tsx
+   {lang === 'cs' ? fixCzechTypography(t.section.key) : t.section.key}
+   ```
+
+## Příklad
+
+```tsx
+// ❌ ŠPATNĚ
+<h2>Nová sekce</h2>
+<p>Popis textu...</p>
+
+// ✅ SPRÁVNĚ
+const { t, lang } = useLanguage();
+<h2>{t.newSection.title}</h2>
+<p>{lang === 'cs' ? fixCzechTypography(t.newSection.description) : t.newSection.description}</p>
+```
+
+V `translations.ts`:
+```ts
+cs: { newSection: { title: 'Nová sekce', description: 'Popis textu...' } },
+en: { newSection: { title: 'New Section', description: 'Description text...' } },
+```
