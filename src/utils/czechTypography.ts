@@ -31,5 +31,14 @@ export function fixCzechTypography(text: string): string {
     result = result.replace(re, `$1${NBSP}`);
   }
 
+  // Čísla + jednotky (Kč, CZK) – nedělitelná mezera před měnou (podporuje i anglický formát 15,000 CZK)
+  result = result.replace(/(\d[\d\s,]*) +([Kk]č|CZK)/g, `$1${NBSP}$2`);
+
+  // Čísla + až, do – nedělitelná mezera
+  result = result.replace(/(\d[\d\s]*) +(až|do)\b/g, `$1${NBSP}$2`);
+
+  // Čísla + běžná slova po čísle (kola, kol, kolo, %)
+  result = result.replace(/(\d[\d\s]*) +(kola|kol|kolo|%|let|měsíců|dnů)\b/g, `$1${NBSP}$2`);
+
   return result;
 }
