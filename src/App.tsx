@@ -14,6 +14,7 @@ import {
   Github,
   ArrowLeft,
   ChevronRight,
+  ChevronDown,
   Menu,
   X,
   Cookie,
@@ -458,94 +459,101 @@ const SERVICES_CARDS = [
   { icon: Rocket, key: 'card3' as const },
 ];
 
-const ServicesSection = () => {
+const ServicesPricingSection = () => {
   const { t, lang } = useLanguage();
-  return (
-  <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
-    
-    <div className="max-w-7xl mx-auto relative z-10">
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase mb-16 sm:mb-20 md:mb-24 leading-[1.08] text-white"
-      >
-        {t.services.title}
-      </motion.h2>
-      
-      <div className="grid md:grid-cols-3 gap-8 sm:gap-10 md:gap-12">
-        {SERVICES_CARDS.map(({ icon: Icon, key }, idx) => (
-          <motion.article
-            key={key}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: idx * 0.1 }}
-            className="group flex flex-col p-6 sm:p-8 md:p-10 border border-white/10 rounded-2xl lg:rounded-[1.75rem] hover:bg-white/[0.03] hover:border-white/20 transition-all duration-500"
-          >
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0 mb-6 group-hover:bg-[var(--color-vibe-orange)] group-hover:text-black transition-all duration-500">
-              <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
-            </div>
-            <h3 className="font-display text-xl sm:text-2xl md:text-3xl uppercase mb-2 text-white/95">
-              {t.services[`${key}Title`]}
-            </h3>
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)] mb-4 block">
-              {t.services[`${key}Subtitle`]}
-            </span>
-            <p className="text-white/75 text-sm sm:text-base leading-[1.6] flex-1">
-              {lang === 'cs' ? fixCzechTypography(t.services[`${key}Desc`]) : t.services[`${key}Desc`]}
-            </p>
-          </motion.article>
-        ))}
-      </div>
-    </div>
-  </section>
-  );
-};
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
-const PricingSection = () => {
-  const { t } = useLanguage();
-  const items = [
-    { title: t.pricing.item1, price: t.pricing.item1Price, note: t.pricing.item1Note },
-    { title: t.pricing.item2, price: t.pricing.item2Price, note: t.pricing.item2Note },
-    { title: t.pricing.item3, price: t.pricing.item3Price, note: t.pricing.item3Note },
-  ];
   return (
-    <section id="pricing" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 bg-white text-black relative overflow-hidden">
-      <div className="max-w-4xl mx-auto">
-        <motion.h2
+    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
+      <div id="pricing" className="absolute top-0 left-0 -translate-y-24" aria-hidden />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase mb-16 sm:mb-20 leading-[1.12] text-center"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase mb-16 sm:mb-20 md:mb-24 leading-[1.08] text-white"
         >
-          {t.pricing.title}
+          {t.services.title}
         </motion.h2>
-        <div className="space-y-6 sm:space-y-8">
-          {items.map((item, idx) => (
-            <motion.a
-              key={idx}
-              href="#contact"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-6 sm:p-8 border border-black/10 rounded-2xl hover:bg-black/[0.02] hover:border-[var(--color-vibe-orange)]/30 transition-all duration-300 group"
-            >
-              <div>
-                <h3 className="font-display text-lg sm:text-xl md:text-2xl uppercase group-hover:text-[var(--color-vibe-orange)] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-black/60 mt-1">{item.note}</p>
-              </div>
-              <span className="text-xl sm:text-2xl font-bold text-[var(--color-vibe-orange)] shrink-0">
-                {item.price}
-              </span>
-            </motion.a>
-          ))}
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {SERVICES_CARDS.map(({ icon: Icon, key }, idx) => {
+            const isExpanded = expandedId === idx;
+            return (
+              <motion.article
+                key={key}
+                layout
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className={`flex flex-col border rounded-2xl lg:rounded-[1.75rem] overflow-hidden cursor-pointer select-none transition-colors ${
+                  isExpanded 
+                    ? 'border-[var(--color-vibe-orange)]/50 bg-white/[0.06]' 
+                    : 'border-white/10 hover:bg-white/[0.03] hover:border-white/20'
+                }`}
+                onClick={() => setExpandedId(isExpanded ? null : idx)}
+              >
+                <div className="p-6 sm:p-8 flex flex-col">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
+                      <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                    </div>
+                    <motion.div
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="shrink-0 text-white/50"
+                    >
+                      <ChevronDown className="w-5 h-5" />
+                    </motion.div>
+                  </div>
+                  <h3 className="font-display text-lg sm:text-xl md:text-2xl uppercase mt-4 text-white/95">
+                    {t.services[`${key}Title`]}
+                  </h3>
+                  <p className="text-sm text-white/70 mt-2 leading-[1.5]">
+                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Subtitle`]) : t.services[`${key}Subtitle`]}
+                  </p>
+                  <p className="text-[var(--color-vibe-orange)] font-bold text-lg sm:text-xl mt-4">
+                    {t.services[`${key}Price`]}
+                  </p>
+                </div>
+
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0 border-t border-white/10">
+                        <p className="text-white/80 text-sm sm:text-base leading-[1.7] mb-4">
+                          {lang === 'cs' ? fixCzechTypography(t.services[`${key}Detail`]) : t.services[`${key}Detail`]}
+                        </p>
+                        {key === 'card2' && (
+                          <p className="text-white/70 text-sm leading-[1.6] mb-6">
+                            {lang === 'cs' ? fixCzechTypography(t.services.card2Bonus) : t.services.card2Bonus}
+                          </p>
+                        )}
+                        <a
+                          href="#contact"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all w-fit"
+                        >
+                          {t.services[`${key}Cta`]}
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -755,8 +763,7 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
     <main>
       <Hero />
       <WorkSection />
-      <ServicesSection />
-      <PricingSection />
+      <ServicesPricingSection />
       <CtaSection />
       <ContactSection />
     </main>
@@ -958,17 +965,13 @@ export default function App() {
         const scrollPos = window.scrollY + 80;
         const workSection = document.getElementById('work');
         const servicesSection = document.getElementById('services');
-        const pricingSection = document.getElementById('pricing');
         const contactSection = document.getElementById('contact');
-
         const ctaSection = document.getElementById('cta');
         let currentTheme: 'light' | 'dark' = 'dark';
         if (contactSection && scrollPos >= contactSection.offsetTop) {
           currentTheme = 'light';
         } else if (ctaSection && scrollPos >= ctaSection.offsetTop) {
           currentTheme = 'dark';
-        } else if (pricingSection && scrollPos >= pricingSection.offsetTop) {
-          currentTheme = 'light';
         } else if (servicesSection && scrollPos >= servicesSection.offsetTop) {
           currentTheme = 'dark';
         } else if (workSection && scrollPos >= workSection.offsetTop) {
