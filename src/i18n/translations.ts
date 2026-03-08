@@ -31,7 +31,7 @@ export const translations = {
       timeline: 'Timeline',
     },
     services: {
-      title: 'Co pro vás můžu postavit?',
+      title: 'S čím vám pomůžu?',
       card1Title: 'Interaktivní Prototypy',
       card1Subtitle: 'Otestujte svůj nápad dřív, než do něj investujete statisíce.',
       card1Price: 'od 15 000 Kč',
