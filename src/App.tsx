@@ -375,9 +375,13 @@ const Hero = () => {
           className="flex flex-wrap gap-5 sm:gap-10 items-center"
         >
           <div className="flex -space-x-3">
-            {[1,2,3].map(i => (
+            {[
+              'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=faces',
+              'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=faces',
+              'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces',
+            ].map((src, i) => (
               <div key={i} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-[var(--color-vibe-black)] bg-gray-800 overflow-hidden">
-                <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="" width={100} height={100} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src={src} alt="" width={100} height={100} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
             ))}
           </div>
