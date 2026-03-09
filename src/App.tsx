@@ -439,7 +439,6 @@ const SERVICES_CARDS = [
 
 const ServicesPricingSection = () => {
   const { t, lang } = useLanguage();
-  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
     <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
@@ -457,36 +456,21 @@ const ServicesPricingSection = () => {
           {lang === 'cs' ? fixCzechTypography(t.services.title) : fixDashes(t.services.title)}
         </motion.h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {SERVICES_CARDS.map(({ icon: Icon, key }, idx) => {
-            const isExpanded = expandedId === idx;
+            const bullets = t.services[`${key}Bullets` as keyof typeof t.services] as string[];
             return (
               <motion.article
                 key={key}
-                layout
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className={`flex flex-col border rounded-2xl lg:rounded-[1.75rem] overflow-hidden cursor-pointer select-none transition-colors ${
-                  isExpanded 
-                    ? 'border-[var(--color-vibe-orange)]/50 bg-white/[0.06]' 
-                    : 'border-white/10 hover:bg-white/[0.03] hover:border-white/20'
-                }`}
-                onClick={() => setExpandedId(isExpanded ? null : idx)}
+                className="flex flex-col border border-white/10 rounded-2xl lg:rounded-[1.75rem] overflow-hidden hover:border-white/20 hover:bg-white/[0.03] transition-colors"
               >
-                <div className="p-6 sm:p-8 flex flex-col">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
-                      <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
-                    </div>
-                    <motion.div
-                      animate={{ rotate: isExpanded ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="shrink-0 text-white/50"
-                    >
-                      <ChevronDown className="w-5 h-5" />
-                    </motion.div>
+                <div className="p-6 sm:p-8 flex flex-col flex-1">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/5 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
+                    <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
                   </div>
                   <h3 className="font-display text-lg sm:text-xl md:text-2xl uppercase mt-4 text-white/95">
                     {lang === 'cs' ? fixCzechTypography(t.services[`${key}Title`]) : fixDashes(t.services[`${key}Title`])}
@@ -497,40 +481,22 @@ const ServicesPricingSection = () => {
                   <p className="text-[var(--color-vibe-orange)] font-bold text-lg sm:text-xl mt-4">
                     {lang === 'cs' ? fixCzechTypography(t.services[`${key}Price`]) : fixDashes(t.services[`${key}Price`])}
                   </p>
+                  <ul className="mt-6 space-y-3 flex-1">
+                    {bullets?.map((bullet, i) => (
+                      <li key={i} className="text-white/80 text-sm sm:text-base leading-[1.6] flex gap-3">
+                        <span className="text-[var(--color-vibe-orange)] shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-current" aria-hidden />
+                        {lang === 'cs' ? fixCzechTypography(bullet) : fixDashes(bullet)}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    className="mt-6 inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full text-[11px] sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all whitespace-nowrap w-fit"
+                  >
+                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Cta`]) : fixDashes(t.services[`${key}Cta`])}
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  </a>
                 </div>
-
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-4 border-t border-white/10">
-                        <p className="text-white/80 text-sm sm:text-base leading-[1.7] mb-4">
-                          {lang === 'cs' ? fixCzechTypography(t.services[`${key}Detail`]) : fixDashes(t.services[`${key}Detail`])}
-                        </p>
-                        {key === 'card2' && (
-                          <p className="text-white/70 text-sm leading-[1.6] mb-6">
-                            {lang === 'cs' ? fixCzechTypography(t.services.card2Bonus) : fixDashes(t.services.card2Bonus)}
-                          </p>
-                        )}
-                        <div className="mt-4 flex justify-start">
-                          <a
-                            href="#contact"
-                            onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full text-[11px] sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all whitespace-nowrap w-fit"
-                          >
-                            {lang === 'cs' ? fixCzechTypography(t.services[`${key}Cta`]) : fixDashes(t.services[`${key}Cta`])}
-                            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                          </a>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </motion.article>
             );
           })}
