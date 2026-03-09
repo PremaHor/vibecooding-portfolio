@@ -29,8 +29,7 @@
     <meta name="twitter:title" content="Vibecoding.cz | Landing page za 7 dní" />
     <meta name="twitter:description" content="Web, landing page nebo MVP na míru. Rychlý prototyping pro vizionáře a startupy. Bez zbytečného čekání." />
     <meta name="twitter:image" content="https://vibecooding.cz/images/projects/5.webp" />
-    <!-- Preload LCP (first project image) - responsive: 640w on mobile, full on desktop -->
-    <link rel="preload" as="image" href="/images/projects/5-640.webp" media="(max-width: 768px)" />
+    <!-- Preload LCP (first project image on desktop; mobile hero is above fold, img loads via srcset) -->
     <link rel="preload" as="image" href="/images/projects/5.webp" media="(min-width: 769px)" />
     <!-- Fonts: async load to avoid render-blocking (saves ~600ms) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
