@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'motion/react';
-import Lenis from '@studio-freight/lenis';
 import { fixCzechTypography, fixDashes } from './utils/czechTypography';
 import { useLanguage } from './i18n/LanguageContext';
 import { 
@@ -281,9 +280,9 @@ const Hero = () => {
   const rotate = useTransform(scrollY, scrollRange, isMobile ? [0, 6] : [0, 12]);
 
   const fadeIn = {
-    initial: { opacity: 0, y: 24 },
+    initial: isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
     animate: { opacity: 1, y: 0 },
-    transition: (delay = 0) => ({ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }),
+    transition: (delay = 0) => isMobile ? { duration: 0 } : { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
   };
 
   const useStaticBlobs = prefersReducedMotion || isMobile;
@@ -392,7 +391,7 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
             alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
             width={1200}
             height={800}
-            loading={index < 2 ? "eager" : "lazy"}
+            loading={index === 0 ? "eager" : "lazy"}
             fetchPriority={index === 0 ? "high" : undefined}
             decoding="async"
             className="w-full h-full object-cover rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] transition-transform duration-700 group-hover:scale-[1.08]"
@@ -1108,30 +1107,33 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location.pathname]);
 
+  const lenisRef = useRef<{ destroy: () => void } | null>(null);
+
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
-    let lenis: Lenis | null = null;
     if (!isMobile) {
-      lenis = new Lenis({
-        duration: 1.1,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1.5,
-      });
+      import('@studio-freight/lenis').then(({ default: Lenis }) => {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 1.5,
+        });
+        lenisRef.current = lenis;
 
-      function raf(time: number) {
-        lenis!.raf(time);
+        function raf(time: number) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+
         requestAnimationFrame(raf);
-      }
-
-      requestAnimationFrame(raf);
+      });
     }
 
+    const isDesktop = window.matchMedia('(min-width: 768px)').matches;
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
-      
-      // Check if hovering over interactive elements
       const target = e.target as HTMLElement;
       const isInteractive = target.closest('a, button, [role="button"]');
       setIsHovering(!!isInteractive);
@@ -1167,14 +1169,15 @@ export default function App() {
       });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    if (isDesktop) window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (isDesktop) window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
-      lenis?.destroy();
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
     };
   }, []);
 

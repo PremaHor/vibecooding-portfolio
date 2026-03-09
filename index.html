@@ -29,7 +29,8 @@
     <meta name="twitter:title" content="Vibecoding.cz | Landing page za 7 dní" />
     <meta name="twitter:description" content="Web, landing page nebo MVP na míru. Rychlý prototyping pro vizionáře a startupy. Bez zbytečného čekání." />
     <meta name="twitter:image" content="https://vibecooding.cz/images/projects/5.webp" />
-    <!-- Preload LCP (first project image on desktop; mobile hero is above fold, img loads via srcset) -->
+    <!-- Preload LCP: mobile=5-640 (smaller), desktop=5.webp -->
+    <link rel="preload" as="image" href="/images/projects/5-640.webp" media="(max-width: 768px)" />
     <link rel="preload" as="image" href="/images/projects/5.webp" media="(min-width: 769px)" />
     <!-- Fonts: async load to avoid render-blocking (saves ~600ms) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -70,9 +71,14 @@
       });
       gtag('js', new Date());
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L0TBNLC3D6"></script>
+    <!-- Defer gtag.js until after load - reduces main thread blocking on mobile -->
     <script>
-      gtag('config', 'G-L0TBNLC3D6');
+      window.addEventListener('load', function() {
+        var d=document,s=d.createElement('script');
+        s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-L0TBNLC3D6';
+        d.head.appendChild(s);
+        s.onload=function(){gtag('config','G-L0TBNLC3D6');};
+      });
     </script>
   </head>
   <body>
