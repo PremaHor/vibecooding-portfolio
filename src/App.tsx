@@ -41,6 +41,13 @@ interface Project {
   quote?: string;
 }
 
+// --- Helpers ---
+function getImageSrcSet(imagePath: string): string {
+  const base = imagePath.replace(/\.(webp|jpg|jpeg|png)$/i, '');
+  const ext = imagePath.match(/\.(webp|jpg|jpeg|png)$/i)?.[1] ?? 'webp';
+  return `${base}-640.webp 640w, ${base}-960.webp 960w, ${imagePath} 1200w`;
+}
+
 // --- Constants ---
 const PROJECTS: Project[] = [
   {
@@ -380,6 +387,8 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
         <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-6 sm:mb-8 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
           <img 
             src={project.image} 
+            srcSet={getImageSrcSet(project.image)}
+            sizes="(max-width: 768px) 100vw, 50vw"
             alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
             width={1200}
             height={800}
@@ -551,6 +560,8 @@ const AboutSection = () => {
             <div className="aspect-square max-w-sm mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-xl shadow-black/10">
               <img
                 src="/images/projects/FOTKA.webp"
+                srcSet={getImageSrcSet("/images/projects/FOTKA.webp")}
+                sizes="(max-width: 768px) 100vw, 400px"
                 alt="Přemysl Horák"
                 width={400}
                 height={400}
@@ -987,6 +998,8 @@ const ProjectPage = () => {
             >
               <img 
                 src={project.image} 
+                srcSet={getImageSrcSet(project.image)}
+                sizes="(max-width: 768px) 100vw, 1200px"
                 alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)} 
                 width={1200}
                 height={800}
