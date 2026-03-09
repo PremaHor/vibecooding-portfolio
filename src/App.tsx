@@ -17,12 +17,12 @@ import {
   ChevronDown,
   Menu,
   X,
-  Cookie,
   Rocket,
   ShieldCheck,
   Brain,
   ClipboardCheck
 } from 'lucide-react';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
 
 // --- Types ---
 interface Project {
@@ -268,102 +268,77 @@ const Hero = () => {
   const isMobile = useIsMobile();
   const prefersReducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
-  // Delší scroll range pro plynulejší přechod, na mobilu jemnější hodnoty
   const scrollRange = isMobile ? [0, 400] : [0, 600];
   const y1 = useTransform(scrollY, scrollRange, isMobile ? [0, 80] : [0, 180]);
   const y2 = useTransform(scrollY, scrollRange, isMobile ? [0, -60] : [0, -140]);
   const rotate = useTransform(scrollY, scrollRange, isMobile ? [0, 6] : [0, 12]);
 
+  const fadeIn = {
+    initial: { opacity: 0, y: 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: (delay = 0) => ({ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }),
+  };
+
   return (
-    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-12 sm:pb-16 md:pb-20 overflow-hidden">
-      {/* Parallax blobs - plynulé na desktopu i mobilu, respektuje prefers-reduced-motion */}
+    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden">
       {prefersReducedMotion ? (
         <>
-          <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[60px] sm:blur-[100px] md:blur-[120px] opacity-20" />
-          <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[60px] sm:blur-[100px] md:blur-[120px] opacity-10" />
+          <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12]" />
+          <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08]" />
         </>
       ) : (
         <>
-          <motion.div 
+          <motion.div
             style={{ y: y1, rotate, willChange: 'transform' }}
-            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[60px] sm:blur-[100px] md:blur-[120px] opacity-20"
+            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12]"
           />
-          <motion.div 
+          <motion.div
             style={{ y: y2, willChange: 'transform' }}
-            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[60px] sm:blur-[100px] md:blur-[120px] opacity-10"
+            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08]"
           />
         </>
       )}
-      
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="inline-block px-4 py-2 border border-white/20 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold mb-8 sm:mb-12 text-white/70 bg-white/5 backdrop-blur-sm">
-            {lang === 'cs' ? fixCzechTypography(t.hero.available) : fixDashes(t.hero.available)}
-          </span>
-        </motion.div>
-        
-        <h1 className="font-display text-[clamp(1.75rem,5vw,3rem)] sm:text-[clamp(2rem,6vw,3.5rem)] md:text-[clamp(2.25rem,5vw,4rem)] leading-[1.15] mb-6 sm:mb-8 max-w-4xl">
-          <motion.span 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="block"
+
+      <div className="relative z-10 max-w-4xl mx-auto w-full text-center">
+        <h1 className="font-display text-[clamp(2rem,6vw,3.5rem)] sm:text-[clamp(2.5rem,7vw,4.25rem)] md:text-[clamp(3rem,8vw,5rem)] font-bold leading-[1.1] mb-6 sm:mb-8">
+          <motion.span
+            initial={fadeIn.initial}
+            animate={fadeIn.animate}
+            transition={fadeIn.transition(0)}
+            className="block bg-gradient-to-br from-white via-white to-slate-300 bg-clip-text text-transparent"
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.h1) : fixDashes(t.hero.h1)}
           </motion.span>
         </h1>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-base sm:text-lg md:text-xl font-light text-white/90 mb-10 sm:mb-12 max-w-2xl leading-[1.6]"
+
+        <motion.p
+          initial={fadeIn.initial}
+          animate={fadeIn.animate}
+          transition={fadeIn.transition(0.12)}
+          className="text-base sm:text-lg md:text-xl font-normal text-slate-400 sm:text-slate-400 mb-10 sm:mb-12 max-w-2xl mx-auto leading-[1.65]"
         >
           {lang === 'cs' ? fixCzechTypography(t.hero.subheadline) : fixDashes(t.hero.subheadline)}
         </motion.p>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-16 sm:mb-20"
+        <motion.div
+          initial={fadeIn.initial}
+          animate={fadeIn.animate}
+          transition={fadeIn.transition(0.24)}
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5"
         >
-          <a 
+          <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all shadow-lg"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all shadow-lg min-w-[180px] sm:min-w-0"
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.ctaPrimary) : fixDashes(t.hero.ctaPrimary)}
             <ArrowRight className="w-4 h-4" />
           </a>
-          <a 
-            href="#pricing"
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all"
+          <a
+            href="#work"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-all min-w-[180px] sm:min-w-0"
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.ctaSecondary) : fixDashes(t.hero.ctaSecondary)}
           </a>
-        </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="flex flex-wrap gap-5 sm:gap-10 items-center"
-        >
-          <div className="flex -space-x-3">
-            {[
-              'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=faces',
-              'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=faces',
-              'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces',
-            ].map((src, i) => (
-              <div key={i} className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-[var(--color-vibe-black)] bg-gray-800 overflow-hidden">
-                <img src={src} alt="" width={100} height={100} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              </div>
-            ))}
-          </div>
-          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">{lang === 'cs' ? fixCzechTypography(t.hero.workedWith) : fixDashes(t.hero.workedWith)}</p>
         </motion.div>
       </div>
     </section>
@@ -924,76 +899,6 @@ const Footer = () => {
   );
 };
 
-const COOKIE_CONSENT_KEY = 'vibecooding-cookie-consent';
-
-const CookieBar = () => {
-  const { t, lang } = useLanguage();
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
-    if (!consent) {
-      const timer = setTimeout(() => setIsVisible(true), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const acceptAll = () => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ essential: true, analytics: true, marketing: true, timestamp: Date.now() }));
-    setIsVisible(false);
-  };
-
-  const declineOptional = () => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ essential: true, analytics: false, marketing: false, timestamp: Date.now() }));
-    setIsVisible(false);
-  };
-
-  if (!isVisible) return null;
-
-  return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 100, opacity: 0 }}
-        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="fixed bottom-0 left-0 right-0 z-[200] p-4 sm:p-6 safe-area-inset-bottom"
-      >
-        <div className="max-w-4xl mx-auto rounded-2xl sm:rounded-[1.5rem] bg-[var(--color-vibe-black)]/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/40 overflow-hidden">
-          <div className="p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-4 lg:gap-6 lg:items-center">
-            <div className="flex gap-4 flex-1">
-              <div className="shrink-0 w-12 h-12 rounded-xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center">
-                <Cookie className="w-6 h-6 text-[var(--color-vibe-orange)]" />
-              </div>
-              <div>
-                <h3 className="font-display font-bold text-white text-lg sm:text-xl mb-1">{lang === 'cs' ? fixCzechTypography(t.cookie.title) : fixDashes(t.cookie.title)}</h3>
-                <p className="text-sm text-white/85 leading-relaxed">
-                  {lang === 'cs' ? fixCzechTypography(t.cookie.text) : fixDashes(t.cookie.text)}{' '}
-                  <a href="#privacy" className="text-[var(--color-vibe-orange)] hover:underline">{lang === 'cs' ? fixCzechTypography(t.cookie.moreInfo) : fixDashes(t.cookie.moreInfo)}</a>
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-              <button
-                onClick={declineOptional}
-                className="min-h-[44px] px-5 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-colors touch-manipulation"
-              >
-                {lang === 'cs' ? fixCzechTypography(t.cookie.essentialOnly) : fixDashes(t.cookie.essentialOnly)}
-              </button>
-              <button
-                onClick={acceptAll}
-                className="min-h-[44px] px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider bg-[var(--color-vibe-orange)] text-white hover:bg-[var(--color-vibe-orange)]/90 transition-colors shadow-lg touch-manipulation"
-              >
-                {lang === 'cs' ? fixCzechTypography(t.cookie.acceptAll) : fixDashes(t.cookie.acceptAll)}
-              </button>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </AnimatePresence>
-  );
-};
-
 // --- Project Structured Content (RiskLight, DDÚ, etc.) ---
 const renderWithBold = (text: string, lang: 'cs' | 'en'): React.ReactNode => {
   const lines = text.split('\n');
@@ -1325,7 +1230,7 @@ export default function App() {
         </motion.div>
       </AnimatePresence>
 
-      <CookieBar />
+      <CookieConsentBanner />
     </div>
   );
 }

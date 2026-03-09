@@ -15,10 +15,10 @@ export const translations = {
     },
     hero: {
       available: 'Dostupný pro nové projekty 2026',
-      h1: 'Nekóduju jen weby. Stavím digitální produkty, které dávají smysl a vydělávají.',
-      subheadline: 'Od prvotního prototypu a validace nápadu, přes weby a redesigny, až po komplexní MVP a PWA aplikace. Rychle, moderně a s jasným ceníkem.',
-      ctaPrimary: 'Chci probrat můj projekt',
-      ctaSecondary: 'Zobrazit orientační ceník',
+      h1: 'Digitální produkty, které vydělávají.',
+      subheadline: 'Kód je pro mě jen nástroj. Stavím weby a aplikace, které dávají smysl vašim uživatelům a přináší reálný růst vašemu byznysu.',
+      ctaPrimary: 'Probrat projekt',
+      ctaSecondary: 'Ukázky práce',
       workedWith: 'Spolupracovali se mnou',
     },
     work: {
@@ -129,6 +129,12 @@ export const translations = {
       essentialOnly: 'Jen nutné',
       acceptAll: 'Přijmout vše',
     },
+    cookieConsent: {
+      title: 'Používáme cookies',
+      description: 'Aby tento web správně fungoval a mohl jsem ho pro vás neustále zlepšovat, používám cookies. K jejich zpracování ale potřebuji váš souhlas.',
+      acceptAll: 'Přijmout vše',
+      reject: 'Odmítnout',
+    },
     project: {
       about: 'O projektu',
       client: 'Klient',
@@ -209,10 +215,10 @@ export const translations = {
     },
     hero: {
       available: 'Available for new projects 2026',
-      h1: "I don't just code websites. I build digital products that make sense and make money.",
-      subheadline: 'From initial prototype and idea validation, through websites and redesigns, to full MVP and PWA apps. Fast, modern, with transparent pricing.',
-      ctaPrimary: "Let's discuss my project",
-      ctaSecondary: 'View indicative pricing',
+      h1: 'Digital products that make money.',
+      subheadline: 'Code is just a tool for me. I build websites and apps that make sense to your users and drive real growth for your business.',
+      ctaPrimary: 'Discuss project',
+      ctaSecondary: 'View work',
       workedWith: 'Worked with me',
     },
     work: {
@@ -322,6 +328,12 @@ export const translations = {
       moreInfo: 'More info',
       essentialOnly: 'Essential only',
       acceptAll: 'Accept all',
+    },
+    cookieConsent: {
+      title: 'We use cookies',
+      description: 'For this site to work properly and so I can keep improving it for you, I use cookies. I need your consent to process them.',
+      acceptAll: 'Accept all',
+      reject: 'Reject',
     },
     project: {
       about: 'About',
