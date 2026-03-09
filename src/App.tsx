@@ -279,9 +279,11 @@ const Hero = () => {
     transition: (delay = 0) => ({ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }),
   };
 
+  const useStaticBlobs = prefersReducedMotion || isMobile;
+
   return (
     <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden">
-      {prefersReducedMotion ? (
+      {useStaticBlobs ? (
         <>
           <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12]" />
           <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08]" />
@@ -553,7 +555,7 @@ const AboutSection = () => {
                 width={400}
                 height={400}
                 className="w-full h-full object-cover"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </div>
@@ -1094,20 +1096,24 @@ export default function App() {
   }, [location.pathname]);
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.5,
-    });
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    let lenis: Lenis | null = null;
+    if (!isMobile) {
+      lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.5,
+      });
 
-    function raf(time: number) {
-      lenis.raf(time);
+      function raf(time: number) {
+        lenis!.raf(time);
+        requestAnimationFrame(raf);
+      }
+
       requestAnimationFrame(raf);
     }
-
-    requestAnimationFrame(raf);
 
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
@@ -1155,7 +1161,7 @@ export default function App() {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
-      lenis.destroy();
+      lenis?.destroy();
     };
   }, []);
 
