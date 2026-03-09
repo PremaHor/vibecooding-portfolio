@@ -346,8 +346,10 @@ const Hero = () => {
 };
 
 const WorkSection = () => {
+  const { t, lang } = useLanguage();
   return (
-    <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48">
+    <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="work-heading">
+      <h2 id="work-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-20 md:gap-24 lg:gap-32">
           {PROJECTS.map((project, idx) => (
