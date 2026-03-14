@@ -561,19 +561,6 @@ const AboutSection = () => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        {/* Sekční label – awwwards styl */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 sm:mb-16"
-        >
-          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-[var(--color-vibe-orange)]">
-            02 — {lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}
-          </span>
-        </motion.div>
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 lg:gap-20 items-start">
           {/* Levý sloupec: fotka + hodnoty */}
           <motion.div
@@ -583,22 +570,18 @@ const AboutSection = () => {
             transition={{ duration: 0.7 }}
             className="lg:col-span-5 space-y-10 sm:space-y-12"
           >
-            <div className="relative">
-              <div className="aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden ring-1 ring-white/10">
-                <img
-                  src="/images/projects/FOTKA.webp"
-                  srcSet={getImageSrcSet("/images/projects/FOTKA.webp")}
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  alt="Přemysl Horák"
-                  width={500}
-                  height={625}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              {/* Dekorativní prvek */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 sm:w-32 sm:h-32 border border-[var(--color-vibe-orange)]/30 rounded-2xl -z-10" aria-hidden />
+            <div className="aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden ring-1 ring-white/10">
+              <img
+                src="/images/projects/FOTKA.webp"
+                srcSet={getImageSrcSet("/images/projects/FOTKA.webp")}
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                alt="Přemysl Horák"
+                width={500}
+                height={625}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
 
             {/* Hodnoty jako karty */}
@@ -1204,7 +1187,7 @@ export default function App() {
         } else if (servicesSection && scrollPos >= servicesSection.offsetTop) {
           currentTheme = 'dark';
         } else if (aboutSection && scrollPos >= aboutSection.offsetTop) {
-          currentTheme = 'light';
+          currentTheme = 'dark';
         } else if (workSection && scrollPos >= workSection.offsetTop) {
           currentTheme = 'light';
         } else {

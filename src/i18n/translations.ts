@@ -87,9 +87,9 @@ export const translations = {
     },
     about: {
       title: 'Kdo stojí za Vibecooding?',
-      subtitle: 'Jsem Přemysl Horák, nezávislý vývojář, který se věnuje digitálním produktům.',
+      subtitle: 'Jsem Přemysl Horák, nezávislý vývojář věnující se digitálním produktům. Otevřený spolupráci a novým příležitostem.',
       p1: 'Nehraju si na velkou agenturu. Když mi napíšete, jednáte přímo se mnou. Kódu a designu se věnuji do hloubky – výsledky mé práce nejen dobře vypadají, ale hlavně bezchybně fungují.',
-      p2: 'Zakládám si na čistém kódu, férové komunikaci a na tom, že složité technologické věci vysvětlím lidsky. Vy rozumíte svému byznysu, já rozumím webům. Rád o tom diskutuji.',
+      p2: 'Zakládám si na čistém kódu, férové komunikaci a na tom, že složité technologické věci vysvětlím lidsky. Vy rozumíte svému byznysu, já rozumím webům. Rád diskutuji a hledám projekty, které dávají smysl.',
       valuesTitle: 'Moje hodnoty',
       value1: 'Žádné šablony, jen čistý a bleskurychlý kód.',
       value2: 'Přímá komunikace bez prostředníků.',
@@ -97,7 +97,7 @@ export const translations = {
     },
     cta: {
       title: 'Máte představu? Rád o ní pohovořím.',
-      text: 'Napište, co vás zajímá, nebo pošlete odkaz na váš web. Jsem otevřený diskuzi a novým výzvám.',
+      text: 'Napište, co vás zajímá, nebo pošlete odkaz na váš web. Jsem otevřený spolupráci a hledám příležitosti, které dávají smysl.',
     },
     competitiveAdvantage: {
       title: 'Proč agentury dodávají za měsíce a já za týdny?',
@@ -124,7 +124,7 @@ export const translations = {
     },
     contact: {
       title: 'Kontakt',
-      intro: 'Máte nápad? Konkrétní potřebu? Napište. Jsem otevřený diskuzi a novým výzvám.',
+      intro: 'Máte nápad? Konkrétní potřebu? Jsem otevřený spolupráci a novým příležitostem. Napište.',
       writeMessage: 'Napsat e-mail',
     },
     footer: {
@@ -317,9 +317,9 @@ export const translations = {
     },
     about: {
       title: 'Who stands behind Vibecooding?',
-      subtitle: 'I\'m Přemysl Horák, an independent developer focused on digital products.',
+      subtitle: 'I\'m Přemysl Horák, an independent developer focused on digital products. Open to collaboration and new opportunities.',
       p1: 'I don\'t pretend to be a big agency. When you write to me, you deal directly with me. I dive deep into code and design—my work not only looks great but, above all, works flawlessly.',
-      p2: 'I pride myself on clean code, fair communication, and explaining complex technical things in plain language. You understand your business, I understand the web. Happy to discuss.',
+      p2: 'I pride myself on clean code, fair communication, and explaining complex technical things in plain language. You understand your business, I understand the web. I\'m always open to discussion and looking for projects that make sense.',
       valuesTitle: 'My values',
       value1: 'No templates, just clean and lightning-fast code.',
       value2: 'Direct communication without intermediaries.',
@@ -327,7 +327,7 @@ export const translations = {
     },
     cta: {
       title: 'Have an idea? I\'d love to discuss it.',
-      text: 'Write what interests you, or send a link to your website. I\'m open to discussion and new challenges.',
+      text: 'Write what interests you, or send a link to your website. I\'m open to collaboration and always looking for opportunities that make sense.',
     },
     competitiveAdvantage: {
       title: 'Why do agencies take months and I take weeks?',
@@ -354,7 +354,7 @@ export const translations = {
     },
     contact: {
       title: 'Contact',
-      intro: "Have an idea? A specific need? Get in touch. I'm open to discussion and new challenges.",
+      intro: "Have an idea? A specific need? I'm open to collaboration and new opportunities. Get in touch.",
       writeMessage: 'Send email',
     },
     footer: {
