@@ -125,8 +125,8 @@ const PROJECTS: Project[] = [
     role: "Developer & Designer",
     quote: "Koncept vznikl jako ověření nápadu - React Native umožnil rychle prototypovat nativní mobilní zážitek.",
     galleryImages: [
-      { src: "/images/projects/klavesnice.webp", alt: "Decision Balance - klávesnice" },
-      { src: "/images/projects/dashboard.webp", alt: "Decision Balance - hlavní dashboard" },
+      { src: "/images/projects/DB1.webp", alt: "Decision Balance - DB1" },
+      { src: "/images/projects/DB2.webp", alt: "Decision Balance - DB2" },
     ],
   }
 ];
