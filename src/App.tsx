@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, frame, cancelFrame } from 'motion/react';
 import { fixCzechTypography, fixDashes } from './utils/czechTypography';
@@ -22,7 +22,8 @@ import {
   ClipboardCheck
 } from 'lucide-react';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
-import { PrivacyPage } from './components/PrivacyPage';
+
+const PrivacyPage = lazy(() => import('./components/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 
 // --- Types ---
 interface Project {
@@ -362,8 +363,9 @@ const Hero = () => {
 
 const WorkSection = () => {
   const { t, lang } = useLanguage();
+  const isMobile = useIsMobile();
   return (
-    <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="work-heading">
+    <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48 content-visibility-auto" aria-labelledby="work-heading">
       <h2 id="work-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <motion.div
@@ -379,7 +381,7 @@ const WorkSection = () => {
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-20 md:gap-24 lg:gap-32">
           {PROJECTS.map((project, idx) => (
-            <ProjectCard key={project.id} project={project} index={idx} />
+            <ProjectCard key={project.id} project={project} index={idx} isMobile={isMobile} />
           ))}
         </div>
       </div>
@@ -389,7 +391,7 @@ const WorkSection = () => {
   );
 };
 
-function ProjectCard({ project, index }: { project: Project, index: number }) {
+function ProjectCard({ project, index, isMobile }: { project: Project, index: number; isMobile: boolean }) {
   const { t, lang } = useLanguage();
   const tr = t.projects[project.slug as keyof typeof t.projects];
   const category = tr?.category ?? project.category;
@@ -411,8 +413,8 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
             alt={lang === 'cs' ? `${fixCzechTypography(project.title)} – ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)} – ${fixDashes(category)}, ${project.year}`}
             width={1200}
             height={800}
-            loading={index === 0 ? "eager" : "lazy"}
-            fetchPriority={index === 0 ? "high" : undefined}
+            loading={index === 0 && !isMobile ? "eager" : "lazy"}
+            fetchPriority={index === 0 && !isMobile ? "high" : undefined}
             decoding="async"
             className="w-full h-full object-cover rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] transition-transform duration-700 group-hover:scale-[1.08]"
             referrerPolicy="no-referrer"
@@ -471,7 +473,7 @@ const ServicesPricingSection = () => {
   const { t, lang } = useLanguage();
 
   return (
-    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
+    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden content-visibility-auto">
       <div id="pricing" className="absolute top-0 left-0 -translate-y-24" aria-hidden />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
       
@@ -560,7 +562,7 @@ const ServicesPricingSection = () => {
 const AboutSection = () => {
   const { t, lang } = useLanguage();
   return (
-    <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden">
+    <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden content-visibility-auto">
       {/* Tmavé pozadí + jemný gradient – vizuální oddělení od portfolia */}
       <div className="absolute inset-0 bg-[var(--color-vibe-black)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(242,125,38,0.06),transparent_50%)]" aria-hidden />
@@ -1256,7 +1258,7 @@ export default function App() {
           <Routes location={location}>
             <Route path="/" element={<HomePage navTheme={navTheme} />} />
             <Route path="/project/:slug" element={<ProjectPage />} />
-            <Route path="/ochrana-soukromi" element={<PrivacyPage />} />
+            <Route path="/ochrana-soukromi" element={<Suspense fallback={null}><PrivacyPage /></Suspense>} />
           </Routes>
         </motion.div>
       </AnimatePresence>

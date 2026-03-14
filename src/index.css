@@ -58,6 +58,12 @@
   .text-scale-xl { font-size: 1.25rem; }  /* 20px */
   .text-scale-2xl { font-size: 1.5rem; }  /* 24px */
 
+  /* content-visibility: below-fold sekce – méně layout práce při initial render */
+  .content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+  }
+
   /* Respektujeme prefers-reduced-motion pro přístupnost */
   @media (prefers-reduced-motion: reduce) {
     html {
