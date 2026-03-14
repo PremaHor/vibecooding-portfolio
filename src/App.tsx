@@ -502,13 +502,6 @@ const ServicesPricingSection = () => {
                       </li>
                     ))}
                   </ul>
-                  <a
-                    href="#contact"
-                    className="mt-6 inline-flex items-center gap-1.5 sm:gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full text-[11px] sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all whitespace-nowrap w-fit"
-                  >
-                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Cta`]) : fixDashes(t.services[`${key}Cta`])}
-                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  </a>
                 </div>
               </motion.article>
             );
