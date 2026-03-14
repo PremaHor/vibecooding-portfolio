@@ -246,6 +246,12 @@ export const translations = {
           ],
         },
       },
+      'decision-balance': {
+        category: 'Koncept',
+        description: 'Mobilní aplikace pro strukturované rozhodování. Vážení možností, porovnávání kritérií a vizualizace výsledků - pomáhá vybrat správnou volbu.',
+        fullDescription: 'Decision Balance je koncept mobilní aplikace pro podporu rozhodování. Uživatelé definují možnosti a kritéria, ohodnotí je a aplikace vizualizuje, která volba nejlépe odpovídá jejich prioritám. Koncept vyvinut v React Native pro ověření nápadu a UX.',
+        quote: 'Koncept vznikl jako ověření nápadu - React Native umožnil rychle prototypovat nativní mobilní zážitek.',
+      },
     },
   },
   en: {
@@ -492,6 +498,12 @@ export const translations = {
             '**clearer organisation** of contact details',
           ],
         },
+      },
+      'decision-balance': {
+        category: 'Concept',
+        description: 'Mobile app for structured decision-making. Weighing options, comparing criteria and visualizing results - helps choose the right option.',
+        fullDescription: 'Decision Balance is a concept for a mobile decision-support app. Users define options and criteria, rate them, and the app visualizes which choice best matches their priorities. Concept built in React Native to validate the idea and UX.',
+        quote: 'The concept emerged as idea validation - React Native made it possible to quickly prototype a native mobile experience.',
       },
     },
   },

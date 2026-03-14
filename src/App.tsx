@@ -109,6 +109,20 @@ const PROJECTS: Project[] = [
       { label: "ddu-olomouc-web.vercel.app (návrh)", url: "https://ddu-olomouc-web.vercel.app/" },
     ],
     quote: "Spolupráce na redesignu byla příjemná - důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
+  },
+  {
+    id: 4,
+    slug: "decision-balance",
+    title: "Decision Balance",
+    category: "Koncept",
+    description: "Mobilní aplikace pro strukturované rozhodování. Vážení možností, porovnávání kritérií a vizualizace výsledků - pomáhá vybrat správnou volbu.",
+    fullDescription: "Decision Balance je koncept mobilní aplikace pro podporu rozhodování. Uživatelé definují možnosti a kritéria, ohodnotí je a aplikace vizualizuje, která volba nejlépe odpovídá jejich prioritám. Koncept vyvinut v React Native pro ověření nápadu a UX.",
+    image: "/images/projects/decision-balance.webp",
+    tags: ["React Native", "TypeScript"],
+    year: "2025",
+    client: "Vlastní projekt",
+    role: "Developer & Designer",
+    quote: "Koncept vznikl jako ověření nápadu - React Native umožnil rychle prototypovat nativní mobilní zážitek.",
   }
 ];
 
@@ -744,10 +758,10 @@ const CtaSection = () => {
 
 // --- Competitive Advantage + FAQ Block ---
 const COMPETITIVE_CARDS = [
-  { icon: Zap, key: 'card1' as const },
-  { icon: Brain, key: 'card2' as const },
-  { icon: ShieldCheck, key: 'card3' as const },
-  { icon: Palette, key: 'card4' as const },
+  { icon: Palette, key: 'card4' as const },   // Design i architektura
+  { icon: Brain, key: 'card2' as const },     // Mozek místo rukou
+  { icon: ShieldCheck, key: 'card3' as const }, // Čistý a bezchybný kód
+  { icon: Zap, key: 'card1' as const },      // Bleskový start
 ];
 
 const CompetitiveAdvantageSection = () => {
