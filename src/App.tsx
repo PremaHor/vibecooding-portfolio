@@ -45,6 +45,7 @@ interface Project {
   role: string;
   websiteUrls?: { label: string; url: string }[];
   quote?: string;
+  galleryImages?: { src: string; alt: string }[];
 }
 
 // --- Helpers ---
@@ -117,12 +118,18 @@ const PROJECTS: Project[] = [
     category: "Koncept",
     description: "Mobilní aplikace pro strukturované rozhodování. Vážení možností, porovnávání kritérií a vizualizace výsledků - pomáhá vybrat správnou volbu.",
     fullDescription: "Decision Balance je koncept mobilní aplikace pro podporu rozhodování. Uživatelé definují možnosti a kritéria, ohodnotí je a aplikace vizualizuje, která volba nejlépe odpovídá jejich prioritám. Koncept vyvinut v React Native pro ověření nápadu a UX.",
-    image: "/images/projects/decision-balance.webp",
-    tags: ["React Native", "TypeScript"],
-    year: "2025",
+    image: "/images/projects/dashboard.webp",
+    tags: ["React Native", "TypeScript", "AI integrace"],
+    year: "2026",
     client: "Vlastní projekt",
     role: "Developer & Designer",
     quote: "Koncept vznikl jako ověření nápadu - React Native umožnil rychle prototypovat nativní mobilní zážitek.",
+    galleryImages: [
+      { src: "/images/projects/onboarding.webp", alt: "Decision Balance - onboarding" },
+      { src: "/images/projects/dashboard.webp", alt: "Decision Balance - hlavní dashboard" },
+      { src: "/images/projects/klavesnice.webp", alt: "Decision Balance - klávesnice" },
+      { src: "/images/projects/backround.webp", alt: "Decision Balance - pozadí" },
+    ],
   }
 ];
 
@@ -1124,6 +1131,40 @@ const ProjectPage = () => {
                 referrerPolicy="no-referrer"
               />
             </motion.div>
+
+            {project.galleryImages && project.galleryImages.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-12 sm:mt-16 md:mt-20"
+              >
+                <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                  {project.galleryImages.map((img, idx) => (
+                    <motion.div
+                      key={img.src}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden rounded-xl sm:rounded-2xl bg-white/5 ring-1 ring-white/5"
+                    >
+                      <img
+                        src={img.src}
+                        srcSet={getImageSrcSet(img.src)}
+                        sizes={idx === 0 ? '(max-width: 768px) 100vw, 1200px' : '(max-width: 768px) 50vw, 600px'}
+                        alt={img.alt}
+                        width={1200}
+                        height={800}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-auto object-contain bg-white/[0.02]"
+                        referrerPolicy="no-referrer"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </div>
         </section>
 
