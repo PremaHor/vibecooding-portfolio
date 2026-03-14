@@ -1065,6 +1065,7 @@ const ProjectPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { t, lang } = useLanguage();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const projectIndex = PROJECTS.findIndex(p => p.slug === slug);
   const project = PROJECTS[projectIndex];
   const nextProject = PROJECTS[(projectIndex + 1) % PROJECTS.length];
@@ -1073,6 +1074,22 @@ const ProjectPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  useEffect(() => {
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = 'hidden';
+      const onEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setLightboxIndex(null);
+      };
+      window.addEventListener('keydown', onEscape);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', onEscape);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [lightboxIndex]);
 
   if (!project) return <div>{lang === 'cs' ? fixCzechTypography(t.project.notFound) : fixDashes(t.project.notFound)}</div>;
 
@@ -1139,12 +1156,15 @@ const ProjectPage = () => {
               >
                 <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                   {project.galleryImages.map((img, idx) => (
-                    <motion.div
+                    <motion.button
                       key={img.src}
+                      type="button"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden rounded-xl sm:rounded-2xl bg-white/5 ring-1 ring-white/5"
+                      onClick={() => setLightboxIndex(idx)}
+                      className="overflow-hidden rounded-xl sm:rounded-2xl text-left w-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-vibe-orange)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-vibe-black)]"
+                      aria-label={lang === 'cs' ? `Zvětšit obrázek ${idx + 1}` : `Enlarge image ${idx + 1}`}
                     >
                       <img
                         src={img.src}
@@ -1155,14 +1175,55 @@ const ProjectPage = () => {
                         height={800}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-auto object-contain bg-white/[0.02]"
+                        className="w-full h-auto object-contain"
                         referrerPolicy="no-referrer"
                       />
-                    </motion.div>
+                    </motion.button>
                   ))}
                 </div>
               </motion.div>
             )}
+
+            <AnimatePresence>
+              {lightboxIndex !== null && project.galleryImages && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 safe-area-inset"
+                  onClick={() => setLightboxIndex(null)}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={lang === 'cs' ? 'Zvětšený náhled obrázku' : 'Enlarged image view'}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setLightboxIndex(null)}
+                    className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    aria-label={lang === 'cs' ? 'Zavřít' : 'Close'}
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                  <motion.div
+                    initial={{ scale: 0.95, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.95, opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="relative max-w-full max-h-[90vh] w-full flex items-center justify-center"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <img
+                      src={project.galleryImages[lightboxIndex].src}
+                      srcSet={getImageSrcSet(project.galleryImages[lightboxIndex].src)}
+                      sizes="100vw"
+                      alt={project.galleryImages[lightboxIndex].alt}
+                      className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
+                    />
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </section>
 
