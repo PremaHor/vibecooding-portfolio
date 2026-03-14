@@ -50,13 +50,20 @@
     hyphens: manual;
   }
 
-  /* Type scale ratio ~1.25 */
+  /* Type scale ratio ~1.25 – Mobile-First */
   .text-scale-xs { font-size: 0.75rem; }   /* 12px */
   .text-scale-sm { font-size: 0.875rem; }  /* 14px */
   .text-scale-base { font-size: 1rem; }   /* 16px */
   .text-scale-lg { font-size: 1.125rem; } /* 18px */
   .text-scale-xl { font-size: 1.25rem; }  /* 20px */
   .text-scale-2xl { font-size: 1.5rem; }  /* 24px */
+
+  /* Respektujeme prefers-reduced-motion pro přístupnost */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 
   /* Safe area for notched devices (iPhone X+, etc.) */
   .safe-area-inset {
@@ -143,9 +150,30 @@
   display: block;
 }
 
-/* Improved focus states for accessibility */
+/* Improved focus states for accessibility – WCAG 2.1 */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-vibe-orange);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip to main content – pro screen readery a klávesnicovou navigaci */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-vibe-orange);
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+  outline: 2px solid white;
   outline-offset: 2px;
 }

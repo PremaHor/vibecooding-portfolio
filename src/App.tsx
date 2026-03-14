@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useParams, Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, frame, cancelFrame } from 'motion/react';
 import { fixCzechTypography, fixDashes } from './utils/czechTypography';
 import { useLanguage } from './i18n/LanguageContext';
 import { 
@@ -49,6 +49,8 @@ function getImageSrcSet(imagePath: string): string {
 }
 
 // --- Constants ---
+const CONTACT_EMAIL = 'mailto:horakpremysl85@gmail.com';
+
 const PROJECTS: Project[] = [
   {
     id: 1,
@@ -138,11 +140,11 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
   const navLinks = !isProjectPage ? (
     <>
-      <a href="#work" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</a>
-      <a href="#about" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}</a>
-      <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}</a>
-      <a href="#pricing" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.pricing) : fixDashes(t.nav.pricing)}</a>
-      <a href="#contact" onClick={closeMobileMenu} className={`hover:text-current transition-colors ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}</a>
+      <a href="#work" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Práce' : 'Go to Work section'}>{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</a>
+      <a href="#about" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci O mně' : 'Go to About section'}>{lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}</a>
+      <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Čemu se věnuji' : 'Go to Services section'}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}</a>
+      <a href="#pricing" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Rozsah práce' : 'Go to Pricing section'}>{lang === 'cs' ? fixCzechTypography(t.nav.pricing) : fixDashes(t.nav.pricing)}</a>
+      <a href={CONTACT_EMAIL} onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Kontaktovat e-mailem' : 'Contact by email'}>{lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}</a>
     </>
   ) : (
     <Link to="/" onClick={closeMobileMenu} className={`hover:text-current transition-colors flex items-center gap-2 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>
@@ -152,13 +154,17 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        {lang === 'cs' ? 'Přeskočit na obsah' : 'Skip to content'}
+      </a>
       <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center gap-2 transition-all duration-500 safe-area-inset-top min-w-0 ${
         scrolled ? 'bg-black/10 backdrop-blur-xl py-3' : 'bg-transparent'
-      } ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+      } ${theme === 'dark' ? 'text-white' : 'text-black'}`} aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}>
         <Link 
           to="/" 
           className="flex items-center gap-2 group min-w-0 shrink"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Vibecooding – úvodní stránka"
         >
           <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${
             theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'
@@ -176,7 +182,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         
         <div className="flex items-center gap-2 sm:gap-4">
           <a 
-            href="mailto:horakpremysl85@gmail.com"
+            href={CONTACT_EMAIL}
             className={`hidden sm:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg ${
               theme === 'dark' 
                 ? 'bg-white text-black hover:bg-[var(--color-vibe-orange)] hover:text-white' 
@@ -231,7 +237,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
                 <a href="#pricing" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
                   {lang === 'cs' ? fixCzechTypography(t.nav.pricing) : fixDashes(t.nav.pricing)}
                 </a>
-                <a href="#contact" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                <a href={CONTACT_EMAIL} onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
                   {lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}
                 </a>
               </>
@@ -242,7 +248,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
             )}
           </nav>
           <a 
-            href="mailto:horakpremysl85@gmail.com"
+            href={CONTACT_EMAIL}
             onClick={closeMobileMenu}
             className="mt-4 flex min-h-[44px] items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black text-center hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all"
           >
@@ -336,15 +342,15 @@ const Hero = () => {
           className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5"
         >
           <a
-            href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all shadow-lg min-w-[180px] sm:min-w-0"
+            href={CONTACT_EMAIL}
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-all duration-300 shadow-lg min-w-[180px] sm:min-w-0"
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.ctaPrimary) : fixDashes(t.hero.ctaPrimary)}
             <ArrowRight className="w-4 h-4" />
           </a>
           <a
             href="#work"
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-all min-w-[180px] sm:min-w-0"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-all duration-300 min-w-[180px] sm:min-w-0"
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.ctaSecondary) : fixDashes(t.hero.ctaSecondary)}
           </a>
@@ -392,17 +398,17 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
     <motion.article 
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="group relative"
     >
       <Link to={`/project/${project.slug}`} className="block relative">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-6 sm:mb-8 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-6 sm:mb-8 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-500">
           <img 
             src={project.image} 
             srcSet={getImageSrcSet(project.image)}
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
+            alt={lang === 'cs' ? `${fixCzechTypography(project.title)} – ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)} – ${fixDashes(category)}, ${project.year}`}
             width={1200}
             height={800}
             loading={index === 0 ? "eager" : "lazy"}
@@ -488,7 +494,7 @@ const ServicesPricingSection = () => {
                 key={key}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 className="flex flex-col border border-white/10 rounded-2xl lg:rounded-[1.75rem] overflow-hidden hover:border-white/20 hover:bg-white/[0.03] transition-colors"
               >
@@ -523,10 +529,10 @@ const ServicesPricingSection = () => {
 
         {/* Rychlý audit zdarma - lead magnet */}
         <motion.a
-          href="#contact"
+          href={CONTACT_EMAIL}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-30px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-all duration-300 group"
         >
@@ -566,7 +572,7 @@ const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.7 }}
             className="lg:col-span-5 space-y-10 sm:space-y-12"
           >
@@ -594,7 +600,7 @@ const AboutSection = () => {
                   key={i}
                   initial={{ opacity: 0, x: -12 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
                   className="group flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[var(--color-vibe-orange)]/20 hover:bg-white/[0.05] transition-all duration-300"
                 >
@@ -611,7 +617,7 @@ const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="lg:col-span-7 space-y-6 sm:space-y-8"
           >
@@ -658,12 +664,12 @@ const CtaSection = () => {
           {lang === 'cs' ? fixCzechTypography(t.cta.text) : fixDashes(t.cta.text)}
         </motion.p>
         <motion.a
-          href="#contact"
+          href={CONTACT_EMAIL}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 transition-all"
+          className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-all duration-300"
         >
           {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : fixDashes(t.contact.writeMessage)}
           <ArrowRight className="w-4 h-4" />
@@ -693,7 +699,7 @@ const CompetitiveAdvantageSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.7 }}
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.12] mb-6 sm:mb-8 text-white">
@@ -713,7 +719,7 @@ const CompetitiveAdvantageSection = () => {
               key={key}
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-30px' }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               className="group relative p-6 sm:p-8 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[var(--color-vibe-orange)]/30 hover:bg-white/[0.05] transition-all duration-500"
             >
@@ -844,10 +850,11 @@ const ContactSection = () => {
 
       <div className="flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-12 mb-20 sm:mb-24 md:mb-32">
         <motion.a 
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          href="mailto:horakpremysl85@gmail.com" 
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-all duration-500 text-center break-words"
+          href={CONTACT_EMAIL} 
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-colors duration-300 text-center break-words"
+          aria-label={lang === 'cs' ? 'Napsat e-mail na horakpremysl85@gmail.com' : 'Send email to horakpremysl85@gmail.com'}
         >
           horakpremysl85@gmail.com
         </motion.a>
@@ -855,10 +862,10 @@ const ContactSection = () => {
         <div className="hidden md:block w-3 h-3 bg-black rounded-full animate-pulse shrink-0" />
         
         <motion.a 
-          whileHover={{ scale: 1.05, rotate: -2 }}
-          whileTap={{ scale: 0.95 }}
-          href="mailto:horakpremysl85@gmail.com"
-          className="bg-black text-white px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-all duration-500 text-center"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.98 }}
+          href={CONTACT_EMAIL}
+          className="bg-black text-white px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-colors duration-300 text-center"
         >
           {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : fixDashes(t.contact.writeMessage)}
         </motion.a>
@@ -881,11 +888,12 @@ const ContactSection = () => {
         ].map(social => (
           <motion.a 
             key={social.name}
-            whileHover={{ y: -5, color: "#FFFFFF" }}
+            whileHover={{ y: -3, color: "#FFFFFF" }}
             href={social.url} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="flex items-center gap-2 sm:gap-3 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] transition-colors"
+            className="flex items-center gap-2 sm:gap-3 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] transition-colors duration-300"
+            aria-label={`${social.name} – ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
           >
             {social.icon} {social.name}
           </motion.a>
@@ -955,7 +963,7 @@ const ProjectStructuredContent = ({ tr, lang }: { tr: { goalTitle: string; goal:
 const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
   <>
     <Navbar theme={navTheme} />
-    <main>
+    <main id="main-content" role="main">
       <Hero />
       <WorkSection />
       <AboutSection />
@@ -994,7 +1002,7 @@ const ProjectPage = () => {
     >
       <Navbar theme="dark" isProjectPage />
       
-      <main className="pt-nav-safe pb-0">
+      <main id="main-content" role="main" className="pt-nav-safe pb-0">
         {/* Project Hero */}
         <section className="px-4 sm:px-6 md:px-8 lg:px-12 mb-20 sm:mb-24 md:mb-32">
           <div className="max-w-7xl mx-auto">
@@ -1137,6 +1145,7 @@ export default function App() {
   }, [location.pathname]);
 
   const lenisRef = useRef<{ destroy: () => void } | null>(null);
+  const lenisFrameCancelRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
@@ -1151,12 +1160,12 @@ export default function App() {
         });
         lenisRef.current = lenis;
 
-        function raf(time: number) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
+        // Synchronizace s Motion frame loopem – eliminuje problikávání při scrollu
+        const onFrame = (data: { timestamp?: number }) => {
+          lenis.raf(data.timestamp ?? performance.now());
+        };
+        frame.update(onFrame, true);
+        lenisFrameCancelRef.current = () => cancelFrame(onFrame);
       });
     }
 
@@ -1205,6 +1214,8 @@ export default function App() {
     return () => {
       if (isDesktop) window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
+      lenisFrameCancelRef.current?.();
+      lenisFrameCancelRef.current = null;
       lenisRef.current?.destroy();
       lenisRef.current = null;
     };
