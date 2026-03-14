@@ -118,17 +118,15 @@ const PROJECTS: Project[] = [
     category: "Koncept",
     description: "Mobilní aplikace pro strukturované rozhodování. Vážení možností, porovnávání kritérií a vizualizace výsledků - pomáhá vybrat správnou volbu.",
     fullDescription: "Decision Balance je koncept mobilní aplikace pro podporu rozhodování. Uživatelé definují možnosti a kritéria, ohodnotí je a aplikace vizualizuje, která volba nejlépe odpovídá jejich prioritám. Koncept vyvinut v React Native pro ověření nápadu a UX.",
-    image: "/images/projects/dashboard.webp",
+    image: "/images/projects/backround.webp",
     tags: ["React Native", "TypeScript", "AI integrace"],
     year: "2026",
     client: "Vlastní projekt",
     role: "Developer & Designer",
     quote: "Koncept vznikl jako ověření nápadu - React Native umožnil rychle prototypovat nativní mobilní zážitek.",
     galleryImages: [
-      { src: "/images/projects/onboarding.webp", alt: "Decision Balance - onboarding" },
-      { src: "/images/projects/dashboard.webp", alt: "Decision Balance - hlavní dashboard" },
       { src: "/images/projects/klavesnice.webp", alt: "Decision Balance - klávesnice" },
-      { src: "/images/projects/backround.webp", alt: "Decision Balance - pozadí" },
+      { src: "/images/projects/dashboard.webp", alt: "Decision Balance - hlavní dashboard" },
     ],
   }
 ];
