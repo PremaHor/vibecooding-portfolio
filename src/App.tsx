@@ -360,12 +360,25 @@ const WorkSection = () => {
     <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="work-heading">
       <h2 id="work-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 sm:mb-16"
+        >
+          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-black/50">
+            01 — {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
+          </span>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-20 md:gap-24 lg:gap-32">
           {PROJECTS.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} />
           ))}
         </div>
       </div>
+      {/* Oddělovač portfolia od sekce O mně */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent" aria-hidden />
     </section>
   );
 };
@@ -541,62 +554,96 @@ const ServicesPricingSection = () => {
 const AboutSection = () => {
   const { t, lang } = useLanguage();
   return (
-    <section id="about" className="py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 bg-white text-black relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16 lg:gap-20 items-start">
-          {/* Left: Profile photo placeholder */}
+    <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden">
+      {/* Tmavé pozadí + jemný gradient – vizuální oddělení od portfolia */}
+      <div className="absolute inset-0 bg-[var(--color-vibe-black)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(242,125,38,0.06),transparent_50%)]" aria-hidden />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        {/* Sekční label – awwwards styl */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 sm:mb-16"
+        >
+          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-[var(--color-vibe-orange)]">
+            02 — {lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}
+          </span>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 lg:gap-20 items-start">
+          {/* Levý sloupec: fotka + hodnoty */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="order-2 md:order-1"
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-5 space-y-10 sm:space-y-12"
           >
-            <div className="aspect-square max-w-sm mx-auto md:mx-0 rounded-2xl overflow-hidden shadow-xl shadow-black/10">
-              <img
-                src="/images/projects/FOTKA.webp"
-                srcSet={getImageSrcSet("/images/projects/FOTKA.webp")}
-                sizes="(max-width: 768px) 100vw, 400px"
-                alt="Přemysl Horák"
-                width={400}
-                height={400}
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+            <div className="relative">
+              <div className="aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden ring-1 ring-white/10">
+                <img
+                  src="/images/projects/FOTKA.webp"
+                  srcSet={getImageSrcSet("/images/projects/FOTKA.webp")}
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  alt="Přemysl Horák"
+                  width={500}
+                  height={625}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              {/* Dekorativní prvek */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 sm:w-32 sm:h-32 border border-[var(--color-vibe-orange)]/30 rounded-2xl -z-10" aria-hidden />
+            </div>
+
+            {/* Hodnoty jako karty */}
+            <div className="space-y-3">
+              <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-4">
+                {lang === 'cs' ? fixCzechTypography(t.about.valuesTitle) : fixDashes(t.about.valuesTitle)}
+              </h3>
+              {[t.about.value1, t.about.value2, t.about.value3].map((value, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  className="group flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[var(--color-vibe-orange)]/20 hover:bg-white/[0.05] transition-all duration-300"
+                >
+                  <span className="shrink-0 w-1 h-1 mt-2 rounded-full bg-[var(--color-vibe-orange)]" />
+                  <span className="text-sm sm:text-base text-white/85 leading-[1.6] font-light">
+                    {lang === 'cs' ? fixCzechTypography(value) : fixDashes(value)}
+                  </span>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Right: Text content */}
+          {/* Pravý sloupec: text */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="order-1 md:order-2 space-y-6 sm:space-y-8"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="lg:col-span-7 space-y-6 sm:space-y-8"
           >
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.1]">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase leading-[1.08] text-white">
               {lang === 'cs' ? fixCzechTypography(t.about.title) : fixDashes(t.about.title)}
             </h2>
-            <p className="text-base sm:text-lg md:text-xl font-bold text-black/90 leading-[1.5]">
+            <p className="text-lg sm:text-xl md:text-2xl font-bold text-white/95 leading-[1.4]">
               {lang === 'cs' ? fixCzechTypography(t.about.subtitle) : fixDashes(t.about.subtitle)}
             </p>
-            <p className="text-sm sm:text-base md:text-lg text-black/80 leading-[1.7] font-light">
+            <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
               {lang === 'cs' ? fixCzechTypography(t.about.p1) : fixDashes(t.about.p1)}
             </p>
-            <p className="text-sm sm:text-base md:text-lg text-black/80 leading-[1.7] font-light">
+            <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
               {lang === 'cs' ? fixCzechTypography(t.about.p2) : fixDashes(t.about.p2)}
             </p>
-            <div>
-              <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold text-black/60 mb-3 sm:mb-4">
-                {lang === 'cs' ? fixCzechTypography(t.about.valuesTitle) : fixDashes(t.about.valuesTitle)}
-              </h3>
-              <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-black/80 leading-[1.6] font-light list-disc list-inside marker:text-[var(--color-vibe-orange)]">
-                <li>{lang === 'cs' ? fixCzechTypography(t.about.value1) : fixDashes(t.about.value1)}</li>
-                <li>{lang === 'cs' ? fixCzechTypography(t.about.value2) : fixDashes(t.about.value2)}</li>
-                <li>{lang === 'cs' ? fixCzechTypography(t.about.value3) : fixDashes(t.about.value3)}</li>
-              </ul>
-            </div>
           </motion.div>
         </div>
       </div>

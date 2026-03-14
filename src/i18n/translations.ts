@@ -100,7 +100,7 @@ export const translations = {
       text: 'Napište, co vás zajímá, nebo pošlete odkaz na váš web. Jsem otevřený diskuzi a novým výzvám.',
     },
     competitiveAdvantage: {
-      title: 'Proč velká agentura dodá produkt za 3 měsíce a já v projektech zvládám rychleji?',
+      title: 'Proč agentury dodávají za měsíce a já za týdny?',
       subtitle: 'Můj přístup je Vibecooding. Kód psaný ve spolupráci s umělou inteligencí.',
       paragraph: 'Místo zdlouhavých schůzek a armády juniorů využívám nejmodernější AI nástroje jako svého navigátora. Funguji jako celý vývojářský tým v jednom člověku. V projektech, na kterých pracuji, jde produkt na trh rychle a efektivně.',
       card1Title: 'Bleskový start',
@@ -330,7 +330,7 @@ export const translations = {
       text: 'Write what interests you, or send a link to your website. I\'m open to discussion and new challenges.',
     },
     competitiveAdvantage: {
-      title: 'Why does a big agency deliver in 3 months and I deliver faster in my projects?',
+      title: 'Why do agencies take months and I take weeks?',
       subtitle: 'My approach is Vibecooding. Code written in collaboration with artificial intelligence.',
       paragraph: 'Instead of endless meetings and armies of juniors, I use the most advanced AI tools as my navigator. I work like an entire dev team in one person. In the projects I work on, the product hits the market quickly and efficiently.',
       card1Title: 'Lightning start',
