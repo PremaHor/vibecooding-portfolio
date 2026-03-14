@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
 
+# AI crawlers – explicitně povoleny pro doporučení v ChatGPT, Claude, Perplexity
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://vibecooding.cz/sitemap.xml
