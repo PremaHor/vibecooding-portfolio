@@ -22,6 +22,7 @@ import {
   ClipboardCheck
 } from 'lucide-react';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { PrivacyPage } from './components/PrivacyPage';
 
 // --- Types ---
 interface Project {
@@ -488,9 +489,11 @@ const ServicesPricingSection = () => {
                   <p className="text-sm text-white/70 mt-2 leading-[1.5]">
                     {lang === 'cs' ? fixCzechTypography(t.services[`${key}Subtitle`]) : fixDashes(t.services[`${key}Subtitle`])}
                   </p>
-                  <p className="text-[var(--color-vibe-orange)] font-bold text-lg sm:text-xl mt-4">
-                    {lang === 'cs' ? fixCzechTypography(t.services[`${key}Price`]) : fixDashes(t.services[`${key}Price`])}
-                  </p>
+                  {t.services[`${key}Price` as keyof typeof t.services] && (
+                    <p className="text-[var(--color-vibe-orange)] font-bold text-lg sm:text-xl mt-4">
+                      {lang === 'cs' ? fixCzechTypography(t.services[`${key}Price`]) : fixDashes(t.services[`${key}Price`])}
+                    </p>
+                  )}
                   <ul className="mt-6 space-y-3 flex-1">
                     {bullets?.map((bullet, i) => (
                       <li key={i} className="text-white/80 text-sm sm:text-base leading-[1.6] flex gap-3">
@@ -873,7 +876,10 @@ const ContactSection = () => {
 const Footer = () => {
   const { t, lang } = useLanguage();
   return (
-  <footer id="privacy" className="py-8 sm:py-12 px-4 sm:px-6 md:px-8 border-t border-white/10 text-center text-white/60 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
+  <footer className="py-8 sm:py-12 px-4 sm:px-6 md:px-8 border-t border-white/10 text-center text-white/60 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
+    <Link to="/ochrana-soukromi" className="hover:text-white/90 transition-colors block mb-3">
+      {lang === 'cs' ? fixCzechTypography(t.footer.privacyLink) : fixDashes(t.footer.privacyLink)}
+    </Link>
     {lang === 'cs' ? fixCzechTypography(t.footer.copyright) : fixDashes(t.footer.copyright)}
   </footer>
   );
@@ -1216,6 +1222,7 @@ export default function App() {
           <Routes location={location}>
             <Route path="/" element={<HomePage navTheme={navTheme} />} />
             <Route path="/project/:slug" element={<ProjectPage />} />
+            <Route path="/ochrana-soukromi" element={<PrivacyPage />} />
           </Routes>
         </motion.div>
       </AnimatePresence>

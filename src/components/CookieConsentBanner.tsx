@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Cookie } from 'lucide-react';
 import {
   getStoredConsent,
   saveConsent,
-  grantAnalyticsConsent,
+  injectGtag,
   injectClarity,
   applyConsentOnLoad,
 } from '../lib/consent';
@@ -28,7 +29,7 @@ export function CookieConsentBanner() {
 
   const handleAccept = () => {
     saveConsent('accepted');
-    grantAnalyticsConsent();
+    injectGtag();
     injectClarity();
     setIsVisible(false);
   };
@@ -67,9 +68,14 @@ export function CookieConsentBanner() {
                 </h2>
                 <p
                   id="cookie-consent-desc"
-                  className="text-sm sm:text-base text-white/75 leading-relaxed mb-5 sm:mb-6"
+                  className="text-sm sm:text-base text-white/75 leading-relaxed mb-4"
                 >
                   {lang === 'cs' ? fixCzechTypography(t.cookieConsent.description) : fixDashes(t.cookieConsent.description)}
+                </p>
+                <p className="text-xs text-white/50 mb-5 sm:mb-6">
+                  <Link to="/ochrana-soukromi" className="underline hover:text-white/70 transition-colors">
+                    {lang === 'cs' ? fixCzechTypography(t.cookieConsent.privacyLink) : fixDashes(t.cookieConsent.privacyLink)}
+                  </Link>
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <button
@@ -80,7 +86,7 @@ export function CookieConsentBanner() {
                   </button>
                   <button
                     onClick={handleReject}
-                    className="inline-flex items-center justify-center px-6 py-3.5 rounded-full text-sm font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-all"
+                    className="inline-flex items-center justify-center px-6 py-3.5 rounded-full text-sm font-semibold bg-white/10 text-white border-2 border-white/30 hover:bg-white/20 hover:border-white/50 active:scale-[0.98] transition-all"
                   >
                     {lang === 'cs' ? fixCzechTypography(t.cookieConsent.reject) : fixDashes(t.cookieConsent.reject)}
                   </button>

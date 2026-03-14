@@ -3,8 +3,8 @@ import { translations, type Lang } from './translations';
 
 function getBrowserLang(): Lang {
   if (typeof navigator === 'undefined') return 'en';
-  const lang = navigator.language || (navigator as any).userLanguage || '';
-  return lang.toLowerCase().startsWith('cs') ? 'cs' : 'en';
+  const lang = (navigator.language || (navigator as any).userLanguage || '').toLowerCase();
+  return lang.startsWith('cs') || lang.startsWith('sk') ? 'cs' : 'en';
 }
 
 const LanguageContext = createContext<{ lang: Lang; t: typeof translations.cs } | null>(null);

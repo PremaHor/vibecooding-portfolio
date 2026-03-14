@@ -2,12 +2,12 @@
 <html lang="cs">
   <head>
     <script>
-      (function(){var l=(navigator.language||navigator.userLanguage||'').toLowerCase();document.documentElement.lang=l.startsWith('cs')?'cs':'en';})();
+      (function(){var l=(navigator.language||navigator.userLanguage||'').toLowerCase();document.documentElement.lang=(l.startsWith('cs')||l.startsWith('sk'))?'cs':'en';})();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#050505" />
-    <meta name="description" content="Vibecoding.cz - landing page za 7 dní. Web, MVP nebo prototyp na míru. Rychlý prototyping pro vizionáře a startupy." />
+    <meta name="description" content="Vibecoding.cz - osobní portfolio Přemysla Horáka. Web, MVP, prototypy. Ukázky práce a dovedností." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://vibecooding.cz/" />
     <link rel="alternate" hreflang="cs" href="https://vibecooding.cz/" />
@@ -16,8 +16,8 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vibecooding.cz/" />
-    <meta property="og:title" content="Vibecoding.cz | Landing page za 7 dní" />
-    <meta property="og:description" content="Web, landing page nebo MVP na míru. Rychlý prototyping pro vizionáře a startupy. Bez zbytečného čekání." />
+    <meta property="og:title" content="Vibecooding.cz | Portfolio – web, MVP, prototypy" />
+    <meta property="og:description" content="Osobní portfolio - web, MVP, prototypy. Ukázky práce a dovedností." />
     <meta property="og:image" content="https://vibecooding.cz/images/projects/5.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="800" />
@@ -26,8 +26,8 @@
     <meta property="og:site_name" content="Vibecoding.cz" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Vibecoding.cz | Landing page za 7 dní" />
-    <meta name="twitter:description" content="Web, landing page nebo MVP na míru. Rychlý prototyping pro vizionáře a startupy. Bez zbytečného čekání." />
+    <meta name="twitter:title" content="Vibecooding.cz | Portfolio – web, MVP, prototypy" />
+    <meta name="twitter:description" content="Osobní portfolio - web, MVP, prototypy. Ukázky práce a dovedností." />
     <meta name="twitter:image" content="https://vibecooding.cz/images/projects/5.webp" />
     <!-- Preload LCP: mobile=5-640 (smaller), desktop=5.webp -->
     <link rel="preload" as="image" href="/images/projects/5-640.webp" media="(max-width: 768px)" />
@@ -37,9 +37,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
-    <link rel="preconnect" href="https://www.clarity.ms" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Vibecoding.cz | Landing page za 7 dní</title>
+    <title>Vibecooding.cz | Portfolio – web, MVP, prototypy</title>
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -48,7 +47,7 @@
       "name": "Přemysl Horák",
       "url": "https://vibecooding.cz/",
       "jobTitle": "Web Developer & Designer",
-      "description": "Stavím weby a aplikace, které prodávají. Landing pages, MVP a automatizace pro vizionáře a startupy.",
+      "description": "Osobní portfolio. Web, landing pages, MVP a automatizace. Ukázky práce a dovedností.",
       "email": "horakpremysl85@gmail.com",
       "sameAs": [
         "https://www.linkedin.com/in/přemysl-horák-0590a5326",
@@ -59,7 +58,7 @@
       "knowsAbout": ["Web Development", "React", "TypeScript", "Landing Pages", "MVP", "UI/UX"]
     }
     </script>
-    <!-- Google Consent Mode v2 - MUST run before gtag. Default: denied. -->
+    <!-- Google Consent Mode v2 - gtag stub only. gtag.js se načte AŽ po souhlasu uživatele. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -71,15 +70,6 @@
         ad_personalization: 'denied'
       });
       gtag('js', new Date());
-    </script>
-    <!-- Defer gtag.js until after load - reduces main thread blocking on mobile -->
-    <script>
-      window.addEventListener('load', function() {
-        var d=document,s=d.createElement('script');
-        s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-L0TBNLC3D6';
-        d.head.appendChild(s);
-        s.onload=function(){gtag('config','G-L0TBNLC3D6');};
-      });
     </script>
   </head>
   <body>

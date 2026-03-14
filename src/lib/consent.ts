@@ -7,6 +7,26 @@ declare global {
   }
 }
 
+/** Načte gtag.js a aktivuje GA4 – pouze po udělení souhlasu. Bez souhlasu se skript vůbec nenačte. */
+export function injectGtag(): void {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  const id = CONSENT_CONFIG.GA4_MEASUREMENT_ID;
+  if (!id) return;
+
+  if (document.querySelector('script[data-gtag-injected]')) return;
+
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.async = true;
+  script.setAttribute('data-gtag-injected', 'true');
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+  script.onload = () => {
+    grantAnalyticsConsent();
+    if (window.gtag) window.gtag('config', id);
+  };
+  document.head.appendChild(script);
+}
+
 export function getStoredConsent(): ConsentStatus {
   if (typeof window === 'undefined') return null;
   try {
@@ -66,7 +86,7 @@ export function injectClarity(): void {
 export function applyConsentOnLoad(): void {
   const status = getStoredConsent();
   if (status === 'accepted') {
-    grantAnalyticsConsent();
+    injectGtag();
     injectClarity();
   }
 }
