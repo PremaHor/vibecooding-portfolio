@@ -320,7 +320,7 @@ const Hero = () => {
   const useStaticBlobs = prefersReducedMotion || isMobile;
 
   return (
-    <section className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden">
+    <section className="hero-section relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden">
       {useStaticBlobs ? (
         <>
           <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12]" />
@@ -339,7 +339,7 @@ const Hero = () => {
         </>
       )}
 
-      <div className="relative z-10 max-w-4xl mx-auto w-full text-center">
+      <div className="hero-content relative z-10 max-w-4xl mx-auto w-full text-center">
         <h1 className="font-display text-[clamp(2rem,6vw,3.5rem)] sm:text-[clamp(2.5rem,7vw,4.25rem)] md:text-[clamp(3rem,8vw,5rem)] font-bold leading-[1.1] mb-6 sm:mb-8">
           <motion.span
             initial={fadeIn.initial}

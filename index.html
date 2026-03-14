@@ -5,9 +5,15 @@
     <style>
       html,body{background-color:#050505!important;color:#fff;margin:0;min-height:100%;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
       #root{min-height:100vh}
+      /* Skrýt root dokud React nevykreslí - eliminuje probliknutí surového stavu */
+      .no-fouc #root{opacity:0!important;pointer-events:none}
     </style>
     <script>
-      (function(){var l=(navigator.language||navigator.userLanguage||'').toLowerCase();document.documentElement.lang=(l.startsWith('cs')||l.startsWith('sk'))?'cs':'en';})();
+      (function(){
+        var l=(navigator.language||navigator.userLanguage||'').toLowerCase();
+        document.documentElement.lang=(l.startsWith('cs')||l.startsWith('sk'))?'cs':'en';
+        document.documentElement.classList.add('no-fouc');
+      })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -36,11 +42,11 @@
     <meta name="twitter:image" content="https://vibecooding.cz/images/projects/5.webp" />
     <!-- Preload LCP: jen desktop - na mobilu je LCP Hero text, ne obrázek -->
     <link rel="preload" as="image" href="/images/projects/5.webp" media="(min-width: 769px)" />
-    <!-- Fonts: async load to avoid render-blocking (saves ~600ms) -->
+    <!-- Fonts: preload pro rychlejší načtení, render-blocking pro eliminaci FOUT -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
