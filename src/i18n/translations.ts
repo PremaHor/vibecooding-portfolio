@@ -4,6 +4,7 @@ export const translations = {
   cs: {
     nav: {
       work: 'Práce',
+      process: 'Jak pracuji',
       about: 'O mně',
       services: 'Čemu se věnuji',
       pricing: 'Rozsah práce',
@@ -16,10 +17,24 @@ export const translations = {
     hero: {
       available: 'Otevřený novým výzvám a spolupráci 2026',
       h1: 'Weby a aplikace, které fungují.',
-      subheadline: 'Pomáhám převést nápad do funkčního produktu. Prototypy, weby, MVP – bez zbytečného balastu a s důrazem na to, co uživatelé skutečně potřebují.',
+      subheadline: 'Od návrhu po nasazení – design i vývoj v jedné osobě. Prototypy, weby, MVP – bez zbytečného balastu a s důrazem na to, co uživatelé skutečně potřebují.',
       ctaPrimary: 'Napsat zprávu',
       ctaSecondary: 'Prohlédnout práci',
       workedWith: 'Spolupracovali se mnou',
+    },
+    process: {
+      title: 'Jak pracuji',
+      subtitle: 'End-to-end – od nápadu po fungující produkt. Design i kód v jedné osobě.',
+      step1Title: 'Nápad & research',
+      step1Text: 'Pochopení cíle, uživatelů a kontextu. Co má produkt řešit a pro koho.',
+      step2Title: 'Design',
+      step2Text: 'Wireframy, UI/UX návrh, vizuální řešení. Ne wireframy na ubrousku – profesionální návrh.',
+      step3Title: 'Prototyp',
+      step3Text: 'Klikatelné mockupy pro ověření před investicí. Produkt si lze proklikat.',
+      step4Title: 'Vývoj',
+      step4Text: 'Implementace v čistém kódu. Rychlé, bezpečné, bez zbytečných závislostí.',
+      step5Title: 'Nasazení',
+      step5Text: 'Spuštění, údržba, úpravy. Jeden kontakt pro celý životní cyklus produktu.',
     },
     work: {
       endOfGallery: 'End of Gallery',
@@ -88,7 +103,7 @@ export const translations = {
     about: {
       title: 'Kdo stojí za Vibecooding?',
       subtitle: 'Přemysl Horák – nezávislý vývojář a designér. Otevřený spolupráci a novým příležitostem.',
-      p1: 'Nehraju si na agenturu. Když mi napíšete, mluvíte přímo se mnou. Kódu i designu se věnuji do hloubky – výsledek nejen vypadá, ale hlavně funguje.',
+      p1: 'Nehraju si na agenturu. Když mi napíšete, mluvíte přímo se mnou. Navrhuji rozhraní od wireframů po finální UI – design i implementace v jedné osobě. Výsledek nejen vypadá, ale hlavně funguje.',
       p2: 'Čistý kód, férová komunikace a schopnost vysvětlit technické věci lidsky. Vy rozumíte svému byznysu, já webům. Rád diskutuji o projektech, které dávají smysl.',
       valuesTitle: 'Moje hodnoty',
       value1: 'Žádné šablony – jen čistý, rychlý kód.',
@@ -109,6 +124,8 @@ export const translations = {
       card2Text: 'Čas investuji do architektury a UX. Rutinní kód nechávám na AI.',
       card3Title: 'Čistý a bezchybný kód',
       card3Text: 'AI generuje moderní kód pod mojí architektonickou kontrolou.',
+      card4Title: 'Design i architektura',
+      card4Text: 'Od návrhu po implementaci – jeden člověk, konzistentní vize. Žádné ztráty při předávání mezi designérem a vývojářem.',
     },
     faq: {
       title: 'Na co se lidé často ptají?',
@@ -234,6 +251,7 @@ export const translations = {
   en: {
     nav: {
       work: 'Work',
+      process: 'How I work',
       about: 'About me',
       services: 'What I do',
       pricing: 'Scope of work',
@@ -246,10 +264,24 @@ export const translations = {
     hero: {
       available: 'Open to new challenges and collaboration 2026',
       h1: 'Websites and apps that work.',
-      subheadline: 'I help turn ideas into working products. Prototypes, websites, MVP – no fluff, focused on what users actually need.',
+      subheadline: 'From design to deployment – design and development in one person. Prototypes, websites, MVP – no fluff, focused on what users actually need.',
       ctaPrimary: 'Get in touch',
       ctaSecondary: 'View work',
       workedWith: 'Worked with me',
+    },
+    process: {
+      title: 'How I work',
+      subtitle: 'End-to-end – from idea to working product. Design and code in one person.',
+      step1Title: 'Idea & research',
+      step1Text: 'Understanding the goal, users and context. What the product should solve and for whom.',
+      step2Title: 'Design',
+      step2Text: 'Wireframes, UI/UX design, visual solutions. Not napkin sketches – professional design.',
+      step3Title: 'Prototype',
+      step3Text: 'Clickable mockups to validate before investment. A product you can click through.',
+      step4Title: 'Development',
+      step4Text: 'Implementation in clean code. Fast, secure, no unnecessary dependencies.',
+      step5Title: 'Deployment',
+      step5Text: 'Launch, maintenance, updates. One contact for the entire product lifecycle.',
     },
     work: {
       endOfGallery: 'End of Gallery',
@@ -318,7 +350,7 @@ export const translations = {
     about: {
       title: 'Who stands behind Vibecooding?',
       subtitle: 'Přemysl Horák – independent developer and designer. Open to collaboration and new opportunities.',
-      p1: 'I don\'t pretend to be an agency. When you write, you talk directly to me. I dive deep into code and design—the result not only looks good but works.',
+      p1: 'I don\'t pretend to be an agency. When you write, you talk directly to me. I design interfaces from wireframes to final UI – design and implementation in one person. The result not only looks good but works.',
       p2: 'Clean code, fair communication, and explaining technical things in plain language. You understand your business, I understand the web. I\'m open to projects that make sense.',
       valuesTitle: 'My values',
       value1: 'No templates, just clean and lightning-fast code.',
@@ -339,6 +371,8 @@ export const translations = {
       card2Text: 'I invest my time in thoughtful architecture and great UX. I leave routine coding to AI.',
       card3Title: 'Clean and bug-free code',
       card3Text: 'AI generates bulletproof and modern code under my strict architectural control.',
+      card4Title: 'Design and architecture',
+      card4Text: 'From design to implementation – one person, consistent vision. No handoff losses between designer and developer.',
     },
     faq: {
       title: 'What do people often ask?',

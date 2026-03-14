@@ -19,7 +19,12 @@ import {
   Rocket,
   ShieldCheck,
   Brain,
-  ClipboardCheck
+  ClipboardCheck,
+  Palette,
+  Lightbulb,
+  PenTool,
+  Layers,
+  Server
 } from 'lucide-react';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 
@@ -142,6 +147,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
   const navLinks = !isProjectPage ? (
     <>
       <a href="#work" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Práce' : 'Go to Work section'}>{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</a>
+      <a href="#process" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Jak pracuji' : 'Go to Process section'}>{lang === 'cs' ? fixCzechTypography(t.nav.process) : fixDashes(t.nav.process)}</a>
       <a href="#about" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci O mně' : 'Go to About section'}>{lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}</a>
       <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Čemu se věnuji' : 'Go to Services section'}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}</a>
       <a href="#pricing" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Rozsah práce' : 'Go to Pricing section'}>{lang === 'cs' ? fixCzechTypography(t.nav.pricing) : fixDashes(t.nav.pricing)}</a>
@@ -228,6 +234,9 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
               <>
                 <a href="#work" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
                   {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
+                </a>
+                <a href="#process" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
+                  {lang === 'cs' ? fixCzechTypography(t.nav.process) : fixDashes(t.nav.process)}
                 </a>
                 <a href="#about" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
                   {lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}
@@ -361,6 +370,73 @@ const Hero = () => {
   );
 };
 
+const PROCESS_STEPS = [
+  { icon: Lightbulb, key: 'step1' as const },
+  { icon: PenTool, key: 'step2' as const },
+  { icon: Layers, key: 'step3' as const },
+  { icon: Code2, key: 'step4' as const },
+  { icon: Server, key: 'step5' as const },
+];
+
+const ProcessSection = () => {
+  const { t, lang } = useLanguage();
+  return (
+    <section id="process" className="relative bg-slate-50 text-black py-20 sm:py-28 md:py-36 lg:py-48 content-visibility-auto" aria-labelledby="process-heading">
+      <h2 id="process-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}</h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 sm:mb-16"
+        >
+          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-black/50">
+            02 — {lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}
+          </span>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-16 sm:mb-20"
+        >
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.08] mb-4">
+            {lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}
+          </h3>
+          <p className="text-lg sm:text-xl text-black/70 max-w-2xl">
+            {lang === 'cs' ? fixCzechTypography(t.process.subtitle) : fixDashes(t.process.subtitle)}
+          </p>
+        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 md:gap-6">
+          {PROCESS_STEPS.map(({ icon: Icon, key }, idx) => (
+            <motion.article
+              key={key}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className="relative flex flex-col items-center md:items-start text-center md:text-left"
+            >
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 shrink-0">
+                <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
+              </div>
+              <h4 className="font-display text-base sm:text-lg uppercase text-black mb-2">
+                {lang === 'cs' ? fixCzechTypography(t.process[`${key}Title`]) : fixDashes(t.process[`${key}Title`])}
+              </h4>
+              <p className="text-sm sm:text-base text-black/70 leading-[1.6]">
+                {lang === 'cs' ? fixCzechTypography(t.process[`${key}Text`]) : fixDashes(t.process[`${key}Text`])}
+              </p>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" aria-hidden />
+    </section>
+  );
+};
+
 const WorkSection = () => {
   const { t, lang } = useLanguage();
   const isMobile = useIsMobile();
@@ -376,7 +452,7 @@ const WorkSection = () => {
           className="mb-12 sm:mb-16"
         >
           <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-black/50">
-            01 — {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
+            03 — {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
           </span>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-20 md:gap-24 lg:gap-32">
@@ -686,6 +762,7 @@ const COMPETITIVE_CARDS = [
   { icon: Zap, key: 'card1' as const },
   { icon: Brain, key: 'card2' as const },
   { icon: ShieldCheck, key: 'card3' as const },
+  { icon: Palette, key: 'card4' as const },
 ];
 
 const CompetitiveAdvantageSection = () => {
@@ -715,7 +792,7 @@ const CompetitiveAdvantageSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {COMPETITIVE_CARDS.map(({ icon: Icon, key }, idx) => (
             <motion.article
               key={key}
@@ -967,6 +1044,7 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
     <Navbar theme={navTheme} />
     <main id="main-content" role="main">
       <Hero />
+      <ProcessSection />
       <WorkSection />
       <AboutSection />
       <ServicesPricingSection />
@@ -1185,6 +1263,7 @@ export default function App() {
       scrollTicking = true;
       requestAnimationFrame(() => {
         const scrollPos = window.scrollY + 80;
+        const processSection = document.getElementById('process');
         const workSection = document.getElementById('work');
         const aboutSection = document.getElementById('about');
         const servicesSection = document.getElementById('services');
@@ -1200,6 +1279,8 @@ export default function App() {
         } else if (aboutSection && scrollPos >= aboutSection.offsetTop) {
           currentTheme = 'dark';
         } else if (workSection && scrollPos >= workSection.offsetTop) {
+          currentTheme = 'light';
+        } else if (processSection && scrollPos >= processSection.offsetTop) {
           currentTheme = 'light';
         } else {
           currentTheme = 'dark';
