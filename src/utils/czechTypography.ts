@@ -9,7 +9,7 @@ const PREPOSITIONS_SINGLE = ['a', 'i', 'k', 'o', 's', 'u', 'v', 'z'];
 const PREPOSITIONS_DOUBLE = ['do', 'na', 'od', 'po', 'pro', 'při', 'za', 'ze', 'bez', 'nad', 'pod', 'před', 'mezi', 'přes'];
 const CONJUNCTIONS = ['ale', 'ani', 'že', 'aby', 'nebo', 'což', 'když', 'proto', 'totiž', 'také', 'jenže'];
 
-/** Nahradí dlouhé pomlčky (en dash –, em dash —) za krátkou (-). */
+/** Nahradí dlouhé pomlčky (en dash -, em dash -) za krátkou (-). */
 export function fixDashes(text: string): string {
   if (!text || typeof text !== 'string') return text;
   return text.replace(/\u2013|\u2014/g, '-');
@@ -20,7 +20,7 @@ export function fixCzechTypography(text: string): string {
 
   let result = fixDashes(text);
 
-  // Jednopísmenné předložky – musí být celé slovo (word boundary), case-insensitive
+  // Jednopísmenné předložky - musí být celé slovo (word boundary), case-insensitive
   for (const p of PREPOSITIONS_SINGLE) {
     const re = new RegExp(`\\b(${p})\\s+`, 'gi');
     result = result.replace(re, `$1${NBSP}`);
@@ -38,10 +38,10 @@ export function fixCzechTypography(text: string): string {
     result = result.replace(re, `$1${NBSP}`);
   }
 
-  // Čísla + jednotky (Kč, CZK) – nedělitelná mezera před měnou (podporuje i anglický formát 15,000 CZK)
+  // Čísla + jednotky (Kč, CZK) - nedělitelná mezera před měnou (podporuje i anglický formát 15,000 CZK)
   result = result.replace(/(\d[\d\s,]*) +([Kk]č|CZK)/g, `$1${NBSP}$2`);
 
-  // Čísla + až, do – nedělitelná mezera
+  // Čísla + až, do - nedělitelná mezera
   result = result.replace(/(\d[\d\s]*) +(až|do)\b/g, `$1${NBSP}$2`);
 
   // Čísla + běžná slova po čísle (kola, kol, kolo, %)

@@ -50,7 +50,7 @@
     hyphens: manual;
   }
 
-  /* Type scale ratio ~1.25 – Mobile-First */
+  /* Type scale ratio ~1.25 - Mobile-First */
   .text-scale-xs { font-size: 0.75rem; }   /* 12px */
   .text-scale-sm { font-size: 0.875rem; }  /* 14px */
   .text-scale-base { font-size: 1rem; }   /* 16px */
@@ -58,7 +58,7 @@
   .text-scale-xl { font-size: 1.25rem; }  /* 20px */
   .text-scale-2xl { font-size: 1.5rem; }  /* 24px */
 
-  /* content-visibility: below-fold sekce – méně layout práce při initial render */
+  /* content-visibility: below-fold sekce - méně layout práce při initial render */
   .content-visibility-auto {
     content-visibility: auto;
     contain-intrinsic-size: auto 500px;
@@ -156,7 +156,7 @@
   display: block;
 }
 
-/* Improved focus states for accessibility – WCAG 2.1 */
+/* Improved focus states for accessibility - WCAG 2.1 */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-vibe-orange);
@@ -164,7 +164,7 @@ button:focus-visible {
   border-radius: 2px;
 }
 
-/* Skip to main content – pro screen readery a klávesnicovou navigaci */
+/* Skip to main content - pro screen readery a klávesnicovou navigaci */
 .skip-link {
   position: absolute;
   top: -100%;

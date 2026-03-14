@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-/** Načte gtag.js a aktivuje GA4 – pouze po udělení souhlasu. Bez souhlasu se skript vůbec nenačte. */
+/** Načte gtag.js a aktivuje GA4 - pouze po udělení souhlasu. Bez souhlasu se skript vůbec nenačte. */
 export function injectGtag(): void {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
   const id = CONSENT_CONFIG.GA4_MEASUREMENT_ID;

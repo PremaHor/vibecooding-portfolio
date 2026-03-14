@@ -108,7 +108,7 @@ const PROJECTS: Project[] = [
       { label: "dduolomouc.cz (původní)", url: "https://www.dduolomouc.cz/" },
       { label: "ddu-olomouc-web.vercel.app (návrh)", url: "https://ddu-olomouc-web.vercel.app/" },
     ],
-    quote: "Spolupráce na redesignu byla příjemná – důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
+    quote: "Spolupráce na redesignu byla příjemná - důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
   }
 ];
 
@@ -150,7 +150,6 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
       <a href="#process" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Jak pracuji' : 'Go to Process section'}>{lang === 'cs' ? fixCzechTypography(t.nav.process) : fixDashes(t.nav.process)}</a>
       <a href="#about" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci O mně' : 'Go to About section'}>{lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}</a>
       <a href="#services" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Čemu se věnuji' : 'Go to Services section'}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}</a>
-      <a href="#pricing" onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Přejít na sekci Rozsah práce' : 'Go to Pricing section'}>{lang === 'cs' ? fixCzechTypography(t.nav.pricing) : fixDashes(t.nav.pricing)}</a>
       <a href={CONTACT_EMAIL} onClick={closeMobileMenu} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`} aria-label={lang === 'cs' ? 'Kontaktovat e-mailem' : 'Contact by email'}>{lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}</a>
     </>
   ) : (
@@ -171,7 +170,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           to="/" 
           className="flex items-center gap-2 group min-w-0 shrink"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          aria-label="Vibecooding – úvodní stránka"
+          aria-label="Vibecooding - úvodní stránka"
         >
           <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${
             theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'
@@ -243,9 +242,6 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
                 </a>
                 <a href="#services" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
                   {lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}
-                </a>
-                <a href="#pricing" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.pricing) : fixDashes(t.nav.pricing)}
                 </a>
                 <a href={CONTACT_EMAIL} onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
                   {lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}
@@ -385,17 +381,6 @@ const ProcessSection = () => {
       <h2 id="process-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}</h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 sm:mb-16"
-        >
-          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-black/50">
-            02 — {lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}
-          </span>
-        </motion.div>
-        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -452,7 +437,7 @@ const WorkSection = () => {
           className="mb-12 sm:mb-16"
         >
           <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-black/50">
-            03 — {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
+            03 - {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
           </span>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-20 md:gap-24 lg:gap-32">
@@ -486,7 +471,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project, index: nu
             src={project.image} 
             srcSet={getImageSrcSet(project.image)}
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt={lang === 'cs' ? `${fixCzechTypography(project.title)} – ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)} – ${fixDashes(category)}, ${project.year}`}
+            alt={lang === 'cs' ? `${fixCzechTypography(project.title)} - ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)} - ${fixDashes(category)}, ${project.year}`}
             width={1200}
             height={800}
             loading={index === 0 && !isMobile ? "eager" : "lazy"}
@@ -639,7 +624,7 @@ const AboutSection = () => {
   const { t, lang } = useLanguage();
   return (
     <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden content-visibility-auto">
-      {/* Tmavé pozadí + jemný gradient – vizuální oddělení od portfolia */}
+      {/* Tmavé pozadí + jemný gradient - vizuální oddělení od portfolia */}
       <div className="absolute inset-0 bg-[var(--color-vibe-black)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(242,125,38,0.06),transparent_50%)]" aria-hidden />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden />
@@ -774,7 +759,7 @@ const CompetitiveAdvantageSection = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,var(--color-vibe-orange)/8_0%,transparent_70%)] pointer-events-none" />
       <div className="absolute inset-0 border border-white/5 rounded-3xl mx-4 sm:mx-6 md:mx-8 lg:mx-12 pointer-events-none" />
       
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -792,7 +777,7 @@ const CompetitiveAdvantageSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 items-stretch">
           {COMPETITIVE_CARDS.map(({ icon: Icon, key }, idx) => (
             <motion.article
               key={key}
@@ -800,7 +785,7 @@ const CompetitiveAdvantageSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="group relative p-6 sm:p-8 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[var(--color-vibe-orange)]/30 hover:bg-white/[0.05] transition-all duration-500"
+              className="group relative p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[var(--color-vibe-orange)]/30 hover:bg-white/[0.05] transition-all duration-500 flex flex-col"
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 group-hover:scale-110 transition-transform duration-300">
                 <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
@@ -972,7 +957,7 @@ const ContactSection = () => {
             target="_blank" 
             rel="noopener noreferrer" 
             className="flex items-center gap-2 sm:gap-3 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] transition-colors duration-300"
-            aria-label={`${social.name} – ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
+            aria-label={`${social.name} - ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
           >
             {social.icon} {social.name}
           </motion.a>
@@ -1240,7 +1225,7 @@ export default function App() {
         });
         lenisRef.current = lenis;
 
-        // Synchronizace s Motion frame loopem – eliminuje problikávání při scrollu
+        // Synchronizace s Motion frame loopem - eliminuje problikávání při scrollu
         const onFrame = (data: { timestamp?: number }) => {
           lenis.raf(data.timestamp ?? performance.now());
         };
