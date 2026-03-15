@@ -7,6 +7,30 @@ declare global {
   }
 }
 
+const DEFERRED_LOAD_DELAY_MS = 3000;
+const INTERACTION_EVENTS = ['mousemove', 'scroll', 'touchstart', 'keydown'] as const;
+
+let deferredLoadScheduled = false;
+
+/** Načte GTM + Clarity až po první interakci NEBO po 3s. Volá se jen když má uživatel souhlas. */
+function scheduleDeferredThirdPartyLoad(): void {
+  if (deferredLoadScheduled || typeof window === 'undefined') return;
+  deferredLoadScheduled = true;
+
+  const load = () => {
+    injectGtag();
+    injectClarity();
+    INTERACTION_EVENTS.forEach((ev) => window.removeEventListener(ev, load));
+    clearTimeout(timeoutId);
+  };
+
+  const timeoutId = setTimeout(load, DEFERRED_LOAD_DELAY_MS);
+
+  INTERACTION_EVENTS.forEach((ev) => {
+    window.addEventListener(ev, load, { once: true, passive: true });
+  });
+}
+
 /** Načte gtag.js a aktivuje GA4 - pouze po udělení souhlasu. Bez souhlasu se skript vůbec nenačte. */
 export function injectGtag(): void {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
@@ -83,10 +107,10 @@ export function injectClarity(): void {
   document.head.appendChild(script);
 }
 
+/** Pro vracející se uživatele se souhlasem: načte skripty až po interakci nebo 3s. */
 export function applyConsentOnLoad(): void {
   const status = getStoredConsent();
   if (status === 'accepted') {
-    injectGtag();
-    injectClarity();
+    scheduleDeferredThirdPartyLoad();
   }
 }
