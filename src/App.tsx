@@ -166,6 +166,7 @@ const mobileItemVariants = {
     y: 0,
     transition: { delay: i * 0.07 + 0.12, type: 'spring' as const, stiffness: 360, damping: 28 },
   }),
+  exit: { opacity: 0, y: -10, transition: { duration: 0.12 } },
 };
 
 const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPage?: boolean }) => {
@@ -281,146 +282,108 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         </div>
       </nav>
 
-      {/* Mobile Menu: bottom sheet */}
+      {/* Mobile Menu: unified fullscreen overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <div
+          <motion.div
             id="mobile-menu"
-            className="fixed inset-0 z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 md:hidden flex flex-col h-screen bg-[var(--color-vibe-black)] text-white"
             role="dialog"
             aria-modal="true"
             aria-label={lang === 'cs' ? 'Navigační menu' : 'Navigation menu'}
           >
-            {/* Backdrop */}
+            {/* Header: logo + close */}
+            <div className="flex items-center justify-between px-4 sm:px-6 py-4 safe-area-inset-top shrink-0">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0">
+                  <Code2 className="w-5 h-5 text-black" />
+                </div>
+                <span className="font-display text-xl tracking-wide">VIBECOODING</span>
+              </div>
+              <button
+                onClick={closeMobileMenu}
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all min-w-[44px] min-h-[44px]"
+                aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Nav links — centered, more spacing */}
+            <nav aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'} className="flex-1 flex flex-col justify-center px-6">
+              {!isProjectPage ? (
+                <ul className="flex flex-col items-center gap-6">
+                  {mobileNavItems.map((item, i) => (
+                    <motion.li
+                      key={item.href}
+                      custom={i}
+                      variants={mobileItemVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      className="w-full max-w-xs"
+                    >
+                      <a
+                        href={item.href}
+                        onClick={closeMobileMenu}
+                        aria-label={item.ariaLabel}
+                        className="group flex items-center justify-center gap-3 px-4 py-4 rounded-2xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
+                      >
+                        <span className="text-xs font-bold tabular-nums text-white/30 shrink-0">
+                          {String(i + 2).padStart(2, '0')}
+                        </span>
+                        <span className="text-lg font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
+                          {item.label}
+                        </span>
+                        <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-0.5 transition-all shrink-0" />
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: 0.1, type: 'spring', stiffness: 360, damping: 28 }}
+                  className="flex justify-center"
+                >
+                  <Link
+                    to="/"
+                    onClick={closeMobileMenu}
+                    className="group flex items-center gap-3 px-4 py-4 rounded-2xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
+                  >
+                    <ArrowLeft className="w-5 h-5 text-white/40 group-hover:-translate-x-0.5 transition-transform shrink-0" />
+                    <span className="text-lg font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
+                      {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
+                    </span>
+                  </Link>
+                </motion.div>
+              )}
+            </nav>
+
+            {/* CTA — pushed to bottom */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/70 backdrop-blur-md"
-              onClick={closeMobileMenu}
-            />
-
-            {/* Sheet — NO overflow:hidden on the animated element (iOS Safari compositing bug fix) */}
-            <motion.div
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              exit={{ y: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 280, mass: 0.85 }}
-              drag="y"
-              dragConstraints={{ top: 0 }}
-              dragElastic={{ top: 0.04, bottom: 0.4 }}
-              onDragEnd={(_e, info) => {
-                if (info.offset.y > 80 || info.velocity.y > 500) closeMobileMenu();
-              }}
-              className="absolute bottom-0 left-0 right-0 rounded-t-3xl bg-[var(--color-vibe-black)] text-white"
-              style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
+              transition={{ delay: 0.15 }}
+              className="mt-auto px-4 sm:px-6 py-6 safe-area-inset-bottom shrink-0"
             >
-              {/* Drag handle */}
-              <div
-                className="flex justify-center pt-3 pb-2 cursor-grab active:cursor-grabbing"
-                aria-hidden="true"
+              <a
+                href={CONTACT_EMAIL}
+                onClick={closeMobileMenu}
+                className="flex items-center justify-center gap-2.5 min-h-[52px] w-full rounded-2xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black hover:brightness-110 active:scale-[0.98] transition-all"
               >
-                <div className="w-9 h-1 rounded-full bg-white/20" />
-              </div>
-
-              {/* Sheet header: brand + close */}
-              <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.07]">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0">
-                    <Code2 className="w-4 h-4 text-black" />
-                  </div>
-                  <span className="font-display text-base tracking-wide text-white/80">VIBECOODING</span>
-                </div>
-                <button
-                  onClick={closeMobileMenu}
-                  className="w-8 h-8 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all"
-                  aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Nav items — inside the black card */}
-              <nav aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}>
-                {!isProjectPage ? (
-                  <ul className="flex flex-col px-3 pt-2">
-                    {mobileNavItems.map((item, i) => (
-                      <motion.li
-                        key={item.href}
-                        custom={i}
-                        variants={mobileItemVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit={{ opacity: 0 }}
-                      >
-                        <a
-                          href={item.href}
-                          onClick={closeMobileMenu}
-                          aria-label={item.ariaLabel}
-                          className="group flex items-center gap-4 px-3 py-[14px] rounded-2xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
-                        >
-                          <span className="text-[11px] font-bold tabular-nums text-white/25 w-5 shrink-0 leading-none select-none">
-                            {String(i + 1).padStart(2, '0')}
-                          </span>
-                          <span className="text-[1.05rem] font-bold tracking-tight text-white/80 group-hover:text-white transition-colors flex-1">
-                            {item.label}
-                          </span>
-                          <ArrowRight className="w-[18px] h-[18px] text-white/15 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-0.5 transition-all shrink-0" />
-                        </a>
-                        {i < mobileNavItems.length - 1 && (
-                          <div className="h-px bg-white/[0.05] mx-4" aria-hidden="true" />
-                        )}
-                      </motion.li>
-                    ))}
-                  </ul>
-                ) : (
-                  <div className="px-3 pt-2">
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.1, type: 'spring', stiffness: 360, damping: 28 }}
-                    >
-                      <Link
-                        to="/"
-                        onClick={closeMobileMenu}
-                        className="group flex items-center gap-4 px-3 py-[14px] rounded-2xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
-                      >
-                        <ArrowLeft className="w-4 h-4 text-white/40 group-hover:-translate-x-0.5 transition-transform shrink-0" />
-                        <span className="text-[1.05rem] font-bold tracking-tight text-white/80 group-hover:text-white transition-colors">
-                          {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
-                        </span>
-                      </Link>
-                    </motion.div>
-                  </div>
-                )}
-              </nav>
-
-              {/* CTA — inside the black card */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  delay: !isProjectPage ? mobileNavItems.length * 0.07 + 0.2 : 0.18,
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 28,
-                }}
-                className="px-4 pt-3 pb-1"
-              >
-                <a
-                  href={CONTACT_EMAIL}
-                  onClick={closeMobileMenu}
-                  className="flex items-center justify-center gap-2.5 min-h-[52px] w-full rounded-2xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black hover:brightness-110 active:scale-[0.98] transition-all"
-                >
-                  {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
-                  <ArrowRight className="w-4 h-4 shrink-0" />
-                </a>
-              </motion.div>
+                {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </a>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
