@@ -208,7 +208,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         <div className="flex items-center gap-2 sm:gap-4">
           <a 
             href={CONTACT_EMAIL}
-            className={`hidden sm:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg ${
+            className={`nav-cta hidden sm:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg ${
               theme === 'dark' 
                 ? 'bg-white text-black hover:bg-[var(--color-vibe-orange)] hover:text-white' 
                 : 'bg-black text-white hover:bg-[var(--color-vibe-orange)]'
