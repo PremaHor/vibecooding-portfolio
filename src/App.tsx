@@ -133,6 +133,44 @@ const PROJECTS: Project[] = [
 
 // --- Components ---
 
+const AnimatedHamburger = ({ isOpen, theme }: { isOpen: boolean; theme: 'light' | 'dark' }) => {
+  const lineStyle = { backgroundColor: theme === 'dark' ? '#ffffff' : '#000000' };
+  return (
+    <div className="relative w-5 h-[14px] flex-shrink-0" aria-hidden="true">
+      <motion.span
+        className="absolute left-0 w-5 h-[2px] rounded-full top-0"
+        style={lineStyle}
+        animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+      />
+      <motion.span
+        className="absolute left-0 w-5 h-[2px] rounded-full top-[6px]"
+        style={lineStyle}
+        animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+        transition={{ duration: 0.15 }}
+      />
+      <motion.span
+        className="absolute left-0 w-5 h-[2px] rounded-full top-[12px]"
+        style={lineStyle}
+        animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+      />
+    </div>
+  );
+};
+
+const mobileSheetVariants = {
+  hidden: {} as const,
+  visible: { transition: { staggerChildren: 0.065, delayChildren: 0.08 } },
+  exit: { transition: { staggerChildren: 0.04, staggerDirection: -1 as const } },
+};
+
+const mobileItemVariants = {
+  hidden: { opacity: 0, x: -18 },
+  visible: { opacity: 1, x: 0, transition: { type: 'spring' as const, stiffness: 380, damping: 28 } },
+  exit: { opacity: 0, x: -10, transition: { duration: 0.12 } },
+};
+
 const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPage?: boolean }) => {
   const { t, lang } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
@@ -161,6 +199,15 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
   const navLinks = !isProjectPage ? (
@@ -176,6 +223,13 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
       <ArrowLeft className="w-4 h-4" /> {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
     </Link>
   );
+
+  const mobileNavItems = !isProjectPage ? [
+    { href: '#work', label: lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work), ariaLabel: lang === 'cs' ? 'Přejít na sekci Práce' : 'Go to Work section' },
+    { href: '#process', label: lang === 'cs' ? fixCzechTypography(t.nav.process) : fixDashes(t.nav.process), ariaLabel: lang === 'cs' ? 'Přejít na sekci Jak pracuji' : 'Go to Process section' },
+    { href: '#about', label: lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about), ariaLabel: lang === 'cs' ? 'Přejít na sekci O mně' : 'Go to About section' },
+    { href: '#services', label: lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services), ariaLabel: lang === 'cs' ? 'Přejít na sekci Čemu se věnuji' : 'Go to Services section' },
+  ] : [];
 
   return (
     <>
@@ -222,65 +276,142 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
               theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-black/10'
             }`}
             aria-label={lang === 'cs' ? (mobileMenuOpen ? fixCzechTypography(t.nav.closeMenu) : fixCzechTypography(t.nav.openMenu)) : (mobileMenuOpen ? fixDashes(t.nav.closeMenu) : fixDashes(t.nav.openMenu))}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <AnimatedHamburger isOpen={mobileMenuOpen} theme={theme} />
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu: compact bottom sheet */}
-      <div 
-        className={`fixed inset-0 z-40 md:hidden transition-opacity duration-300 ${
-          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div 
-          className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
-            mobileMenuOpen ? 'opacity-100' : 'opacity-0'
-          }`}
-          onClick={closeMobileMenu}
-        />
-        <motion.div
-          initial={{ y: '100%' }}
-          animate={{ y: mobileMenuOpen ? 0 : '100%' }}
-          transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-          className="absolute bottom-0 left-0 right-0 bg-[var(--color-vibe-black)] border-t border-white/10 rounded-t-2xl p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] text-white safe-area-inset-bottom"
-        >
-          <div className="w-10 h-1 rounded-full bg-white/20 mx-auto mb-5" aria-hidden />
-          <nav className="flex flex-col gap-1">
-            {!isProjectPage ? (
-              <>
-                <a href="#work" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
-                </a>
-                <a href="#process" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.process) : fixDashes(t.nav.process)}
-                </a>
-                <a href="#about" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}
-                </a>
-                <a href="#services" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}
-                </a>
-                <a href={CONTACT_EMAIL} onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors">
-                  {lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}
-                </a>
-              </>
-            ) : (
-              <Link to="/" onClick={closeMobileMenu} className="min-h-[44px] flex items-center py-3 px-4 rounded-xl text-sm font-semibold tracking-wide text-white/90 hover:bg-white/5 hover:text-white active:bg-white/10 transition-colors gap-2">
-                <ArrowLeft className="w-4 h-4" /> {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
-              </Link>
-            )}
-          </nav>
-          <a 
-            href={CONTACT_EMAIL}
-            onClick={closeMobileMenu}
-            className="mt-4 flex min-h-[44px] items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black text-center hover:bg-[var(--color-vibe-orange)]/90 active:scale-[0.98] transition-all"
+      {/* Mobile Menu: bottom sheet with AnimatePresence */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <div
+            id="mobile-menu"
+            className="fixed inset-0 z-40 md:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label={lang === 'cs' ? 'Navigační menu' : 'Navigation menu'}
           >
-            {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
-          </a>
-        </motion.div>
-      </div>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.22 }}
+              className="absolute inset-0 bg-black/65 backdrop-blur-md"
+              onClick={closeMobileMenu}
+            />
+
+            {/* Sheet */}
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 280, mass: 0.9 }}
+              drag="y"
+              dragConstraints={{ top: 0 }}
+              dragElastic={{ top: 0.05, bottom: 0.45 }}
+              onDragEnd={(_e, info) => {
+                if (info.offset.y > 80 || info.velocity.y > 500) closeMobileMenu();
+              }}
+              className="absolute bottom-0 left-0 right-0 bg-[var(--color-vibe-black)] rounded-t-3xl text-white overflow-hidden"
+              style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
+            >
+              {/* Drag handle */}
+              <div className="flex justify-center pt-3.5 pb-1 cursor-grab active:cursor-grabbing" aria-hidden="true">
+                <div className="w-10 h-1 rounded-full bg-white/20" />
+              </div>
+
+              {/* Sheet header */}
+              <div className="flex items-center justify-between px-5 pt-3 pb-4">
+                <span className="text-[10px] font-bold tracking-[0.35em] uppercase text-white/35 select-none">
+                  {lang === 'cs' ? 'Navigace' : 'Navigation'}
+                </span>
+                <button
+                  onClick={closeMobileMenu}
+                  className="w-8 h-8 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all"
+                  aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Nav items */}
+              <nav className="px-3">
+                {!isProjectPage ? (
+                  <motion.ul
+                    variants={mobileSheetVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="flex flex-col"
+                  >
+                    {mobileNavItems.map((item, i) => (
+                      <motion.li key={item.href} variants={mobileItemVariants}>
+                        <a
+                          href={item.href}
+                          onClick={closeMobileMenu}
+                          aria-label={item.ariaLabel}
+                          className="group flex items-center gap-4 px-3 py-4 rounded-2xl hover:bg-white/[0.05] active:bg-white/10 transition-colors"
+                        >
+                          <span className="text-[11px] font-bold tabular-nums text-white/30 w-5 shrink-0 leading-none">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <span className="text-[1.1rem] font-bold tracking-tight text-white/85 group-hover:text-white transition-colors flex-1 leading-snug">
+                            {item.label}
+                          </span>
+                          <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/55 group-hover:translate-x-0.5 transition-all shrink-0" />
+                        </a>
+                        {i < mobileNavItems.length - 1 && (
+                          <div className="h-px bg-white/[0.06] mx-3" aria-hidden="true" />
+                        )}
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, x: -18 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ delay: 0.1, type: 'spring', stiffness: 380, damping: 28 }}
+                  >
+                    <Link
+                      to="/"
+                      onClick={closeMobileMenu}
+                      className="group flex items-center gap-4 px-3 py-4 rounded-2xl hover:bg-white/[0.05] active:bg-white/10 transition-colors"
+                    >
+                      <ArrowLeft className="w-4 h-4 text-white/50 group-hover:-translate-x-0.5 transition-transform shrink-0" />
+                      <span className="text-[1.1rem] font-bold tracking-tight text-white/85 group-hover:text-white transition-colors">
+                        {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
+                      </span>
+                    </Link>
+                  </motion.div>
+                )}
+              </nav>
+
+              {/* CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: !isProjectPage ? mobileNavItems.length * 0.065 + 0.18 : 0.2, type: 'spring', stiffness: 300, damping: 28 }}
+                className="px-3 mt-3"
+              >
+                <a
+                  href={CONTACT_EMAIL}
+                  onClick={closeMobileMenu}
+                  className="flex items-center justify-center gap-2.5 min-h-[52px] px-4 rounded-2xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black hover:brightness-110 active:scale-[0.98] transition-all"
+                >
+                  {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
+                  <ArrowRight className="w-4 h-4 shrink-0" />
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
