@@ -109,24 +109,24 @@ const PROJECTS: Project[] = [
       { label: "dduolomouc.cz (původní)", url: "https://www.dduolomouc.cz/" },
       { label: "ddu-olomouc-web.vercel.app (návrh)", url: "https://ddu-olomouc-web.vercel.app/" },
     ],
-    quote: "Spolupráce na redesignu byla příjemná - důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
+    quote: "Spolupráce na redesignu byla příjemná, důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
   },
   {
     id: 4,
     slug: "decision-balance",
     title: "Decision Balance",
     category: "Koncept",
-    description: "Mobilní aplikace pro strukturované rozhodování. Vážení možností, porovnávání kritérií a vizualizace výsledků - pomáhá vybrat správnou volbu.",
+    description: "Mobilní aplikace pro strukturované rozhodování. Vážení možností, porovnávání kritérií a vizualizace výsledků. Pomáhá vybrat správnou volbu.",
     fullDescription: "Decision Balance je koncept mobilní aplikace pro podporu rozhodování. Uživatelé definují možnosti a kritéria, ohodnotí je a aplikace vizualizuje, která volba nejlépe odpovídá jejich prioritám. Koncept vyvinut v React Native pro ověření nápadu a UX.",
     image: "/images/projects/backround.webp",
     tags: ["React Native", "TypeScript", "AI integrace"],
     year: "2026",
     client: "Vlastní projekt",
     role: "Developer & Designer",
-    quote: "Koncept vznikl jako ověření nápadu - React Native umožnil rychle prototypovat nativní mobilní zážitek.",
+    quote: "Koncept vznikl jako ověření nápadu. React Native umožnil rychle prototypovat nativní mobilní zážitek.",
     galleryImages: [
-      { src: "/images/projects/DB1.webp", alt: "Decision Balance - DB1" },
-      { src: "/images/projects/DB2.webp", alt: "Decision Balance - DB2" },
+      { src: "/images/projects/DB1.webp", alt: "Decision Balance, DB1" },
+      { src: "/images/projects/DB2.webp", alt: "Decision Balance, DB2" },
     ],
   }
 ];
@@ -189,7 +189,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           to="/" 
           className="flex items-center gap-2 group min-w-0 shrink"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          aria-label="Vibecooding - úvodní stránka"
+          aria-label="Vibecooding, úvodní stránka"
         >
           <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${
             theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'
@@ -228,7 +228,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         </div>
       </nav>
 
-      {/* Mobile Menu - compact bottom sheet */}
+      {/* Mobile Menu: compact bottom sheet */}
       <div 
         className={`fixed inset-0 z-40 md:hidden transition-opacity duration-300 ${
           mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -456,7 +456,7 @@ const WorkSection = () => {
           className="mb-12 sm:mb-16"
         >
           <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-black/50">
-            03 - {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
+            03 • {lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}
           </span>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-20 md:gap-24 lg:gap-32">
@@ -490,7 +490,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project, index: nu
             src={project.image} 
             srcSet={getImageSrcSet(project.image)}
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt={lang === 'cs' ? `${fixCzechTypography(project.title)} - ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)} - ${fixDashes(category)}, ${project.year}`}
+            alt={lang === 'cs' ? `${fixCzechTypography(project.title)}, ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)}, ${fixDashes(category)}, ${project.year}`}
             width={1200}
             height={800}
             loading={index === 0 && !isMobile ? "eager" : "lazy"}
@@ -976,7 +976,7 @@ const ContactSection = () => {
             target="_blank" 
             rel="noopener noreferrer" 
             className="flex items-center gap-2 sm:gap-3 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] transition-colors duration-300"
-            aria-label={`${social.name} - ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
+            aria-label={`${social.name}, ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
           >
             {social.icon} {social.name}
           </motion.a>

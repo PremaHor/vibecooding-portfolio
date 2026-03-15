@@ -16,9 +16,7 @@ root.render(
   </StrictMode>,
 );
 
-// Odstranit no-fouc až po prvním vykreslení - eliminuje probliknutí
+// Odstranit no-fouc po prvním frame (1 rAF místo 2 = rychlejší LCP)
 requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    document.documentElement.classList.remove('no-fouc');
-  });
+  document.documentElement.classList.remove('no-fouc');
 });

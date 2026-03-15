@@ -1,7 +1,7 @@
 /**
  * Nahrazuje obyčejné mezery za nedělitelné (nbsp) po českých předložkách a spojkách,
  * aby nezůstávaly na konci řádku při responzivním zalamování.
- * Také nahrazuje dlouhé pomlčky (en dash, em dash) za krátkou pomlčku.
+ * fixDashes slouží jako fallback pro anglické texty (nenahrazuje pomlčky, jen projde textem).
  */
 const NBSP = '\u00A0';
 
@@ -9,10 +9,10 @@ const PREPOSITIONS_SINGLE = ['a', 'i', 'k', 'o', 's', 'u', 'v', 'z'];
 const PREPOSITIONS_DOUBLE = ['do', 'na', 'od', 'po', 'pro', 'při', 'za', 'ze', 'bez', 'nad', 'pod', 'před', 'mezi', 'přes'];
 const CONJUNCTIONS = ['ale', 'ani', 'že', 'aby', 'nebo', 'což', 'když', 'proto', 'totiž', 'také', 'jenže'];
 
-/** Nahradí dlouhé pomlčky (en dash -, em dash -) za krátkou (-). */
+/** Pro anglické texty: vrací text beze změny (pomlčky jsou odstraněny v překladech). */
 export function fixDashes(text: string): string {
   if (!text || typeof text !== 'string') return text;
-  return text.replace(/\u2013|\u2014/g, '-');
+  return text;
 }
 
 export function fixCzechTypography(text: string): string {
