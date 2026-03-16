@@ -265,41 +265,67 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         role="dialog"
         aria-modal="true"
         aria-label={lang === 'cs' ? 'Navigační menu' : 'Navigation menu'}
-        className={`fixed inset-0 z-[100] md:hidden bg-[var(--color-vibe-black)] transition-[opacity,visibility] duration-300 ${
-          mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
+        className={`fixed inset-0 z-[100] md:hidden bg-[var(--color-vibe-black)] text-white
+          transition-[opacity,visibility] duration-300
+          ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
       >
-        {/* ── Scrollable content wrapper — fills full screen, no overflow clipping bugs ── */}
+        {/*
+          Layout: fixed inset-0 → absolute positioning, no h-full tricks needed.
+          Use absolute positioned sections: header top, CTA bottom, nav fills the middle.
+          This is the most reliable cross-browser layout — zero flexbox min-height bugs.
+        */}
+
+        {/* ── Header (top) ── */}
         <div
-          className="h-full flex flex-col"
-          style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+          className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 h-16 border-b border-white/[0.07] bg-[var(--color-vibe-black)]"
+          style={{ top: 'env(safe-area-inset-top, 0px)' }}
         >
+          <Link
+            to="/"
+            onClick={close}
+            className="flex items-center gap-2.5 group"
+            aria-label="Vibecooding, úvodní stránka"
+          >
+            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110">
+              <Code2 className="w-5 h-5 text-black" />
+            </div>
+            <span className="font-display text-xl text-white">VIBECOODING</span>
+          </Link>
+          <button
+            onClick={close}
+            className="w-11 h-11 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all shrink-0"
+            aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
+          >
+            <X className="w-5 h-5 text-white" />
+          </button>
+        </div>
 
-          {/* Header — fixed height, never overlaps content */}
-          <div className="flex items-center justify-between px-5 h-16 shrink-0 border-b border-white/[0.07]">
-            <Link
-              to="/"
-              onClick={close}
-              className="flex items-center gap-2.5 group"
-              aria-label="Vibecooding, úvodní stránka"
-            >
-              <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110">
-                <Code2 className="w-5 h-5 text-black" />
-              </div>
-              <span className="font-display text-xl text-white">VIBECOODING</span>
-            </Link>
-            <button
-              onClick={close}
-              className="w-11 h-11 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all shrink-0"
-              aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
-            >
-              <X className="w-5 h-5 text-white" />
-            </button>
-          </div>
+        {/* ── CTA (bottom) — rendered before nav in DOM so z-index stacking is correct ── */}
+        <div
+          className="absolute bottom-0 left-0 right-0 px-5 pt-4 pb-5 bg-[var(--color-vibe-black)]"
+          style={{ paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
+        >
+          <a
+            href={CONTACT_EMAIL}
+            onClick={close}
+            className="flex items-center justify-center gap-2.5 w-full min-h-[54px] rounded-2xl bg-[var(--color-vibe-orange)] text-black text-sm font-bold uppercase tracking-[0.15em] hover:brightness-110 active:scale-[0.98] transition-all duration-200"
+          >
+            {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
+            <ArrowRight className="w-4 h-4 shrink-0" />
+          </a>
+        </div>
 
-          {/* Back-home — project pages only */}
+        {/* ── Nav items (middle — fills space between header and CTA) ── */}
+        <nav
+          aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}
+          className="absolute left-0 right-0 overflow-y-auto px-5"
+          style={{
+            top: 'calc(env(safe-area-inset-top, 0px) + 4rem)',
+            bottom: 'calc(env(safe-area-inset-bottom, 0px) + 5.5rem)',
+          }}
+        >
           {isProjectPage && (
-            <div className="px-6 pt-6 pb-2 shrink-0">
+            <div className="pt-6 pb-2">
               <Link
                 to="/"
                 onClick={close}
@@ -310,49 +336,26 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
               </Link>
             </div>
           )}
-
-          {/* Nav items — flex-1 pushes CTA to the bottom, overflow-y-auto handles small screens */}
-          <nav
-            aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}
-            className="flex-1 overflow-y-auto px-5 py-6"
-          >
-            <ul className="flex flex-col">
-              {mobileNavItems.map((item, i) => (
-                <li key={item.href} className="border-b border-white/[0.07] last:border-0">
-                  <a
-                    href={item.href}
-                    onClick={close}
-                    className="group flex items-center gap-5 py-5 w-full active:opacity-60 transition-opacity duration-100"
-                  >
-                    {/* Number — fixed width so labels align perfectly */}
-                    <span className="text-[11px] font-bold tabular-nums text-white/25 w-8 shrink-0 leading-none select-none">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    {/* Label */}
-                    <span className="font-display text-[1.7rem] leading-none text-white/85 group-hover:text-white transition-colors duration-200 flex-1">
-                      {item.label}
-                    </span>
-                    {/* Arrow */}
-                    <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-1 transition-all duration-200 shrink-0" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* CTA — always at the bottom, thumb-reachable */}
-          <div className="px-5 pt-4 pb-5 shrink-0">
-            <a
-              href={CONTACT_EMAIL}
-              onClick={close}
-              className="flex items-center justify-center gap-2.5 w-full min-h-[54px] rounded-2xl bg-[var(--color-vibe-orange)] text-black text-sm font-bold uppercase tracking-[0.15em] hover:brightness-110 active:scale-[0.98] transition-all duration-200"
-            >
-              {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
-              <ArrowRight className="w-4 h-4 shrink-0" />
-            </a>
-          </div>
-
-        </div>
+          <ul className="flex flex-col py-4">
+            {mobileNavItems.map((item, i) => (
+              <li key={item.href} className="border-b border-white/[0.07] last:border-0">
+                <a
+                  href={item.href}
+                  onClick={close}
+                  className="group flex items-center gap-5 py-5 w-full active:opacity-60 transition-opacity duration-100"
+                >
+                  <span className="text-[11px] font-bold tabular-nums text-white/25 w-8 shrink-0 leading-none select-none">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-display text-[1.7rem] leading-none text-white/85 group-hover:text-white transition-colors duration-200 flex-1">
+                    {item.label}
+                  </span>
+                  <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-1 transition-all duration-200 shrink-0" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </>
   );
