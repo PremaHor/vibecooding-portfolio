@@ -213,7 +213,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
     </Link>
   );
 
-  // All 5 items — always shown in mobile menu on every page
+  // Položky v mobilní kartě mezi VIBECOODING a Napsat zprávu
   const mobileNavItems = [
     { href: '#work',    label: lang === 'cs' ? fixCzechTypography(t.nav.work)     : fixDashes(t.nav.work),     ariaLabel: lang === 'cs' ? 'Přejít na sekci Práce'         : 'Go to Work section' },
     { href: '#process', label: lang === 'cs' ? fixCzechTypography(t.nav.process)  : fixDashes(t.nav.process),  ariaLabel: lang === 'cs' ? 'Přejít na sekci Jak pracuji'   : 'Go to Process section' },
