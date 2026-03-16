@@ -314,16 +314,16 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
               onDragEnd={(_e, info) => {
                 if (info.offset.y > 80 || info.velocity.y > 500) closeMobileMenu();
               }}
-              className="absolute bottom-0 left-0 right-0 rounded-t-[28px] bg-[var(--color-vibe-black)] text-white"
+              className="absolute bottom-0 left-0 right-0 rounded-t-[28px] bg-[var(--color-vibe-black)] text-white max-h-[65vh] flex flex-col"
               style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
             >
               {/* Drag handle */}
-              <div className="flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing" aria-hidden="true">
+              <div className="flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing shrink-0" aria-hidden="true">
                 <div className="w-10 h-[3px] rounded-full bg-white/20" />
               </div>
 
-              {/* Sheet header: brand + close */}
-              <div className="flex items-center justify-between px-5 pt-2 pb-4 border-b border-white/[0.08]">
+              {/* Sheet header: brand + close — vše dole v kartě */}
+              <div className="flex items-center justify-between px-5 pt-2 pb-4 border-b border-white/[0.08] shrink-0">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0">
                     <Code2 className="w-4 h-4 text-black" />
@@ -341,7 +341,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
               {/* "Back home" row — only on project pages */}
               {isProjectPage && (
-                <div className="px-4 pt-3">
+                <div className="px-4 pt-3 shrink-0">
                   <Link
                     to="/"
                     onClick={closeMobileMenu}
@@ -356,8 +356,8 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
                 </div>
               )}
 
-              {/* Nav items — always the full 5 */}
-              <nav aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'} className="px-4 pt-2">
+              {/* Nav items — scrollovatelné, vše v kartě dole */}
+              <nav aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'} className="px-4 pt-2 overflow-y-auto min-h-0 flex-1">
                 <ul className="flex flex-col">
                   {mobileNavItems.map((item, i) => (
                     <motion.li
@@ -393,7 +393,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: mobileNavItems.length * 0.055 + 0.12, type: 'spring', stiffness: 300, damping: 28 }}
-                className="px-4 pt-3 pb-1"
+                className="px-4 pt-3 pb-1 shrink-0"
               >
                 <a
                   href={CONTACT_EMAIL}
