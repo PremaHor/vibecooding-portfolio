@@ -285,127 +285,117 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
       {/* ── Mobile bottom-sheet menu ── */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <div
+          <motion.div
+            key="mobile-menu-overlay"
             id="mobile-menu"
-            className="fixed inset-0 z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[60] md:hidden"
             role="dialog"
             aria-modal="true"
             aria-label={lang === 'cs' ? 'Navigační menu' : 'Navigation menu'}
           >
             {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+            <div
               className="absolute inset-0 bg-black/70 backdrop-blur-sm"
               onClick={closeMobileMenu}
             />
 
-            {/* Sheet — no overflow:hidden to avoid iOS Safari compositing bug */}
+            {/* Sheet — bottom-anchored card */}
             <motion.div
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
-              transition={{ type: 'spring', damping: 32, stiffness: 300, mass: 0.8 }}
-              drag="y"
-              dragConstraints={{ top: 0 }}
-              dragElastic={{ top: 0.03, bottom: 0.35 }}
-              onDragEnd={(_e, info) => {
-                if (info.offset.y > 80 || info.velocity.y > 500) closeMobileMenu();
-              }}
-              className="absolute bottom-0 left-0 right-0 rounded-t-[28px] bg-[var(--color-vibe-black)] text-white max-h-[65vh] flex flex-col"
-              style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300, mass: 0.85 }}
+              className="absolute bottom-0 left-0 right-0"
             >
-              {/* Drag handle */}
-              <div className="flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing shrink-0" aria-hidden="true">
-                <div className="w-10 h-[3px] rounded-full bg-white/20" />
-              </div>
-
-              {/* Sheet header: brand + close — vše dole v kartě */}
-              <div className="flex items-center justify-between px-5 pt-2 pb-4 border-b border-white/[0.08] shrink-0">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0">
-                    <Code2 className="w-4 h-4 text-black" />
-                  </div>
-                  <span className="font-display text-base text-white/75 tracking-wide">VIBECOODING</span>
-                </div>
-                <button
-                  onClick={closeMobileMenu}
-                  className="w-9 h-9 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all"
-                  aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* "Back home" row — only on project pages */}
-              {isProjectPage && (
-                <div className="px-4 pt-3 shrink-0">
-                  <Link
-                    to="/"
-                    onClick={closeMobileMenu}
-                    className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
-                  >
-                    <ArrowLeft className="w-4 h-4 text-white/40 group-hover:-translate-x-0.5 transition-transform shrink-0" />
-                    <span className="text-sm font-semibold text-white/60 group-hover:text-white/90 transition-colors">
-                      {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
-                    </span>
-                  </Link>
-                  <div className="h-px bg-white/[0.06] mx-3 mt-3" aria-hidden="true" />
-                </div>
-              )}
-
-              {/* Nav items — scrollovatelné, vše v kartě dole */}
-              <nav aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'} className="px-4 pt-2 overflow-y-auto min-h-0 flex-1">
-                <ul className="flex flex-col">
-                  {mobileNavItems.map((item, i) => (
-                    <motion.li
-                      key={item.href}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.055 + 0.08, type: 'spring', stiffness: 380, damping: 30 }}
-                    >
-                      <a
-                        href={item.href}
-                        onClick={closeMobileMenu}
-                        aria-label={item.ariaLabel}
-                        className="group flex items-center gap-4 px-3 py-[13px] rounded-xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
-                      >
-                        <span className="text-[10px] font-bold tabular-nums text-white/25 w-5 shrink-0 leading-none select-none">
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <span className="text-[1rem] font-bold tracking-tight text-white/80 group-hover:text-white transition-colors flex-1">
-                          {item.label}
-                        </span>
-                        <ArrowRight className="w-4 h-4 text-white/15 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-0.5 transition-all shrink-0" />
-                      </a>
-                      {i < mobileNavItems.length - 1 && (
-                        <div className="h-px bg-white/[0.05] mx-3" aria-hidden="true" />
-                      )}
-                    </motion.li>
-                  ))}
-                </ul>
-              </nav>
-
-              {/* CTA button */}
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: mobileNavItems.length * 0.055 + 0.12, type: 'spring', stiffness: 300, damping: 28 }}
-                className="px-4 pt-3 pb-1 shrink-0"
+              {/* Inner wrapper — handles overflow clipping without being transformed */}
+              <div
+                className="rounded-t-[28px] bg-[var(--color-vibe-black)] text-white max-h-[70vh] flex flex-col overflow-hidden"
+                style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}
               >
-                <a
-                  href={CONTACT_EMAIL}
-                  onClick={closeMobileMenu}
-                  className="flex items-center justify-center gap-2 min-h-[52px] w-full rounded-2xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black hover:brightness-110 active:scale-[0.98] transition-all"
-                >
-                  {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
-                  <ArrowRight className="w-4 h-4 shrink-0" />
-                </a>
-              </motion.div>
+                {/* Drag handle */}
+                <div className="flex justify-center pt-3 pb-1 shrink-0" aria-hidden="true">
+                  <div className="w-10 h-[3px] rounded-full bg-white/20" />
+                </div>
+
+                {/* Header: brand + close */}
+                <div className="flex items-center justify-between px-5 pt-2 pb-3 border-b border-white/[0.08] shrink-0">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0">
+                      <Code2 className="w-4 h-4 text-black" />
+                    </div>
+                    <span className="font-display text-base text-white/75 tracking-wide">VIBECOODING</span>
+                  </div>
+                  <button
+                    onClick={closeMobileMenu}
+                    className="w-9 h-9 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all"
+                    aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* "Back home" — only on project pages */}
+                {isProjectPage && (
+                  <div className="px-4 pt-3 shrink-0">
+                    <Link
+                      to="/"
+                      onClick={closeMobileMenu}
+                      className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
+                    >
+                      <ArrowLeft className="w-4 h-4 text-white/40 group-hover:-translate-x-0.5 transition-transform shrink-0" />
+                      <span className="text-sm font-semibold text-white/60 group-hover:text-white/90 transition-colors">
+                        {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
+                      </span>
+                    </Link>
+                    <div className="h-px bg-white/[0.06] mx-3 mt-3" aria-hidden="true" />
+                  </div>
+                )}
+
+                {/* Nav items */}
+                <nav aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'} className="px-4 pt-2 overflow-y-auto flex-1 min-h-0">
+                  <ul className="flex flex-col">
+                    {mobileNavItems.map((item, i) => (
+                      <li key={item.href}>
+                        <a
+                          href={item.href}
+                          onClick={closeMobileMenu}
+                          aria-label={item.ariaLabel}
+                          className="group flex items-center gap-4 px-3 py-[13px] rounded-xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
+                        >
+                          <span className="text-[10px] font-bold tabular-nums text-white/25 w-5 shrink-0 leading-none select-none">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <span className="text-[1rem] font-bold tracking-tight text-white/80 group-hover:text-white transition-colors flex-1">
+                            {item.label}
+                          </span>
+                          <ArrowRight className="w-4 h-4 text-white/15 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-0.5 transition-all shrink-0" />
+                        </a>
+                        {i < mobileNavItems.length - 1 && (
+                          <div className="h-px bg-white/[0.05] mx-3" aria-hidden="true" />
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+
+                {/* CTA */}
+                <div className="px-4 pt-3 pb-1 shrink-0">
+                  <a
+                    href={CONTACT_EMAIL}
+                    onClick={closeMobileMenu}
+                    className="flex items-center justify-center gap-2 min-h-[52px] w-full rounded-2xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black hover:brightness-110 active:scale-[0.98] transition-all"
+                  >
+                    {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
+                    <ArrowRight className="w-4 h-4 shrink-0" />
+                  </a>
+                </div>
+              </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
