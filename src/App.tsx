@@ -259,119 +259,99 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         </div>
       </nav>
 
-      {/* ── Full-screen mobile menu overlay ──
-           Full-screen is the only reliable pattern across iOS Safari, Chrome, Firefox mobile.
-           No positioning tricks, no overflow clipping on transformed elements. */}
+      {/* ── Full-screen mobile menu overlay ── */}
       <div
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
         aria-label={lang === 'cs' ? 'Navigační menu' : 'Navigation menu'}
-        className={`fixed inset-0 z-[60] md:hidden flex flex-col bg-[var(--color-vibe-black)] transition-[opacity,visibility] duration-300 ${
+        className={`fixed inset-0 z-[100] md:hidden bg-[var(--color-vibe-black)] transition-[opacity,visibility] duration-300 ${
           mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
-        {/* Top bar — mirrors the navbar */}
+        {/* ── Scrollable content wrapper — fills full screen, no overflow clipping bugs ── */}
         <div
-          className="flex items-center justify-between px-5 shrink-0 border-b border-white/[0.07]"
-          style={{
-            paddingTop: 'calc(1rem + env(safe-area-inset-top, 0px))',
-            paddingBottom: '1rem',
-          }}
+          className="h-full flex flex-col"
+          style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
-          <Link
-            to="/"
-            onClick={close}
-            className="flex items-center gap-2.5 group"
-            aria-label="Vibecooding, úvodní stránka"
-          >
-            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110">
-              <Code2 className="w-5 h-5 text-black" />
-            </div>
-            <span className="font-display text-xl text-white">VIBECOODING</span>
-          </Link>
 
-          <button
-            onClick={close}
-            className="w-11 h-11 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all"
-            aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
-          >
-            <X className="w-5 h-5 text-white" />
-          </button>
-        </div>
-
-        {/* Back-home row — project pages only */}
-        {isProjectPage && (
-          <div className="px-5 pt-5 shrink-0">
+          {/* Header — fixed height, never overlaps content */}
+          <div className="flex items-center justify-between px-5 h-16 shrink-0 border-b border-white/[0.07]">
             <Link
               to="/"
               onClick={close}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white/50 hover:text-white transition-colors"
+              className="flex items-center gap-2.5 group"
+              aria-label="Vibecooding, úvodní stránka"
             >
-              <ArrowLeft className="w-4 h-4" />
-              {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
+              <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110">
+                <Code2 className="w-5 h-5 text-black" />
+              </div>
+              <span className="font-display text-xl text-white">VIBECOODING</span>
             </Link>
+            <button
+              onClick={close}
+              className="w-11 h-11 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all shrink-0"
+              aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
+            >
+              <X className="w-5 h-5 text-white" />
+            </button>
           </div>
-        )}
 
-        {/* Nav items — large editorial typography, vertically centered */}
-        <nav
-          aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}
-          className="flex-1 flex flex-col justify-center px-5 overflow-y-auto"
-        >
-          <ul className="flex flex-col gap-1">
-            {mobileNavItems.map((item, i) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  onClick={close}
-                  className="group flex items-center justify-between py-4 border-b border-white/[0.07] last:border-0 transition-all duration-200 active:opacity-60"
-                  style={{
-                    opacity: mobileMenuOpen ? 1 : 0,
-                    transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(12px)',
-                    transitionDelay: mobileMenuOpen ? `${i * 45 + 80}ms` : '0ms',
-                    transitionProperty: 'opacity, transform',
-                    transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-                    transitionDuration: '400ms',
-                  }}
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-[11px] font-bold tabular-nums text-white/25 w-5 leading-none select-none">
+          {/* Back-home — project pages only */}
+          {isProjectPage && (
+            <div className="px-6 pt-6 pb-2 shrink-0">
+              <Link
+                to="/"
+                onClick={close}
+                className="inline-flex items-center gap-2 text-sm font-semibold text-white/50 hover:text-white transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
+              </Link>
+            </div>
+          )}
+
+          {/* Nav items — flex-1 pushes CTA to the bottom, overflow-y-auto handles small screens */}
+          <nav
+            aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}
+            className="flex-1 overflow-y-auto px-5 py-6"
+          >
+            <ul className="flex flex-col">
+              {mobileNavItems.map((item, i) => (
+                <li key={item.href} className="border-b border-white/[0.07] last:border-0">
+                  <a
+                    href={item.href}
+                    onClick={close}
+                    className="group flex items-center gap-5 py-5 w-full active:opacity-60 transition-opacity duration-100"
+                  >
+                    {/* Number — fixed width so labels align perfectly */}
+                    <span className="text-[11px] font-bold tabular-nums text-white/25 w-8 shrink-0 leading-none select-none">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="font-display text-[1.65rem] leading-tight text-white/85 group-hover:text-white transition-colors duration-200">
+                    {/* Label */}
+                    <span className="font-display text-[1.7rem] leading-none text-white/85 group-hover:text-white transition-colors duration-200 flex-1">
                       {item.label}
                     </span>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-1 transition-all duration-200 shrink-0" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+                    {/* Arrow */}
+                    <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-1 transition-all duration-200 shrink-0" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        {/* Bottom CTA — always reachable by thumb */}
-        <div
-          className="px-5 shrink-0"
-          style={{
-            paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))',
-            paddingTop: '1rem',
-            opacity: mobileMenuOpen ? 1 : 0,
-            transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(8px)',
-            transitionProperty: 'opacity, transform',
-            transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-            transitionDuration: '400ms',
-            transitionDelay: mobileMenuOpen ? `${mobileNavItems.length * 45 + 120}ms` : '0ms',
-          }}
-        >
-          <a
-            href={CONTACT_EMAIL}
-            onClick={close}
-            className="flex items-center justify-center gap-2.5 w-full min-h-[54px] rounded-2xl bg-[var(--color-vibe-orange)] text-black text-sm font-bold uppercase tracking-[0.15em] hover:brightness-110 active:scale-[0.98] transition-all duration-200"
-          >
-            {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
-            <ArrowRight className="w-4 h-4 shrink-0" />
-          </a>
+          {/* CTA — always at the bottom, thumb-reachable */}
+          <div className="px-5 pt-4 pb-5 shrink-0">
+            <a
+              href={CONTACT_EMAIL}
+              onClick={close}
+              className="flex items-center justify-center gap-2.5 w-full min-h-[54px] rounded-2xl bg-[var(--color-vibe-orange)] text-black text-sm font-bold uppercase tracking-[0.15em] hover:brightness-110 active:scale-[0.98] transition-all duration-200"
+            >
+              {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
+              <ArrowRight className="w-4 h-4 shrink-0" />
+            </a>
+          </div>
+
         </div>
       </div>
     </>
