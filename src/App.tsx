@@ -133,32 +133,6 @@ const PROJECTS: Project[] = [
 
 // --- Components ---
 
-const AnimatedHamburger = ({ isOpen, theme }: { isOpen: boolean; theme: 'light' | 'dark' }) => {
-  const lineStyle = { backgroundColor: theme === 'dark' ? '#ffffff' : '#000000' };
-  return (
-    <div className="relative w-5 h-[14px] flex-shrink-0" aria-hidden="true">
-      <motion.span
-        className="absolute left-0 w-5 h-[2px] rounded-full top-0"
-        style={lineStyle}
-        animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-      />
-      <motion.span
-        className="absolute left-0 w-5 h-[2px] rounded-full top-[6px]"
-        style={lineStyle}
-        animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-        transition={{ duration: 0.15 }}
-      />
-      <motion.span
-        className="absolute left-0 w-5 h-[2px] rounded-full top-[12px]"
-        style={lineStyle}
-        animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-      />
-    </div>
-  );
-};
-
 const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPage?: boolean }) => {
   const { t, lang } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
@@ -179,47 +153,25 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
   }, []);
 
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMobileMenuOpen(false);
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileMenuOpen(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
   }, [mobileMenuOpen]);
 
-  const closeMobileMenu = () => setMobileMenuOpen(false);
+  const close = () => setMobileMenuOpen(false);
 
-  // Desktop nav links
-  const navLinks = !isProjectPage ? (
-    <>
-      <a href="#work" className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</a>
-      <a href="#process" className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.process) : fixDashes(t.nav.process)}</a>
-      <a href="#about" className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.about) : fixDashes(t.nav.about)}</a>
-      <a href="#services" className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}</a>
-      <a href={CONTACT_EMAIL} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}</a>
-    </>
-  ) : (
-    <Link to="/" className={`hover:text-current transition-colors flex items-center gap-2 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>
-      <ArrowLeft className="w-4 h-4" /> {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
-    </Link>
-  );
-
-  // Položky v mobilní kartě mezi VIBECOODING a Napsat zprávu
   const mobileNavItems = [
-    { href: '#work',    label: lang === 'cs' ? fixCzechTypography(t.nav.work)     : fixDashes(t.nav.work),     ariaLabel: lang === 'cs' ? 'Přejít na sekci Práce'         : 'Go to Work section' },
-    { href: '#process', label: lang === 'cs' ? fixCzechTypography(t.nav.process)  : fixDashes(t.nav.process),  ariaLabel: lang === 'cs' ? 'Přejít na sekci Jak pracuji'   : 'Go to Process section' },
-    { href: '#about',   label: lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about),    ariaLabel: lang === 'cs' ? 'Přejít na sekci O mně'         : 'Go to About section' },
-    { href: '#services',label: lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services), ariaLabel: lang === 'cs' ? 'Přejít na sekci Čemu se věnuji': 'Go to Services section' },
-    { href: CONTACT_EMAIL, label: lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact), ariaLabel: lang === 'cs' ? 'Kontaktovat e-mailem' : 'Contact by email' },
+    { href: '#work',       label: lang === 'cs' ? fixCzechTypography(t.nav.work)     : fixDashes(t.nav.work) },
+    { href: '#process',    label: lang === 'cs' ? fixCzechTypography(t.nav.process)  : fixDashes(t.nav.process) },
+    { href: '#about',      label: lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about) },
+    { href: '#services',   label: lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services) },
+    { href: CONTACT_EMAIL, label: lang === 'cs' ? fixCzechTypography(t.nav.contact)  : fixDashes(t.nav.contact) },
   ];
 
   return (
@@ -228,13 +180,14 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         {lang === 'cs' ? 'Přeskočit na obsah' : 'Skip to content'}
       </a>
 
-      {/* Top nav bar */}
+      {/* ── Desktop / top navbar ── */}
       <nav
         className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center gap-2 transition-all duration-500 safe-area-inset-top min-w-0 ${
           scrolled ? 'bg-black/10 backdrop-blur-xl py-3' : 'bg-transparent'
         } ${theme === 'dark' ? 'text-white' : 'text-black'}`}
         aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}
       >
+        {/* Logo */}
         <Link
           to="/"
           className="flex items-center gap-2 group min-w-0 shrink"
@@ -249,12 +202,26 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           <span className="font-display text-xl sm:text-2xl truncate">VIBECOODING</span>
         </Link>
 
+        {/* Desktop links */}
         <div className={`hidden md:flex gap-6 lg:gap-8 text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-500 ${
           theme === 'dark' ? 'text-white/70' : 'text-black/70'
         }`}>
-          {navLinks}
+          {!isProjectPage ? (
+            <>
+              <a href="#work"     className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.work)     : fixDashes(t.nav.work)}</a>
+              <a href="#process"  className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.process)  : fixDashes(t.nav.process)}</a>
+              <a href="#about"    className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about)}</a>
+              <a href="#services" className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}</a>
+              <a href={CONTACT_EMAIL} className={`hover:text-current transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.contact) : fixDashes(t.nav.contact)}</a>
+            </>
+          ) : (
+            <Link to="/" className={`hover:text-current transition-colors flex items-center gap-2 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>
+              <ArrowLeft className="w-4 h-4" /> {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
+            </Link>
+          )}
         </div>
 
+        {/* Desktop CTA + mobile hamburger */}
         <div className="flex items-center gap-2 sm:gap-4">
           <a
             href={CONTACT_EMAIL}
@@ -266,9 +233,11 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           >
             {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
           </a>
+
+          {/* Hamburger — 3 lines morph to X via CSS */}
           <button
             onClick={() => setMobileMenuOpen(v => !v)}
-            className={`md:hidden p-3 -mr-1 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors ${
+            className={`md:hidden flex flex-col justify-center items-center w-11 h-11 gap-[5px] rounded-lg transition-colors -mr-1 ${
               theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-black/10'
             }`}
             aria-label={mobileMenuOpen
@@ -277,106 +246,128 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
           >
-            <AnimatedHamburger isOpen={mobileMenuOpen} theme={theme} />
+            <span className={`block w-5 h-[2px] rounded-full transition-all duration-300 origin-center ${
+              theme === 'dark' ? 'bg-white' : 'bg-black'
+            } ${mobileMenuOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
+            <span className={`block w-5 h-[2px] rounded-full transition-all duration-150 ${
+              theme === 'dark' ? 'bg-white' : 'bg-black'
+            } ${mobileMenuOpen ? 'opacity-0 scale-x-0' : ''}`} />
+            <span className={`block w-5 h-[2px] rounded-full transition-all duration-300 origin-center ${
+              theme === 'dark' ? 'bg-white' : 'bg-black'
+            } ${mobileMenuOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
           </button>
         </div>
       </nav>
 
-      {/* ── Backdrop ── */}
-      <div
-        className={`fixed inset-0 z-[60] md:hidden bg-black/70 backdrop-blur-sm transition-[visibility,opacity] duration-300 ${
-          mobileMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
-        }`}
-        onClick={closeMobileMenu}
-        aria-hidden="true"
-      />
-
-      {/* ── Mobile bottom-sheet ── */}
+      {/* ── Full-screen mobile menu overlay ──
+           Full-screen is the only reliable pattern across iOS Safari, Chrome, Firefox mobile.
+           No positioning tricks, no overflow clipping on transformed elements. */}
       <div
         id="mobile-menu"
         role="dialog"
-        aria-modal={mobileMenuOpen ? 'true' : undefined}
+        aria-modal="true"
         aria-label={lang === 'cs' ? 'Navigační menu' : 'Navigation menu'}
-        className={`fixed bottom-0 left-0 right-0 z-[61] md:hidden rounded-t-[28px] bg-[var(--color-vibe-black)] text-white flex flex-col overflow-hidden transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-          mobileMenuOpen ? 'translate-y-0' : 'translate-y-full'
+        className={`fixed inset-0 z-[60] md:hidden flex flex-col bg-[var(--color-vibe-black)] transition-[opacity,visibility] duration-300 ${
+          mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
-        style={{
-          maxHeight: 'calc(85vh - env(safe-area-inset-top, 0px))',
-          paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))',
-        }}
       >
-        {/* Drag handle */}
-        <div className="flex justify-center pt-3 pb-1 shrink-0" aria-hidden="true">
-          <div className="w-10 h-[3px] rounded-full bg-white/20" />
-        </div>
-
-        {/* Header: brand + close */}
-        <div className="flex items-center justify-between px-5 pt-2 pb-3 border-b border-white/[0.08] shrink-0">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0">
-              <Code2 className="w-4 h-4 text-black" />
+        {/* Top bar — mirrors the navbar */}
+        <div
+          className="flex items-center justify-between px-5 shrink-0 border-b border-white/[0.07]"
+          style={{
+            paddingTop: 'calc(1rem + env(safe-area-inset-top, 0px))',
+            paddingBottom: '1rem',
+          }}
+        >
+          <Link
+            to="/"
+            onClick={close}
+            className="flex items-center gap-2.5 group"
+            aria-label="Vibecooding, úvodní stránka"
+          >
+            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110">
+              <Code2 className="w-5 h-5 text-black" />
             </div>
-            <span className="font-display text-base text-white/75 tracking-wide">VIBECOODING</span>
-          </div>
+            <span className="font-display text-xl text-white">VIBECOODING</span>
+          </Link>
+
           <button
-            onClick={closeMobileMenu}
-            className="w-9 h-9 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all"
+            onClick={close}
+            className="w-11 h-11 rounded-full bg-white/[0.08] flex items-center justify-center hover:bg-white/15 active:scale-95 transition-all"
             aria-label={lang === 'cs' ? fixCzechTypography(t.nav.closeMenu) : fixDashes(t.nav.closeMenu)}
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5 text-white" />
           </button>
         </div>
 
-        {/* "Back home" — only on project pages */}
+        {/* Back-home row — project pages only */}
         {isProjectPage && (
-          <div className="px-4 pt-3 shrink-0">
+          <div className="px-5 pt-5 shrink-0">
             <Link
               to="/"
-              onClick={closeMobileMenu}
-              className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
+              onClick={close}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-white/50 hover:text-white transition-colors"
             >
-              <ArrowLeft className="w-4 h-4 text-white/40 group-hover:-translate-x-0.5 transition-transform shrink-0" />
-              <span className="text-sm font-semibold text-white/60 group-hover:text-white/90 transition-colors">
-                {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
-              </span>
+              <ArrowLeft className="w-4 h-4" />
+              {lang === 'cs' ? fixCzechTypography(t.nav.backHome) : fixDashes(t.nav.backHome)}
             </Link>
-            <div className="h-px bg-white/[0.06] mx-3 mt-3" aria-hidden="true" />
           </div>
         )}
 
-        {/* Nav items — scrollable if needed */}
-        <nav aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'} className="px-4 pt-2 overflow-y-auto flex-1 min-h-0">
-          <ul className="flex flex-col">
+        {/* Nav items — large editorial typography, vertically centered */}
+        <nav
+          aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}
+          className="flex-1 flex flex-col justify-center px-5 overflow-y-auto"
+        >
+          <ul className="flex flex-col gap-1">
             {mobileNavItems.map((item, i) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  onClick={closeMobileMenu}
-                  aria-label={item.ariaLabel}
-                  className="group flex items-center gap-4 px-3 py-[13px] rounded-xl hover:bg-white/[0.06] active:bg-white/10 transition-colors"
+                  onClick={close}
+                  className="group flex items-center justify-between py-4 border-b border-white/[0.07] last:border-0 transition-all duration-200 active:opacity-60"
+                  style={{
+                    opacity: mobileMenuOpen ? 1 : 0,
+                    transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(12px)',
+                    transitionDelay: mobileMenuOpen ? `${i * 45 + 80}ms` : '0ms',
+                    transitionProperty: 'opacity, transform',
+                    transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    transitionDuration: '400ms',
+                  }}
                 >
-                  <span className="text-[10px] font-bold tabular-nums text-white/25 w-5 shrink-0 leading-none select-none">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-[1rem] font-bold tracking-tight text-white/80 group-hover:text-white transition-colors flex-1">
-                    {item.label}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-white/15 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-0.5 transition-all shrink-0" />
+                  <div className="flex items-center gap-4">
+                    <span className="text-[11px] font-bold tabular-nums text-white/25 w-5 leading-none select-none">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="font-display text-[1.65rem] leading-tight text-white/85 group-hover:text-white transition-colors duration-200">
+                      {item.label}
+                    </span>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-[var(--color-vibe-orange)] group-hover:translate-x-1 transition-all duration-200 shrink-0" />
                 </a>
-                {i < mobileNavItems.length - 1 && (
-                  <div className="h-px bg-white/[0.05] mx-3" aria-hidden="true" />
-                )}
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* CTA */}
-        <div className="px-4 pt-3 pb-1 shrink-0">
+        {/* Bottom CTA — always reachable by thumb */}
+        <div
+          className="px-5 shrink-0"
+          style={{
+            paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))',
+            paddingTop: '1rem',
+            opacity: mobileMenuOpen ? 1 : 0,
+            transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(8px)',
+            transitionProperty: 'opacity, transform',
+            transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            transitionDuration: '400ms',
+            transitionDelay: mobileMenuOpen ? `${mobileNavItems.length * 45 + 120}ms` : '0ms',
+          }}
+        >
           <a
             href={CONTACT_EMAIL}
-            onClick={closeMobileMenu}
-            className="flex items-center justify-center gap-2 min-h-[52px] w-full rounded-2xl text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black hover:brightness-110 active:scale-[0.98] transition-all"
+            onClick={close}
+            className="flex items-center justify-center gap-2.5 w-full min-h-[54px] rounded-2xl bg-[var(--color-vibe-orange)] text-black text-sm font-bold uppercase tracking-[0.15em] hover:brightness-110 active:scale-[0.98] transition-all duration-200"
           >
             {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
             <ArrowRight className="w-4 h-4 shrink-0" />
