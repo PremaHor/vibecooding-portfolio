@@ -472,7 +472,7 @@ const PROCESS_STEPS = [
 const ProcessSection = () => {
   const { t, lang } = useLanguage();
   return (
-    <section id="process" className="relative bg-slate-50 text-black py-20 sm:py-28 md:py-36 lg:py-48 content-visibility-auto" aria-labelledby="process-heading">
+    <section id="process" className="relative bg-slate-50 text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="process-heading">
       <h2 id="process-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}</h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <motion.div
@@ -521,7 +521,7 @@ const WorkSection = () => {
   const { t, lang } = useLanguage();
   const isMobile = useIsMobile();
   return (
-    <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48 content-visibility-auto" aria-labelledby="work-heading">
+    <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="work-heading">
       <h2 id="work-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.nav.work) : fixDashes(t.nav.work)}</h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <motion.div
@@ -629,7 +629,7 @@ const ServicesPricingSection = () => {
   const { t, lang } = useLanguage();
 
   return (
-    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden content-visibility-auto">
+    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
       <div id="pricing" className="absolute top-0 left-0 -translate-y-24" aria-hidden />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
       
@@ -650,10 +650,10 @@ const ServicesPricingSection = () => {
             return (
               <motion.article
                 key={key}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
                 className="flex flex-col border border-white/10 rounded-2xl lg:rounded-[1.75rem] overflow-hidden hover:border-white/20 hover:bg-white/[0.03] transition-colors"
               >
                 <div className="p-6 sm:p-8 flex flex-col flex-1">
@@ -718,7 +718,7 @@ const ServicesPricingSection = () => {
 const AboutSection = () => {
   const { t, lang } = useLanguage();
   return (
-    <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden content-visibility-auto">
+    <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden">
       {/* Tmavé pozadí + jemný gradient - vizuální oddělení od portfolia */}
       <div className="absolute inset-0 bg-[var(--color-vibe-black)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(242,125,38,0.06),transparent_50%)]" aria-hidden />
@@ -876,10 +876,10 @@ const CompetitiveAdvantageSection = () => {
           {COMPETITIVE_CARDS.map(({ icon: Icon, key }, idx) => (
             <motion.article
               key={key}
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="group relative p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[var(--color-vibe-orange)]/30 hover:bg-white/[0.05] transition-all duration-500 flex flex-col"
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 group-hover:scale-110 transition-transform duration-300">
