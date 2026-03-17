@@ -554,10 +554,10 @@ function ProjectCard({ project, index, isMobile }: { project: Project, index: nu
   
   return (
     <motion.article 
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="group relative"
     >
       <Link to={`/project/${project.slug}`} className="block relative">
@@ -688,10 +688,10 @@ const ServicesPricingSection = () => {
         {/* Rychlý audit zdarma - lead magnet */}
         <motion.a
           href={CONTACT_EMAIL}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true, amount: 0, margin: '0px 0px -60px 0px' }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-all duration-300 group"
         >
           <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
@@ -728,10 +728,10 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 lg:gap-20 items-start">
           {/* Levý sloupec: fotka + hodnoty */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
+            transition={{ duration: 0.6 }}
             className="lg:col-span-5 space-y-10 sm:space-y-12"
           >
             <div className="aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden ring-1 ring-white/10">
@@ -756,10 +756,10 @@ const AboutSection = () => {
               {[t.about.value1, t.about.value2, t.about.value3].map((value, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0, margin: '0px 0px -60px 0px' }}
+                  transition={{ duration: 0.45, delay: i * 0.07 }}
                   className="group flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[var(--color-vibe-orange)]/20 hover:bg-white/[0.05] transition-all duration-300"
                 >
                   <span className="shrink-0 w-1 h-1 mt-2 rounded-full bg-[var(--color-vibe-orange)]" />
@@ -773,10 +773,10 @@ const AboutSection = () => {
 
           {/* Pravý sloupec: text */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
+            transition={{ duration: 0.6, delay: 0.08 }}
             className="lg:col-span-7 space-y-6 sm:space-y-8"
           >
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase leading-[1.08] text-white">
@@ -856,10 +856,10 @@ const CompetitiveAdvantageSection = () => {
       
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
+          transition={{ duration: 0.6 }}
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.12] mb-6 sm:mb-8 text-white">
             {lang === 'cs' ? fixCzechTypography(t.competitiveAdvantage.title) : fixDashes(t.competitiveAdvantage.title)}
