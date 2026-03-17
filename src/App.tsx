@@ -1390,9 +1390,7 @@ const ProjectPage = () => {
 };
 
 export default function App() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [navTheme, setNavTheme] = useState<'light' | 'dark'>('dark');
-  const [isHovering, setIsHovering] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -1423,14 +1421,6 @@ export default function App() {
         lenisFrameCancelRef.current = () => cancelFrame(onFrame);
       });
     }
-
-    const isDesktop = window.matchMedia('(min-width: 768px)').matches;
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-      const target = e.target as HTMLElement;
-      const isInteractive = target.closest('a, button, [role="button"]');
-      setIsHovering(!!isInteractive);
-    };
 
     let scrollTicking = false;
     const handleScroll = () => {
@@ -1465,12 +1455,10 @@ export default function App() {
       });
     };
 
-    if (isDesktop) window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     return () => {
-      if (isDesktop) window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
       lenisFrameCancelRef.current?.();
       lenisFrameCancelRef.current = null;
@@ -1483,25 +1471,6 @@ export default function App() {
     <div className="relative min-h-screen selection:bg-[var(--color-vibe-orange)] selection:text-black">
       {/* Noise Overlay */}
       <div className="noise-overlay" />
-      
-      <motion.div 
-        className="fixed w-10 h-10 rounded-full pointer-events-none z-[100] flex items-center justify-center bg-white text-black hidden md:flex"
-        animate={{ 
-          x: mousePos.x - 20, 
-          y: mousePos.y - 20,
-          scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? "#F27D26" : "#FFFFFF"
-        }}
-        transition={{ 
-          type: 'spring', 
-          damping: 25, 
-          stiffness: 250, 
-          mass: 0.5,
-          backgroundColor: { duration: 0.3 }
-        }}
-      >
-        <Code2 className="w-5 h-5" />
-      </motion.div>
       
       <AnimatePresence mode="wait">
         <motion.div 
