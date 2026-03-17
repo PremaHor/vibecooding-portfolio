@@ -49,12 +49,12 @@ export function CookieConsentBanner() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="fixed bottom-0 left-0 right-0 z-[9999] p-4 sm:p-6 safe-area-inset-bottom"
+          className="fixed bottom-0 left-0 right-0 z-[9999] p-4 sm:p-6 safe-area-inset-bottom pointer-events-none"
           role="dialog"
           aria-labelledby="cookie-consent-title"
           aria-describedby="cookie-consent-desc"
         >
-          <div className="max-w-2xl mx-auto bg-[#0f0f0f] border border-white/10 rounded-2xl shadow-2xl p-5 sm:p-6 md:p-8">
+          <div className="max-w-2xl mx-auto bg-[#0f0f0f] border border-white/10 rounded-2xl shadow-2xl p-5 sm:p-6 md:p-8 pointer-events-auto">
             <div className="flex gap-4 sm:gap-5">
               <div className="shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)]">
                 <Cookie className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden />
