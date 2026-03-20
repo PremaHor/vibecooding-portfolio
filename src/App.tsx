@@ -989,7 +989,7 @@ const FAQSection = () => {
 };
 
 const FORMSPREE_URL = 'https://formspree.io/f/mjkebwwp';
-const RECAPTCHA_SITE_KEY = '6LdXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+const RECAPTCHA_SITE_KEY = '6LdmmJEsAAAAAJuJYP_R6yhyFrOGTsKF1A8ml6ZF';
 
 const ContactSection = () => {
   const { t, lang } = useLanguage();
