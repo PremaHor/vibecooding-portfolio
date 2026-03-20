@@ -33,6 +33,7 @@ import { CookieConsentBanner } from './components/CookieConsentBanner';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 const PrivacyPage = lazy(() => import('./components/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
+const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 // --- Types ---
 interface Project {
@@ -1662,6 +1663,7 @@ export default function App() {
             <Route path="/" element={<HomePage navTheme={navTheme} />} />
             <Route path="/project/:slug" element={<ProjectPage />} />
             <Route path="/ochrana-soukromi" element={<Suspense fallback={null}><PrivacyPage /></Suspense>} />
+            <Route path="*" element={<Suspense fallback={null}><NotFoundPage /></Suspense>} />
           </Routes>
         </motion.div>
       </AnimatePresence>

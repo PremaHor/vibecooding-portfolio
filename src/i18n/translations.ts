@@ -181,6 +181,14 @@ export const translations = {
       reject: 'Odmítnout vše',
       privacyLink: 'Zásady ochrany soukromí',
     },
+    notFound: {
+      artboardLabel: 'Chybová stránka v0.1',
+      title: '404: Design not found',
+      description: 'Tuhle stránku jsem ještě nenastyloval… a popravdě ani nenaprogramoval. Ale ta bílá plocha kolem vypadá docela minimalisticky, že?',
+      button: 'Zpět do reality (Domů)',
+      dimensions: 'W: 404px  H: undefined',
+      cursorLabel: 'Zapomenutý kurzor',
+    },
     privacy: {
       title: 'Zásady ochrany soukromí',
       lastUpdated: 'Poslední aktualizace: březen 2026',
@@ -452,6 +460,14 @@ export const translations = {
       acceptAll: 'Accept all',
       reject: 'Reject all',
       privacyLink: 'Privacy policy',
+    },
+    notFound: {
+      artboardLabel: 'Error page v0.1',
+      title: '404: Design not found',
+      description: "I haven't styled this page yet… and honestly, haven't coded it either. But the white space around it looks quite minimalist, don't you think?",
+      button: 'Back to reality (Home)',
+      dimensions: 'W: 404px  H: undefined',
+      cursorLabel: 'Forgotten cursor',
     },
     privacy: {
       title: 'Privacy Policy',
