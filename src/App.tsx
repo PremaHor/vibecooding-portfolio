@@ -24,7 +24,10 @@ import {
   Lightbulb,
   PenTool,
   Layers,
-  Server
+  Server,
+  Send,
+  CheckCircle,
+  AlertCircle
 } from 'lucide-react';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 
@@ -984,20 +987,47 @@ const FAQSection = () => {
   );
 };
 
+const FORMSPREE_URL = 'https://formspree.io/f/XXXXX';
+
 const ContactSection = () => {
   const { t, lang } = useLanguage();
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('sending');
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        body: new FormData(e.currentTarget),
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        setFormStatus('success');
+        formRef.current?.reset();
+      } else {
+        setFormStatus('error');
+      }
+    } catch {
+      setFormStatus('error');
+    }
+  };
+
+  const f = t.contact.form;
+
   return (
   <section id="contact" className="py-24 sm:py-32 md:py-40 lg:py-52 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-orange)] text-black relative overflow-hidden">
-    {/* Decorative Elements */}
     <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/5 to-transparent" />
     <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-black/10 rounded-full blur-3xl" />
-    
-    <div className="max-w-7xl mx-auto text-center relative z-10">
+
+    <div className="max-w-7xl mx-auto relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1 }}
+        className="text-center"
       >
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase leading-[1.08] mb-8 sm:mb-10">
           {lang === 'cs' ? fixCzechTypography(t.contact.title) : fixDashes(t.contact.title)}
@@ -1007,56 +1037,158 @@ const ContactSection = () => {
         </p>
       </motion.div>
 
-      <div className="flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-12 mb-20 sm:mb-24 md:mb-32">
-        <motion.a 
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          href={CONTACT_EMAIL} 
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-colors duration-300 text-center break-words"
-          aria-label={lang === 'cs' ? 'Napsat e-mail na horakpremysl85@gmail.com' : 'Send email to horakpremysl85@gmail.com'}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        {/* Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          horakpremysl85@gmail.com
-        </motion.a>
-        
-        <div className="hidden md:block w-3 h-3 bg-black rounded-full animate-pulse shrink-0" />
-        
-        <motion.a 
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          href={CONTACT_EMAIL}
-          className="bg-black text-white px-8 sm:px-10 md:px-12 py-4 sm:py-5 rounded-full text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-colors duration-300 text-center"
-        >
-          {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : fixDashes(t.contact.writeMessage)}
-        </motion.a>
-      </div>
-      
-      <div className="flex flex-wrap justify-center gap-6 sm:gap-10 md:gap-16 border-t border-black/20 pt-12 sm:pt-16">
-        {[
-          { name: 'LinkedIn', icon: <Linkedin className="w-5 h-5" />, url: 'https://www.linkedin.com/in/p%C5%99emysl-hor%C3%A1k-0590a5326' },
-          { name: 'Behance', icon: (
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.268 14.584h-4.841c.314 1.813 2.142 2.021 3.272 1.233.194-.134.541-.503.541-.503l1.705 1.307s-.746 1.059-1.589 1.662c-1.356.971-3.674 1.409-5.49.615-2.845-1.245-2.976-4.413-2.134-6.62.981-2.575 4.477-3.179 6.726-1.511 2.212 1.638 2.036 5.271 1.81 6.317zm-1.691-1.896c.144-1.419-.851-2.423-2.104-2.403-1.272.019-2.24 1.022-2.433 2.403h4.537zm-18.677 4.712h-2.9v-10.2h5.5c2.35 0 3.1 1.25 3.1 2.35 0 1.1-.9 1.9-1.8 2.15 1.1.35 2.1 1.4 2.1 2.85 0 1.45-1.15 2.85-3.5 2.85h-2.5zm0-6h2.2c.8 0 1.2-.45 1.2-1.1 0-.65-.4-1.1-1.2-1.1h-2.2v2.2zm0 3.8h2.5c.85 0 1.4-.45 1.4-1.25 0-.8-.55-1.25-1.4-1.25h-2.5v2.5zm15.1-6.4h4.8v1.1h-4.8v-1.1z"/>
-            </svg>
-          ), url: 'https://www.behance.net/dobryux' },
-          { name: 'GitHub', icon: <Github className="w-5 h-5" />, url: 'https://github.com/PremaHor' },
-          { name: 'X (Twitter)', icon: (
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.294 19.497h2.039L6.482 3.239H4.293l13.314 17.411z"/>
-            </svg>
-          ), url: 'https://x.com/horakpremysl85' }
-        ].map(social => (
-          <motion.a 
-            key={social.name}
-            whileHover={{ y: -3, color: "#FFFFFF" }}
-            href={social.url} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="flex items-center gap-2 sm:gap-3 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] transition-colors duration-300"
-            aria-label={`${social.name}, ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
+          <form
+            ref={formRef}
+            action={FORMSPREE_URL}
+            method="POST"
+            onSubmit={handleSubmit}
+            className="bg-black/[0.06] backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl border border-black/10 space-y-5"
           >
-            {social.icon} {social.name}
+            <input type="hidden" name="_subject" value={lang === 'cs' ? 'Nová zpráva z webu vibecooding.cz' : 'New message from vibecooding.cz'} />
+
+            <div>
+              <label htmlFor="full-name" className="block text-sm font-bold uppercase tracking-[0.15em] mb-2">{f.name}</label>
+              <input
+                type="text"
+                id="full-name"
+                name="full-name"
+                placeholder={f.namePlaceholder}
+                className="w-full px-4 py-3.5 rounded-xl bg-white/60 border border-black/10 text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-black/30 focus:bg-white/80 transition-all duration-200"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-bold uppercase tracking-[0.15em] mb-2">{f.email} *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder={f.emailPlaceholder}
+                className="w-full px-4 py-3.5 rounded-xl bg-white/60 border border-black/10 text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-black/30 focus:bg-white/80 transition-all duration-200"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="subject" className="block text-sm font-bold uppercase tracking-[0.15em] mb-2">{f.subject}</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder={f.subjectPlaceholder}
+                className="w-full px-4 py-3.5 rounded-xl bg-white/60 border border-black/10 text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-black/30 focus:bg-white/80 transition-all duration-200"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm font-bold uppercase tracking-[0.15em] mb-2">{f.message} *</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                placeholder={f.messagePlaceholder}
+                className="w-full px-4 py-3.5 rounded-xl bg-white/60 border border-black/10 text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-black/30 focus:bg-white/80 transition-all duration-200 resize-y min-h-[120px]"
+              />
+            </div>
+
+            <motion.button
+              type="submit"
+              disabled={formStatus === 'sending'}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-4.5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {formStatus === 'sending' ? (
+                <>{f.sending}</>
+              ) : (
+                <><Send className="w-4 h-4" /> {f.submit}</>
+              )}
+            </motion.button>
+
+            {formStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 text-sm font-medium text-emerald-900 bg-emerald-100/80 rounded-xl px-4 py-3"
+              >
+                <CheckCircle className="w-4 h-4 shrink-0" />
+                {lang === 'cs' ? fixCzechTypography(f.success) : fixDashes(f.success)}
+              </motion.div>
+            )}
+
+            {formStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 text-sm font-medium text-red-900 bg-red-100/80 rounded-xl px-4 py-3"
+              >
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                {lang === 'cs' ? fixCzechTypography(f.error) : fixDashes(f.error)}
+              </motion.div>
+            )}
+
+            <p className="text-[11px] text-black/50 text-center pt-1">
+              {lang === 'cs' ? fixCzechTypography(f.gdpr) : fixDashes(f.gdpr)}
+            </p>
+          </form>
+        </motion.div>
+
+        {/* Right column: email + socials */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="flex flex-col items-center lg:items-start gap-10 lg:pt-8"
+        >
+          <motion.a
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            href={CONTACT_EMAIL}
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-colors duration-300 text-center lg:text-left break-words"
+            aria-label={lang === 'cs' ? 'Napsat e-mail na horakpremysl85@gmail.com' : 'Send email to horakpremysl85@gmail.com'}
+          >
+            horakpremysl85@gmail.com
           </motion.a>
-        ))}
+
+          <div className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-8">
+            {[
+              { name: 'LinkedIn', icon: <Linkedin className="w-5 h-5" />, url: 'https://www.linkedin.com/in/p%C5%99emysl-hor%C3%A1k-0590a5326' },
+              { name: 'Behance', icon: (
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.268 14.584h-4.841c.314 1.813 2.142 2.021 3.272 1.233.194-.134.541-.503.541-.503l1.705 1.307s-.746 1.059-1.589 1.662c-1.356.971-3.674 1.409-5.49.615-2.845-1.245-2.976-4.413-2.134-6.62.981-2.575 4.477-3.179 6.726-1.511 2.212 1.638 2.036 5.271 1.81 6.317zm-1.691-1.896c.144-1.419-.851-2.423-2.104-2.403-1.272.019-2.24 1.022-2.433 2.403h4.537zm-18.677 4.712h-2.9v-10.2h5.5c2.35 0 3.1 1.25 3.1 2.35 0 1.1-.9 1.9-1.8 2.15 1.1.35 2.1 1.4 2.1 2.85 0 1.45-1.15 2.85-3.5 2.85h-2.5zm0-6h2.2c.8 0 1.2-.45 1.2-1.1 0-.65-.4-1.1-1.2-1.1h-2.2v2.2zm0 3.8h2.5c.85 0 1.4-.45 1.4-1.25 0-.8-.55-1.25-1.4-1.25h-2.5v2.5zm15.1-6.4h4.8v1.1h-4.8v-1.1z"/>
+                </svg>
+              ), url: 'https://www.behance.net/dobryux' },
+              { name: 'GitHub', icon: <Github className="w-5 h-5" />, url: 'https://github.com/PremaHor' },
+              { name: 'X (Twitter)', icon: (
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.294 19.497h2.039L6.482 3.239H4.293l13.314 17.411z"/>
+                </svg>
+              ), url: 'https://x.com/horakpremysl85' }
+            ].map(social => (
+              <motion.a
+                key={social.name}
+                whileHover={{ y: -3, color: '#FFFFFF' }}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 sm:gap-3 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] transition-colors duration-300"
+                aria-label={`${social.name}, ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
+              >
+                {social.icon} {social.name}
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </div>
   </section>
