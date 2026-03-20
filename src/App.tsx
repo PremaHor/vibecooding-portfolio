@@ -987,7 +987,7 @@ const FAQSection = () => {
   );
 };
 
-const FORMSPREE_URL = 'https://formspree.io/f/XXXXX';
+const FORMSPREE_URL = 'https://formspree.io/f/mbdzbqea';
 
 const ContactSection = () => {
   const { t, lang } = useLanguage();
