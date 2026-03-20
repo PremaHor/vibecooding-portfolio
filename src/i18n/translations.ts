@@ -158,6 +158,9 @@ export const translations = {
         error: 'Něco se pokazilo. Zkuste to znovu nebo napište přímo na e-mail.',
         gdpr: 'Vaše data zpracováváme v souladu s GDPR.',
         recaptchaError: 'Prosím potvrďte, že nejste robot.',
+        thankYouTitle: 'Děkuji Vám za zprávu',
+        thankYouText: 'Vaše zpráva ke mně v pořádku dorazila. Podívám se na ni a odpovím Vám obvykle obratem.',
+        backToSite: 'Zpět na web',
       },
     },
     footer: {
@@ -427,6 +430,9 @@ export const translations = {
         error: 'Something went wrong. Try again or email me directly.',
         gdpr: 'Your data is processed in accordance with GDPR.',
         recaptchaError: 'Please confirm you are not a robot.',
+        thankYouTitle: 'Thank you for your message',
+        thankYouText: 'Your message has been received. I will review it and get back to you promptly.',
+        backToSite: 'Back to site',
       },
     },
     footer: {

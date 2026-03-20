@@ -1021,7 +1021,6 @@ const ContactSection = () => {
         formRef.current?.reset();
         recaptchaRef.current?.reset();
         setRecaptchaToken(null);
-        setTimeout(() => setFormStatus('idle'), 5000);
       } else {
         setFormStatus('error');
       }
@@ -1061,6 +1060,36 @@ const ContactSection = () => {
           viewport={{ once: true, amount: 0 }}
           transition={{ duration: 0.6 }}
         >
+          {formStatus === 'success' ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="bg-black/[0.06] backdrop-blur-sm rounded-2xl p-8 sm:p-10 md:p-12 shadow-sm border border-black/10 text-center flex flex-col items-center gap-6"
+            >
+              <div className="w-16 h-16 rounded-full bg-black/10 flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-black" />
+              </div>
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-black">
+                {lang === 'cs' ? fixCzechTypography(f.thankYouTitle) : fixDashes(f.thankYouTitle)}
+              </h3>
+              <p className="text-base sm:text-lg text-black/70 max-w-md leading-relaxed">
+                {lang === 'cs' ? fixCzechTypography(f.thankYouText) : fixDashes(f.thankYouText)}
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  setFormStatus('idle');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="mt-2 inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-[0.2em] shadow-xl hover:bg-white hover:text-black transition-colors duration-300"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                {lang === 'cs' ? fixCzechTypography(f.backToSite) : fixDashes(f.backToSite)}
+              </motion.button>
+            </motion.div>
+          ) : (
           <form
             ref={formRef}
             action={FORMSPREE_URL}
@@ -1141,17 +1170,6 @@ const ContactSection = () => {
               )}
             </motion.button>
 
-            {formStatus === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 text-sm font-medium text-emerald-900 bg-emerald-100/80 rounded-xl px-4 py-3"
-              >
-                <CheckCircle className="w-4 h-4 shrink-0" />
-                {lang === 'cs' ? fixCzechTypography(f.success) : fixDashes(f.success)}
-              </motion.div>
-            )}
-
             {formStatus === 'error' && (
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
@@ -1167,6 +1185,7 @@ const ContactSection = () => {
               {lang === 'cs' ? fixCzechTypography(f.gdpr) : fixDashes(f.gdpr)}
             </p>
           </form>
+          )}
         </motion.div>
 
         {/* Right column: email + socials */}
