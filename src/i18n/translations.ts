@@ -157,6 +157,7 @@ export const translations = {
         success: 'Zpráva odeslána! Ozvu se co nejdříve.',
         error: 'Něco se pokazilo. Zkuste to znovu nebo napište přímo na e-mail.',
         gdpr: 'Vaše data zpracováváme v souladu s GDPR.',
+        recaptchaError: 'Prosím potvrďte, že nejste robot.',
       },
     },
     footer: {
@@ -425,6 +426,7 @@ export const translations = {
         success: 'Message sent! I will get back to you soon.',
         error: 'Something went wrong. Try again or email me directly.',
         gdpr: 'Your data is processed in accordance with GDPR.',
+        recaptchaError: 'Please confirm you are not a robot.',
       },
     },
     footer: {

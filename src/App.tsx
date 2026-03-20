@@ -30,6 +30,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const PrivacyPage = lazy(() => import('./components/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 
@@ -987,25 +988,40 @@ const FAQSection = () => {
   );
 };
 
-const FORMSPREE_URL = 'https://formspree.io/f/mbdzbqea';
+const FORMSPREE_URL = 'https://formspree.io/f/mjkebwwp';
+const RECAPTCHA_SITE_KEY = '6LdXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
 
 const ContactSection = () => {
   const { t, lang } = useLanguage();
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const formRef = useRef<HTMLFormElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!recaptchaToken) {
+      setFormStatus('error');
+      return;
+    }
+
     setFormStatus('sending');
     try {
+      const formData = new FormData(e.currentTarget);
+      formData.append('g-recaptcha-response', recaptchaToken);
+
       const res = await fetch(FORMSPREE_URL, {
         method: 'POST',
-        body: new FormData(e.currentTarget),
+        body: formData,
         headers: { Accept: 'application/json' },
       });
       if (res.ok) {
         setFormStatus('success');
         formRef.current?.reset();
+        recaptchaRef.current?.reset();
+        setRecaptchaToken(null);
+        setTimeout(() => setFormStatus('idle'), 5000);
       } else {
         setFormStatus('error');
       }
@@ -1100,9 +1116,20 @@ const ContactSection = () => {
               />
             </div>
 
+            <div className="flex justify-center">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={RECAPTCHA_SITE_KEY}
+                hl={lang}
+                theme="light"
+                onChange={(token) => setRecaptchaToken(token)}
+                onExpired={() => setRecaptchaToken(null)}
+              />
+            </div>
+
             <motion.button
               type="submit"
-              disabled={formStatus === 'sending'}
+              disabled={formStatus === 'sending' || !recaptchaToken}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-4.5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
