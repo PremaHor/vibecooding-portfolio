@@ -30,7 +30,8 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
-import ReCAPTCHA from 'react-google-recaptcha';
+
+const LazyReCAPTCHA = lazy(() => import('react-google-recaptcha'));
 
 const PrivacyPage = lazy(() => import('./components/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
@@ -996,7 +997,7 @@ const ContactSection = () => {
   const { t, lang } = useLanguage();
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const formRef = useRef<HTMLFormElement>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<any>(null);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -1147,14 +1148,16 @@ const ContactSection = () => {
             </div>
 
             <div className="flex justify-center">
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={RECAPTCHA_SITE_KEY}
-                hl={lang}
-                theme="light"
-                onChange={(token) => setRecaptchaToken(token)}
-                onExpired={() => setRecaptchaToken(null)}
-              />
+              <Suspense fallback={<div className="h-[78px]" />}>
+                <LazyReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={RECAPTCHA_SITE_KEY}
+                  hl={lang}
+                  theme="light"
+                  onChange={(token: string | null) => setRecaptchaToken(token)}
+                  onExpired={() => setRecaptchaToken(null)}
+                />
+              </Suspense>
             </div>
 
             <motion.button

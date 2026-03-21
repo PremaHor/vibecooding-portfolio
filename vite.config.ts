@@ -9,6 +9,7 @@ export default defineConfig(({mode}) => {
   return {
     plugins: [react(), tailwindcss(), nonblockingCss()],
     build: {
+      target: 'es2020',
       rollupOptions: {
         output: {
           manualChunks: {
