@@ -1053,8 +1053,8 @@ const ContactSection = () => {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-        {/* Form */}
+      {/* Form — centered */}
+      <div className="max-w-xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1189,52 +1189,23 @@ const ContactSection = () => {
           )}
         </motion.div>
 
-        {/* Right column: email + socials */}
+        {/* Email link — below form */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="flex flex-col items-center lg:items-start gap-10 lg:pt-8"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-10 sm:mt-12 text-center"
         >
           <motion.a
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             href={CONTACT_EMAIL}
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold border-b-4 border-black pb-3 hover:text-white hover:border-white transition-colors duration-300 text-center lg:text-left break-words"
+            className="text-lg sm:text-xl md:text-2xl font-bold border-b-4 border-black pb-2 hover:text-white hover:border-white transition-colors duration-300 break-words"
             aria-label={lang === 'cs' ? 'Napsat e-mail na horakpremysl85@gmail.com' : 'Send email to horakpremysl85@gmail.com'}
           >
             horakpremysl85@gmail.com
           </motion.a>
-
-          <div className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-8">
-            {[
-              { name: 'LinkedIn', icon: <Linkedin className="w-5 h-5" />, url: 'https://www.linkedin.com/in/p%C5%99emysl-hor%C3%A1k-0590a5326' },
-              { name: 'Behance', icon: (
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M23.268 14.584h-4.841c.314 1.813 2.142 2.021 3.272 1.233.194-.134.541-.503.541-.503l1.705 1.307s-.746 1.059-1.589 1.662c-1.356.971-3.674 1.409-5.49.615-2.845-1.245-2.976-4.413-2.134-6.62.981-2.575 4.477-3.179 6.726-1.511 2.212 1.638 2.036 5.271 1.81 6.317zm-1.691-1.896c.144-1.419-.851-2.423-2.104-2.403-1.272.019-2.24 1.022-2.433 2.403h4.537zm-18.677 4.712h-2.9v-10.2h5.5c2.35 0 3.1 1.25 3.1 2.35 0 1.1-.9 1.9-1.8 2.15 1.1.35 2.1 1.4 2.1 2.85 0 1.45-1.15 2.85-3.5 2.85h-2.5zm0-6h2.2c.8 0 1.2-.45 1.2-1.1 0-.65-.4-1.1-1.2-1.1h-2.2v2.2zm0 3.8h2.5c.85 0 1.4-.45 1.4-1.25 0-.8-.55-1.25-1.4-1.25h-2.5v2.5zm15.1-6.4h4.8v1.1h-4.8v-1.1z"/>
-                </svg>
-              ), url: 'https://www.behance.net/dobryux' },
-              { name: 'GitHub', icon: <Github className="w-5 h-5" />, url: 'https://github.com/PremaHor' },
-              { name: 'X (Twitter)', icon: (
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.294 19.497h2.039L6.482 3.239H4.293l13.314 17.411z"/>
-                </svg>
-              ), url: 'https://x.com/horakpremysl85' }
-            ].map(social => (
-              <motion.a
-                key={social.name}
-                whileHover={{ y: -3, color: '#FFFFFF' }}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 sm:gap-3 font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-[11px] transition-colors duration-300"
-                aria-label={`${social.name}, ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
-              >
-                {social.icon} {social.name}
-              </motion.a>
-            ))}
-          </div>
         </motion.div>
       </div>
     </div>
@@ -1242,14 +1213,45 @@ const ContactSection = () => {
   );
 };
 
+const SOCIAL_LINKS = [
+  { name: 'LinkedIn', icon: <Linkedin className="w-4 h-4" />, url: 'https://www.linkedin.com/in/p%C5%99emysl-hor%C3%A1k-0590a5326' },
+  { name: 'Behance', icon: (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.268 14.584h-4.841c.314 1.813 2.142 2.021 3.272 1.233.194-.134.541-.503.541-.503l1.705 1.307s-.746 1.059-1.589 1.662c-1.356.971-3.674 1.409-5.49.615-2.845-1.245-2.976-4.413-2.134-6.62.981-2.575 4.477-3.179 6.726-1.511 2.212 1.638 2.036 5.271 1.81 6.317zm-1.691-1.896c.144-1.419-.851-2.423-2.104-2.403-1.272.019-2.24 1.022-2.433 2.403h4.537zm-18.677 4.712h-2.9v-10.2h5.5c2.35 0 3.1 1.25 3.1 2.35 0 1.1-.9 1.9-1.8 2.15 1.1.35 2.1 1.4 2.1 2.85 0 1.45-1.15 2.85-3.5 2.85h-2.5zm0-6h2.2c.8 0 1.2-.45 1.2-1.1 0-.65-.4-1.1-1.2-1.1h-2.2v2.2zm0 3.8h2.5c.85 0 1.4-.45 1.4-1.25 0-.8-.55-1.25-1.4-1.25h-2.5v2.5zm15.1-6.4h4.8v1.1h-4.8v-1.1z"/>
+    </svg>
+  ), url: 'https://www.behance.net/dobryux' },
+  { name: 'GitHub', icon: <Github className="w-4 h-4" />, url: 'https://github.com/PremaHor' },
+  { name: 'X', icon: (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.294 19.497h2.039L6.482 3.239H4.293l13.314 17.411z"/>
+    </svg>
+  ), url: 'https://x.com/horakpremysl85' },
+];
+
 const Footer = () => {
   const { t, lang } = useLanguage();
   return (
-  <footer className="py-8 sm:py-12 px-4 sm:px-6 md:px-8 border-t border-white/10 text-center text-white/60 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold">
-    <Link to="/ochrana-soukromi" className="hover:text-white/90 transition-colors block mb-3">
+  <footer className="py-10 sm:py-14 px-4 sm:px-6 md:px-8 border-t border-white/10 text-center">
+    <div className="flex flex-wrap justify-center gap-6 sm:gap-8 mb-6">
+      {SOCIAL_LINKS.map(social => (
+        <a
+          key={social.name}
+          href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em]"
+          aria-label={`${social.name}, ${lang === 'cs' ? 'otevřít v novém okně' : 'open in new window'}`}
+        >
+          {social.icon} {social.name}
+        </a>
+      ))}
+    </div>
+    <Link to="/ochrana-soukromi" className="text-white/40 hover:text-white/80 transition-colors block mb-3 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em]">
       {lang === 'cs' ? fixCzechTypography(t.footer.privacyLink) : fixDashes(t.footer.privacyLink)}
     </Link>
-    {lang === 'cs' ? fixCzechTypography(t.footer.copyright) : fixDashes(t.footer.copyright)}
+    <p className="text-white/30 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em]">
+      {lang === 'cs' ? fixCzechTypography(t.footer.copyright) : fixDashes(t.footer.copyright)}
+    </p>
   </footer>
   );
 };
