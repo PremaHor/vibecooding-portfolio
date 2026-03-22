@@ -112,8 +112,8 @@ export const translations = {
       value3: 'Spolehlivost a transparentnost.',
     },
     cta: {
-      title: 'Máte nápad? Pojďme o něm pohovořit.',
-      text: 'Napište, co vás zajímá, nebo pošlete odkaz na váš web. Jsem otevřený spolupráci a hledám projekty, které dávají smysl.',
+      title: 'Máte nápad? Pojďme se o něm pobavit.',
+      text: 'Napište mi, co vás zajímá, nebo pošlete odkaz na váš současný projekt. Hledám smysluplné spolupráce a výzvy, kde mohu využít své zkušenosti.',
     },
     competitiveAdvantage: {
       title: 'Proč agentury dodávají za měsíce a já za týdny?',
@@ -405,7 +405,7 @@ export const translations = {
     },
     cta: {
       title: 'Have an idea? Let\'s talk about it.',
-      text: 'Write what interests you, or send a link to your site. I\'m open to collaboration and projects that make sense.',
+      text: 'Write me what interests you, or send a link to your current project. I\'m looking for meaningful collaborations and challenges where I can put my experience to use.',
     },
     competitiveAdvantage: {
       title: 'Why do agencies take months and I take weeks?',
