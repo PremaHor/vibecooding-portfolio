@@ -496,7 +496,7 @@ const ProcessSection = () => {
             {lang === 'cs' ? fixCzechTypography(t.process.subtitle2) : fixDashes(t.process.subtitle2)}
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 md:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-6">
           {PROCESS_STEPS.map(({ icon: Icon, key }, idx) => (
             <motion.article
               key={key}
@@ -504,7 +504,7 @@ const ProcessSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="relative flex flex-col items-center md:items-start text-center md:text-left"
+              className="relative flex flex-col items-center lg:items-start text-center lg:text-left"
             >
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 shrink-0">
                 <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
