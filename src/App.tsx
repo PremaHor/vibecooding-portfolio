@@ -651,7 +651,7 @@ const ServicesPricingSection = () => {
           {lang === 'cs' ? fixCzechTypography(t.services.title) : fixDashes(t.services.title)}
         </motion.h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {SERVICES_CARDS.map(({ icon: Icon, key }, idx) => {
             const bullets = t.services[`${key}Bullets` as keyof typeof t.services] as string[];
             return (
