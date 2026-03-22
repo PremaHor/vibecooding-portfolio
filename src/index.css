@@ -96,6 +96,27 @@
     }
   }
 
+  /* Prevent inputs from hiding under fixed nav when browser auto-scrolls on focus (Firefox mobile) */
+  input,
+  textarea,
+  select {
+    scroll-margin-top: calc(7rem + env(safe-area-inset-top, 0px));
+  }
+  @media (min-width: 640px) {
+    input,
+    textarea,
+    select {
+      scroll-margin-top: calc(8rem + env(safe-area-inset-top, 0px));
+    }
+  }
+  @media (min-width: 768px) {
+    input,
+    textarea,
+    select {
+      scroll-margin-top: calc(9rem + env(safe-area-inset-top, 0px));
+    }
+  }
+
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
