@@ -33,7 +33,7 @@ export const translations = {
       step3Text: 'Rychlá validace myšlenky. Tvořím interaktivní mockupy, aby si celý tým (nebo uživatelé) mohl produkt proklikat a otestovat ještě před samotným vývojem.',
       step4Title: 'Vývoj',
       step4Text: 'Implementace v moderním a čistém kódu. Zakládám si na rychlosti, bezpečnosti a používám jen ty technologie, které dávají smysl bez zbytečných závislostí.',
-      step5Title: 'Nasazení & produkce',
+      step5Title: 'Produkce',
       step5Text: 'Od lokálního vývoje až po ostrý provoz. Zvládám kompletní nasazení projektu a dbám na to, aby aplikace běžela stabilně.',
     },
     work: {
@@ -324,7 +324,7 @@ export const translations = {
       step3Text: 'Quick idea validation. I create interactive mockups so the whole team (or users) can click through and test the product before actual development begins.',
       step4Title: 'Development',
       step4Text: 'Implementation in modern, clean code. I prioritize speed and security, using only technologies that make sense without unnecessary dependencies.',
-      step5Title: 'Deployment & production',
+      step5Title: 'Production',
       step5Text: 'From local development to live production. I handle complete project deployment and make sure the application runs reliably.',
     },
     work: {
