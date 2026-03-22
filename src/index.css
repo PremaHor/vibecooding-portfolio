@@ -40,7 +40,14 @@
   body {
     @apply bg-[var(--color-vibe-black)] text-white font-sans selection:bg-[var(--color-vibe-orange)] selection:text-black antialiased;
     overflow-x: hidden;
-    touch-action: manipulation; /* Removes 300ms tap delay on mobile */
+    touch-action: manipulation;
+  }
+
+  @media (max-width: 1023px) {
+    body {
+      min-width: 1019px;
+      overflow-x: auto;
+    }
   }
 
   /* Prefer natural wrapping at word boundaries, break long words only when necessary */
