@@ -147,6 +147,11 @@
   backdrop-filter: blur(24px);
 }
 
+.ios-backdrop-blur {
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
 /* Noise Texture Overlay */
 .noise-overlay {
   position: fixed;

@@ -450,14 +450,14 @@ const Hero = () => {
         >
           <a
             href={CONTACT_EMAIL}
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-all duration-300 shadow-lg min-w-[180px] sm:min-w-0"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 shadow-lg min-w-[180px] sm:min-w-0"
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.ctaPrimary) : fixDashes(t.hero.ctaPrimary)}
             <ArrowRight className="w-4 h-4" />
           </a>
           <a
             href="#work"
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-all duration-300 min-w-[180px] sm:min-w-0"
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-[background-color,border-color] duration-300 min-w-[180px] sm:min-w-0"
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.ctaSecondary) : fixDashes(t.hero.ctaSecondary)}
           </a>
@@ -567,7 +567,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project, index: nu
       className="group relative"
     >
       <Link to={`/project/${project.slug}`} className="block relative">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-6 sm:mb-8 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-500">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-6 sm:mb-8 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-500 backface-hidden">
           <img 
             src={project.image} 
             srcSet={getImageSrcSet(project.image)}
@@ -578,12 +578,12 @@ function ProjectCard({ project, index, isMobile }: { project: Project, index: nu
             loading={index === 0 && !isMobile ? "eager" : "lazy"}
             fetchPriority={index === 0 && !isMobile ? "high" : undefined}
             decoding="async"
-            className="w-full h-full object-cover rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] transition-transform duration-700 group-hover:scale-[1.08]"
+            className="w-full h-full object-cover rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] transition-transform duration-700 group-hover:scale-[1.08] backface-hidden"
             referrerPolicy="no-referrer"
           />
           
           {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-700 flex flex-col items-center justify-center backdrop-blur-[2px]">
+          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col items-center justify-center ios-backdrop-blur backface-hidden">
             <div className="overflow-hidden mb-4">
               <motion.div 
                 initial={{ y: "100%" }}
@@ -613,7 +613,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project, index: nu
           
           <div className="flex flex-wrap items-center gap-3">
             {project.tags.map(tag => (
-              <span key={tag} className="text-[10px] px-3 py-1.5 border border-black/10 rounded-full font-mono uppercase tracking-[0.15em] bg-white group-hover:bg-black group-hover:text-white group-hover:border-black transition-all duration-300">
+              <span key={tag} className="text-[10px] px-3 py-1.5 border border-black/10 rounded-full font-mono uppercase tracking-[0.15em] bg-white group-hover:bg-black group-hover:text-white group-hover:border-black transition-[background-color,color,border-color] duration-300">
                 {tag}
               </span>
             ))}
@@ -635,9 +635,9 @@ const ServicesPricingSection = () => {
   const { t, lang } = useLanguage();
 
   return (
-    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
+    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden backface-hidden">
       <div id="pricing" className="absolute top-0 left-0 -translate-y-24" aria-hidden />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none backface-hidden" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.h2 
@@ -698,7 +698,7 @@ const ServicesPricingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0, margin: '0px 0px -60px 0px' }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-all duration-300 group"
+          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-[border-color,background-color] duration-300 group"
         >
           <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
             <ClipboardCheck className="w-6 h-6 sm:w-7 sm:h-7" />
@@ -724,10 +724,10 @@ const ServicesPricingSection = () => {
 const AboutSection = () => {
   const { t, lang } = useLanguage();
   return (
-    <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden">
+    <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden backface-hidden">
       {/* Tmavé pozadí + jemný gradient - vizuální oddělení od portfolia */}
-      <div className="absolute inset-0 bg-[var(--color-vibe-black)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(242,125,38,0.06),transparent_50%)]" aria-hidden />
+      <div className="absolute inset-0 bg-[var(--color-vibe-black)] backface-hidden" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(242,125,38,0.06),transparent_50%)] backface-hidden" aria-hidden />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
@@ -766,7 +766,7 @@ const AboutSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0, margin: '0px 0px -60px 0px' }}
                   transition={{ duration: 0.45, delay: i * 0.07 }}
-                  className="group flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[var(--color-vibe-orange)]/20 hover:bg-white/[0.05] transition-all duration-300"
+                  className="group flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[var(--color-vibe-orange)]/20 hover:bg-white/[0.05] transition-[border-color,background-color] duration-300 backface-hidden"
                 >
                   <span className="shrink-0 w-1 h-1 mt-2 rounded-full bg-[var(--color-vibe-orange)]" />
                   <span className="text-sm sm:text-base text-white/85 leading-[1.6] font-light">
@@ -807,7 +807,7 @@ const AboutSection = () => {
 const CtaSection = () => {
   const { t, lang } = useLanguage();
   return (
-    <section id="cta" className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)] text-white relative overflow-hidden">
+    <section id="cta" className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)] text-white relative overflow-hidden backface-hidden">
       <div className="max-w-3xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -833,7 +833,7 @@ const CtaSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-all duration-300"
+          className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300"
         >
           {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : fixDashes(t.contact.writeMessage)}
           <ArrowRight className="w-4 h-4" />
@@ -854,11 +854,11 @@ const COMPETITIVE_CARDS = [
 const CompetitiveAdvantageSection = () => {
   const { t, lang } = useLanguage();
   return (
-    <section id="competitive-advantage" className="relative py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden">
+    <section id="competitive-advantage" className="relative py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden backface-hidden">
       {/* Gradient background + glow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-vibe-black)] via-[#0a0a0a] to-[var(--color-vibe-black)]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,var(--color-vibe-orange)/8_0%,transparent_70%)] pointer-events-none" />
-      <div className="absolute inset-0 border border-white/5 rounded-3xl mx-4 sm:mx-6 md:mx-8 lg:mx-12 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-vibe-black)] via-[#0a0a0a] to-[var(--color-vibe-black)] backface-hidden" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,var(--color-vibe-orange)/8_0%,transparent_70%)] pointer-events-none backface-hidden" />
+      <div className="absolute inset-0 border border-white/5 rounded-3xl mx-4 sm:mx-6 md:mx-8 lg:mx-12 pointer-events-none backface-hidden" />
       
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
@@ -886,7 +886,7 @@ const CompetitiveAdvantageSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="group relative p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[var(--color-vibe-orange)]/30 hover:bg-white/[0.05] transition-all duration-500 flex flex-col"
+              className="group relative p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[var(--color-vibe-orange)]/30 hover:bg-white/[0.05] transition-[border-color,background-color] duration-500 flex flex-col backface-hidden"
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 group-hover:scale-110 transition-transform duration-300">
                 <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
