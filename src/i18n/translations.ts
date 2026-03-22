@@ -15,11 +15,11 @@ export const translations = {
       openMenu: 'Otevřít menu',
     },
     hero: {
-      available: 'Otevřený novým výzvám a spolupráci 2026',
-      h1: 'Weby a aplikace, které fungují.',
-      subheadline: 'Od návrhu po nasazení, design i vývoj v jedné osobě. Prototypy, weby, MVP, bez zbytečného balastu a s důrazem na to, co uživatelé skutečně potřebují.',
+      available: 'Otevřený novým projektům a spolupracím 2026',
+      h1: 'Tvořím weby a aplikace, které dávají smysl.',
+      subheadline: 'Jsem vývojář s přesahem do UI/UX. Od prvního návrhu po čistý kód, dělám design i vývoj v jedné osobě. Baví mě stavět funkční prototypy (MVP) bez zbytečného balastu a s ohledem na reálné uživatele. Aktuálně jsem otevřený novým projektům a spolupracím.',
       ctaPrimary: 'Napsat zprávu',
-      ctaSecondary: 'Prohlédnout práci',
+      ctaSecondary: 'Prohlédnout projekty',
       workedWith: 'Spolupracovali se mnou',
     },
     process: {
@@ -306,11 +306,11 @@ export const translations = {
       openMenu: 'Open menu',
     },
     hero: {
-      available: 'Open to new challenges and collaboration 2026',
-      h1: 'Websites and apps that work.',
-      subheadline: 'From design to deployment, design and development in one person. Prototypes, websites, MVP, no fluff, focused on what users actually need.',
+      available: 'Open to new projects and collaborations 2026',
+      h1: 'I build websites and apps that make sense.',
+      subheadline: 'I\'m a developer with a strong UI/UX background. From the first design to clean code, I handle both design and development as one person. I enjoy building functional prototypes (MVPs) without unnecessary fluff, with real users in mind. Currently open to new projects and collaborations.',
       ctaPrimary: 'Get in touch',
-      ctaSecondary: 'View work',
+      ctaSecondary: 'View projects',
       workedWith: 'Worked with me',
     },
     process: {
