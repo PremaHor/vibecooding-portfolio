@@ -104,8 +104,8 @@ export const translations = {
     about: {
       title: 'Kdo stojí za Vibecooding?',
       subtitle: 'Přemysl Horák, nezávislý vývojář a designér. Otevřený spolupráci a novým příležitostem.',
-      p1: 'Nehraju si na agenturu. Když mi napíšete, mluvíte přímo se mnou. Navrhuji rozhraní od wireframů po finální UI, design i implementace v jedné osobě. Výsledek nejen vypadá, ale hlavně funguje.',
-      p2: 'Čistý kód, férová komunikace a schopnost vysvětlit technické věci lidsky. Vy rozumíte svému byznysu, já webům. Rád diskutuji o projektech, které dávají smysl.',
+      p1: 'Nehraju si na agenturu. Když mi napíšete, mluvíte přímo se mnou. Navrhuji rozhraní od wireframů po finální UI \u2013 design i implementace v jedné osobě. Výsledek nejen dobře vypadá, ale hlavně funguje.',
+      p2: 'Čistý kód, férová komunikace a schopnost vysvětlit technické věci lidsky. Vy rozumíte svému byznysu, já digitálnímu světu. Rád diskutuji o projektech, které dávají smysl.',
       valuesTitle: 'Moje hodnoty',
       value1: 'Žádné šablony, jen čistý, rychlý kód.',
       value2: 'Přímá komunikace bez prostředníků.',
@@ -396,8 +396,8 @@ export const translations = {
     about: {
       title: 'Who stands behind Vibecooding?',
       subtitle: 'Přemysl Horák, independent developer and designer. Open to collaboration and new opportunities.',
-      p1: 'I don\'t pretend to be an agency. When you write, you talk directly to me. I design interfaces from wireframes to final UI, design and implementation in one person. The result not only looks good but works.',
-      p2: 'Clean code, fair communication, and explaining technical things in plain language. You understand your business, I understand the web. I\'m open to projects that make sense.',
+      p1: 'I don\'t pretend to be an agency. When you write, you talk directly to me. I design interfaces from wireframes to final UI \u2013 design and implementation in one person. The result doesn\'t just look good, it actually works.',
+      p2: 'Clean code, fair communication, and explaining technical things in plain language. You understand your business, I understand the digital world. I enjoy discussing projects that make sense.',
       valuesTitle: 'My values',
       value1: 'No templates, just clean and lightning fast code.',
       value2: 'Direct communication without intermediaries.',
