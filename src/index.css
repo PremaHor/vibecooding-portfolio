@@ -43,13 +43,6 @@
     touch-action: manipulation;
   }
 
-  @media (max-width: 1023px) {
-    body {
-      min-width: 1019px;
-      overflow-x: auto;
-    }
-  }
-
   /* Prefer natural wrapping at word boundaries, break long words only when necessary */
   h1, h2, h3, h4, p, li {
     overflow-wrap: break-word;
