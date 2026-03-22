@@ -486,13 +486,15 @@ const ProcessSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-16 sm:mb-20"
+          className="mb-16 sm:mb-20 text-center"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.08] mb-4">
             {lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}
           </h3>
-          <p className="text-lg sm:text-xl text-black/70 max-w-2xl">
+          <p className="text-lg sm:text-xl text-black/70 max-w-2xl mx-auto">
             {lang === 'cs' ? fixCzechTypography(t.process.subtitle) : fixDashes(t.process.subtitle)}
+            <br />
+            {lang === 'cs' ? fixCzechTypography(t.process.subtitle2) : fixDashes(t.process.subtitle2)}
           </p>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 md:gap-6">

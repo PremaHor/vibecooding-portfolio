@@ -24,7 +24,8 @@ export const translations = {
     },
     process: {
       title: 'Můj postup',
-      subtitle: 'Od prvotní myšlenky po fungující aplikaci. Řeším design i kód v jedné osobě.',
+      subtitle: 'Od prvotní myšlenky po fungující aplikaci.',
+      subtitle2: 'Řeším design i kód v jedné osobě.',
       step1Title: 'Nápad & research',
       step1Text: 'Pochopení vize a kontextu. Než napíšu první řádek kódu, zajímá mě, jaký problém aplikace řeší a kdo ji bude reálně používat.',
       step2Title: 'UI/UX Design',
@@ -315,7 +316,8 @@ export const translations = {
     },
     process: {
       title: 'My process',
-      subtitle: 'From the initial idea to a working application. I handle both design and code as one person.',
+      subtitle: 'From the initial idea to a working application.',
+      subtitle2: 'I handle both design and code as one person.',
       step1Title: 'Idea & research',
       step1Text: 'Understanding the vision and context. Before I write a single line of code, I want to know what problem the app solves and who will actually use it.',
       step2Title: 'UI/UX Design',
