@@ -1000,6 +1000,28 @@ const ContactSection = () => {
   const recaptchaRef = useRef<any>(null);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+
+    const handleFocusIn = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (!target.matches('input, textarea, select')) return;
+
+      setTimeout(() => {
+        const rect = target.getBoundingClientRect();
+        const remPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const navHeight = remPx * 7;
+        if (rect.top < navHeight) {
+          window.scrollBy({ top: rect.top - navHeight, behavior: 'smooth' });
+        }
+      }, 350);
+    };
+
+    form.addEventListener('focusin', handleFocusIn);
+    return () => form.removeEventListener('focusin', handleFocusIn);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
