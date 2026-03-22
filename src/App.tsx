@@ -188,7 +188,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
       {/* ── Desktop / top navbar ── */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center gap-2 transition-all duration-500 safe-area-inset-top min-w-0 ${
+        className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center gap-2 transition-all duration-500 safe-area-inset-top min-w-0 backface-hidden will-change-transform ${
           scrolled ? 'bg-black/10 backdrop-blur-xl py-3' : 'bg-transparent'
         } ${theme === 'dark' ? 'text-white' : 'text-black'}`}
         aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}
@@ -272,7 +272,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         aria-modal="true"
         aria-label={lang === 'cs' ? 'Navigační menu' : 'Navigation menu'}
         className={`fixed inset-0 z-[100] md:hidden bg-[var(--color-vibe-black)] text-white
-          transition-[opacity,visibility] duration-300
+          transition-[opacity,visibility] duration-300 backface-hidden
           ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
       >
         {/*
@@ -402,21 +402,21 @@ const Hero = () => {
   const useStaticBlobs = prefersReducedMotion || isMobile;
 
   return (
-    <section className="hero-section relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden">
+    <section className="hero-section relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden backface-hidden">
       {useStaticBlobs ? (
         <>
-          <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12]" />
-          <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08]" />
+          <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12] backface-hidden will-change-transform" />
+          <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08] backface-hidden will-change-transform" />
         </>
       ) : (
         <>
           <motion.div
             style={{ y: y1, rotate, willChange: 'transform' }}
-            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12]"
+            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12] backface-hidden"
           />
           <motion.div
             style={{ y: y2, willChange: 'transform' }}
-            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08]"
+            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08] backface-hidden"
           />
         </>
       )}
@@ -1674,7 +1674,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen selection:bg-[var(--color-vibe-orange)] selection:text-black">
+    <div className="relative min-h-screen selection:bg-[var(--color-vibe-orange)] selection:text-black backface-hidden">
       {/* Noise Overlay */}
       <div className="noise-overlay" />
       
