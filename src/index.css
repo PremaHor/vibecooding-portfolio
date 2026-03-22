@@ -133,6 +133,20 @@
   }
 }
 
+/* iOS Safari: fix flickering on fixed nav with backdrop-filter */
+.nav-ios-gpu {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.nav-blur-active {
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
 /* Noise Texture Overlay */
 .noise-overlay {
   position: fixed;

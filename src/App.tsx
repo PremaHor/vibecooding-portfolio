@@ -188,8 +188,8 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
 
       {/* ── Desktop / top navbar ── */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center gap-2 transition-all duration-500 safe-area-inset-top min-w-0 backface-hidden will-change-transform ${
-          scrolled ? 'bg-black/10 backdrop-blur-xl py-3' : 'bg-transparent'
+        className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center gap-2 transition-[background-color,padding,color] duration-500 safe-area-inset-top min-w-0 nav-ios-gpu ${
+          scrolled ? 'bg-black/10 nav-blur-active py-3' : 'bg-transparent'
         } ${theme === 'dark' ? 'text-white' : 'text-black'}`}
         aria-label={lang === 'cs' ? 'Hlavní navigace' : 'Main navigation'}
       >
