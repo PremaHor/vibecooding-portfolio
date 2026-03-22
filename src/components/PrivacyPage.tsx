@@ -68,6 +68,31 @@ export function PrivacyPage() {
 
           <section className="mb-10">
             <h2 className="font-display text-lg sm:text-xl font-bold text-white mb-3">
+              {lang === 'cs' ? fixCzechTypography(tr.formTitle) : fixDashes(tr.formTitle)}
+            </h2>
+            <p className="text-white/80 leading-relaxed mb-4">
+              {lang === 'cs' ? fixCzechTypography(tr.formText) : fixDashes(tr.formText)}
+            </p>
+            <h3 className="font-display text-base sm:text-lg font-bold text-white mb-2">
+              {lang === 'cs' ? fixCzechTypography(tr.formDataTitle) : fixDashes(tr.formDataTitle)}
+            </h3>
+            <ul className="list-disc list-inside text-white/80 space-y-2 marker:text-[var(--color-vibe-orange)] mb-4">
+              {tr.formDataList.map((item: string, i: number) => (
+                <li key={i}>
+                  {lang === 'cs' ? fixCzechTypography(item) : fixDashes(item)}
+                </li>
+              ))}
+            </ul>
+            <p className="text-white/80 leading-relaxed mb-4">
+              {lang === 'cs' ? fixCzechTypography(tr.formPurpose) : fixDashes(tr.formPurpose)}
+            </p>
+            <p className="text-white/60 leading-relaxed text-sm">
+              {lang === 'cs' ? fixCzechTypography(tr.formThirdParty) : fixDashes(tr.formThirdParty)}
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-white mb-3">
               {lang === 'cs' ? fixCzechTypography(tr.purposeTitle) : fixDashes(tr.purposeTitle)}
             </h2>
             <p className="text-white/80 leading-relaxed">
