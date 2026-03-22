@@ -209,7 +209,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         </Link>
 
         {/* Desktop links */}
-        <div className={`hidden md:flex gap-6 lg:gap-8 text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-500 ${
+        <div className={`hidden lg:flex gap-6 lg:gap-8 text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-500 ${
           theme === 'dark' ? 'text-white/70' : 'text-black/70'
         }`}>
           {!isProjectPage ? (
@@ -230,7 +230,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         <div className="flex items-center gap-2 sm:gap-4">
           <a
             href={CONTACT_EMAIL}
-            className={`nav-cta hidden sm:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg ${
+            className={`nav-cta hidden lg:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg ${
               theme === 'dark'
                 ? 'bg-white text-black hover:bg-[var(--color-vibe-orange)] hover:text-white'
                 : 'bg-black text-white hover:bg-[var(--color-vibe-orange)]'
@@ -242,7 +242,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
           {/* Hamburger — 3 lines morph to X via CSS */}
           <button
             onClick={() => setMobileMenuOpen(v => !v)}
-            className={`md:hidden flex flex-col justify-center items-center w-11 h-11 gap-[5px] rounded-lg transition-colors -mr-1 ${
+            className={`lg:hidden flex flex-col justify-center items-center w-11 h-11 gap-[5px] rounded-lg transition-colors -mr-1 ${
               theme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-black/10'
             }`}
             aria-label={mobileMenuOpen
@@ -270,7 +270,7 @@ const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark', isProjectPa
         role="dialog"
         aria-modal="true"
         aria-label={lang === 'cs' ? 'Navigační menu' : 'Navigation menu'}
-        className={`fixed inset-0 z-[100] md:hidden bg-[var(--color-vibe-black)] text-white
+        className={`fixed inset-0 z-[100] lg:hidden bg-[var(--color-vibe-black)] text-white
           transition-[opacity,visibility] duration-300 backface-hidden
           ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
       >
