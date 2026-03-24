@@ -51,7 +51,7 @@ const SectionHeading = ({ children }: { children: React.ReactNode }) => (
   <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{children}</h3>
 );
 
-const SectionParagraph = ({ text, lang }: { text: string; lang: 'cs' | 'en' }) => (
+const SectionParagraph = ({ text, lang }: { key?: React.Key; text: string; lang: 'cs' | 'en' }) => (
   <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] font-light">{renderWithBold(text, lang)}</p>
 );
 

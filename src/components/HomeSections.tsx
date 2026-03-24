@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
@@ -13,7 +13,6 @@ import {
   IterationCcw, Users, Languages, Smartphone, TestTube,
 } from 'lucide-react';
 
-const LazyReCAPTCHA = lazy(() => import('react-google-recaptcha'));
 
 // --- Process (Bento Grid) ---
 
@@ -164,7 +163,7 @@ const ProcessSection = () => {
 
 // --- Work ---
 
-function ProjectCard({ project, index, isMobile }: { project: Project; index: number; isMobile: boolean }) {
+function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: Project; index: number; isMobile: boolean }) {
   const { lang } = useLanguage();
   const t = translations[lang];
   const tr = t.projects[project.slug as keyof typeof t.projects];
@@ -718,15 +717,12 @@ const FAQSection = () => {
 // --- Contact ---
 
 const FORMSPREE_URL = 'https://formspree.io/f/mjkebwwp';
-const RECAPTCHA_SITE_KEY = '6LdmmJEsAAAAAJuJYP_R6yhyFrOGTsKF1A8ml6ZF';
 
 const ContactSection = () => {
   const { lang } = useLanguage();
   const t = translations[lang];
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const formRef = useRef<HTMLFormElement>(null);
-  const recaptchaRef = useRef<any>(null);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
   useEffect(() => {
     const form = formRef.current;
@@ -749,17 +745,13 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!recaptchaToken) { setFormStatus('error'); return; }
     setFormStatus('sending');
     try {
       const formData = new FormData(e.currentTarget);
-      formData.append('g-recaptcha-response', recaptchaToken);
       const res = await fetch(FORMSPREE_URL, { method: 'POST', body: formData, headers: { Accept: 'application/json' } });
       if (res.ok) {
         setFormStatus('success');
         formRef.current?.reset();
-        recaptchaRef.current?.reset();
-        setRecaptchaToken(null);
       } else { setFormStatus('error'); }
     } catch { setFormStatus('error'); }
   };
@@ -809,12 +801,8 @@ const ContactSection = () => {
                   <label htmlFor="message" className="block text-sm font-bold uppercase tracking-[0.15em] mb-2">{f.message} *</label>
                   <textarea id="message" name="message" required rows={5} placeholder={f.messagePlaceholder} className="w-full px-4 py-3.5 rounded-xl bg-white/60 border border-black/10 text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-black/30 focus:bg-white/80 transition-all duration-200 resize-y min-h-[120px]" />
                 </div>
-                <div className="flex justify-center">
-                  <Suspense fallback={<div className="h-[78px]" />}>
-                    <LazyReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY} hl={lang} theme="light" onChange={(token: string | null) => setRecaptchaToken(token)} onExpired={() => setRecaptchaToken(null)} />
-                  </Suspense>
-                </div>
-                <motion.button type="submit" disabled={formStatus === 'sending' || !recaptchaToken} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-4.5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
+                <input type="text" name="_gotcha" autoComplete="off" className="hidden" tabIndex={-1} aria-hidden="true" />
+                <motion.button type="submit" disabled={formStatus === 'sending'} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-4.5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
                   {formStatus === 'sending' ? <>{f.sending}</> : <><Send className="w-4 h-4" /> {f.submit}</>}
                 </motion.button>
                 {formStatus === 'error' && (
