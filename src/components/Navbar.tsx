@@ -39,10 +39,9 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
   const close = () => setMobileMenuOpen(false);
 
   const mobileNavItems = [
-    { href: '#work',       label: lang === 'cs' ? fixCzechTypography(t.nav.work)     : fixDashes(t.nav.work) },
-    { href: '#services',   label: lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services) },
-    { href: '#about',      label: lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about) },
-    { href: CONTACT_EMAIL, label: lang === 'cs' ? fixCzechTypography(t.nav.contact)  : fixDashes(t.nav.contact) },
+    { href: '#work',     label: lang === 'cs' ? fixCzechTypography(t.nav.work)     : fixDashes(t.nav.work) },
+    { href: '#services', label: lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services) },
+    { href: '#about',    label: lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about) },
   ];
 
   return (
@@ -202,9 +201,6 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
                   onClick={close}
                   className="group flex items-center gap-5 py-5 w-full active:opacity-60 transition-opacity duration-100"
                 >
-                  <span className="text-[11px] font-bold tabular-nums text-white/25 w-8 shrink-0 leading-none select-none">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                   <span className="font-display text-[1.7rem] leading-none text-white/85 group-hover:text-white transition-colors duration-200 flex-1">
                     {item.label}
                   </span>
