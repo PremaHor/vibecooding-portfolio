@@ -184,9 +184,16 @@ export const ProjectPage = () => {
                 {lang === 'cs' ? fixCzechTypography(tr?.category ?? project.category) : fixDashes(tr?.category ?? project.category ?? '')} / {project.year}
               </motion.span>
             </div>
-            <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }} className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.08] mb-12 sm:mb-20">
+            <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }} className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.08] mb-4 sm:mb-6">
               {lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
             </motion.h1>
+            {tr && 'subtitle' in tr && tr.subtitle ? (
+              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }} className="text-base sm:text-lg text-white/50 font-light max-w-2xl mb-12 sm:mb-20">
+                {lang === 'cs' ? fixCzechTypography(tr.subtitle as string) : fixDashes(tr.subtitle as string)}
+              </motion.p>
+            ) : (
+              <div className="mb-8 sm:mb-14" />
+            )}
             <motion.div initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }} className="aspect-[16/9] w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl">
               <img src={project.image} srcSet={getImageSrcSet(project.image)} sizes="(max-width: 768px) 100vw, 1200px" alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)} width={1200} height={800} fetchPriority="high" decoding="async" className="w-full h-full object-cover rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]" referrerPolicy="no-referrer" />
             </motion.div>
@@ -243,6 +250,11 @@ export const ProjectPage = () => {
             <div className="space-y-8 sm:space-y-12">
               <div>
                 <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{lang === 'cs' ? fixCzechTypography(t.project.tech) : fixDashes(t.project.tech)}</h4>
+                {tr && 'techNote' in tr && tr.techNote && (
+                  <p className="text-xs sm:text-sm text-white/60 leading-relaxed mb-4 font-light">
+                    {lang === 'cs' ? fixCzechTypography(tr.techNote as string) : fixDashes(tr.techNote as string)}
+                  </p>
+                )}
                 <div className="flex flex-wrap gap-2 sm:gap-3">
                   {project.tags.map(tag => (
                     <span key={tag} className="px-3 sm:px-5 py-1.5 sm:py-2 border border-white/10 rounded-full text-[10px] sm:text-xs font-mono uppercase tracking-widest bg-white/5">{tag}</span>
