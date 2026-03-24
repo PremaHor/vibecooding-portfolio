@@ -254,6 +254,8 @@ const WorkSection = () => {
         >
           <h2 id="work-heading" className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.08] mb-4">
             {lang === 'cs' ? fixCzechTypography(t.work.title) : fixDashes(t.work.title)}
+            <br className="hidden md:block" />
+            <span className="md:block">{' '}{lang === 'cs' ? fixCzechTypography(t.work.titleLine2) : fixDashes(t.work.titleLine2)}</span>
           </h2>
           <p className="text-lg sm:text-xl text-black/70 max-w-2xl mx-auto">
             {lang === 'cs' ? fixCzechTypography(t.work.subtitle) : fixDashes(t.work.subtitle)}

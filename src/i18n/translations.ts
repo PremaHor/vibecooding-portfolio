@@ -45,7 +45,8 @@ export const translations = {
       goalText: 'Hledám místo, kde kód dává smysl. Chci tvořit produkty s reálným dopadem po boku inovativního týmu.',
     },
     work: {
-      title: 'Produkty, které jsem dodal end-to-end',
+      title: 'Produkty, které jsem dodal',
+      titleLine2: 'end-to-end',
       subtitle: 'Od první skici a definice problému přes kompletní vývoj až po nasazení do ostrého provozu.',
       endOfGallery: 'End of Gallery',
       start: 'Start',
@@ -371,7 +372,8 @@ export const translations = {
       goalText: 'I\'m looking for a place where code makes a difference. I want to build products with real impact alongside an innovative team.',
     },
     work: {
-      title: 'Products I delivered end-to-end',
+      title: 'Products I delivered',
+      titleLine2: 'end-to-end',
       subtitle: 'From the first sketch and problem definition through full development to production deployment.',
       endOfGallery: 'End of Gallery',
       start: 'Start',
