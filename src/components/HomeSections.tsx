@@ -9,7 +9,8 @@ import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, type Project } from '../shared
 import {
   Code2, Zap, Globe, ArrowRight, ArrowLeft, Rocket, ShieldCheck, Brain,
   ClipboardCheck, Palette, Lightbulb, PenTool, Layers, Server, Cpu, Target,
-  Send, CheckCircle, AlertCircle, ChevronDown,
+  Send, CheckCircle, AlertCircle, ChevronDown, Compass, Handshake, MessageCircle,
+  IterationCcw, Users, Languages,
 } from 'lucide-react';
 
 const LazyReCAPTCHA = lazy(() => import('react-google-recaptcha'));
@@ -293,26 +294,6 @@ const AboutSection = () => {
                 decoding="async"
               />
             </div>
-            <div className="space-y-3">
-              <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-4">
-                {lang === 'cs' ? fixCzechTypography(t.about.valuesTitle) : fixDashes(t.about.valuesTitle)}
-              </h3>
-              {[t.about.value1, t.about.value2, t.about.value3].map((value, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0, margin: '0px 0px -60px 0px' }}
-                  transition={{ duration: 0.45, delay: i * 0.07 }}
-                  className="group flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[var(--color-vibe-orange)]/20 hover:bg-white/[0.05] transition-[border-color,background-color] duration-300 backface-hidden"
-                >
-                  <span className="shrink-0 w-1 h-1 mt-2 rounded-full bg-[var(--color-vibe-orange)]" />
-                  <span className="text-sm sm:text-base text-white/85 leading-[1.6] font-light">
-                    {lang === 'cs' ? fixCzechTypography(value) : fixDashes(value)}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -335,6 +316,50 @@ const AboutSection = () => {
             </p>
           </motion.div>
         </div>
+
+        {/* "Co ode mě čekat" — Bento Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-20 sm:mt-28 lg:mt-36"
+        >
+          <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-8 sm:mb-10">
+            {lang === 'cs' ? fixCzechTypography(t.about.valuesTitle) : fixDashes(t.about.valuesTitle)}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {([
+              { icon: Compass,        titleKey: 'value1Title' as const, textKey: 'value1' as const, span: 'md:col-span-2 lg:col-span-2' },
+              { icon: Handshake,      titleKey: 'value2Title' as const, textKey: 'value2' as const, span: '' },
+              { icon: MessageCircle,  titleKey: 'value3Title' as const, textKey: 'value3' as const, span: '' },
+              { icon: IterationCcw,   titleKey: 'value4Title' as const, textKey: 'value4' as const, span: '' },
+              { icon: Users,          titleKey: 'value5Title' as const, textKey: 'value5' as const, span: '' },
+              { icon: Languages,      titleKey: 'value6Title' as const, textKey: 'value6' as const, span: '' },
+            ] as const).map(({ icon: Icon, titleKey, textKey, span }, i) => (
+              <motion.article
+                key={titleKey}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.45, delay: i * 0.06 }}
+                className={`group rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 sm:p-8 hover:bg-white/[0.06] hover:border-[var(--color-vibe-orange)]/15 transition-[background-color,border-color] duration-300 ${span}`}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-[var(--color-vibe-orange)]/10 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
+                    <Icon className="w-[18px] h-[18px]" />
+                  </div>
+                  <h4 className="font-display text-sm sm:text-base uppercase tracking-wide text-white/95">
+                    {lang === 'cs' ? fixCzechTypography(t.about[titleKey]) : fixDashes(t.about[titleKey])}
+                  </h4>
+                </div>
+                <p className="text-sm sm:text-[15px] text-white/65 leading-[1.65] font-light">
+                  {lang === 'cs' ? fixCzechTypography(t.about[textKey]) : fixDashes(t.about[textKey])}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
