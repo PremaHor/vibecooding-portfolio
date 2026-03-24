@@ -38,7 +38,6 @@ export const PROJECTS: Project[] = [
     websiteUrls: [
       { label: "risklight.cz", url: "https://risklight.cz" },
       { label: "risklight.app", url: "https://risklight.app" },
-      { label: "Figma", url: "https://www.figma.com/design/LydaoS04XpM4l5VQKTyu9h/risklight?node-id=0-1&t=RNqmEn685skaU3ZV-1" },
     ],
   },
   {
