@@ -47,7 +47,7 @@ export const PROJECTS: Project[] = [
     category: "Prototyp",
     description: "Interaktivní kalkulátor pro reklamní výrobu. Převádí složitou matematickou logiku do kódu s validací vstupů a přepočtem ceny v reálném čase.",
     fullDescription: "AdCalc je funkční prototyp nástroje pro kalkulace v reklamní výrobě.",
-    image: "/images/projects/AdCalc.webp",
+    image: "/images/projects/addcalc.webp",
     tags: ["React", "TypeScript", "Tailwind"],
     year: "2025",
     client: "Rekly",
