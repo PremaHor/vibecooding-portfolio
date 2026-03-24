@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 import { motion } from 'motion/react';
 import { MousePointer2 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';

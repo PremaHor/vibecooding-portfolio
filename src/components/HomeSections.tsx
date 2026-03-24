@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 import { motion, AnimatePresence } from 'motion/react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';

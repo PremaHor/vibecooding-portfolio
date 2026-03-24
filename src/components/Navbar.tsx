@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../router';
 import { ArrowRight, ArrowLeft, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';

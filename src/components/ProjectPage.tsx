@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link } from '../router';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ExternalLink, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';

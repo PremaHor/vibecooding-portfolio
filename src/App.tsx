@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { useLocation, useRouteMatch } from './router';
 import { ArrowRight } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from './utils/czechTypography';
 import { useLanguage } from './i18n/LanguageContext';
@@ -77,6 +77,7 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
 export default function App() {
   const [navTheme, setNavTheme] = useState<'light' | 'dark'>('dark');
   const location = useLocation();
+  const match = useRouteMatch();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -166,12 +167,22 @@ export default function App() {
     <div className="relative min-h-screen selection:bg-[var(--color-vibe-orange)] selection:text-black backface-hidden">
       <div className="noise-overlay" />
       <div key={location.pathname} className="page-fade-in">
-        <Routes location={location}>
-          <Route path="/" element={<HomePage navTheme={navTheme} />} />
-          <Route path="/project/:slug" element={<Suspense fallback={null}><LazyProjectPage /></Suspense>} />
-          <Route path="/ochrana-soukromi" element={<Suspense fallback={null}><PrivacyPage /></Suspense>} />
-          <Route path="*" element={<Suspense fallback={null}><NotFoundPage /></Suspense>} />
-        </Routes>
+        {match.name === 'home' && <HomePage navTheme={navTheme} />}
+        {match.name === 'project' && (
+          <Suspense fallback={null}>
+            <LazyProjectPage />
+          </Suspense>
+        )}
+        {match.name === 'privacy' && (
+          <Suspense fallback={null}>
+            <PrivacyPage />
+          </Suspense>
+        )}
+        {match.name === 'notfound' && (
+          <Suspense fallback={null}>
+            <NotFoundPage />
+          </Suspense>
+        )}
       </div>
       <CookieConsentBanner />
     </div>
