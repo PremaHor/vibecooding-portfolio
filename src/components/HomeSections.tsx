@@ -7,7 +7,7 @@ import { translations } from '../i18n/translations';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, type Project } from '../shared/data';
 import {
-  Code2, Zap, Globe, ArrowRight, ArrowLeft, Rocket, ShieldCheck, Brain,
+  Code2, Zap, Globe, ArrowRight, ArrowDown, ArrowLeft, Rocket, ShieldCheck, Brain,
   ClipboardCheck, Palette, Lightbulb, PenTool, Layers, Server, Cpu, Target,
   Send, CheckCircle, AlertCircle, ChevronDown, Compass, Handshake, MessageCircle,
   IterationCcw, Users, Languages, Smartphone, TestTube,
@@ -486,17 +486,28 @@ const CtaSection = () => {
         >
           {lang === 'cs' ? fixCzechTypography(t.cta.text) : fixDashes(t.cta.text)}
         </motion.p>
-        <motion.a
-          href={CONTACT_EMAIL}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300"
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5"
         >
-          {lang === 'cs' ? fixCzechTypography(t.contact.writeMessage) : fixDashes(t.contact.writeMessage)}
-          <ArrowRight className="w-4 h-4" />
-        </motion.a>
+          <a
+            href={CONTACT_EMAIL}
+            className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 min-w-[180px] sm:min-w-0 justify-center"
+          >
+            {lang === 'cs' ? fixCzechTypography(t.cta.ctaPrimary) : fixDashes(t.cta.ctaPrimary)}
+            <ArrowRight className="w-4 h-4" />
+          </a>
+          <a
+            href="#work"
+            className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-[background-color,border-color] duration-300 min-w-[180px] sm:min-w-0 justify-center"
+          >
+            {lang === 'cs' ? fixCzechTypography(t.cta.ctaSecondary) : fixDashes(t.cta.ctaSecondary)}
+            <ArrowDown className="w-4 h-4" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

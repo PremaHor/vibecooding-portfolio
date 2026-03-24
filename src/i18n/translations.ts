@@ -137,7 +137,9 @@ export const translations = {
     },
     cta: {
       title: 'Stavíte produkt a hledáte parťáka?',
-      text: 'Hledám tým nebo firmu, kde můžu přinést svůj přesah mezi designem, vývojem a produktovým myšlením. Pokud řešíte něco podobného, napište mi. Rád se potkám a probereme to.',
+      text: 'Hledám inovativní tým, kde mohu naplno zúročit svůj přesah mezi designem, vývojem a produktovým myšlením. Pokud hledáte přesně takový přístup, napište mi. Nebo se rovnou podívejte níže, jak to vypadá v praxi.',
+      ctaPrimary: 'Pojďme se pobavit',
+      ctaSecondary: 'Ukázky mé práce',
     },
     competitiveAdvantage: {
       title: 'Proč zrovna já?',
@@ -453,7 +455,9 @@ export const translations = {
     },
     cta: {
       title: 'Building a product and looking for a partner?',
-      text: 'I\'m looking for a team or company where I can bring my blend of design, development, and product thinking. If that resonates, drop me a message. I\'d love to meet and talk it through.',
+      text: 'I\'m looking for an innovative team where I can fully leverage my overlap between design, development, and product thinking. If that\'s exactly what you need, drop me a message. Or scroll down to see how it looks in practice.',
+      ctaPrimary: 'Let\'s talk',
+      ctaSecondary: 'See my work',
     },
     competitiveAdvantage: {
       title: 'Why me?',
