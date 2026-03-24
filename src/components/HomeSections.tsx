@@ -281,7 +281,7 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
             className="lg:col-span-5 space-y-10 sm:space-y-12"
           >
-            <div className="aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden">
+            <div className="photo-glitch aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden relative">
               <img
                 src="/images/projects/FOTKA.webp"
                 srcSet={getImageSrcSet('/images/projects/FOTKA.webp')}

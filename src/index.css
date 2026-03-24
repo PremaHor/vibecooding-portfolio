@@ -275,11 +275,86 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+/* Profile photo glitch — CSS only, desktop only, zero runtime cost */
+@media (min-width: 768px) {
+  .photo-glitch {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .photo-glitch::before,
+  .photo-glitch::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    background-image: inherit;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0;
+  }
+
+  .photo-glitch::before {
+    animation: photo-glitch-r 8s ease-in-out infinite;
+  }
+
+  .photo-glitch::after {
+    animation: photo-glitch-b 8s ease-in-out 0.15s infinite;
+  }
+
+  @keyframes photo-glitch-r {
+    0%, 42%, 44%, 58%, 60%, 100% {
+      opacity: 0;
+      clip-path: inset(0 0 0 0);
+      transform: none;
+    }
+    43% {
+      opacity: 0.6;
+      clip-path: inset(20% 0 60% 0);
+      transform: translateX(4px);
+      background-color: rgba(242, 125, 38, 0.4);
+    }
+    59% {
+      opacity: 0.5;
+      clip-path: inset(65% 0 10% 0);
+      transform: translateX(-3px);
+      background-color: rgba(242, 125, 38, 0.35);
+    }
+  }
+
+  @keyframes photo-glitch-b {
+    0%, 42%, 44%, 58%, 60%, 100% {
+      opacity: 0;
+      clip-path: inset(0 0 0 0);
+      transform: none;
+    }
+    43% {
+      opacity: 0.5;
+      clip-path: inset(50% 0 25% 0);
+      transform: translateX(-5px);
+      background-color: rgba(56, 189, 248, 0.3);
+    }
+    59% {
+      opacity: 0.4;
+      clip-path: inset(8% 0 75% 0);
+      transform: translateX(3px);
+      background-color: rgba(56, 189, 248, 0.25);
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-eyebrow-type {
     width: auto;
     max-width: none;
     border-right: 0;
     animation: none;
+  }
+
+  .photo-glitch::before,
+  .photo-glitch::after {
+    animation: none !important;
+    opacity: 0 !important;
   }
 }
