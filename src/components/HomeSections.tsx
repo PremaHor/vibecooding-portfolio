@@ -32,7 +32,7 @@ const BentoCard = ({ children, className = '', delay = 0, dark = false }: { chil
     transition={{ duration: 0.5, delay }}
     className={`group relative rounded-2xl border p-6 sm:p-8 transition-shadow duration-300 hover:shadow-[0_8px_30px_-6px_rgba(0,0,0,0.08)] ${
       dark
-        ? 'bg-slate-900 text-white border-slate-700/30'
+        ? 'bg-slate-800 text-white border-slate-600/25'
         : 'bg-white text-black border-black/[0.06]'
     } ${className}`}
   >
