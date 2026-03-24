@@ -111,8 +111,8 @@ export const translations = {
     about: {
       title: 'Kdo jsem a co hledám',
       subtitle: 'Přemysl Horák. Vývojář, designér a člověk, kterého žene zvědavost.',
-      p1: 'Baví mě propojovat různé obory: design, vývoj, UX, produktovou strategii. Nechci být jen ten, kdo napíše kód podle zadání. Chci rozumět tomu, proč produkt vzniká, pro koho je a jak mu dát smysl. Hledám firmu nebo tým, kde můžu tenhle přesah naplno využít.',
-      p2: 'Šílené tempo inovací v AI je někdy těžké stíhat, ale o to víc mě baví vrhat se do toho a zkoušet věci přímo v praxi. Nechci vydělat miliony. Chci si pokrýt náklady a mít klid na smysluplnou práci s fajn lidmi, kterým na produktu záleží stejně jako mně.',
+      p1: 'Moje síla je v propojování světů: designu, vývoje, UX a produktové strategie. Nechci být jen ten, kdo napíše kód podle zadání. Chci rozumět tomu, PROČ produkt vzniká, komu pomáhá a jak mu dát byznysový smysl. Hledám inovativní tým, kde tento přesah plně zúročím.',
+      p2: 'Tempo AI inovací je šílené. Někdy je těžké to stíhat, ale o to víc mě baví vrhat se do toho a zkoušet nové věci přímo v praxi. Nehledám okamžitě zlatý důl. Mým cílem je pokrýt si životní náklady a mít klid na smysluplnou tvorbu, která mě baví a která má dopad, po boku lidí, se kterými si sednu i lidsky.',
       valuesTitle: 'Co ode mě čekat',
       value1: 'Loajalita a spolehlivost. Ne nájemný kodér, ale parťák.',
       value2: 'Upřímná komunikace. Řeknu, co si myslím, i když to není pohodlné.',
@@ -410,8 +410,8 @@ export const translations = {
     about: {
       title: 'Who I am and what I\'m looking for',
       subtitle: 'Přemysl Horák. Developer, designer, and a person driven by curiosity.',
-      p1: 'I love connecting different disciplines: design, development, UX, product strategy. I don\'t want to just write code to spec. I want to understand why the product exists, who it\'s for, and how to make it meaningful. I\'m looking for a company or team where I can fully leverage this cross-disciplinary mindset.',
-      p2: 'The insane pace of AI innovation can be hard to keep up with, but that\'s exactly what makes it so exciting to dive in and try things in practice. I don\'t want to make millions. I want to cover my costs and have the peace to do meaningful work with good people who care about the product as much as I do.',
+      p1: 'My strength lies in connecting worlds: design, development, UX, and product strategy. I don\'t want to just write code to spec. I want to understand WHY a product exists, who it helps, and how to give it real business value. I\'m looking for an innovative team where I can fully leverage this overlap.',
+      p2: 'The pace of AI innovation is insane. Sometimes it\'s hard to keep up, but that\'s exactly what makes it so exciting to dive in and try new things in practice. I\'m not chasing a gold rush. My goal is to cover my living costs and have the peace to do meaningful work I enjoy and that has impact, alongside people I connect with on a human level.',
       valuesTitle: 'What to expect from me',
       value1: 'Loyalty and reliability. Not a hired gun, but a partner.',
       value2: 'Honest communication. I\'ll say what I think, even when it\'s uncomfortable.',
