@@ -25,26 +25,130 @@ const renderWithBold = (text: string, lang: 'cs' | 'en'): React.ReactNode => {
   });
 };
 
-const ProjectStructuredContent = ({ tr, lang }: { tr: { goalTitle: string; goal: string; solutionTitle: string; solution: string; benefitsTitle: string; benefits: readonly string[] }; lang: 'cs' | 'en' }) => (
-  <div className="space-y-8 sm:space-y-10 mb-10 sm:mb-16">
-    <div>
-      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.goalTitle) : fixDashes(tr.goalTitle)}</h3>
-      <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] font-light">{renderWithBold(tr.goal, lang)}</p>
-    </div>
-    <div>
-      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.solutionTitle) : fixDashes(tr.solutionTitle)}</h3>
-      <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] font-light">{renderWithBold(tr.solution, lang)}</p>
-    </div>
-    <div>
-      <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(tr.benefitsTitle) : fixDashes(tr.benefitsTitle)}</h3>
-      <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base md:text-lg text-white/80 leading-[1.6] font-light list-disc list-inside marker:text-[var(--color-vibe-orange)]">
-        {tr.benefits.map((item, i) => (
-          <li key={i}>{renderWithBold(item, lang)}</li>
-        ))}
-      </ul>
-    </div>
-  </div>
+interface StructuredBase {
+  goalTitle: string;
+  goal: string;
+  solutionTitle: string;
+  solution: string;
+  benefitsTitle: string;
+  benefits: readonly string[];
+}
+
+interface StructuredExtended extends StructuredBase {
+  problemTitle: string;
+  problem: readonly string[];
+  processTitle: string;
+  process: readonly string[];
+  challengesTitle: string;
+  challenges: readonly string[];
+  statsTitle: string;
+  stats: readonly string[];
+  lessonsTitle: string;
+  lessons: readonly string[];
+}
+
+const SectionHeading = ({ children }: { children: React.ReactNode }) => (
+  <h3 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-3 sm:mb-4">{children}</h3>
 );
+
+const SectionParagraph = ({ text, lang }: { text: string; lang: 'cs' | 'en' }) => (
+  <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] font-light">{renderWithBold(text, lang)}</p>
+);
+
+const SectionList = ({ items, lang }: { items: readonly string[]; lang: 'cs' | 'en' }) => (
+  <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base md:text-lg text-white/80 leading-[1.6] font-light list-disc list-inside marker:text-[var(--color-vibe-orange)]">
+    {items.map((item, i) => (
+      <li key={i}>{renderWithBold(item, lang)}</li>
+    ))}
+  </ul>
+);
+
+const t_ = (text: string, lang: 'cs' | 'en') => lang === 'cs' ? fixCzechTypography(text) : fixDashes(text);
+
+const isExtended = (tr: StructuredBase): tr is StructuredExtended => 'processTitle' in tr;
+
+const ProjectStructuredContent = ({ tr, lang }: { tr: StructuredBase; lang: 'cs' | 'en' }) => {
+  const extended = isExtended(tr);
+
+  return (
+    <div className="space-y-10 sm:space-y-14 mb-10 sm:mb-16">
+      <div>
+        <SectionHeading>{t_(tr.goalTitle, lang)}</SectionHeading>
+        <SectionParagraph text={tr.goal} lang={lang} />
+      </div>
+
+      {extended && (
+        <div>
+          <SectionHeading>{t_(tr.problemTitle, lang)}</SectionHeading>
+          <div className="space-y-3">
+            {tr.problem.map((p, i) => (
+              <SectionParagraph key={i} text={p} lang={lang} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div>
+        <SectionHeading>{t_(tr.solutionTitle, lang)}</SectionHeading>
+        <SectionParagraph text={tr.solution} lang={lang} />
+      </div>
+
+      <div>
+        <SectionHeading>{t_(tr.benefitsTitle, lang)}</SectionHeading>
+        <SectionList items={tr.benefits} lang={lang} />
+      </div>
+
+      {extended && (
+        <>
+          <div className="border-t border-white/5 pt-10 sm:pt-14">
+            <SectionHeading>{t_(tr.processTitle, lang)}</SectionHeading>
+            <ol className="space-y-4 sm:space-y-5">
+              {tr.process.map((step, i) => (
+                <li key={i} className="flex gap-4 items-start">
+                  <span className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[var(--color-vibe-orange)]/15 text-[var(--color-vibe-orange)] flex items-center justify-center text-xs sm:text-sm font-bold mt-0.5">{i + 1}</span>
+                  <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] font-light">{renderWithBold(step, lang)}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="border-t border-white/5 pt-10 sm:pt-14">
+            <SectionHeading>{t_(tr.challengesTitle, lang)}</SectionHeading>
+            <div className="space-y-4 sm:space-y-5">
+              {tr.challenges.map((ch, i) => (
+                <div key={i} className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <p className="text-sm sm:text-base md:text-lg text-white/80 leading-[1.7] font-light">{renderWithBold(ch, lang)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="border-t border-white/5 pt-10 sm:pt-14">
+            <SectionHeading>{t_(tr.statsTitle, lang)}</SectionHeading>
+            <div className="grid grid-cols-3 gap-4 sm:gap-6">
+              {tr.stats.map((stat, i) => {
+                const match = stat.match(/^\*\*([^*]+)\*\*\s*(.*)/);
+                const value = match ? match[1] : stat;
+                const label = match ? match[2] : '';
+                return (
+                  <div key={i} className="text-center p-4 sm:p-6 rounded-xl bg-white/[0.03] border border-white/5">
+                    <p className="text-lg sm:text-2xl md:text-3xl font-bold text-white/95 mb-1">{t_(value, lang)}</p>
+                    {label && <p className="text-xs sm:text-sm text-white/50 font-light">{t_(label, lang)}</p>}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="border-t border-white/5 pt-10 sm:pt-14">
+            <SectionHeading>{t_(tr.lessonsTitle, lang)}</SectionHeading>
+            <SectionList items={tr.lessons} lang={lang} />
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 export const ProjectPage = () => {
   const { slug } = useParams();
