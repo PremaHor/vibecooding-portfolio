@@ -24,13 +24,17 @@ const BENTO_STEPS = [
   { icon: Server,    key: 'step5' as const },
 ];
 
-const BentoCard = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => (
+const BentoCard = ({ children, className = '', delay = 0, dark = false }: { children: React.ReactNode; className?: string; delay?: number; dark?: boolean }) => (
   <motion.article
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.15 }}
     transition={{ duration: 0.5, delay }}
-    className={`group relative rounded-2xl border border-black/[0.06] bg-white p-6 sm:p-8 transition-shadow duration-300 hover:shadow-[0_8px_30px_-6px_rgba(0,0,0,0.08)] ${className}`}
+    className={`group relative rounded-2xl border p-6 sm:p-8 transition-shadow duration-300 hover:shadow-[0_8px_30px_-6px_rgba(0,0,0,0.08)] ${
+      dark
+        ? 'bg-[var(--color-vibe-black)] text-white border-white/[0.06]'
+        : 'bg-white text-black border-black/[0.06]'
+    } ${className}`}
   >
     {children}
   </motion.article>
@@ -64,7 +68,7 @@ const ProcessSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {/* Card 1 — Stack & Tooling (wide) */}
-          <BentoCard className="md:col-span-2 lg:col-span-2 bg-[var(--color-vibe-black)] text-white border-white/[0.06]" delay={0}>
+          <BentoCard className="md:col-span-2 lg:col-span-2" dark delay={0}>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
                 <Zap className="w-5 h-5" />
@@ -73,7 +77,7 @@ const ProcessSection = () => {
             </div>
             <div className="flex flex-wrap gap-2">
               {t.process.stackTags.map((tag) => (
-                <span key={tag} className="inline-block px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-white/80 border border-white/[0.08] transition-colors duration-200 group-hover:bg-[var(--color-vibe-orange)]/15 group-hover:text-[var(--color-vibe-orange)] group-hover:border-[var(--color-vibe-orange)]/20">
+                <span key={tag} className="inline-block px-3.5 py-2 rounded-full text-xs font-semibold bg-white/[0.08] text-white/90 border border-white/[0.12] hover:bg-[var(--color-vibe-orange)]/20 hover:text-[var(--color-vibe-orange)] hover:border-[var(--color-vibe-orange)]/30 transition-colors duration-200">
                   {tag}
                 </span>
               ))}
@@ -139,7 +143,7 @@ const ProcessSection = () => {
           </BentoCard>
 
           {/* Card 8 — Můj cíl (full-width bottom) */}
-          <BentoCard className="md:col-span-2 lg:col-span-4 bg-[var(--color-vibe-black)] text-white border-white/[0.06]" delay={0.42}>
+          <BentoCard className="md:col-span-2 lg:col-span-4" dark delay={0.42}>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
               <div className="w-12 h-12 rounded-2xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
                 <Target className="w-6 h-6" />
