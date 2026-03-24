@@ -329,7 +329,8 @@ export const translations = {
       },
       adcalc: {
         category: 'Prototyp',
-        subtitle: 'Rychlá a přesná validace cenotvorby pro reklamní produkci. Konec chybám v Excelu.',
+        subtitle: 'Rychlá a přesná validace cenotvorby pro reklamní produkci.',
+        subtitleLine2: 'Konec chybám v Excelu.',
         description: 'Interaktivní kalkulátor pro reklamní výrobu. Převádí složitou matematickou logiku do kódu s validací vstupů a přepočtem ceny v reálném čase.',
         fullDescription: 'AdCalc je funkční prototyp nástroje pro kalkulace v reklamní výrobě.',
         quote: 'Největší výzvou bylo převést matematickou logiku kalkulací do kódu a zajistit stoprocentní přesnost výsledné ceny. To mě naučilo uvažovat nad datovou integritou a UX složitých formulářů.',
@@ -709,7 +710,8 @@ export const translations = {
       },
       adcalc: {
         category: 'Prototype',
-        subtitle: 'Fast and accurate pricing validation for advertising production. No more Excel errors.',
+        subtitle: 'Fast and accurate pricing validation for advertising production.',
+        subtitleLine2: 'No more Excel errors.',
         description: 'Interactive calculator for advertising production. Converts complex mathematical logic into code with real-time input validation and instant price recalculation.',
         fullDescription: 'AdCalc is a functional prototype tool for advertising production calculations.',
         quote: 'The biggest challenge was converting the mathematical logic of calculations into code and ensuring 100% accuracy of the final price. It taught me to think about data integrity and UX of complex forms.',

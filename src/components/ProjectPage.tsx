@@ -190,6 +190,7 @@ export const ProjectPage = () => {
             {tr && 'subtitle' in tr && tr.subtitle ? (
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }} className="text-base sm:text-lg text-white/50 font-light max-w-2xl mb-12 sm:mb-20">
                 {lang === 'cs' ? fixCzechTypography(tr.subtitle as string) : fixDashes(tr.subtitle as string)}
+                {'subtitleLine2' in tr && tr.subtitleLine2 && (<><br className="hidden md:block" /><span className="md:hidden"> </span>{lang === 'cs' ? fixCzechTypography(tr.subtitleLine2 as string) : fixDashes(tr.subtitleLine2 as string)}</> )}
               </motion.p>
             ) : (
               <div className="mb-8 sm:mb-14" />
