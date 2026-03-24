@@ -64,7 +64,7 @@ export const PROJECTS: Project[] = [
     description: "Kompletní redesign webu Dětského diagnostického ústavu v Olomouci. Moderní, přehledný a přístupný web pro instituci pečující o děti a mládež.",
     fullDescription: "Redesign webu DDÚ Olomouc přináší novou vizuální identitu a přehlednější strukturu informací.",
     image: "/images/projects/ddu-olomouc.webp",
-    tags: ["HTML", "CSS"],
+    tags: ["HTML", "CSS", "Responsive Design", "WCAG"],
     year: "2026",
     client: "DDÚ Olomouc",
     role: "Developer & Designer",
