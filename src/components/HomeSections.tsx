@@ -8,28 +8,42 @@ import { useIsMobile } from '../hooks/useIsMobile';
 import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, type Project } from '../shared/data';
 import {
   Code2, Zap, Globe, ArrowRight, ArrowLeft, Rocket, ShieldCheck, Brain,
-  ClipboardCheck, Palette, Lightbulb, PenTool, Layers, Server,
+  ClipboardCheck, Palette, Lightbulb, PenTool, Layers, Server, Cpu, Target,
   Send, CheckCircle, AlertCircle, ChevronDown,
 } from 'lucide-react';
 
 const LazyReCAPTCHA = lazy(() => import('react-google-recaptcha'));
 
-// --- Process ---
+// --- Process (Bento Grid) ---
 
-const PROCESS_STEPS = [
+const BENTO_STEPS = [
   { icon: Lightbulb, key: 'step1' as const },
-  { icon: PenTool, key: 'step2' as const },
-  { icon: Layers, key: 'step3' as const },
-  { icon: Code2, key: 'step4' as const },
-  { icon: Server, key: 'step5' as const },
+  { icon: PenTool,   key: 'step2' as const },
+  { icon: Layers,    key: 'step3' as const },
+  { icon: Code2,     key: 'step4' as const },
+  { icon: Server,    key: 'step5' as const },
 ];
+
+const BentoCard = ({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => (
+  <motion.article
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.15 }}
+    transition={{ duration: 0.5, delay }}
+    className={`group relative rounded-2xl border border-black/[0.06] bg-white p-6 sm:p-8 transition-shadow duration-300 hover:shadow-[0_8px_30px_-6px_rgba(0,0,0,0.08)] ${className}`}
+  >
+    {children}
+  </motion.article>
+);
 
 const ProcessSection = () => {
   const { lang } = useLanguage();
   const t = translations[lang];
+  const tx = (v: string) => lang === 'cs' ? fixCzechTypography(v) : fixDashes(v);
+
   return (
     <section id="process" className="relative bg-slate-50 text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="process-heading">
-      <h2 id="process-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}</h2>
+      <h2 id="process-heading" className="sr-only">{tx(t.process.title)}</h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,35 +53,103 @@ const ProcessSection = () => {
           className="mb-16 sm:mb-20 text-center"
         >
           <h3 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase leading-[1.08] mb-4">
-            {lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}
+            {tx(t.process.title)}
           </h3>
           <p className="text-lg sm:text-xl text-black/70 max-w-2xl mx-auto">
-            {lang === 'cs' ? fixCzechTypography(t.process.subtitle) : fixDashes(t.process.subtitle)}
+            {tx(t.process.subtitle)}
             <br />
-            {lang === 'cs' ? fixCzechTypography(t.process.subtitle2) : fixDashes(t.process.subtitle2)}
+            {tx(t.process.subtitle2)}
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-6">
-          {PROCESS_STEPS.map(({ icon: Icon, key }, idx) => (
-            <motion.article
-              key={key}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="relative flex flex-col items-center lg:items-start text-center lg:text-left"
-            >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 shrink-0">
-                <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {/* Card 1 — Stack & Tooling (wide) */}
+          <BentoCard className="md:col-span-2 lg:col-span-2 bg-[var(--color-vibe-black)] text-white border-white/[0.06]" delay={0}>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
+                <Zap className="w-5 h-5" />
               </div>
-              <h4 className="font-display text-base sm:text-lg uppercase text-black mb-2">
-                {lang === 'cs' ? fixCzechTypography(t.process[`${key}Title`]) : fixDashes(t.process[`${key}Title`])}
-              </h4>
-              <p className="text-sm sm:text-base text-black/70 leading-[1.6]">
-                {lang === 'cs' ? fixCzechTypography(t.process[`${key}Text`]) : fixDashes(t.process[`${key}Text`])}
-              </p>
-            </motion.article>
-          ))}
+              <h4 className="font-display text-sm sm:text-base uppercase tracking-wide">{tx(t.process.stackTitle)}</h4>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {t.process.stackTags.map((tag) => (
+                <span key={tag} className="inline-block px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-white/80 border border-white/[0.08] transition-colors duration-200 group-hover:bg-[var(--color-vibe-orange)]/15 group-hover:text-[var(--color-vibe-orange)] group-hover:border-[var(--color-vibe-orange)]/20">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </BentoCard>
+
+          {/* Card 2 — Pochopení problému (dominant, tall) */}
+          <BentoCard className="md:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col bg-gradient-to-br from-[var(--color-vibe-orange)]/[0.04] to-transparent" delay={0.06}>
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 shrink-0">
+              <Lightbulb className="w-6 h-6 sm:w-7 sm:h-7" />
+            </div>
+            <h4 className="font-display text-lg sm:text-xl lg:text-2xl uppercase leading-[1.1] text-black mb-3">
+              {tx(t.process.step1Title)}
+            </h4>
+            <p className="text-base sm:text-lg text-black/70 leading-[1.65] flex-1">
+              {tx(t.process.step1Text)}
+            </p>
+          </BentoCard>
+
+          {/* Card 3 — UI/UX Design */}
+          <BentoCard delay={0.12}>
+            <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
+              <PenTool className="w-5 h-5" />
+            </div>
+            <h4 className="font-display text-sm sm:text-base uppercase text-black mb-2">{tx(t.process.step2Title)}</h4>
+            <p className="text-sm text-black/70 leading-[1.6]">{tx(t.process.step2Text)}</p>
+          </BentoCard>
+
+          {/* Card 4 — Validace */}
+          <BentoCard delay={0.18}>
+            <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
+              <Layers className="w-5 h-5" />
+            </div>
+            <h4 className="font-display text-sm sm:text-base uppercase text-black mb-2">{tx(t.process.step3Title)}</h4>
+            <p className="text-sm text-black/70 leading-[1.6]">{tx(t.process.step3Text)}</p>
+          </BentoCard>
+
+          {/* Card 5 — Vývoj s AI */}
+          <BentoCard delay={0.24}>
+            <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
+              <Code2 className="w-5 h-5" />
+            </div>
+            <h4 className="font-display text-sm sm:text-base uppercase text-black mb-2">{tx(t.process.step4Title)}</h4>
+            <p className="text-sm text-black/70 leading-[1.6]">{tx(t.process.step4Text)}</p>
+          </BentoCard>
+
+          {/* Card 6 — Produkce */}
+          <BentoCard delay={0.30}>
+            <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
+              <Server className="w-5 h-5" />
+            </div>
+            <h4 className="font-display text-sm sm:text-base uppercase text-black mb-2">{tx(t.process.step5Title)}</h4>
+            <p className="text-sm text-black/70 leading-[1.6]">{tx(t.process.step5Text)}</p>
+          </BentoCard>
+
+          {/* Card 7 — AI & Automatizace */}
+          <BentoCard className="md:col-span-1 lg:col-span-2" delay={0.36}>
+            <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
+              <Cpu className="w-5 h-5" />
+            </div>
+            <h4 className="font-display text-sm sm:text-base uppercase text-black mb-2">{tx(t.process.aiTitle)}</h4>
+            <p className="text-sm sm:text-base text-black/70 leading-[1.6]">{tx(t.process.aiText)}</p>
+          </BentoCard>
+
+          {/* Card 8 — Můj cíl (full-width bottom) */}
+          <BentoCard className="md:col-span-2 lg:col-span-4 bg-[var(--color-vibe-black)] text-white border-white/[0.06]" delay={0.42}>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+              <div className="w-12 h-12 rounded-2xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
+                <Target className="w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="font-display text-base sm:text-lg uppercase mb-1">{tx(t.process.goalTitle)}</h4>
+                <p className="text-sm sm:text-base text-white/70 leading-[1.6]">{tx(t.process.goalText)}</p>
+              </div>
+            </div>
+          </BentoCard>
         </div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent" aria-hidden />
