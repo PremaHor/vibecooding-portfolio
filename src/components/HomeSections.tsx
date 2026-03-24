@@ -178,8 +178,11 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="group relative"
     >
-      <Link to={`/project/${project.slug}`} className="block relative">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] mb-6 sm:mb-8 bg-gray-50 group-hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-500 backface-hidden">
+      <Link
+        to={`/project/${project.slug}`}
+        className="block relative rounded-2xl sm:rounded-[1.75rem] border border-black/[0.06] shadow-sm hover:shadow-lg active:scale-[0.98] active:shadow-sm transition-[box-shadow,transform] duration-300 overflow-hidden bg-white"
+      >
+        <div className="relative aspect-[16/10] overflow-hidden bg-gray-50 backface-hidden">
           <img
             src={project.image}
             srcSet={getImageSrcSet(project.image)}
@@ -190,7 +193,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
             loading={index === 0 && !isMobile ? 'eager' : 'lazy'}
             fetchPriority={index === 0 && !isMobile ? 'high' : undefined}
             decoding="async"
-            className="w-full h-full object-cover rounded-2xl sm:rounded-[1.75rem] md:rounded-[2rem] transition-transform duration-700 group-hover:scale-[1.08] backface-hidden"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.08] backface-hidden"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col items-center justify-center ios-backdrop-blur backface-hidden">
@@ -208,15 +211,18 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-4 sm:gap-5">
+        <div className="flex flex-col gap-4 sm:gap-5 p-5 sm:p-6">
           <div className="flex items-center gap-4">
             <span className="w-8 h-px bg-[var(--color-vibe-orange)]" />
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)]">
               {lang === 'cs' ? fixCzechTypography(category) : fixDashes(category)}
             </span>
           </div>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase leading-[1.05] group-hover:translate-x-2 transition-transform duration-300">
-            {lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
+          <h3 className="flex items-center justify-between gap-3 text-2xl sm:text-3xl md:text-4xl font-display uppercase leading-[1.05]">
+            <span className="group-hover:translate-x-1 transition-transform duration-300">
+              {lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
+            </span>
+            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 text-black/30 group-hover:text-[var(--color-vibe-orange)] transition-colors duration-300" />
           </h3>
           <div className="flex flex-wrap items-center gap-3">
             {project.tags.map(tag => (
@@ -253,7 +259,7 @@ const WorkSection = () => {
             {lang === 'cs' ? fixCzechTypography(t.work.subtitle) : fixDashes(t.work.subtitle)}
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-20 md:gap-24 lg:gap-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16">
           {PROJECTS.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} isMobile={isMobile} />
           ))}
