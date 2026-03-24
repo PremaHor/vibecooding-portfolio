@@ -16,7 +16,7 @@ export const criticalTranslations = {
     },
     hero: {
       available: 'Hledám tým, se kterým budu tvořit budoucnost',
-      eyebrow: 'Ahoj, jsem Přemek 👋 Product-minded builder',
+      eyebrow: 'Ahoj, jsem Přemek - stavím produkty, které dávají smysl',
       h1: 'Propojuji design, kód a produktové myšlení.',
       subheadline: 'AI mění hru a já chci být u toho v praxi. Hledám inovativní tým, kde zúročím svůj mezioborový přesah. Ne jako nájemný kodér, ale jako loajální parťák, co tvoří produkty s reálným dopadem.',
       ctaPrimary: 'Pojďme se potkat',
@@ -50,7 +50,7 @@ export const criticalTranslations = {
     },
     hero: {
       available: 'Looking for a team to build the future with',
-      eyebrow: "Hi, I'm Premek 👋 Product-minded builder",
+      eyebrow: "Hi, I'm Premek - I build products that matter",
       h1: 'I connect design, code, and product thinking.',
       subheadline: 'AI is changing the game, and I want to be part of it in practice. I am looking for an innovative team where I can turn my cross-disciplinary overlap into results. Not as a hired gun, but as a loyal partner building products with real impact.',
       ctaPrimary: 'Let\'s meet',
