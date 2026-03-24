@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
     id: 2,
     slug: "adcalc",
     title: "AdCalc",
-    category: "Prototyp",
+    category: "PWA MVP Prototyp",
     description: "Interaktivní kalkulátor pro reklamní výrobu. Převádí složitou matematickou logiku do kódu s validací vstupů a přepočtem ceny v reálném čase.",
     fullDescription: "AdCalc je funkční prototyp nástroje pro kalkulace v reklamní výrobě.",
     image: "/images/projects/addcalc.webp",

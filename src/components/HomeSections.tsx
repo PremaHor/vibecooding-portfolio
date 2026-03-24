@@ -214,7 +214,7 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
         <div className="flex flex-col gap-4 sm:gap-5 p-5 sm:p-6">
           <div className="flex items-center gap-4">
             <span className="w-8 h-px bg-[var(--color-vibe-orange)]" />
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)]">
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-[var(--color-vibe-orange)] whitespace-nowrap">
               {lang === 'cs' ? fixCzechTypography(category) : fixDashes(category)}
             </span>
           </div>
