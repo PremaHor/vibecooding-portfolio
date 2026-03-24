@@ -55,6 +55,9 @@ export const translations = {
       finish: 'Finish',
       viewCaseStudy: 'Zobrazit detail projektu',
       timeline: 'Timeline',
+      comingSoonBadge: 'Building something new...',
+      comingSoonTitle: 'TRHNISI',
+      comingSoonDescription: 'Vlastní B2C SaaS aplikace pro moderní barterovou směnu. Přetvářím komunitní dynamiku do digitálního světa.',
     },
     services: {
       title: 'Co přinesu do týmu',
@@ -451,6 +454,9 @@ export const translations = {
       finish: 'Finish',
       viewCaseStudy: 'View project detail',
       timeline: 'Timeline',
+      comingSoonBadge: 'Building something new...',
+      comingSoonTitle: 'TRHNISI',
+      comingSoonDescription: 'A B2C SaaS app for modern barter exchange. Transforming community dynamics into the digital world.',
     },
     services: {
       title: 'What I bring to the team',
