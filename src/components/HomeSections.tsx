@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
+import { translations } from '../i18n/translations';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, type Project } from '../shared/data';
 import {
@@ -24,7 +25,8 @@ const PROCESS_STEPS = [
 ];
 
 const ProcessSection = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   return (
     <section id="process" className="relative bg-slate-50 text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="process-heading">
       <h2 id="process-heading" className="sr-only">{lang === 'cs' ? fixCzechTypography(t.process.title) : fixDashes(t.process.title)}</h2>
@@ -76,7 +78,8 @@ const ProcessSection = () => {
 // --- Work ---
 
 function ProjectCard({ project, index, isMobile }: { project: Project; index: number; isMobile: boolean }) {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   const tr = t.projects[project.slug as keyof typeof t.projects];
   const category = tr?.category ?? project.category;
 
@@ -143,7 +146,8 @@ function ProjectCard({ project, index, isMobile }: { project: Project; index: nu
 }
 
 const WorkSection = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   const isMobile = useIsMobile();
   return (
     <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="work-heading">
@@ -174,7 +178,8 @@ const WorkSection = () => {
 // --- About ---
 
 const AboutSection = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   return (
     <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden backface-hidden">
       <div className="absolute inset-0 bg-[var(--color-vibe-black)] backface-hidden" />
@@ -258,7 +263,8 @@ const SERVICES_CARDS = [
 ];
 
 const ServicesPricingSection = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   return (
     <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden backface-hidden">
       <div id="pricing" className="absolute top-0 left-0 -translate-y-24" aria-hidden />
@@ -345,7 +351,8 @@ const ServicesPricingSection = () => {
 // --- CTA ---
 
 const CtaSection = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   return (
     <section id="cta" className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)] text-white relative overflow-hidden backface-hidden">
       <div className="max-w-3xl mx-auto text-center">
@@ -393,7 +400,8 @@ const COMPETITIVE_CARDS = [
 ];
 
 const CompetitiveAdvantageSection = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   return (
     <section id="competitive-advantage" className="relative py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden backface-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-vibe-black)] via-[#0a0a0a] to-[var(--color-vibe-black)] backface-hidden" />
@@ -448,7 +456,8 @@ const CompetitiveAdvantageSection = () => {
 // --- FAQ ---
 
 const FAQSection = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   const [openId, setOpenId] = useState<number | null>(null);
 
   const items = [
@@ -537,7 +546,8 @@ const FORMSPREE_URL = 'https://formspree.io/f/mjkebwwp';
 const RECAPTCHA_SITE_KEY = '6LdmmJEsAAAAAJuJYP_R6yhyFrOGTsKF1A8ml6ZF';
 
 const ContactSection = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const formRef = useRef<HTMLFormElement>(null);
   const recaptchaRef = useRef<any>(null);

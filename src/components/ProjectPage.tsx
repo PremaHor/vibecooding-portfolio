@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ExternalLink, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
+import { translations } from '../i18n/translations';
 import { PROJECTS, getImageSrcSet } from '../shared/data';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
@@ -47,7 +48,8 @@ const ProjectStructuredContent = ({ tr, lang }: { tr: { goalTitle: string; goal:
 
 export const ProjectPage = () => {
   const { slug } = useParams();
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const projectIndex = PROJECTS.findIndex(p => p.slug === slug);
   const project = PROJECTS[projectIndex];

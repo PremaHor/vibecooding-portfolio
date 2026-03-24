@@ -5,7 +5,7 @@
     <style>
       html,body{background-color:#050505!important;color:#fff;margin:0;min-height:100%;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
       #root{min-height:100vh}
-      .no-fouc #root{opacity:0!important;pointer-events:none}
+      @media(min-width:768px){.no-fouc #root{opacity:0!important;pointer-events:none}}
       /* LCP hero + navbar (FOUC-free při async CSS) */
       .font-display{font-family:"Montserrat",system-ui,sans-serif;font-weight:700;letter-spacing:.03em}
       .hero-section .hero-content h1 span{display:block;background:linear-gradient(to bottom right,#fff,#fff,#94a3b8);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -13,7 +13,18 @@
       nav a:not(.nav-cta),nav button{color:inherit}
       .nav-cta.bg-white{color:#000}
       .nav-cta.bg-black{color:#fff}
-      @media(min-width:768px){.hero-section .hero-content h1 span,.hero-section .hero-content>p,.hero-section .hero-content>div:last-child{opacity:0}}
+      @keyframes hfi{from{opacity:0;transform:translateY(1.5rem)}to{opacity:1;transform:none}}
+      @keyframes pfi{from{opacity:0}to{opacity:1}}
+      @media(min-width:768px){
+        .hero-anim{opacity:0;animation:hfi .7s cubic-bezier(.16,1,.3,1) both}
+        .hero-anim-d1{animation-delay:.12s}
+        .hero-anim-d2{animation-delay:.24s}
+      }
+      .page-fade-in{animation:pfi .4s ease both}
+      @keyframes csi{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+      @keyframes cso{from{transform:translateY(0);opacity:1}to{transform:translateY(100%);opacity:0}}
+      .cookie-enter{animation:csi .4s cubic-bezier(.16,1,.3,1) both}
+      .cookie-exit{animation:cso .3s ease-in both}
       .pt-nav-safe{padding-top:calc(6rem + env(safe-area-inset-top,0))}
       @media(min-width:640px){.pt-nav-safe{padding-top:calc(7rem + env(safe-area-inset-top,0))}}
       @media(min-width:768px){.pt-nav-safe{padding-top:calc(8rem + env(safe-area-inset-top,0))}}
@@ -55,8 +66,10 @@
     <!-- Preconnect: fonty (DNS + TCP + TLS ještě před požadavkem na CSS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Google Fonts — blocking but tiny (~2 KB), display=swap shows fallback instantly -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" />
+    <!-- Google Fonts — preload for priority, non-blocking for fast FCP on mobile -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
     <!-- Analytics: dns-prefetch only (full preconnect wasted until cookie consent) -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.clarity.ms" />
@@ -101,7 +114,8 @@
     <script type="module" src="/src/main.tsx"></script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><div id="pre" style="min-height:100dvh;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1rem 4rem"><div style="max-width:56rem;margin:0 auto;width:100%"><h1 class="font-display" style="font-size:clamp(2rem,6vw,3.5rem);line-height:1.1;margin-bottom:1.5rem"><span style="display:block;background:linear-gradient(to bottom right,#fff,#fff,#94a3b8);-webkit-background-clip:text;background-clip:text;color:transparent" id="ph1"></span></h1><p style="color:#94a3b8;max-width:42rem;margin:0 auto;line-height:1.65;font-size:clamp(.875rem,2.5vw,1.125rem)" id="pp"></p></div></div></div>
+    <script>!function(){var l=document.documentElement.lang,h=document.getElementById('ph1'),p=document.getElementById('pp');if(l==='cs'){h.textContent='Propojuji design, k\u00f3d a\u00a0produktov\u00e9 my\u0161len\u00ed.';p.textContent='Fascinuje m\u011b AI a\u00a0tempo, jak\u00fdm m\u011bn\u00ed sv\u011bt kolem n\u00e1s. Hled\u00e1m t\u00fdm nebo firmu, kde mohu vyu\u017e\u00edt sv\u016fj mezioborov\u00fd p\u0159esah a\u00a0spole\u010dn\u011b tvo\u0159it produkty, kter\u00e9 d\u00e1vaj\u00ed smysl.'}else{h.textContent='I connect design, code, and product thinking.';p.textContent='I\u2019m fascinated by AI and the pace at which it\u2019s changing the world. I\u2019m looking for a team where I can leverage my cross-disciplinary skills and build meaningful products together.'}}()</script>
   </body>
 </html>
 

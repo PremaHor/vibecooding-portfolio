@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { translations } from '../i18n/translations';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 
 export function PrivacyPage() {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
+  const t = translations[lang];
 
   useEffect(() => {
     window.scrollTo(0, 0);

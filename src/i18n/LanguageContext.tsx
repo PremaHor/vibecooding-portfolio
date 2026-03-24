@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useMemo } from 'react';
-import { translations, type Lang } from './translations';
+import React, { createContext, useContext, useMemo, useEffect } from 'react';
+import { criticalTranslations, type Lang } from './translations-critical';
 
 function getBrowserLang(): Lang {
   if (typeof navigator === 'undefined') return 'en';
@@ -7,12 +7,12 @@ function getBrowserLang(): Lang {
   return lang.startsWith('cs') || lang.startsWith('sk') ? 'cs' : 'en';
 }
 
-const LanguageContext = createContext<{ lang: Lang; t: (typeof translations)[Lang] } | null>(null);
+const LanguageContext = createContext<{ lang: Lang; t: (typeof criticalTranslations)[Lang] } | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo(() => {
     const lang = getBrowserLang();
-    return { lang, t: translations[lang] };
+    return { lang, t: criticalTranslations[lang] };
   }, []);
 
   useEffect(() => {
@@ -31,3 +31,5 @@ export function useLanguage() {
   if (!ctx) throw new Error('useLanguage must be used within LanguageProvider');
   return ctx;
 }
+
+export type { Lang };

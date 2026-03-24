@@ -20,7 +20,7 @@ export function getImageSrcSet(imagePath: string): string {
   return `${base}-640.webp 640w, ${base}-960.webp 960w, ${imagePath} 1200w`;
 }
 
-export const CONTACT_EMAIL = 'mailto:horakpremysl85@gmail.com';
+export { CONTACT_EMAIL } from './constants';
 
 export const PROJECTS: Project[] = [
   {

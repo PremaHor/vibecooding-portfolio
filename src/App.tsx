@@ -1,11 +1,9 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, frame, cancelFrame } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from './utils/czechTypography';
 import { useLanguage } from './i18n/LanguageContext';
-import { useIsMobile } from './hooks/useIsMobile';
-import { CONTACT_EMAIL } from './shared/data';
+import { CONTACT_EMAIL } from './shared/constants';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
@@ -15,73 +13,28 @@ const LazyProjectPage = lazy(() => import('./components/ProjectPage').then(m => 
 const PrivacyPage = lazy(() => import('./components/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
-// --- Hero (above the fold, stays in main bundle) ---
+// --- Hero (zero motion dependency — CSS animations only) ---
 
 const Hero = () => {
   const { t, lang } = useLanguage();
-  const isMobile = useIsMobile();
-  const prefersReducedMotion = useReducedMotion();
-  const { scrollY } = useScroll();
-  const scrollRange = isMobile ? [0, 400] : [0, 600];
-  const y1 = useTransform(scrollY, scrollRange, isMobile ? [0, 80] : [0, 180]);
-  const y2 = useTransform(scrollY, scrollRange, isMobile ? [0, -60] : [0, -140]);
-  const rotate = useTransform(scrollY, scrollRange, isMobile ? [0, 6] : [0, 12]);
-
-  const fadeIn = {
-    initial: isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
-    animate: { opacity: 1, y: 0 },
-    transition: (delay = 0) => isMobile ? { duration: 0 } : { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as const },
-  };
-
-  const useStaticBlobs = prefersReducedMotion || isMobile;
 
   return (
     <section className="hero-section relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden backface-hidden">
-      {useStaticBlobs ? (
-        <>
-          <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12] backface-hidden will-change-transform" />
-          <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08] backface-hidden will-change-transform" />
-        </>
-      ) : (
-        <>
-          <motion.div
-            style={{ y: y1, rotate, willChange: 'transform' }}
-            className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12] backface-hidden"
-          />
-          <motion.div
-            style={{ y: y2, willChange: 'transform' }}
-            className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08] backface-hidden"
-          />
-        </>
-      )}
+      <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12] backface-hidden will-change-transform" />
+      <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08] backface-hidden will-change-transform" />
 
       <div className="hero-content relative z-10 max-w-4xl mx-auto w-full text-center">
         <h1 className="font-display text-[clamp(2rem,6vw,3.5rem)] sm:text-[clamp(2.5rem,7vw,4.25rem)] md:text-[clamp(3rem,8vw,5rem)] font-bold leading-[1.1] mb-6 sm:mb-8">
-          <motion.span
-            initial={fadeIn.initial}
-            animate={fadeIn.animate}
-            transition={fadeIn.transition(0)}
-            className="block bg-gradient-to-br from-white via-white to-slate-300 bg-clip-text text-transparent"
-          >
+          <span className="block bg-gradient-to-br from-white via-white to-slate-300 bg-clip-text text-transparent hero-anim">
             {lang === 'cs' ? fixCzechTypography(t.hero.h1) : fixDashes(t.hero.h1)}
-          </motion.span>
+          </span>
         </h1>
 
-        <motion.p
-          initial={fadeIn.initial}
-          animate={fadeIn.animate}
-          transition={fadeIn.transition(0.12)}
-          className="text-base sm:text-lg md:text-xl font-normal text-slate-400 sm:text-slate-400 mb-10 sm:mb-12 max-w-2xl mx-auto leading-[1.65]"
-        >
+        <p className="text-base sm:text-lg md:text-xl font-normal text-slate-400 sm:text-slate-400 mb-10 sm:mb-12 max-w-2xl mx-auto leading-[1.65] hero-anim hero-anim-d1">
           {lang === 'cs' ? fixCzechTypography(t.hero.subheadline) : fixDashes(t.hero.subheadline)}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={fadeIn.initial}
-          animate={fadeIn.animate}
-          transition={fadeIn.transition(0.24)}
-          className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5"
-        >
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5 hero-anim hero-anim-d2">
           <a
             href={CONTACT_EMAIL}
             className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 shadow-lg min-w-[180px] sm:min-w-0"
@@ -95,7 +48,7 @@ const Hero = () => {
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.ctaSecondary) : fixDashes(t.hero.ctaSecondary)}
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -134,7 +87,10 @@ export default function App() {
     if (isMobile) return;
 
     const initLenis = () => {
-      import('@studio-freight/lenis').then(({ default: Lenis }) => {
+      Promise.all([
+        import('@studio-freight/lenis'),
+        import('motion/react'),
+      ]).then(([{ default: Lenis }, { frame, cancelFrame }]) => {
         const lenis = new Lenis({
           duration: 1.1,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -205,24 +161,14 @@ export default function App() {
   return (
     <div className="relative min-h-screen selection:bg-[var(--color-vibe-orange)] selection:text-black backface-hidden">
       <div className="noise-overlay" />
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={location.pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Routes location={location}>
-            <Route path="/" element={<HomePage navTheme={navTheme} />} />
-            <Route path="/project/:slug" element={<Suspense fallback={null}><LazyProjectPage /></Suspense>} />
-            <Route path="/ochrana-soukromi" element={<Suspense fallback={null}><PrivacyPage /></Suspense>} />
-            <Route path="*" element={<Suspense fallback={null}><NotFoundPage /></Suspense>} />
-          </Routes>
-        </motion.div>
-      </AnimatePresence>
-
+      <div key={location.pathname} className="page-fade-in">
+        <Routes location={location}>
+          <Route path="/" element={<HomePage navTheme={navTheme} />} />
+          <Route path="/project/:slug" element={<Suspense fallback={null}><LazyProjectPage /></Suspense>} />
+          <Route path="/ochrana-soukromi" element={<Suspense fallback={null}><PrivacyPage /></Suspense>} />
+          <Route path="*" element={<Suspense fallback={null}><NotFoundPage /></Suspense>} />
+        </Routes>
+      </div>
       <CookieConsentBanner />
     </div>
   );

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Code2, ArrowRight, ArrowLeft, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
-import { CONTACT_EMAIL } from '../shared/data';
+import { CONTACT_EMAIL } from '../shared/constants';
 
 export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isProjectPage?: boolean }) => {
   const { t, lang } = useLanguage();
