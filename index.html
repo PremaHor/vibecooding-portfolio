@@ -52,14 +52,14 @@
     <meta name="twitter:image" content="https://vibecooding.cz/images/projects/5.webp" />
     <!-- Preload LCP: desktop = obrázek -->
     <link rel="preload" as="image" href="/images/projects/5.webp" media="(min-width: 769px)" />
-    <!-- Preconnect: třetí strany (DNS + TCP před načtením skriptů) -->
+    <!-- Preconnect: fonty (DNS + TCP + TLS ještě před požadavkem na CSS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://www.clarity.ms" />
-    <!-- Google Fonts — async load via media swap -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
+    <!-- Google Fonts — blocking but tiny (~2 KB), display=swap shows fallback instantly -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" />
+    <!-- Analytics: dns-prefetch only (full preconnect wasted until cookie consent) -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.clarity.ms" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />

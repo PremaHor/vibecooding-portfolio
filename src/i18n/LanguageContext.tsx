@@ -7,7 +7,7 @@ function getBrowserLang(): Lang {
   return lang.startsWith('cs') || lang.startsWith('sk') ? 'cs' : 'en';
 }
 
-const LanguageContext = createContext<{ lang: Lang; t: typeof translations.cs } | null>(null);
+const LanguageContext = createContext<{ lang: Lang; t: (typeof translations)[Lang] } | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo(() => {
