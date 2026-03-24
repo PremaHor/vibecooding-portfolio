@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Code2, ArrowRight, ArrowLeft, X } from 'lucide-react';
+import { ArrowRight, ArrowLeft, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
 import { CONTACT_EMAIL } from '../shared/constants';
@@ -40,9 +40,8 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
 
   const mobileNavItems = [
     { href: '#work',       label: lang === 'cs' ? fixCzechTypography(t.nav.work)     : fixDashes(t.nav.work) },
-    { href: '#process',    label: lang === 'cs' ? fixCzechTypography(t.nav.process)  : fixDashes(t.nav.process) },
-    { href: '#about',      label: lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about) },
     { href: '#services',   label: lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services) },
+    { href: '#about',      label: lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about) },
     { href: CONTACT_EMAIL, label: lang === 'cs' ? fixCzechTypography(t.nav.contact)  : fixDashes(t.nav.contact) },
   ];
 
@@ -62,14 +61,16 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
           to="/"
           className="flex items-center gap-2 group min-w-0 shrink"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          aria-label="Vibecooding, úvodní stránka"
+          aria-label={lang === 'cs' ? 'Přemysl Horák, úvodní stránka' : 'Premysl Horak, homepage'}
         >
-          <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${
-            theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'
-          }`}>
-            <Code2 className="w-5 h-5 sm:w-6 sm:h-6" />
+          <div className="min-w-0 truncate">
+            <span className={`font-bold transition-colors duration-500 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Přemysl Horák</span>
+            <span className={`text-sm ml-2 hidden sm:inline-block transition-colors duration-500 ${
+              theme === 'dark' ? 'text-gray-400' : 'text-black/60'
+            }`}>
+              | VibeCooding
+            </span>
           </div>
-          <span className="font-display text-xl sm:text-2xl truncate">VIBECOODING</span>
         </Link>
 
         <div className={`hidden lg:flex gap-6 lg:gap-8 text-xs font-bold tracking-[0.3em] uppercase transition-colors duration-500 ${
@@ -78,9 +79,8 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
           {!isProjectPage ? (
             <>
               <a href="#work"     className={`nav-link transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.work)     : fixDashes(t.nav.work)}</a>
-              <a href="#process"  className={`nav-link transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.process)  : fixDashes(t.nav.process)}</a>
-              <a href="#about"    className={`nav-link transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about)}</a>
               <a href="#services" className={`nav-link transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.services) : fixDashes(t.nav.services)}</a>
+              <a href="#about"    className={`nav-link transition-colors duration-300 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>{lang === 'cs' ? fixCzechTypography(t.nav.about)    : fixDashes(t.nav.about)}</a>
             </>
           ) : (
             <Link to="/" className={`hover:text-current transition-colors flex items-center gap-2 ${theme === 'dark' ? 'hover:text-white' : 'hover:text-black'}`}>
@@ -142,12 +142,14 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
             to="/"
             onClick={close}
             className="flex items-center gap-2.5 group"
-            aria-label="Vibecooding, úvodní stránka"
+            aria-label={lang === 'cs' ? 'Přemysl Horák, úvodní stránka' : 'Premysl Horak, homepage'}
           >
-            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110">
-              <Code2 className="w-5 h-5 text-black" />
+            <div className="min-w-0 truncate">
+              <span className="font-bold text-white">Přemysl Horák</span>
+              <span className="text-gray-400 text-sm ml-2 hidden sm:inline-block">
+                | VibeCooding
+              </span>
             </div>
-            <span className="font-display text-xl text-white">VIBECOODING</span>
           </Link>
           <button
             onClick={close}
