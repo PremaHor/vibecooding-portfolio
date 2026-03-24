@@ -3,12 +3,13 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 import { nonblockingCss } from './vite-plugin-nonblocking-css';
+import { earlyModulePreload } from './vite-plugin-early-modulepreload';
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   const prod = mode === 'production';
   return {
-    plugins: [react(), tailwindcss(), nonblockingCss()],
+    plugins: [react(), tailwindcss(), nonblockingCss(), earlyModulePreload()],
     build: {
       target: 'es2022',
       minify: prod ? 'terser' : 'esbuild',

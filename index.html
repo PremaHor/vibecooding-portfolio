@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="cs">
   <head>
+    <!-- Nejčasnější resource hints: font soubory z gstatic (CORS) — musí mít crossorigin="anonymous" -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <!-- Critical CSS: LCP hero + FOUC fix, minimal inline pro rychlý first paint -->
     <style>
       html,body{background-color:#050505!important;color:#fff;margin:0;min-height:100%;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
@@ -63,9 +66,6 @@
     <meta name="twitter:image" content="https://vibecooding.cz/images/projects/5.webp" />
     <!-- Preload LCP: desktop = obrázek -->
     <link rel="preload" as="image" href="/images/projects/5.webp" media="(min-width: 769px)" />
-    <!-- Preconnect: fonty (DNS + TCP + TLS ještě před požadavkem na CSS) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Google Fonts — preload for priority, non-blocking for fast FCP on mobile -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" as="style" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
