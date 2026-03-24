@@ -316,7 +316,7 @@ export const translations = {
           statsTitle: 'Čísla',
           stats: [
             '**600+** hodin celkového času',
-            '**7 měsíců** vývoje',
+            '**5 měsíců** vývoje',
             '**~25** obrazovek aplikace',
           ],
           lessonsTitle: 'Co mi projekt dal',
@@ -675,7 +675,7 @@ export const translations = {
           statsTitle: 'Numbers',
           stats: [
             '**600+** total hours',
-            '**7 months** of development',
+            '**5 months** of development',
             '**~25** app screens',
           ],
           lessonsTitle: 'What this project taught me',
