@@ -226,6 +226,7 @@
 
   .hero-eyebrow-type {
     display: inline-block;
+    opacity: 1;
     width: 0;
     max-width: 100%;
     white-space: nowrap;
