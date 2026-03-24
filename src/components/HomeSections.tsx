@@ -10,7 +10,7 @@ import {
   Code2, Zap, Globe, ArrowRight, ArrowLeft, Rocket, ShieldCheck, Brain,
   ClipboardCheck, Palette, Lightbulb, PenTool, Layers, Server, Cpu, Target,
   Send, CheckCircle, AlertCircle, ChevronDown, Compass, Handshake, MessageCircle,
-  IterationCcw, Users, Languages,
+  IterationCcw, Users, Languages, Smartphone, TestTube,
 } from 'lucide-react';
 
 const LazyReCAPTCHA = lazy(() => import('react-google-recaptcha'));
@@ -369,8 +369,9 @@ const AboutSection = () => {
 
 const SERVICES_CARDS = [
   { icon: Zap, key: 'card1' as const },
-  { icon: Globe, key: 'card2' as const },
+  { icon: Smartphone, key: 'card2' as const },
   { icon: Rocket, key: 'card3' as const },
+  { icon: TestTube, key: 'card4' as const },
 ];
 
 const ServicesPricingSection = () => {
@@ -390,7 +391,7 @@ const ServicesPricingSection = () => {
         >
           {lang === 'cs' ? fixCzechTypography(t.services.title) : fixDashes(t.services.title)}
         </motion.h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
           {SERVICES_CARDS.map(({ icon: Icon, key }, idx) => {
             const bullets = t.services[`${key}Bullets` as keyof typeof t.services] as unknown as string[];
             return (
