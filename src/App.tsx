@@ -64,7 +64,7 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
     <Navbar theme={navTheme} />
     <main id="main-content" role="main">
       <Hero />
-      <Suspense fallback={<div className="min-h-[200vh]" />}>
+      <Suspense fallback={<div className="min-h-[min(70vh,32rem)]" aria-hidden />}>
         <HomeSections />
       </Suspense>
     </main>
@@ -90,10 +90,7 @@ export default function App() {
     if (isMobile) return;
 
     const initLenis = () => {
-      Promise.all([
-        import('@studio-freight/lenis'),
-        import('motion/react'),
-      ]).then(([{ default: Lenis }, { frame, cancelFrame }]) => {
+      import('@studio-freight/lenis').then(({ default: Lenis }) => {
         const lenis = new Lenis({
           duration: 1.1,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -102,11 +99,15 @@ export default function App() {
           touchMultiplier: 1.5,
         });
         lenisRef.current = lenis;
-        const onFrame = (data: { timestamp?: number }) => {
-          lenis.raf(data.timestamp ?? performance.now());
+        let rafId = 0;
+        const onFrame = (time: number) => {
+          lenis.raf(time);
+          rafId = requestAnimationFrame(onFrame);
         };
-        frame.update(onFrame, true);
-        lenisFrameCancelRef.current = () => cancelFrame(onFrame);
+        rafId = requestAnimationFrame(onFrame);
+        lenisFrameCancelRef.current = () => {
+          cancelAnimationFrame(rafId);
+        };
       });
     };
 

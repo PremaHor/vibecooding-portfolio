@@ -6,23 +6,39 @@ import { nonblockingCss } from './vite-plugin-nonblocking-css';
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
+  const prod = mode === 'production';
   return {
     plugins: [react(), tailwindcss(), nonblockingCss()],
     build: {
-      target: 'es2020',
+      target: 'es2022',
+      minify: prod ? 'terser' : 'esbuild',
+      terserOptions: prod
+        ? {
+            compress: { passes: 2, pure_getters: true },
+            format: { comments: false },
+          }
+        : undefined,
+      cssMinify: prod,
       rollupOptions: {
         output: {
-          manualChunks: {
-            'vendor-motion': ['motion'],
-            'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-            'vendor-ui': ['lucide-react'],
+          manualChunks(id) {
+            if (id.includes('node_modules/motion')) return 'vendor-motion';
+            if (id.includes('node_modules/react-dom') || id.includes('node_modules/react-router')) return 'vendor-react';
+            if (id.includes('node_modules/react/')) return 'vendor-react';
+            if (id.includes('node_modules/lucide-react')) return 'vendor-ui';
+            if (id.includes('node_modules/@studio-freight/lenis')) return 'vendor-lenis';
+            return undefined;
           },
         },
       },
       chunkSizeWarningLimit: 600,
+      reportCompressedSize: false,
     },
+    esbuild: prod
+      ? { legalComments: 'none', drop: ['debugger'] as ('debugger')[] }
+      : undefined,
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY ?? ''),
     },
     resolve: {
       alias: {
