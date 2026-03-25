@@ -8,3 +8,4 @@ coverage/
 public/favicon-32.png
 public/favicon-180.png
 !.env.example
+public/fonts/*.woff2

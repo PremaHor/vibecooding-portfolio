@@ -6,15 +6,14 @@ import App from './App.tsx';
 import './index.css';
 
 const root = createRoot(document.getElementById('root')!);
-root.render(
-  <StrictMode>
-    <BrowserRouter>
-      <LanguageProvider>
-        <App />
-      </LanguageProvider>
-    </BrowserRouter>
-  </StrictMode>,
+const tree = (
+  <BrowserRouter>
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
+  </BrowserRouter>
 );
+root.render(import.meta.env.DEV ? <StrictMode>{tree}</StrictMode> : tree);
 
 // Odstranit no-fouc po prvním frame (1 rAF místo 2 = rychlejší LCP)
 requestAnimationFrame(() => {
