@@ -49,7 +49,7 @@ export const PROJECTS: Project[] = [
       "Česká progresivní webová aplikace pro generování kvízů z konfigurace. Otázky připravuje LLM na serveru; klient je lehký průvodce a přehrávač.",
     fullDescription:
       "Kvíz PWA spojuje průvodce nastavením, strukturované generování přes Gemini a PWA nasazení na Vercel.",
-    image: "/images/projects/onboarding.webp",
+    image: "/images/projects/kviz.webp",
     tags: [
       "React",
       "TypeScript",
