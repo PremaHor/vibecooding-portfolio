@@ -265,6 +265,7 @@ export const translations = {
       role: 'Role',
       tech: 'Technologie',
       website: 'Web projektu',
+      prototype: 'Prototyp',
       defaultQuote: 'Tento projekt byl výzvou v oblasti výkonu a vizuální věrnosti. Výsledek předčil očekávání klienta.',
       nextProject: 'Další Projekt',
       notFound: 'Projekt nenalezen',
@@ -327,6 +328,37 @@ export const translations = {
             'Jistotu v **produktovém rozhodování** pod omezeními. Menší rozsah na začátku by umožnil rychlejší iterace.',
             'Zkušenost s **end-to-end odpovědností** za celý produkt: výzkum, UX, UI, vývoj, databáze, nasazení.',
             'Potvrzení, že **kombinace doménové znalosti, UX myšlení a technické realizace** má reálnou hodnotu a je přenositelná do dalších oblastí.',
+          ],
+        },
+      },
+      'kviz-pwa': {
+        category: 'PWA',
+        subtitle:
+          'Česká PWA pro generování kvízů z konfigurace (cíl, téma, délka, přístupnost). Otázky připravuje LLM na serveru; klient je lehký průvodce a přehrávač.',
+        subtitleLine2: '',
+        description:
+          'Česká progresivní webová aplikace pro generování kvízů z konfigurace. Otázky připravuje LLM na serveru; klient je lehký průvodce a přehrávač.',
+        fullDescription:
+          'Kvíz PWA spojuje průvodce nastavením, strukturované generování přes Gemini a produkční nasazení na Vercel.',
+        quote:
+          'Spojit lehký klient, bezpečný server a chování LLM tak, aby byl kvíz zábavný a zároveň předvídatelný, bylo jádrem výzvy.',
+        techNote:
+          'Zdůrazňuji **fullstack** práci (UI + API), návrh promptů, validaci výstupu LLM vůči schématu, UX průvodce, přístupnost v obsahu kvízu, PWA a produkční běh na Vercelu.',
+        prototypeOnRequest:
+          'Odkaz na prototyp zašlu na vyžádání.',
+        structured: {
+          goalTitle: 'Smysl aplikace',
+          goal:
+            'Kvíz PWA umožní rychle sestavit kvíz podle **cílové skupiny**, **tématu** a **délky**. Průvodce zohledňuje i **přístupnost a handicap** — generovaný obsah respektuje zvolená pravidla. Veškerá práce s modelem probíhá na **serveru**; prohlížeč jen vede uživatele krok za krokem a přehrává hotový kvíz.',
+          solutionTitle: 'Architektura a stack',
+          solution:
+            'Frontend: **React 18**, **TypeScript**, **Vite**, **Tailwind CSS**, **Zustand** pro stav, **Framer Motion** a **Lucide** pro UI. PWA (manifest, service worker) přes **vite-plugin-pwa**. Backend běží jako **jeden serverless handler na Vercelu (Node 20)**; TypeScript se **esbuildem** balí do jednoho výstupu. Generování otázek: **Google Gemini** se **strukturovaným JSON výstupem** a validací odpovědi vůči schématu.',
+          benefitsTitle: 'Logika a UX',
+          benefits: [
+            '**Průvodce nastavením**: věková skupina, handicap / přístupnost, kategorie, dynamická témata podle publika, vlastní nebo náhodné téma.',
+            '**Prompt engineering**: bohatý systémový a uživatelský prompt (persona, formát otázek, pravidla přístupnosti, téma kvízu) a kontrola výstupu.',
+            '**Ilustrace bez spoilerů**: pole „imageContextPrompt“ — model v angličtině popíše jen atmosféru, ne správnou odpověď; vyhledávání obrázků (Wikimedia Commons, volitelně Pexels) vychází z tohoto popisu a záložní heuristika neprozrazuje správnou možnost.',
+            '**České rozhraní** a zaměření na edtech a kvízy v praxi.',
           ],
         },
       },
@@ -664,6 +696,7 @@ export const translations = {
       role: 'Role',
       tech: 'Technologies',
       website: 'Project website',
+      prototype: 'Prototype',
       defaultQuote: 'This project was a challenge in performance and visual fidelity. The result exceeded the client\'s expectations.',
       nextProject: 'Next Project',
       notFound: 'Project not found',
@@ -726,6 +759,36 @@ export const translations = {
             'Confidence in **product decision-making** under constraints. Smaller scope early on would have allowed faster iterations.',
             'Experience with **end-to-end ownership** of an entire product: research, UX, UI, development, database, deployment.',
             'Confirmation that **combining domain knowledge, UX thinking and technical implementation** has real value and is transferable to other areas.',
+          ],
+        },
+      },
+      'kviz-pwa': {
+        category: 'PWA',
+        subtitle:
+          'A Czech PWA that generates quizzes from configuration (audience, topic, length, accessibility). Questions are produced by an LLM on the server; the client is a lightweight wizard and player.',
+        subtitleLine2: '',
+        description:
+          'A Czech progressive web app for quiz generation from configuration. Questions are created by an LLM on the server; the client is a light wizard and player.',
+        fullDescription:
+          'Quiz PWA combines a setup wizard, structured Gemini generation, and production deployment on Vercel.',
+        quote:
+          'Keeping the client thin, the API safe, and LLM behavior predictable so the quiz stays fun and trustworthy was the core challenge.',
+        techNote:
+          'I highlight **full-stack** work (UI + API), prompt design, schema validation of LLM output, wizard UX, accessibility in quiz content, PWA delivery, and production hosting on Vercel.',
+        prototypeOnRequest: 'I can share the prototype link on request.',
+        structured: {
+          goalTitle: 'What the app does',
+          goal:
+            'Quiz PWA lets you assemble a quiz from **target audience**, **topic**, and **length**. The wizard also captures **accessibility and disability** settings so generated content follows the chosen rules. All heavy **LLM work runs on the server**; the browser guides the user step by step and plays the finished quiz.',
+          solutionTitle: 'Architecture and stack',
+          solution:
+            'Frontend: **React 18**, **TypeScript**, **Vite**, **Tailwind CSS**, **Zustand** for state, **Framer Motion** and **Lucide** for UI. PWA (manifest, service worker) via **vite-plugin-pwa**. The backend is a **single Vercel serverless handler (Node 20)**; TypeScript is bundled with **esbuild** into one output. Question generation uses the **Google Gemini** API with **structured JSON** and response validation against a schema.',
+          benefitsTitle: 'Product logic and UX',
+          benefits: [
+            '**Setup wizard**: age group, accessibility / disability, categories, dynamic themes by audience, custom or random topic.',
+            '**Prompt engineering**: rich system and user prompts (persona, question format, accessibility rules, quiz theme) plus output checks.',
+            '**Images without spoilers**: an **imageContextPrompt** field — the model outputs a short English “atmosphere” description, not the correct answer; image search (Wikimedia Commons, optional Pexels) uses that description, with a fallback heuristic that does not reveal the right option.',
+            '**Czech UI** with a practical focus on edtech and quizzes.',
           ],
         },
       },

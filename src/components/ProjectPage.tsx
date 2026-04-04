@@ -275,6 +275,14 @@ export const ProjectPage = () => {
                   </div>
                 </div>
               )}
+              {tr && 'prototypeOnRequest' in tr && tr.prototypeOnRequest && (
+                <div>
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{lang === 'cs' ? fixCzechTypography(t.project.prototype) : fixDashes(t.project.prototype)}</h4>
+                  <p className="text-sm text-white/75 leading-relaxed font-light">
+                    {lang === 'cs' ? fixCzechTypography(tr.prototypeOnRequest as string) : fixDashes(tr.prototypeOnRequest as string)}
+                  </p>
+                </div>
+              )}
               <div className="p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10">
                 <p className="text-xs sm:text-sm text-white/80 leading-relaxed italic">
                   "{lang === 'cs' ? fixCzechTypography(tr?.quote ?? project.quote ?? t.project.defaultQuote) : fixDashes(tr?.quote ?? project.quote ?? t.project.defaultQuote ?? '')}"

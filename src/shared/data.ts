@@ -42,6 +42,31 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 2,
+    slug: "kviz-pwa",
+    title: "Kvíz PWA",
+    category: "PWA",
+    description:
+      "Česká progresivní webová aplikace pro generování kvízů z konfigurace. Otázky připravuje LLM na serveru; klient je lehký průvodce a přehrávač.",
+    fullDescription:
+      "Kvíz PWA spojuje průvodce nastavením, strukturované generování přes Gemini a PWA nasazení na Vercel.",
+    image: "/images/projects/onboarding.webp",
+    tags: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind",
+      "PWA",
+      "Zustand",
+      "Gemini API",
+      "Vercel",
+      "Edtech",
+    ],
+    year: "2026",
+    client: "Vlastní projekt",
+    role: "Fullstack (UI + API)",
+  },
+  {
+    id: 3,
     slug: "adcalc",
     title: "AdCalc",
     category: "PWA MVP Prototyp",
@@ -57,7 +82,7 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     slug: "ddu-olomouc",
     title: "DDÚ Olomouc",
     category: "Redesign webu",
@@ -75,7 +100,7 @@ export const PROJECTS: Project[] = [
     quote: "Spolupráce na redesignu byla příjemná, důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
   },
   {
-    id: 4,
+    id: 5,
     slug: "decision-balance",
     title: "Decision Balance",
     category: "Koncept",
