@@ -15,6 +15,7 @@ export interface Project {
   galleryImages?: { src: string; alt: string }[];
   /** YouTube video ID (embed), e.g. MC0M3jmvmBE from youtu.be/... */
   youtubeVideoId?: string;
+  notionCaseStudyUrl?: string;
 }
 
 export function getImageSrcSet(imagePath: string): string {
@@ -42,6 +43,8 @@ export const PROJECTS: Project[] = [
       { label: "risklight.app", url: "https://risklight.app" },
     ],
     youtubeVideoId: "MC0M3jmvmBE",
+    notionCaseStudyUrl:
+      "https://utopian-biology-d74.notion.site/Case-study-RiskLight-2eca0be69d5d803db31cdb1abcf06bad?pvs=143",
   },
   {
     id: 2,

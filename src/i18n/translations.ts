@@ -285,6 +285,7 @@ export const translations = {
         category: 'PWA',
         description: 'Modulární mobil-first aplikace pro sledování rizik, správu klientů a týmovou spolupráci v reálném čase.',
         fullDescription: 'RiskLight spojuje ochranu života s přehlednou evidencí.',
+        notionCaseStudyLabel: 'Case study (Notion)',
         quote: 'Projekt mi dal hlubokou zkušenost s end-to-end vývojem produktu, od identifikace problému přes návrh řešení až po technickou realizaci.',
         structured: {
           goalTitle: 'Jaký problém RiskLight řeší',
@@ -719,6 +720,7 @@ export const translations = {
         category: 'PWA',
         description: 'Modular mobile-first app for risk tracking, client management and real-time team collaboration.',
         fullDescription: 'RiskLight combines life safety with clear record keeping.',
+        notionCaseStudyLabel: 'Case study (Notion)',
         quote: 'This project gave me deep experience with end-to-end product development, from problem identification through solution design to technical implementation.',
         structured: {
           goalTitle: 'What problem RiskLight solves',

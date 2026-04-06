@@ -292,16 +292,22 @@ export const ProjectPage = () => {
                   ))}
                 </div>
               </div>
-              {project.websiteUrls && project.websiteUrls.length > 0 && (
+              {((project.websiteUrls && project.websiteUrls.length > 0) || project.notionCaseStudyUrl) && (
                 <div>
                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-4 sm:mb-6">{lang === 'cs' ? fixCzechTypography(t.project.website) : fixDashes(t.project.website)}</h4>
                   <div className="flex flex-wrap gap-3">
-                    {project.websiteUrls.map(({ label, url }) => (
+                    {project.websiteUrls?.map(({ label, url }) => (
                       <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-2.5 min-h-[44px] border border-white/20 rounded-full text-sm font-mono text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition-all break-words max-w-full">
                         <span className="break-all">{label}</span>
                         <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                       </a>
                     ))}
+                    {project.notionCaseStudyUrl && tr && 'notionCaseStudyLabel' in tr && tr.notionCaseStudyLabel && (
+                      <a href={project.notionCaseStudyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-2.5 min-h-[44px] border border-white/20 rounded-full text-sm font-mono text-white/90 hover:bg-white/10 hover:border-white/30 hover:text-white transition-all break-words max-w-full">
+                        <span className="break-all">{lang === 'cs' ? fixCzechTypography(tr.notionCaseStudyLabel as string) : fixDashes(tr.notionCaseStudyLabel as string)}</span>
+                        <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                      </a>
+                    )}
                   </div>
                 </div>
               )}
