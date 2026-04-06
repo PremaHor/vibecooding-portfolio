@@ -13,6 +13,8 @@ export interface Project {
   websiteUrls?: { label: string; url: string }[];
   quote?: string;
   galleryImages?: { src: string; alt: string }[];
+  /** YouTube video ID (embed), e.g. MC0M3jmvmBE from youtu.be/... */
+  youtubeVideoId?: string;
 }
 
 export function getImageSrcSet(imagePath: string): string {
@@ -39,6 +41,7 @@ export const PROJECTS: Project[] = [
       { label: "risklight.cz", url: "https://risklight.cz" },
       { label: "risklight.app", url: "https://risklight.app" },
     ],
+    youtubeVideoId: "MC0M3jmvmBE",
   },
   {
     id: 2,

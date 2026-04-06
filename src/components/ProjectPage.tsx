@@ -199,6 +199,36 @@ export const ProjectPage = () => {
               <img src={project.image} srcSet={getImageSrcSet(project.image)} sizes="(max-width: 768px) 100vw, 1200px" alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)} width={1200} height={800} fetchPriority="high" decoding="async" className="w-full h-full object-cover rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]" referrerPolicy="no-referrer" />
             </motion.div>
 
+            {project.youtubeVideoId && (
+              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] }} className="mt-12 sm:mt-16 md:mt-20">
+                <h2 className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] font-bold text-white/50 mb-4 sm:mb-5">
+                  {lang === 'cs' ? fixCzechTypography(t.project.videoUserFlow) : fixDashes(t.project.videoUserFlow)}
+                </h2>
+                <div className="aspect-video w-full rounded-2xl sm:rounded-[2rem] overflow-hidden bg-black border border-white/10 shadow-2xl">
+                  <iframe
+                    className="h-full w-full"
+                    src={`https://www.youtube-nocookie.com/embed/${project.youtubeVideoId}?rel=0`}
+                    title={lang === 'cs' ? fixCzechTypography(t.project.videoEmbedTitle) : fixDashes(t.project.videoEmbedTitle)}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                  />
+                </div>
+                <p className="mt-4">
+                  <a
+                    href={`https://www.youtube.com/watch?v=${project.youtubeVideoId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-mono text-white/70 hover:text-[var(--color-vibe-orange)] transition-colors"
+                  >
+                    {lang === 'cs' ? fixCzechTypography(t.project.openOnYoutube) : fixDashes(t.project.openOnYoutube)}
+                    <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                  </a>
+                </p>
+              </motion.div>
+            )}
+
             {project.galleryImages && project.galleryImages.length > 0 && (
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }} className="mt-12 sm:mt-16 md:mt-20">
                 <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
