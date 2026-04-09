@@ -367,25 +367,32 @@ export const translations = {
         },
       },
       adcalc: {
-        category: 'PWA MVP Prototyp',
-        subtitle: 'Plně funkční PWA MVP prototyp pro rychlou a přesnou validaci cenotvorby pro reklamní produkci.',
+        category: 'Interní nástroj',
+        subtitle:
+          'Od řádků kalkulace přes uložené zakázky až po PDF pro klienta: jedna aplikace, jedna data pro celý tým.',
         subtitleLine2: '',
-        description: 'Interaktivní kalkulátor pro reklamní výrobu. Převádí složitou matematickou logiku do kódu s validací vstupů a přepočtem ceny v reálném čase.',
-        fullDescription: 'AdCalc je funkční prototyp nástroje pro kalkulace v reklamní výrobě.',
-        quote: 'Největší výzvou bylo převést matematickou logiku kalkulací do kódu a zajistit stoprocentní přesnost výsledné ceny. To mě naučilo uvažovat nad datovou integritou a UX složitých formulářů.',
-        techNote: 'TypeScript mi zajistil bezpečnost nad výpočetními vzorci a reaktivita Reactu umožňuje okamžitý přepočet ceny.',
+        description:
+          'Interní webová aplikace pro REKLY: kalkulace položek (materiál, tisk, práce, doprava…), sdílené zakázky a PDF nabídka v jednom. Navrženo tak, aby nikdo neřešil roztříštěné tabulky.',
+        fullDescription:
+          'AdCalc sjednocuje reklamní kalkulaci, cloudové úložiště zakázek a zákaznický PDF výstup ve vizuálním stylu značky.',
+        quote:
+          'Nástroj není o tom mít víc polí ve formuláři, ale aby se celý tým díval na stejná čísla a zákazník dostal dokument, za kterým se firma nebude stydět stát.',
+        techNote:
+          'Od produktové logiky a UI/UX přes implementaci ve **Reactu 19** a napojení na **Firebase** až po **PDF pipeline** (jsPDF, vložené fonty) a nasazení s **CSP**.',
         structured: {
-          goalTitle: 'Kontext / Lehké a funkční MVP',
-          goal: 'Kalkulace v reklamní výrobě (tisk, instalace) jsou komplexní a plné proměnných. V Rekly se nacenění dělalo ručně, což vedlo k chybám a nekonzistentním cenám.\nCílem bylo vytvořit **PWA MVP prototyp**, který okamžitě doručí hodnotu, bez nutnosti stahovat aplikaci. To nám umožnilo rychle validovat matematickou logiku s reálnými uživateli.',
+          goalTitle: 'Kontext a výzva',
+          goal:
+            'Reklamní výroba spojuje **desítky typů položek**, slevy, marže a DPH, a zároveň potřebuje rychlý výstup pro klienta, který vypadá jako od firmy, ne jako export z Excelu. Cílem bylo **nahradit nebo doplnit chaotické postupy** jedním přehledným, **mobilně použitelným** nástrojem s přihlášením a cloudovým úložištěm.\n\nBylo potřeba **sjednotit kalkulaci**: materiál, tisk, kooperace, práce, montáž i doprava v jedné logice. **Ceník a zakázky** musely zůstat dostupné pro více lidí v jedné firmě, ne izolovaně pod jedním účtem. **PDF** muselo nést brand barvy a typografii, bez „interních“ řádků (marže, interní poznámky), aby šlo rovnou odeslat. **Bezpečnost a provoz**: ověření e-mailu, cache v prohlížeči vázaná na účet, účty zakládá jen administrátor ve Firebase.',
           solutionTitle: 'Řešení',
-          solution: 'Navrhl jsem a vyvinul **interaktivní kalkulátor**, který převádí matematickou logiku výpočtů do kódu. Nástroj **validuje vstupy v reálném čase** a okamžitě přepočítává cenu.',
-          benefitsTitle: 'Klíčové přínosy',
+          solution:
+            '**AdCalc (REKLY)** je single-page nástroj postavený na **Reactu 19** a **TypeScriptu**, stylování **Tailwind 4** s vlastní brand paletou (akcent např. **#00c4b7**). UI používá font **Prompt**; PDF export běží přes **jsPDF** s vloženými fonty **Poppins** pro konzistentní tisk.\n\n**Firebase Authentication** (e-mail a heslo): účty lze zakládat jen ve Firebase Console. **Firestore** drží sdílený workspace pod **orgs/…**, takže všichni přihlášení členové týmu vidí stejné zakázky a ceník. **localStorage** je vázaný na uživatele pro rychlou práci, s migrací ze starších úložišť.\n\n**PDF pro zákazníka** respektuje pravidla výstupu: v souhrnu například sleva jen u stálého klienta, **bez marže a bez interní poznámky**, aby byl dokument přímo k odeslání. **Nasazení**: statický frontend na **Vercelu** s bezpečnostními hlavičkami (**CSP**, včetně Google Fonts), proměnné prostředí pro Firebase a volitelné **App Check**.',
+          benefitsTitle: 'Výsledek',
           benefits: [
-            '**eliminace chyb** z ručních kalkulací v Excelu',
-            '**okamžitý přepočet ceny** při změně jakéhokoliv parametru',
-            '**validace vstupů** v reálném čase, nemožnost zadat nesmyslnou kombinaci',
-            '**konzistentní cenotvorba** napříč celým týmem',
-            '**podklad pro cenové nabídky** generovaný během sekund',
+            '**jedna pravda o zakázkách** v týmu: méně duplicit a hádky o tom, kdo má poslední verzi',
+            '**rychlá kalkulace** z ceníku a úpravy přímo v řádcích',
+            '**PDF na pár kliknutí** ve vizuálním stylu značky',
+            '**provoz bez veřejné registrace**: přístup pod kontrolou administrátora',
+            '**přesné výpočty a validace vstupů** v reálném čase díky TypeScriptu a sjednocené logice',
           ],
         },
       },
@@ -801,25 +808,32 @@ export const translations = {
         },
       },
       adcalc: {
-        category: 'PWA MVP Prototype',
-        subtitle: 'Fully functional PWA MVP prototype for fast and accurate pricing validation in advertising production.',
+        category: 'Internal tool',
+        subtitle:
+          'From line-item estimates and saved jobs to a client-ready PDF: one app, one source of truth for the whole team.',
         subtitleLine2: '',
-        description: 'Interactive calculator for advertising production. Converts complex mathematical logic into code with real-time input validation and instant price recalculation.',
-        fullDescription: 'AdCalc is a functional prototype tool for advertising production calculations.',
-        quote: 'The biggest challenge was converting the mathematical logic of calculations into code and ensuring 100% accuracy of the final price. It taught me to think about data integrity and UX of complex forms.',
-        techNote: 'TypeScript ensured safety over calculation formulas and React\'s reactivity enables instant price recalculation.',
+        description:
+          'Internal web app for REKLY: pricing items (materials, print, labour, shipping…), shared jobs, and a customer PDF in one place. Built so the team stops living in scattered spreadsheets.',
+        fullDescription:
+          'AdCalc unifies advertising production pricing, cloud job storage, and on-brand PDF output customers can receive with confidence.',
+        quote:
+          'The goal is not more form fields, it is making sure the whole team sees the same numbers and the customer gets a document the company can stand behind.',
+        techNote:
+          'Product logic and UI/UX, **React 19** implementation, **Firebase** integration, **PDF pipeline** (jsPDF, embedded fonts), and deployment with **CSP** headers.',
         structured: {
-          goalTitle: 'Context / Lightweight and functional MVP',
-          goal: 'Calculations in advertising production (printing, installation) are complex and full of variables. At Rekly, pricing was done manually, leading to errors and inconsistent prices.\nThe goal was to build a **PWA MVP prototype** that delivers value immediately, without requiring an app download. This allowed us to quickly validate the mathematical logic with real users.',
+          goalTitle: 'Context and challenge',
+          goal:
+            'Advertising production combines **dozens of line types**, discounts, margins, and VAT, while still needing a fast client deliverable that looks like a company document, not an Excel export. The aim was to **replace or complement chaotic workflows** with one clear, **mobile-friendly** tool with sign-in and cloud storage.\n\nWe had to **unify pricing** for materials, print, subcontractors, labour, installation, and shipping in one model. **Price lists and jobs** had to stay available to multiple people in one company, not locked to a single account. **PDFs** needed brand colours and typography, without “internal” rows (margins, internal notes) so they could be sent as-is. **Security and operations**: email verification, per-account browser cache, and accounts created only by an admin in Firebase.',
           solutionTitle: 'Solution',
-          solution: 'I designed and developed an **interactive calculator** that converts mathematical calculation logic into code. The tool **validates inputs in real time** and instantly recalculates the price.',
-          benefitsTitle: 'Key benefits',
+          solution:
+            '**AdCalc (REKLY)** is a single-page app built with **React 19** and **TypeScript**, styled with **Tailwind 4** and a custom brand palette (accent e.g. **#00c4b7**). The UI uses the **Prompt** typeface; PDF export runs through **jsPDF** with embedded **Poppins** for consistent print output.\n\n**Firebase Authentication** (email and password): accounts are provisioned only in the Firebase Console. **Firestore** provides a shared workspace under **orgs/…**, so every signed-in team member sees the same jobs and price list. **localStorage** is scoped to the user for speed, with migration from older storage keys.\n\n**Customer-facing PDFs** follow output rules: for example discounts only for returning clients, **no margin rows and no internal notes** in the summary so the file is ready to send. **Hosting**: static frontend on **Vercel** with security headers (**CSP**, including Google Fonts), environment variables for Firebase, and optional **App Check**.',
+          benefitsTitle: 'Outcome',
           benefits: [
-            '**elimination of errors** from manual Excel calculations',
-            '**instant price recalculation** when any parameter changes',
-            '**real-time input validation**, impossible to enter nonsensical combinations',
-            '**consistent pricing** across the entire team',
-            '**quote materials** generated in seconds',
+            '**one source of truth for jobs** across the team: fewer duplicates and “who has the latest version” debates',
+            '**fast quoting** from the price list with inline edits on each line',
+            '**PDF in a few clicks** in the brand’s visual language',
+            '**no public self-signup**: access controlled by an administrator',
+            '**accurate calculations and live validation** thanks to TypeScript and a single pricing model',
           ],
         },
       },

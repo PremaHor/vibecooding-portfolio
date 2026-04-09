@@ -75,14 +75,16 @@ export const PROJECTS: Project[] = [
     id: 3,
     slug: "adcalc",
     title: "AdCalc",
-    category: "PWA MVP Prototyp",
-    description: "Interaktivní kalkulátor pro reklamní výrobu. Převádí složitou matematickou logiku do kódu s validací vstupů a přepočtem ceny v reálném čase.",
-    fullDescription: "AdCalc je funkční prototyp nástroje pro kalkulace v reklamní výrobě.",
+    category: "Interní nástroj",
+    description:
+      "Interní webová aplikace pro REKLY: kalkulace položek, uložené zakázky a PDF nabídka pro zákazníka v jednom. Celý tým pracuje se stejnými daty, bez roztříštěných tabulek.",
+    fullDescription:
+      "AdCalc pro reklamní výrobu sjednocuje materiál, tisk, práci i dopravu, sdílený ceník ve Firebase a PDF export ve firemním vizuálu.",
     image: "/images/projects/addcalc.webp",
-    tags: ["React", "TypeScript", "Tailwind"],
+    tags: ["React 19", "TypeScript", "Vite", "Tailwind", "Motion", "Firebase", "jsPDF"],
     year: "2025",
-    client: "Rekly",
-    role: "Lead Developer & Designer",
+    client: "REKLY",
+    role: "Produktová logika, UI/UX, frontend, Firebase, PDF",
     websiteUrls: [
       { label: "rekly.vercel.app", url: "https://rekly.vercel.app/" },
     ],
