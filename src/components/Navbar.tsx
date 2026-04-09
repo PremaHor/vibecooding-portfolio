@@ -3,10 +3,11 @@ import { Link } from '../router';
 import { ArrowRight, ArrowLeft, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
-import { CONTACT_EMAIL } from '../shared/constants';
+import { useGoToContactForm } from '../hooks/useGoToContactForm';
 
 export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isProjectPage?: boolean }) => {
   const { t, lang } = useLanguage();
+  const goToContactForm = useGoToContactForm();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -89,16 +90,17 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <a
-            href={CONTACT_EMAIL}
-            className={`nav-cta hidden lg:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg ${
+          <button
+            type="button"
+            onClick={goToContactForm}
+            className={`nav-cta hidden lg:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg cursor-pointer ${
               theme === 'dark'
                 ? 'bg-white text-black hover:bg-[var(--color-vibe-orange)] hover:text-white'
                 : 'bg-black text-white hover:bg-[var(--color-vibe-orange)]'
             }`}
           >
             {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
-          </a>
+          </button>
 
           <button
             onClick={() => setMobileMenuOpen(v => !v)}
@@ -163,14 +165,17 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
           className="absolute bottom-0 left-0 right-0 px-5 pt-4 pb-5 bg-[var(--color-vibe-black)]"
           style={{ paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
         >
-          <a
-            href={CONTACT_EMAIL}
-            onClick={close}
-            className="flex items-center justify-center gap-2.5 w-full min-h-[54px] rounded-2xl bg-[var(--color-vibe-orange)] text-black text-sm font-bold uppercase tracking-[0.15em] hover:brightness-110 active:scale-[0.98] transition-all duration-200"
+          <button
+            type="button"
+            onClick={() => {
+              close();
+              goToContactForm();
+            }}
+            className="flex items-center justify-center gap-2.5 w-full min-h-[54px] rounded-2xl bg-[var(--color-vibe-orange)] text-black text-sm font-bold uppercase tracking-[0.15em] hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer"
           >
             {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
             <ArrowRight className="w-4 h-4 shrink-0" />
-          </a>
+          </button>
         </div>
 
         <nav

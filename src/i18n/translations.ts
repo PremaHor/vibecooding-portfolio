@@ -95,7 +95,7 @@ export const translations = {
       ],
       auditTitle: 'AI integrace a automatizace',
       auditSubtitle: 'Pomohu vašemu týmu zapojit AI do každodenní práce i přímo do produktu. Automatizace rutiny a méně manuální práce.',
-      auditCta: 'Napsat zprávu',
+      auditCta: 'Pojďme se pobavit',
       titleOld: 'Co',
       titleItalic: 'umím',
       intro: 'Weby, prototypy, MVP i AI automatizace. Produktový přístup ke každému projektu.',
@@ -181,7 +181,7 @@ export const translations = {
     contact: {
       title: 'Kontakt',
       intro: 'Zaujal vás můj přístup? Hledáte parťáka do týmu? Napište mi, rád se potkám a probereme to.',
-      writeMessage: 'Napsat zprávu',
+      writeMessage: 'Zpráva',
       form: {
         name: 'Jméno',
         namePlaceholder: 'Vaše jméno',
@@ -191,7 +191,7 @@ export const translations = {
         subjectPlaceholder: 'O čem to bude?',
         message: 'Zpráva',
         messagePlaceholder: 'Popište svůj nápad nebo projekt…',
-        submit: 'Odeslat zprávu',
+        submit: 'Zpráva',
         sending: 'Odesílám…',
         success: 'Zpráva odeslána! Ozvu se co nejdříve.',
         error: 'Něco se pokazilo. Zkuste to znovu nebo napište přímo na e-mail.',
@@ -264,7 +264,7 @@ export const translations = {
       client: 'Klient',
       role: 'Role',
       tech: 'Technologie',
-      website: 'Web projektu',
+      relatedLinks: 'Související odkazy',
       prototype: 'Prototyp',
       videoUserFlow: 'User flow: průlet aplikací',
       videoEmbedTitle: 'RiskLight: user flow aplikace (YouTube)',
@@ -368,6 +368,7 @@ export const translations = {
       },
       adcalc: {
         category: 'Interní nástroj',
+        videoEmbedTitle: 'AdCalc: průchod aplikací (YouTube)',
         subtitle:
           'Od řádků kalkulace přes uložené zakázky až po PDF pro klienta: jedna aplikace, jedna data pro celý tým.',
         subtitleLine2: '',
@@ -537,7 +538,7 @@ export const translations = {
       ],
       auditTitle: 'AI integration & automation',
       auditSubtitle: 'I\'ll help your team integrate AI into daily work and directly into the product. Automate routine, less manual work.',
-      auditCta: 'Get in touch',
+      auditCta: 'Let\'s talk',
       titleOld: 'What I',
       titleItalic: 'can do',
       intro: 'Websites, prototypes, MVPs, and AI automation. Product approach to every project.',
@@ -623,7 +624,7 @@ export const translations = {
     contact: {
       title: 'Contact',
       intro: 'Like my approach? Looking for a partner for your team? Drop me a message, I\'d love to meet and talk it through.',
-      writeMessage: 'Send message',
+      writeMessage: 'Message',
       form: {
         name: 'Name',
         namePlaceholder: 'Your name',
@@ -633,7 +634,7 @@ export const translations = {
         subjectPlaceholder: 'What is it about?',
         message: 'Message',
         messagePlaceholder: 'Describe your idea or project…',
-        submit: 'Send message',
+        submit: 'Message',
         sending: 'Sending…',
         success: 'Message sent! I will get back to you soon.',
         error: 'Something went wrong. Try again or email me directly.',
@@ -706,7 +707,7 @@ export const translations = {
       client: 'Client',
       role: 'Role',
       tech: 'Technologies',
-      website: 'Project website',
+      relatedLinks: 'Related links',
       prototype: 'Prototype',
       videoUserFlow: 'User flow walkthrough',
       videoEmbedTitle: 'RiskLight app user flow (YouTube)',
@@ -809,6 +810,7 @@ export const translations = {
       },
       adcalc: {
         category: 'Internal tool',
+        videoEmbedTitle: 'AdCalc: app walkthrough (YouTube)',
         subtitle:
           'From line-item estimates and saved jobs to a client-ready PDF: one app, one source of truth for the whole team.',
         subtitleLine2: '',

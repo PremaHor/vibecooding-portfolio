@@ -59,6 +59,12 @@ export function BrowserRouter({ children }: { children: ReactNode }) {
   return <RouterContext.Provider value={value}>{children}</RouterContext.Provider>;
 }
 
+export function useRouter() {
+  const ctx = useContext(RouterContext);
+  if (!ctx) throw new Error('useRouter must be used within BrowserRouter');
+  return ctx;
+}
+
 export function useLocation() {
   const ctx = useContext(RouterContext);
   if (!ctx) throw new Error('useLocation must be used within BrowserRouter');

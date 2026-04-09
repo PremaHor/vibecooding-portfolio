@@ -3,7 +3,7 @@ import { useLocation, useRouteMatch } from './router';
 import { ArrowRight } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from './utils/czechTypography';
 import { useLanguage } from './i18n/LanguageContext';
-import { CONTACT_EMAIL } from './shared/constants';
+import { useGoToContactForm } from './hooks/useGoToContactForm';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
@@ -17,6 +17,7 @@ const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => 
 
 const Hero = () => {
   const { t, lang } = useLanguage();
+  const goToContactForm = useGoToContactForm();
 
   return (
     <section className="hero-section relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden backface-hidden">
@@ -38,13 +39,14 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5 hero-anim hero-anim-d2">
-          <a
-            href={CONTACT_EMAIL}
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 shadow-lg min-w-[180px] sm:min-w-0"
+          <button
+            type="button"
+            onClick={goToContactForm}
+            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 shadow-lg min-w-[180px] sm:min-w-0 cursor-pointer"
           >
             {lang === 'cs' ? fixCzechTypography(t.hero.ctaPrimary) : fixDashes(t.hero.ctaPrimary)}
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </button>
           <a
             href="#work"
             className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-[background-color,border-color] duration-300 min-w-[180px] sm:min-w-0"

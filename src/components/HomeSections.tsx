@@ -5,6 +5,7 @@ import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
 import { translations } from '../i18n/translations';
 import { useIsMobile } from '../hooks/useIsMobile';
+import { useGoToContactForm } from '../hooks/useGoToContactForm';
 import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, type Project } from '../shared/data';
 import {
   Code2, Zap, Globe, ArrowRight, ArrowDown, ArrowLeft, Rocket, ShieldCheck, Brain,
@@ -425,6 +426,7 @@ const SERVICES_CARDS = [
 const ServicesPricingSection = () => {
   const { lang } = useLanguage();
   const t = translations[lang];
+  const goToContactForm = useGoToContactForm();
   return (
     <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden backface-hidden">
       <div id="pricing" className="absolute top-0 left-0 -translate-y-24" aria-hidden />
@@ -479,13 +481,14 @@ const ServicesPricingSection = () => {
             );
           })}
         </div>
-        <motion.a
-          href={CONTACT_EMAIL}
+        <motion.button
+          type="button"
+          onClick={goToContactForm}
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0, margin: '0px 0px -60px 0px' }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-[border-color,background-color] duration-300 group"
+          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-[border-color,background-color] duration-300 group w-full text-left cursor-pointer"
         >
           <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
             <ClipboardCheck className="w-6 h-6 sm:w-7 sm:h-7" />
@@ -502,7 +505,7 @@ const ServicesPricingSection = () => {
             {lang === 'cs' ? fixCzechTypography(t.services.auditCta) : fixDashes(t.services.auditCta)}
             <ArrowRight className="w-4 h-4" />
           </span>
-        </motion.a>
+        </motion.button>
       </div>
     </section>
   );
@@ -513,6 +516,7 @@ const ServicesPricingSection = () => {
 const CtaSection = () => {
   const { lang } = useLanguage();
   const t = translations[lang];
+  const goToContactForm = useGoToContactForm();
   return (
     <section id="cta" className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)] text-white relative overflow-hidden backface-hidden">
       <div className="max-w-3xl mx-auto text-center">
@@ -541,13 +545,14 @@ const CtaSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5"
         >
-          <a
-            href={CONTACT_EMAIL}
-            className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 min-w-[180px] sm:min-w-0 justify-center"
+          <button
+            type="button"
+            onClick={goToContactForm}
+            className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 min-w-[180px] sm:min-w-0 justify-center cursor-pointer"
           >
             {lang === 'cs' ? fixCzechTypography(t.cta.ctaPrimary) : fixDashes(t.cta.ctaPrimary)}
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </button>
           <a
             href="#work"
             className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-[background-color,border-color] duration-300 min-w-[180px] sm:min-w-0 justify-center"
@@ -783,7 +788,7 @@ const ContactSection = () => {
                 </motion.button>
               </motion.div>
             ) : (
-              <form ref={formRef} action={FORMSPREE_URL} method="POST" onSubmit={handleSubmit} className="bg-black/[0.06] backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl border border-black/10 space-y-5">
+              <form id="contact-form" ref={formRef} action={FORMSPREE_URL} method="POST" onSubmit={handleSubmit} className="bg-black/[0.06] backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl border border-black/10 space-y-5">
                 <input type="hidden" name="_subject" value={lang === 'cs' ? 'Nová zpráva z webu vibecooding.cz' : 'New message from vibecooding.cz'} />
                 <div>
                   <label htmlFor="full-name" className="block text-sm font-bold uppercase tracking-[0.15em] mb-2">{f.name}</label>
@@ -827,7 +832,31 @@ const ContactSection = () => {
 
 // --- Exported composite ---
 
+function useScrollToContactFromHash() {
+  useEffect(() => {
+    if (window.location.hash !== '#contact') return;
+    let done = false;
+    const ids: number[] = [];
+    const attempt = () => {
+      if (done) return;
+      const el = document.getElementById('contact');
+      if (!el) return;
+      done = true;
+      ids.forEach(clearTimeout);
+      ids.length = 0;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.history.replaceState(null, '', window.location.pathname);
+      window.setTimeout(() => document.getElementById('full-name')?.focus({ preventScroll: true }), 550);
+    };
+    [0, 100, 300, 600, 1000].forEach((ms) => {
+      ids.push(window.setTimeout(attempt, ms));
+    });
+    return () => ids.forEach(clearTimeout);
+  }, []);
+}
+
 export default function HomeSections() {
+  useScrollToContactFromHash();
   return (
     <>
       <ProcessSection />

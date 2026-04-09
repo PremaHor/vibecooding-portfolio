@@ -38,10 +38,6 @@ export const PROJECTS: Project[] = [
     year: "2025",
     client: "Vlastní projekt",
     role: "End-to-End (UX, UI, Dev, Produkt)",
-    websiteUrls: [
-      { label: "risklight.cz", url: "https://risklight.cz" },
-      { label: "risklight.app", url: "https://risklight.app" },
-    ],
     youtubeVideoId: "MC0M3jmvmBE",
     notionCaseStudyUrl:
       "https://utopian-biology-d74.notion.site/Case-study-RiskLight-2eca0be69d5d803db31cdb1abcf06bad?pvs=143",
@@ -60,9 +56,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     client: "REKLY",
     role: "Produktová logika, UI/UX, frontend, Firebase, PDF",
-    websiteUrls: [
-      { label: "rekly.vercel.app", url: "https://rekly.vercel.app/" },
-    ],
+    youtubeVideoId: "nuMND8cJNhE",
   },
   {
     id: 3,
@@ -101,10 +95,6 @@ export const PROJECTS: Project[] = [
     year: "2026",
     client: "DDÚ Olomouc",
     role: "Developer & Designer",
-    websiteUrls: [
-      { label: "dduolomouc.cz (původní)", url: "https://www.dduolomouc.cz/" },
-      { label: "ddu-olomouc-web.vercel.app (návrh)", url: "https://ddu-olomouc-web.vercel.app/" },
-    ],
     quote: "Spolupráce na redesignu byla příjemná, důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
   },
   {
