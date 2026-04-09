@@ -48,6 +48,24 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 2,
+    slug: "adcalc",
+    title: "AdCalc",
+    category: "Interní nástroj",
+    description:
+      "Interní webová aplikace pro REKLY: kalkulace položek, uložené zakázky a PDF nabídka pro zákazníka v jednom. Celý tým pracuje se stejnými daty, bez roztříštěných tabulek.",
+    fullDescription:
+      "AdCalc pro reklamní výrobu sjednocuje materiál, tisk, práci i dopravu, sdílený ceník ve Firebase a PDF export ve firemním vizuálu.",
+    image: "/images/projects/addcalc.webp",
+    tags: ["React 19", "TypeScript", "Vite", "Tailwind", "Motion", "Firebase", "jsPDF"],
+    year: "2026",
+    client: "REKLY",
+    role: "Produktová logika, UI/UX, frontend, Firebase, PDF",
+    websiteUrls: [
+      { label: "rekly.vercel.app", url: "https://rekly.vercel.app/" },
+    ],
+  },
+  {
+    id: 3,
     slug: "kviz-pwa",
     title: "Kvíz PWA",
     category: "PWA",
@@ -70,24 +88,6 @@ export const PROJECTS: Project[] = [
     year: "2026",
     client: "Vlastní projekt",
     role: "Fullstack (UI + API)",
-  },
-  {
-    id: 3,
-    slug: "adcalc",
-    title: "AdCalc",
-    category: "Interní nástroj",
-    description:
-      "Interní webová aplikace pro REKLY: kalkulace položek, uložené zakázky a PDF nabídka pro zákazníka v jednom. Celý tým pracuje se stejnými daty, bez roztříštěných tabulek.",
-    fullDescription:
-      "AdCalc pro reklamní výrobu sjednocuje materiál, tisk, práci i dopravu, sdílený ceník ve Firebase a PDF export ve firemním vizuálu.",
-    image: "/images/projects/addcalc.webp",
-    tags: ["React 19", "TypeScript", "Vite", "Tailwind", "Motion", "Firebase", "jsPDF"],
-    year: "2025",
-    client: "REKLY",
-    role: "Produktová logika, UI/UX, frontend, Firebase, PDF",
-    websiteUrls: [
-      { label: "rekly.vercel.app", url: "https://rekly.vercel.app/" },
-    ],
   },
   {
     id: 4,
