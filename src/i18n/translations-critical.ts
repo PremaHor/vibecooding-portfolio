@@ -34,6 +34,17 @@ export const criticalTranslations = {
       copyright: '© 2026 Přemysl Horák',
       privacyLink: 'Zásady ochrany soukromí',
     },
+    seo: {
+      pageTitle: 'Weby a produkty od nápadu po nasazení',
+      metaDescription:
+        'Pomáhám firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+      ogDescription:
+        'Pomáhám firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+      jsonLdDescription:
+        'Pomáhám firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+      ogLocale: 'cs_CZ',
+      ogLocaleAlternate: 'en_US',
+    },
   },
   en: {
     nav: {
@@ -67,6 +78,17 @@ export const criticalTranslations = {
     footer: {
       copyright: '© 2026 Přemysl Horák',
       privacyLink: 'Privacy policy',
+    },
+    seo: {
+      pageTitle: 'Websites and products from idea to deployment',
+      metaDescription:
+        'I help companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+      ogDescription:
+        'I help companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+      jsonLdDescription:
+        'I help companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+      ogLocale: 'en_US',
+      ogLocaleAlternate: 'cs_CZ',
     },
   },
 } as const;
