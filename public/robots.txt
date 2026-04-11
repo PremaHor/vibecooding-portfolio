@@ -14,4 +14,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://vibecooding.cz/sitemap.xml
+Sitemap: https://premyslhorak.cz/sitemap.xml

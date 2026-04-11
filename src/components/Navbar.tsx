@@ -68,7 +68,7 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
             <span className={`text-sm ml-2 hidden sm:inline-block transition-colors duration-500 ${
               theme === 'dark' ? 'text-gray-400' : 'text-black/60'
             }`}>
-              | VibeCooding
+              | premyslhorak.cz
             </span>
           </div>
         </Link>
@@ -148,7 +148,7 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
             <div className="min-w-0 truncate">
               <span className="font-bold text-white">Přemysl Horák</span>
               <span className="text-gray-400 text-sm ml-2 hidden sm:inline-block">
-                | VibeCooding
+                | premyslhorak.cz
               </span>
             </div>
           </Link>

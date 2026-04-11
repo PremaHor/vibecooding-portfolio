@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vibecooding.cz/</loc>
+    <loc>https://premyslhorak.cz/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://vibecooding.cz/project/risklight</loc>
+    <loc>https://premyslhorak.cz/project/risklight</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vibecooding.cz/project/adcalc</loc>
+    <loc>https://premyslhorak.cz/project/adcalc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vibecooding.cz/project/ddu-olomouc</loc>
+    <loc>https://premyslhorak.cz/project/ddu-olomouc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vibecooding.cz/project/void-interface</loc>
+    <loc>https://premyslhorak.cz/project/void-interface</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://vibecooding.cz/ochrana-soukromi</loc>
+    <loc>https://premyslhorak.cz/ochrana-soukromi</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

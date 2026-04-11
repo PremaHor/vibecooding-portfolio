@@ -1,4 +1,4 @@
-# VibeCooding Portfolio
+# Přemysl Horák – portfolio
 
 Portfolio web vytvořený v React + Vite + Tailwind CSS.
 

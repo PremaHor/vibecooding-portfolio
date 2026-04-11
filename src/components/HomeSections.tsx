@@ -789,7 +789,7 @@ const ContactSection = () => {
               </motion.div>
             ) : (
               <form id="contact-form" ref={formRef} action={FORMSPREE_URL} method="POST" onSubmit={handleSubmit} className="bg-black/[0.06] backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl border border-black/10 space-y-5">
-                <input type="hidden" name="_subject" value={lang === 'cs' ? 'Nová zpráva z webu vibecooding.cz' : 'New message from vibecooding.cz'} />
+                <input type="hidden" name="_subject" value={lang === 'cs' ? 'Nová zpráva z webu premyslhorak.cz' : 'New message from premyslhorak.cz'} />
                 <div>
                   <label htmlFor="full-name" className="block text-sm font-bold uppercase tracking-[0.15em] mb-2">{f.name}</label>
                   <input type="text" id="full-name" name="full-name" placeholder={f.namePlaceholder} className="w-full px-4 py-3.5 rounded-xl bg-white/60 border border-black/10 text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-black/30 focus:bg-white/80 transition-all duration-200" />

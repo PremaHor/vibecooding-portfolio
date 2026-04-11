@@ -6,8 +6,8 @@
  * Automaticky: Vercel Cron volá /api/indexnow denně v 6:00 UTC.
  * Manuálně: npm run indexnow (po prvním deployi, až je key soubor živě)
  */
-const SITE_URL = 'https://vibecooding.cz';
-const KEY = 'vibecooding-indexnow-a1b2c3d4e5f6';
+const SITE_URL = 'https://premyslhorak.cz';
+const KEY = 'premyslhorak-indexnow-a1b2c3d4e5f6';
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
 
 const urlList = [
@@ -15,6 +15,7 @@ const urlList = [
   `${SITE_URL}/project/risklight`,
   `${SITE_URL}/project/adcalc`,
   `${SITE_URL}/project/ddu-olomouc`,
+  `${SITE_URL}/project/void-interface`,
   `${SITE_URL}/ochrana-soukromi`,
   `${SITE_URL}/llms.txt`,
   `${SITE_URL}/robots.txt`,
@@ -22,7 +23,7 @@ const urlList = [
 
 async function submit() {
   const body = {
-    host: 'vibecooding.cz',
+    host: 'premyslhorak.cz',
     key: KEY,
     keyLocation: `${SITE_URL}/${KEY}.txt`,
     urlList,

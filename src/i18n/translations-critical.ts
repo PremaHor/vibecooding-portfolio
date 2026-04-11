@@ -31,7 +31,7 @@ export const criticalTranslations = {
       privacyLink: 'Zásady ochrany soukromí',
     },
     footer: {
-      copyright: '© 2026 VIBECOODING',
+      copyright: '© 2026 Přemysl Horák',
       privacyLink: 'Zásady ochrany soukromí',
     },
   },
@@ -65,7 +65,7 @@ export const criticalTranslations = {
       privacyLink: 'Privacy policy',
     },
     footer: {
-      copyright: '© 2026 VIBECOODING',
+      copyright: '© 2026 Přemysl Horák',
       privacyLink: 'Privacy policy',
     },
   },

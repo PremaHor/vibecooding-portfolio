@@ -10,16 +10,17 @@ export default async function handler(req, res) {
   }
 
   const body = {
-    host: 'vibecooding.cz',
-    key: 'vibecooding-indexnow-a1b2c3d4e5f6',
-    keyLocation: 'https://vibecooding.cz/vibecooding-indexnow-a1b2c3d4e5f6.txt',
+    host: 'premyslhorak.cz',
+    key: 'premyslhorak-indexnow-a1b2c3d4e5f6',
+    keyLocation: 'https://premyslhorak.cz/premyslhorak-indexnow-a1b2c3d4e5f6.txt',
     urlList: [
-      'https://vibecooding.cz/',
-      'https://vibecooding.cz/project/risklight',
-      'https://vibecooding.cz/project/adcalc',
-      'https://vibecooding.cz/project/ddu-olomouc',
-      'https://vibecooding.cz/ochrana-soukromi',
-      'https://vibecooding.cz/llms.txt',
+      'https://premyslhorak.cz/',
+      'https://premyslhorak.cz/project/risklight',
+      'https://premyslhorak.cz/project/adcalc',
+      'https://premyslhorak.cz/project/ddu-olomouc',
+      'https://premyslhorak.cz/project/void-interface',
+      'https://premyslhorak.cz/ochrana-soukromi',
+      'https://premyslhorak.cz/llms.txt',
     ],
   };
 

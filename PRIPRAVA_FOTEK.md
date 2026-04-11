@@ -53,7 +53,7 @@ Obrázky se zobrazují s `object-cover` – vyplní plochu a oříznou se. Důle
 ## Struktura souborů
 
 ```
-vibecooding-portfolio/
+premyslhorak-portfolio/
 ├── public/
 │   └── images/
 │       └── projects/

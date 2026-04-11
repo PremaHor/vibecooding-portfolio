@@ -8,6 +8,6 @@ export const CONSENT_CONFIG = {
   CLARITY_PROJECT_ID: 'vsrf174num',
 } as const;
 
-export const CONSENT_STORAGE_KEY = 'vibecooding_cookie_consent';
+export const CONSENT_STORAGE_KEY = 'premyslhorak_cookie_consent';
 
 export type ConsentStatus = 'accepted' | 'rejected' | null;

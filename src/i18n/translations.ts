@@ -203,7 +203,7 @@ export const translations = {
       },
     },
     footer: {
-      copyright: '© 2026 VIBECOODING',
+      copyright: '© 2026 Přemysl Horák',
       privacyLink: 'Zásady ochrany soukromí',
     },
     cookie: {
@@ -646,7 +646,7 @@ export const translations = {
       },
     },
     footer: {
-      copyright: '© 2026 VIBECOODING',
+      copyright: '© 2026 Přemysl Horák',
       privacyLink: 'Privacy policy',
     },
     cookie: {
