@@ -20,7 +20,7 @@ function applyDocumentSeo(seo: SeoCopy) {
   setMetaProperty('og:description', seo.ogDescription);
   setMetaProperty('og:locale', seo.ogLocale);
   setMetaProperty('og:locale:alternate', seo.ogLocaleAlternate);
-  setMetaName('twitter:title', seo.pageTitle);
+  setMetaName('twitter:title', seo.twitterTitle);
   setMetaName('twitter:description', seo.ogDescription);
 
   const ldEl = document.head.querySelector('script[type="application/ld+json"]');

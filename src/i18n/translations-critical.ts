@@ -37,6 +37,7 @@ export const criticalTranslations = {
     },
     seo: {
       pageTitle: 'Weby a produkty od nápadu po nasazení',
+      twitterTitle: 'Stavím produkty. Ne backlogy.',
       metaDescription:
         'Pomáhám firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
       ogDescription:
@@ -83,6 +84,7 @@ export const criticalTranslations = {
     },
     seo: {
       pageTitle: 'Websites and products from idea to deployment',
+      twitterTitle: 'I build products. Not backlogs.',
       metaDescription:
         'I help companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       ogDescription:
