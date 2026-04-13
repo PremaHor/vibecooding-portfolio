@@ -36,14 +36,14 @@ export const criticalTranslations = {
       privacyLink: 'Zásady ochrany soukromí',
     },
     seo: {
-      pageTitle: 'Weby a produkty od nápadu po nasazení',
-      twitterTitle: 'Stavím produkty. Ne backlogy.',
+      pageTitle: 'Stavím produkty. Ne backlogy. | Přemysl Horák',
+      twitterTitle: 'Stavím produkty. Ne backlogy. | Přemysl Horák',
       metaDescription:
-        'Pomáhám firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
       ogDescription:
-        'Pomáhám firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
       jsonLdDescription:
-        'Pomáhám firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
       ogLocale: 'cs_CZ',
       ogLocaleAlternate: 'en_US',
     },
@@ -83,14 +83,14 @@ export const criticalTranslations = {
       privacyLink: 'Privacy policy',
     },
     seo: {
-      pageTitle: 'Websites and products from idea to deployment',
-      twitterTitle: 'I build products. Not backlogs.',
+      pageTitle: 'I build products. Not backlogs. | Premysl Horak',
+      twitterTitle: 'I build products. Not backlogs. | Premysl Horak',
       metaDescription:
-        'I help companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       ogDescription:
-        'I help companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       jsonLdDescription:
-        'I help companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       ogLocale: 'en_US',
       ogLocaleAlternate: 'cs_CZ',
     },
