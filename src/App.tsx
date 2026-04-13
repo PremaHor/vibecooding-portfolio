@@ -34,7 +34,7 @@ const Hero = () => {
           </span>
         </h1>
 
-        <p className="text-base sm:text-lg md:text-xl font-normal text-gray-400 mb-10 sm:mb-12 max-w-2xl mx-auto leading-relaxed text-center hero-anim hero-anim-d1">
+        <p className="text-base sm:text-lg md:text-xl font-normal text-gray-400 mb-10 sm:mb-12 max-w-2xl mx-auto leading-relaxed text-center whitespace-pre-line hero-anim hero-anim-d1">
           {lang === 'cs' ? fixCzechTypography(t.hero.subheadline) : fixDashes(t.hero.subheadline)}
         </p>
 

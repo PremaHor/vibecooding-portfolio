@@ -17,8 +17,9 @@ export const translations = {
     hero: {
       available: 'Hledám tým, se kterým budu tvořit budoucnost',
       eyebrow: 'Ahoj, jsem Přemek - stavím produkty, které dávají smysl',
-      h1: 'Propojuji design, kód a produktové myšlení.',
-      subheadline: 'AI mění hru a já chci být u toho v praxi. Hledám inovativní tým, kde zúročím svůj mezioborový přesah. Ne jako nájemný kodér, ale jako loajální parťák, co tvoří produkty s reálným dopadem.',
+      h1: 'Stavím produkty. Ne backlogy.',
+      subheadline:
+        'Hledám tým, kde využiju svůj přesah napříč obory.\n\nNe jako nájemný kodér, ale jako parťák, který staví produkty, které dávají smysl.',
       ctaPrimary: 'Pojďme se potkat',
       ctaSecondary: 'Prohlédnout projekty',
       workedWith: 'Spolupracovali se mnou',
@@ -460,8 +461,9 @@ export const translations = {
     hero: {
       available: 'Looking for a team to build the future with',
       eyebrow: "Hi, I'm Premek - I build products that matter",
-      h1: 'I connect design, code, and product thinking.',
-      subheadline: 'AI is changing the game, and I want to be part of it in practice. I am looking for an innovative team where I can turn my cross-disciplinary overlap into results. Not as a hired gun, but as a loyal partner building products with real impact.',
+      h1: 'I build products. Not backlogs.',
+      subheadline:
+        'I am looking for a team where I can put my cross-disciplinary edge to work.\n\nNot as a hired gun, but as a partner who builds products that make sense.',
       ctaPrimary: 'Let\'s meet',
       ctaSecondary: 'View projects',
       workedWith: 'Worked with me',
