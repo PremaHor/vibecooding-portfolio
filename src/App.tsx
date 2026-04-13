@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, useMemo, lazy, Suspense } from 'react';
 import { useLocation, useRouteMatch } from './router';
 import { ArrowRight } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from './utils/czechTypography';
@@ -7,17 +7,25 @@ import { useGoToContactForm } from './hooks/useGoToContactForm';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { HeroAccentTypewriter } from './components/HeroAccentTypewriter';
 
 const HomeSections = lazy(() => import('./components/HomeSections'));
 const LazyProjectPage = lazy(() => import('./components/ProjectPage').then(m => ({ default: m.ProjectPage })));
 const PrivacyPage = lazy(() => import('./components/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
-// --- Hero (zero motion dependency — CSS animations only) ---
+// --- Hero (hlavní animace CSS; accent = typewriter v komponentě) ---
 
 const Hero = () => {
   const { t, lang } = useLanguage();
   const goToContactForm = useGoToContactForm();
+  const accentText = useMemo(
+    () =>
+      lang === 'cs'
+        ? fixCzechTypography(t.hero.subheadlineAccent)
+        : fixDashes(t.hero.subheadlineAccent),
+    [lang, t.hero.subheadlineAccent],
+  );
 
   return (
     <section className="hero-section relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden backface-hidden">
@@ -35,7 +43,7 @@ const Hero = () => {
           {lang === 'cs' ? fixCzechTypography(t.hero.subheadlineLead) : fixDashes(t.hero.subheadlineLead)}
         </p>
         <p className="max-w-2xl mx-auto text-center text-[var(--color-vibe-orange)] font-semibold tracking-wider uppercase text-xs sm:text-sm md:text-base leading-relaxed text-balance mb-10 sm:mb-12 hero-anim hero-anim-d1">
-          {lang === 'cs' ? fixCzechTypography(t.hero.subheadlineAccent) : fixDashes(t.hero.subheadlineAccent)}
+          <HeroAccentTypewriter text={accentText} />
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5 hero-anim hero-anim-d2">
