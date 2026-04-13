@@ -16,10 +16,10 @@ export const criticalTranslations = {
     },
     hero: {
       available: 'Hledám tým, se kterým budu tvořit budoucnost',
-      eyebrow: 'Ahoj, jsem Přemek - stavím produkty, které dávají smysl',
       h1: 'Stavím produkty. Ne backlogy.',
-      subheadline:
-        'Hledám tým, kde využiju svůj přesah napříč obory.\n\nNe jako nájemný kodér, ale jako parťák, který staví produkty, které dávají smysl.',
+      subheadlineLead: 'Hledám tým, kde využiju svůj přesah napříč obory.',
+      subheadlineAccent:
+        'Ne jako nájemný kodér, ale jako parťák, který staví produkty, které dávají smysl.',
       ctaPrimary: 'Pojďme se potkat',
       ctaSecondary: 'Prohlédnout projekty',
       workedWith: 'Spolupracovali se mnou',
@@ -62,10 +62,10 @@ export const criticalTranslations = {
     },
     hero: {
       available: 'Looking for a team to build the future with',
-      eyebrow: "Hi, I'm Premek - I build products that matter",
       h1: 'I build products. Not backlogs.',
-      subheadline:
-        'I am looking for a team where I can put my cross-disciplinary edge to work.\n\nNot as a hired gun, but as a partner who builds products that make sense.',
+      subheadlineLead: 'I am looking for a team where I can put my cross-disciplinary edge to work.',
+      subheadlineAccent:
+        'Not as a hired gun, but as a partner who builds products that make sense.',
       ctaPrimary: 'Let\'s meet',
       ctaSecondary: 'View projects',
       workedWith: 'Worked with me',
