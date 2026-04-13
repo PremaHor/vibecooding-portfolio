@@ -22,8 +22,8 @@ type HeroAccentTypewriterProps = {
 
 export function HeroAccentTypewriter({
   text,
-  startDelayMs = 520,
-  charIntervalMs = 22,
+  startDelayMs = 640,
+  charIntervalMs = 44,
 }: HeroAccentTypewriterProps) {
   const reducedMotion = usePrefersReducedMotion();
   const [shown, setShown] = useState(() => (reducedMotion ? text.length : 0));
