@@ -269,6 +269,8 @@ export const translations = {
       websiteLinkLabels: {
         risklightLanding: 'Landing page — risklight.cz',
         risklightPwa: 'Aplikace (PWA) — risklight.app',
+        dduOriginalWeb: 'Původní web — dduolomouc.cz',
+        dduRedesignPreview: 'Návrh redesignu — ddu-olomouc-web.vercel.app',
       },
       prototype: 'Prototyp',
       videoUserFlow: 'User flow: průlet aplikací',
@@ -717,6 +719,8 @@ export const translations = {
       websiteLinkLabels: {
         risklightLanding: 'Landing page — risklight.cz',
         risklightPwa: 'App (PWA) — risklight.app',
+        dduOriginalWeb: 'Original website — dduolomouc.cz',
+        dduRedesignPreview: 'Redesign proposal — ddu-olomouc-web.vercel.app',
       },
       prototype: 'Prototype',
       videoUserFlow: 'User flow walkthrough',

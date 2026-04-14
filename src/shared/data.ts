@@ -10,14 +10,16 @@ export interface Project {
   year: string;
   client: string;
   role: string;
-  websiteUrls?: { label: string; url: string }[];
   quote?: string;
   galleryImages?: { src: string; alt: string }[];
   /** YouTube video ID (embed), e.g. MC0M3jmvmBE from youtu.be/... */
   youtubeVideoId?: string;
   notionCaseStudyUrl?: string;
   /** Keys map to `t.project.websiteLinkLabels` */
-  websiteUrls?: { labelKey: 'risklightLanding' | 'risklightPwa'; url: string }[];
+  websiteUrls?: {
+    labelKey: 'risklightLanding' | 'risklightPwa' | 'dduOriginalWeb' | 'dduRedesignPreview';
+    url: string;
+  }[];
 }
 
 export function getImageSrcSet(imagePath: string): string {
@@ -102,6 +104,10 @@ export const PROJECTS: Project[] = [
     client: "DDÚ Olomouc",
     role: "Developer & Designer",
     quote: "Spolupráce na redesignu byla příjemná, důraz na přehlednost a přístupnost pro rodiče i pedagogy se promítl do každého detailu.",
+    websiteUrls: [
+      { labelKey: 'dduOriginalWeb', url: 'https://www.dduolomouc.cz/' },
+      { labelKey: 'dduRedesignPreview', url: 'https://ddu-olomouc-web.vercel.app/' },
+    ],
   },
   {
     id: 5,
