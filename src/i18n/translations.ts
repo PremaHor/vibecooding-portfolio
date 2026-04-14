@@ -266,6 +266,10 @@ export const translations = {
       role: 'Role',
       tech: 'Technologie',
       relatedLinks: 'Související odkazy',
+      websiteLinkLabels: {
+        risklightLanding: 'Landing page — risklight.cz',
+        risklightPwa: 'Aplikace (PWA) — risklight.app',
+      },
       prototype: 'Prototyp',
       videoUserFlow: 'User flow: průlet aplikací',
       videoEmbedTitle: 'RiskLight: user flow aplikace (YouTube)',
@@ -710,6 +714,10 @@ export const translations = {
       role: 'Role',
       tech: 'Technologies',
       relatedLinks: 'Related links',
+      websiteLinkLabels: {
+        risklightLanding: 'Landing page — risklight.cz',
+        risklightPwa: 'App (PWA) — risklight.app',
+      },
       prototype: 'Prototype',
       videoUserFlow: 'User flow walkthrough',
       videoEmbedTitle: 'RiskLight app user flow (YouTube)',
