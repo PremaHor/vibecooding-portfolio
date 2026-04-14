@@ -245,7 +245,7 @@ button:focus-visible {
 
 /* Hero: počáteční stav animovaných prvků v CSS - eliminuje probliknutí před Motion */
 @media (min-width: 768px) {
-  .hero-section .hero-content h1 span,
+  .hero-section .hero-content h1 > span,
   .hero-section .hero-content > p,
   .hero-section .hero-content > div:last-child {
     opacity: 0;

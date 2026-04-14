@@ -27,10 +27,16 @@ function applyDocumentSeo(seo: SeoCopy) {
   if (!ldEl?.textContent) return;
   try {
     const data = JSON.parse(ldEl.textContent.trim()) as Record<string, unknown>;
-    if (data['@type'] === 'Person') {
-      data.description = seo.jsonLdDescription;
-      ldEl.textContent = `${JSON.stringify(data, null, 2)}\n`;
+    const patchPersonDescription = (node: Record<string, unknown>) => {
+      if (node['@type'] === 'Person') node.description = seo.jsonLdDescription;
+    };
+    const graph = data['@graph'];
+    if (Array.isArray(graph)) {
+      for (const node of graph as Record<string, unknown>[]) patchPersonDescription(node);
+    } else {
+      patchPersonDescription(data);
     }
+    ldEl.textContent = `${JSON.stringify(data, null, 2)}\n`;
   } catch {
     /* ignore malformed JSON-LD */
   }

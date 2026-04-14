@@ -15,6 +15,7 @@ export const criticalTranslations = {
       openMenu: 'Otevřít menu',
     },
     hero: {
+      brandedName: 'Přemysl Horák',
       available: 'Hledám tým, se kterým budu tvořit budoucnost',
       h1: 'Stavím produkty. Ne backlogy.',
       subheadlineLead: 'Hledám tým, kde využiju svůj přesah napříč obory.',
@@ -36,14 +37,14 @@ export const criticalTranslations = {
       privacyLink: 'Zásady ochrany soukromí',
     },
     seo: {
-      pageTitle: 'Stavím produkty. Ne backlogy. | Přemysl Horák',
-      twitterTitle: 'Stavím produkty. Ne backlogy. | Přemysl Horák',
+      pageTitle: 'Přemysl Horák | Stavím produkty. Ne backlogy.',
+      twitterTitle: 'Přemysl Horák | Stavím produkty. Ne backlogy.',
       metaDescription:
-        'Přemysl Horák pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák — vývojář a designér. Pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
       ogDescription:
-        'Přemysl Horák pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák — vývojář a designér. Pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
       jsonLdDescription:
-        'Přemysl Horák pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák — vývojář a designér. Pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
       ogLocale: 'cs_CZ',
       ogLocaleAlternate: 'en_US',
     },
@@ -62,6 +63,7 @@ export const criticalTranslations = {
       openMenu: 'Open menu',
     },
     hero: {
+      brandedName: 'Přemysl Horák',
       available: 'Looking for a team to build the future with',
       h1: 'I build products. Not backlogs.',
       subheadlineLead: 'I am looking for a team where I can put my cross-disciplinary edge to work.',
@@ -83,14 +85,14 @@ export const criticalTranslations = {
       privacyLink: 'Privacy policy',
     },
     seo: {
-      pageTitle: 'I build products. Not backlogs. | Premysl Horak',
-      twitterTitle: 'I build products. Not backlogs. | Premysl Horak',
+      pageTitle: 'Premysl Horak | I build products. Not backlogs.',
+      twitterTitle: 'Premysl Horak | I build products. Not backlogs.',
       metaDescription:
-        'Premysl Horak helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák) — developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       ogDescription:
-        'Premysl Horak helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák) — developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       jsonLdDescription:
-        'Premysl Horak helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák) — developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       ogLocale: 'en_US',
       ogLocaleAlternate: 'cs_CZ',
     },
