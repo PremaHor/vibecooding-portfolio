@@ -44,7 +44,8 @@ export interface Project {
 }
 
 export function getImageSrcSet(imagePath: string, intrinsicWidth?: number): string {
-  const base = imagePath.replace(/\.(webp|jpg|jpeg|png)$/i, '');
+  const pathOnly = imagePath.split('?')[0];
+  const base = pathOnly.replace(/\.(webp|jpg|jpeg|png)$/i, '');
   const w = intrinsicWidth ?? 1200;
   return `${base}-640.webp 640w, ${base}-960.webp 960w, ${imagePath} ${w}w`;
 }
@@ -59,6 +60,9 @@ export function getProjectImageSrcSet(
 }
 
 export { CONTACT_EMAIL } from './constants';
+
+/** Bump číslo po každé výměně souboru `public/images/projects/arboris.webp` (obejde cache prohlížeče/CDN). */
+const ARBORIS_IMAGE = '/images/projects/arboris.webp?v=5';
 
 export const PROJECTS: Project[] = [
   {
@@ -167,10 +171,10 @@ export const PROJECTS: Project[] = [
       "Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie realizací, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboris je ukázková.",
     fullDescription:
       "Arboris propojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.",
-    image: "/images/projects/arboris.webp",
+    image: ARBORIS_IMAGE,
     imageWidth: 1440,
     imageHeight: 4414,
-    detailImage: "/images/projects/arboris.webp",
+    detailImage: ARBORIS_IMAGE,
     detailImageWidth: 1440,
     detailImageHeight: 4414,
     thumbObjectFit: "contain",
