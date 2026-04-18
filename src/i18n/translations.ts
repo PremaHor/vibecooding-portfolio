@@ -453,30 +453,30 @@ export const translations = {
       arboris: {
         category: 'Ukázkový web',
         subtitle:
-          'Arboris, prémiová úvodní stránka pro dřevostavby. Ukázkový web a vymyšlená značka jen pro představu, jak by taková prezentace mohla vypadat.',
+          'Marketingový one-page pro prémiové dřevostavby: hero, hodnoty, galerie s lightboxem, proces a kontakt; ukázková značka Arboris a obsah v češtině.',
         subtitleLine2: '',
         description:
-          'Jedna dlouhá stránka pro prémiové dřevostavby: úvod s velkou fotkou, hodnoty firmy, galerie realizací s rozkliknutím detailu, popis spolupráce a kontaktní část. Vše je v češtině a dobře se čte na mobilu i na počítači.',
+          'Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie s lightboxem, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboris je ukázková.',
         fullDescription:
-          'Web představuje smyšlenou značku Arboris a vede návštěvníka od hlavní myšlenky přes důvěru a postup práce až k kontaktu. Fotky jsou z Unsplash jako ukázka.',
+          'Arboris spojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.',
         quote:
-          'Byl to klidný prostor vyladit rozložení stránky, galerii a české texty v kódu. Žádný ostrý termín od klienta, ale choval jsem se k tomu jako k ostrému webu.',
+          'Sladit prémiový vizuál, chování galerie a českou typografii v kódu tak, aby stránka působila jako reálný byznys, přestože jde o ukázkový obsah, byl hlavní cíl.',
         techNote:
-          'Řešil jsem **přehled na všech šířkách obrazovky**, **čitelnost na mobilu včetně spodního tlačítka**, **přístupnost** (vidíte kde jste na stránce, galerii ovládáte i klávesnicí, méně pohybu když to uživatel v systému chce) a **jednotný vzhled** přes barvy a mezery v CSS. Stejný kód jde vystavit jako rychlou statickou verzi nebo jako aplikaci ve složce `web/` na Vercelu.',
+          'Od **responzivního layoutu** a **mobilního CTA** přes **přístupnost** (focus, ARIA u lightboxu, **prefers-reduced-motion** u Motion) a **CSS tokeny** až po **dvojí build** (statika a SPA ve složce `web/`) na **Vercelu**.',
         structured: {
-          goalTitle: 'O čem web je',
+          goalTitle: 'Kontext a záměr',
           goal:
-            'Jde o propagační jednu stránku pro prémiové dřevostavby: úvod, hodnoty, galerii, jak spolupracujeme a výzvu napsat nám. **Značka Arboris i kontakty v textu jsou vymyšlené.** Reálný obchod za tím nehledej, jde o ukázku.',
-          solutionTitle: 'Jak je to postavené',
+            'Cílem byl **marketingový one-page** pro prémiové dřevostavby: **hero**, sekce **hodnot**, **galerie realizací** s lightboxem, **proces spolupráce** a **kontaktní CTA**. Texty jsou v češtině. **Značka Arboris a kontaktní údaje jsou fiktivní**; jde o transparentní ukázku konceptu, ne o živý obchodní web. Vizuály jsou z **Unsplash** jako ukázkový obsah.',
+          solutionTitle: 'Řešení',
           solution:
-            'Web běží na **Reactu 19**, **TypeScriptu** a **Vite**. Vzhled je v **CSS modulech** s vlastními barvami, mezerami a písmem. Jemné pohyby dělá **Motion**, ale respektuje v systému volbu **méně animací**. U českých textů pomáhá malá utilita, která drží krátké předložky se slovem za nimi na jednom řádku. V projektu je i **statický soubor** a **verze po sestavení** ve složce `web/`, nasazení na **Vercel** popisuje `vercel.json`. Na kvalitu kódu dohlíží **ESLint**.',
-          benefitsTitle: 'Co z toho plyne',
+            'Implementace běží na **Reactu 19**, **TypeScriptu** a **Vite 8**. Stylování přes **CSS moduly** na **design tokeny** (barvy, mezery, typografie). Animace řeší **Motion** s respektem k **sníženému pohybu** v systémových preferencích. Pro české texty je v kódu utilita v duchu **czechNbsp** na nedělitelné mezery u krátkých předložek. Repozitář obsahuje paralelně **statický index.html** a **buildovanou SPA** ve složce `web/`; **vercel.json** cílí build z `web/`. Kvalitu kódu hlídá **ESLint**.',
+          benefitsTitle: 'Výsledek',
           benefits: [
-            '**Přehledné rozložení** na malém mobilu i velkém monitoru, galerie a karty drží pořadí důležitosti.',
-            '**Přístupnost v praxi**: kde se právě nacházíte je vidět, galerii ovládáte i klávesnicí.',
-            '**Stejné barvy a mezery** všude, aby to působilo jako jedna srozumitelná značka.',
-            '**Dvě cesty online**: jednoduchá statika nebo plná aplikace ze stejného kódu.',
-            '**Je hned jasné, že jde o ukázku**: fotky z Unsplash a vymyšlená firma.',
+            '**responzivní grid**: hero, karty i galerie drží hierarchii od mobilu po desktop',
+            '**přístupnost**: viditelný focus, sémantika, ARIA u lightboxu, klávesová navigace v galerii',
+            '**jednotný design systém** v CSS custom properties',
+            '**dvě varianty nasazení**: rychlý statický náhled i produkční SPA z jednoho zdroje',
+            '**ukázkový obsah** z Unsplash; značka Arboris je v portfoliu označena jako koncept',
           ],
         },
       },
@@ -933,30 +933,30 @@ export const translations = {
       arboris: {
         category: 'Sample one-page',
         subtitle:
-          'Arboris, a premium landing page for timber homes. A sample site and made up brand to show what that kind of marketing page could look like.',
+          'A marketing one-page for premium timber homes: hero, values, gallery with lightbox, process, and contact; sample Arboris brand with Czech copy.',
         subtitleLine2: '',
         description:
-          'One long page for premium timber builds: a big photo at the top, what the company stands for, a project gallery you can open full screen, how we work together, and a contact section. Czech interface, easy to read on a phone or desktop.',
+          'A single-page concept for premium timber construction: hero, values, gallery with lightbox, collaboration process, and contact CTA. Czech UI, responsive layout focused on readability and accessibility; Arboris is a sample brand.',
         fullDescription:
-          'The site presents a fictional Arboris brand and walks the visitor from the main idea through trust and the workflow to getting in touch. Photos are from Unsplash as placeholders.',
+          'Arboris combines a premium visual intro, values, project gallery, collaboration story, and a contact call-to-action on one scrolling page.',
         quote:
-          'It was a calm space to refine layout, the gallery, and Czech type in code. No hard client deadline, but I still treated it like a real launch.',
+          'Balancing a premium visual, gallery behavior, and Czech typography in code so the page feels like a real business, even with sample content, was the main goal.',
         techNote:
-          'I focused on **layout at every screen width**, **readable mobile layout including the bottom action**, **accessibility** (you can see where you are on the page, the gallery works with the keyboard, less motion when the user asks for that in system settings), and **one clear visual style** through colors and spacing in CSS. The same code can ship as a quick static version or as the built app in `web/` on Vercel.',
+          'From **responsive layout** and **mobile CTA** through **accessibility** (focus, ARIA on the lightbox, **prefers-reduced-motion** with Motion) and **CSS tokens** to a **dual build** (static export and SPA in `web/`) on **Vercel**.',
         structured: {
-          goalTitle: 'What the page is about',
+          goalTitle: 'Context and intent',
           goal:
-            'A marketing one pager for premium timber homes: intro, values, gallery, how we collaborate, and an invite to write. **Arboris and the contacts in the copy are fictional.** It is a demo, not a live business.',
-          solutionTitle: 'How it is built',
+            'The aim was a **marketing one-page** for premium timber homes: a **hero**, **values**, a **project gallery** with lightbox, a **collaboration process**, and a **contact CTA**. Copy is in Czech. **The Arboris brand and contact details are fictional**; this is a transparent concept piece, not a live commercial site. Visuals are **Unsplash** placeholders.',
+          solutionTitle: 'Solution',
           solution:
-            'The site runs on **React 19**, **TypeScript**, and **Vite**. Styles use **CSS Modules** with custom colors, spacing, and type. **Motion** adds light movement but honors **reduced motion** in system settings. A small utility keeps short Czech prepositions with the next word on one line. The repo includes a **static file** and a **built version** in `web/`; **vercel.json** describes the Vercel setup. **ESLint** helps keep the code tidy.',
-          benefitsTitle: 'Takeaways',
+            'Built with **React 19**, **TypeScript**, and **Vite 8**. Styling uses **CSS Modules** on **design tokens** (color, spacing, typography). **Motion** handles animation with respect for **prefers-reduced-motion**. Czech copy uses a **czechNbsp**-style utility for non-breaking spaces after short prepositions. The repo ships both a **static index.html** and a **built SPA** under `web/`; **vercel.json** targets the `web/` build. **ESLint** enforces code quality.',
+          benefitsTitle: 'Outcome',
           benefits: [
-            '**Clear layout** on a small phone or a large monitor; gallery and cards keep a sensible order.',
-            '**Accessibility in daily use**: focus is visible, the gallery works from the keyboard.',
-            '**Same colors and spacing** everywhere so it feels like one brand.',
-            '**Two ways to go live**: simple static files or the full app from the same source.',
-            '**Obviously a sample**: Unsplash photos and a made up company.',
+            '**responsive grid**: hero, cards, and gallery keep hierarchy from phone to desktop',
+            '**accessibility**: visible focus, semantics, ARIA on the lightbox, keyboard control in the gallery',
+            '**one design system** in CSS custom properties',
+            '**two deployment paths**: quick static preview and production SPA from the same source',
+            '**sample content** from Unsplash; Arboris is labelled as a concept in the portfolio',
           ],
         },
       },
