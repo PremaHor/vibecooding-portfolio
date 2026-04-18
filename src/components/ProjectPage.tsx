@@ -163,6 +163,54 @@ export const ProjectPage = () => {
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
   useEffect(() => {
+    if (!project) return;
+
+    const origin = window.location.origin;
+    const previewPath = project.detailImage ?? project.image;
+    const previewW = project.detailImage
+      ? (project.detailImageWidth ?? 1200)
+      : (project.imageWidth ?? 1200);
+    const previewH = project.detailImage
+      ? (project.detailImageHeight ?? 800)
+      : (project.imageHeight ?? 800);
+    const absImage = `${origin}${previewPath}`;
+    const absUrl = `${origin}/project/${project.slug}`;
+    const brandTitle = lang === 'cs' ? 'Přemysl Horák' : 'Premysl Horak';
+    const pageTitle = `${project.title} | ${brandTitle}`;
+
+    const patches: { attr: 'property' | 'name'; key: string; value: string }[] = [
+      { attr: 'property', key: 'og:url', value: absUrl },
+      { attr: 'property', key: 'og:image', value: absImage },
+      { attr: 'property', key: 'og:image:width', value: String(previewW) },
+      { attr: 'property', key: 'og:image:height', value: String(previewH) },
+      { attr: 'property', key: 'og:title', value: pageTitle },
+      { attr: 'name', key: 'twitter:title', value: pageTitle },
+      { attr: 'name', key: 'twitter:image', value: absImage },
+      { attr: 'name', key: 'twitter:card', value: 'summary_large_image' },
+    ];
+
+    const snapshots: { el: HTMLMetaElement; prev: string | null }[] = [];
+    for (const { attr, key, value } of patches) {
+      const el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+      if (el) {
+        snapshots.push({ el, prev: el.getAttribute('content') });
+        el.setAttribute('content', value);
+      }
+    }
+
+    const prevDocTitle = document.title;
+    document.title = pageTitle;
+
+    return () => {
+      document.title = prevDocTitle;
+      for (const { el, prev } of snapshots) {
+        if (prev === null) el.removeAttribute('content');
+        else el.setAttribute('content', prev);
+      }
+    };
+  }, [project, lang]);
+
+  useEffect(() => {
     if (lightboxIndex !== null) {
       document.body.style.overflow = 'hidden';
       const onEscape = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightboxIndex(null); };
@@ -383,7 +431,20 @@ export const ProjectPage = () => {
         </section>
 
         <Link to={`/project/${nextProject.slug}`} className="group block relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-8 lg:px-12 bg-white text-black overflow-hidden">
-          <div className="absolute inset-0 bg-[var(--color-vibe-orange)] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]" />
+          <div className="absolute inset-0 z-0">
+            <img
+              src={nextProject.image}
+              srcSet={getImageSrcSet(nextProject.image, nextProject.imageWidth)}
+              sizes="100vw"
+              alt=""
+              width={nextProject.imageWidth ?? 1200}
+              height={nextProject.imageHeight ?? 800}
+              decoding="async"
+              className="w-full h-full object-cover object-top scale-105 group-hover:scale-100 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-white/80 group-hover:bg-white/70 transition-colors duration-500" aria-hidden />
+          </div>
+          <div className="absolute inset-0 z-[1] bg-[var(--color-vibe-orange)] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]" />
           <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
             <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">{lang === 'cs' ? fixCzechTypography(t.project.nextProject) : fixDashes(t.project.nextProject)}</span>
             <h2 className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
