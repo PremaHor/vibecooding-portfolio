@@ -133,9 +133,9 @@ export const PROJECTS: Project[] = [
     title: "Arboris",
     category: "Ukázkový web",
     description:
-      "Koncept prémiového one-page webu pro dřevostavby: silný hero, hodnoty, galerie s lightboxem, proces a kontaktní CTA. Plně responzivní české rozhraní s důrazem na čitelnost, rytmus a přístupnost.",
+      "Ukázková jedna stránka pro prémiové dřevostavby: úvod s velkým obrázkem, hodnoty, galerie realizací, popis spolupráce a kontakt. České rozhraní, dobře čitelné na mobilu i na počítači.",
     fullDescription:
-      "Marketingový one-page jako vizuální a obsahový koncept fiktivní značky Arboris — od hlavního sdělení přes důvěru a proces až k akci.",
+      "Web představuje vymyšlenou značku Arboris a vede návštěvníka od hlavní myšlenky přes důvěru a postup práce až ke kontaktu.",
     image: "/images/projects/arboris.webp",
     tags: [
       "React 19",
