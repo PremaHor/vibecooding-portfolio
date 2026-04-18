@@ -463,7 +463,7 @@ export const translations = {
         quote:
           'Sladit prémiový vizuál, chování galerie a českou typografii v kódu tak, aby stránka působila jako reálný byznys, přestože jde o ukázkový obsah, byl hlavní cíl.',
         techNote:
-          'Od **responzivního layoutu** a **mobilního CTA** přes **přístupnost** (focus, ARIA u lightboxu, **prefers-reduced-motion** u Motion) a **CSS tokeny** až po **dvojí build** (statika a SPA ve složce `web/`) na **Vercelu**.',
+          '**Responzivní rozvržení** a **mobilní CTA**, **přístupnost** včetně lightboxu a **animace** s ohledem na **snížený pohyb**. Styly přes **CSS tokeny**; **statika i SPA** ve složce `web/` na **Vercelu**.',
         structured: {
           goalTitle: 'Kontext a záměr',
           goal:
@@ -944,7 +944,7 @@ export const translations = {
         quote:
           'Balancing a premium visual, gallery behavior, and Czech typography in code so the page feels like a real business, even with sample content, was the main goal.',
         techNote:
-          'From **responsive layout** and **mobile CTA** through **accessibility** (focus, ARIA on the lightbox, **prefers-reduced-motion** with Motion) and **CSS tokens** to a **dual build** (static export and SPA in `web/`) on **Vercel**.',
+          '**Responsive layout** and **mobile CTA**, **accessibility** including the lightbox, and **motion** that respects **reduced motion**. **CSS tokens** for styling; **static and SPA** builds in `web/` on **Vercel**.',
         structured: {
           goalTitle: 'Context and intent',
           goal:
