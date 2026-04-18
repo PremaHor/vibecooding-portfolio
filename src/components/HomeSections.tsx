@@ -185,15 +185,15 @@ function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: P
         <div className="relative aspect-[16/10] overflow-hidden bg-gray-50 backface-hidden">
           <img
             src={project.image}
-            srcSet={getImageSrcSet(project.image)}
+            srcSet={getImageSrcSet(project.image, project.imageWidth)}
             sizes="(max-width: 768px) 100vw, 50vw"
             alt={lang === 'cs' ? `${fixCzechTypography(project.title)}, ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)}, ${fixDashes(category)}, ${project.year}`}
-            width={1200}
-            height={800}
+            width={project.imageWidth ?? 1200}
+            height={project.imageHeight ?? 800}
             loading={index === 0 && !isMobile ? 'eager' : 'lazy'}
             fetchPriority={index === 0 && !isMobile ? 'high' : undefined}
             decoding="async"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.08] backface-hidden"
+            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.08] backface-hidden"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col items-center justify-center ios-backdrop-blur backface-hidden">

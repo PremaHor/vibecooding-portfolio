@@ -195,8 +195,39 @@ export const ProjectPage = () => {
             ) : (
               <div className="mb-8 sm:mb-14" />
             )}
-            <motion.div initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }} className="aspect-[16/9] w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl">
-              <img src={project.image} srcSet={getImageSrcSet(project.image)} sizes="(max-width: 768px) 100vw, 1200px" alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)} width={1200} height={800} fetchPriority="high" decoding="async" className="w-full h-full object-cover rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]" referrerPolicy="no-referrer" />
+            <motion.div
+              initial={{ opacity: 0, scale: 1.03 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+              className={
+                project.detailImage
+                  ? 'w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl flex justify-center items-start'
+                  : 'aspect-[16/9] w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl'
+              }
+            >
+              <img
+                src={project.detailImage ?? project.image}
+                srcSet={getImageSrcSet(
+                  project.detailImage ?? project.image,
+                  project.detailImage ? (project.detailImageWidth ?? 1200) : 1200,
+                )}
+                sizes={
+                  project.detailImage
+                    ? '(max-width: 768px) 100vw, (max-width: 1920px) min(96vw, 1680px), 1800px'
+                    : '(max-width: 768px) 100vw, 1200px'
+                }
+                alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
+                width={project.detailImage ? (project.detailImageWidth ?? 1200) : 1200}
+                height={project.detailImage ? (project.detailImageHeight ?? 800) : 800}
+                fetchPriority="high"
+                decoding="async"
+                className={
+                  project.detailImage
+                    ? 'w-full h-auto max-w-[min(100%,min(96vw,1800px))] object-contain object-top rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]'
+                    : 'w-full h-full object-cover rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]'
+                }
+                referrerPolicy="no-referrer"
+              />
             </motion.div>
 
             {project.youtubeVideoId && (

@@ -5,7 +5,17 @@ export interface Project {
   category: string;
   description: string;
   fullDescription: string;
+  /** Listing / work grid thumbnail */
   image: string;
+  /** Actual width in px of `image` (last srcset width); omit for 1200 */
+  imageWidth?: number;
+  /** Actual height in px of `image` (img dimensions hint); omit for 800 */
+  imageHeight?: number;
+  /** Optional full-width hero on project detail (e.g. full-page screenshot) */
+  detailImage?: string;
+  /** Intrinsic pixel size of `detailImage` (for layout / CLS); optional */
+  detailImageWidth?: number;
+  detailImageHeight?: number;
   tags: string[];
   year: string;
   client: string;
@@ -22,9 +32,10 @@ export interface Project {
   }[];
 }
 
-export function getImageSrcSet(imagePath: string): string {
+export function getImageSrcSet(imagePath: string, intrinsicWidth?: number): string {
   const base = imagePath.replace(/\.(webp|jpg|jpeg|png)$/i, '');
-  return `${base}-640.webp 640w, ${base}-960.webp 960w, ${imagePath} 1200w`;
+  const w = intrinsicWidth ?? 1200;
+  return `${base}-640.webp 640w, ${base}-960.webp 960w, ${imagePath} ${w}w`;
 }
 
 export { CONTACT_EMAIL } from './constants';
@@ -130,13 +141,18 @@ export const PROJECTS: Project[] = [
   {
     id: 6,
     slug: "arboris",
-    title: "Arboria",
+    title: "Arboris",
     category: "Ukázkový web",
     description:
-      "Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie realizací, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboria je ukázková.",
+      "Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie realizací, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboris je ukázková.",
     fullDescription:
-      "Arboria propojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.",
-    image: "/images/projects/arboria.webp",
+      "Arboris propojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.",
+    image: "/images/projects/arboria-card.webp",
+    imageWidth: 334,
+    imageHeight: 410,
+    detailImage: "/images/projects/arboria.webp",
+    detailImageWidth: 334,
+    detailImageHeight: 1024,
     tags: [
       "React 19",
       "TypeScript",
