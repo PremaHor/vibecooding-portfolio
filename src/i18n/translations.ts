@@ -468,13 +468,12 @@ export const translations = {
             'Cílem byl **marketingový one-page** pro prémiové dřevostavby: **hero**, sekce **hodnot**, **galerie realizací** s lightboxem, **proces spolupráce** a **kontaktní CTA**. Texty jsou v češtině. **Značka Arboris a kontaktní údaje jsou fiktivní**; jde o transparentní ukázku konceptu, ne o živý obchodní web. Náhled na portfoliu odpovídá **živé verzi** na Vercelu.',
           solutionTitle: 'Řešení',
           solution:
-            'Implementace běží na **Reactu 19**, **TypeScriptu** a **Vite 8**. Stylování přes **CSS moduly** na **design tokeny** (barvy, mezery, typografie). Animace řeší **Motion** s respektem k **sníženému pohybu** v systémových preferencích. Pro české texty je v kódu utilita v duchu **czechNbsp** na nedělitelné mezery u krátkých předložek. Repozitář obsahuje paralelně **statický index.html** a **buildovanou SPA** ve složce `web/`; **vercel.json** cílí build z `web/`. Kvalitu kódu hlídá **ESLint**.',
+            'Implementace běží na **Reactu 19**, **TypeScriptu** a **Vite 8**. Stylování přes **CSS moduly** na **design tokeny** (barvy, mezery, typografie). Animace řeší **Motion** s respektem k **sníženému pohybu** v systémových preferencích. Pro české texty je v kódu utilita v duchu **czechNbsp** na nedělitelné mezery u krátkých předložek.',
           benefitsTitle: 'Výsledek',
           benefits: [
             '**responzivní grid**: hero, karty i galerie drží hierarchii od mobilu po desktop',
             '**přístupnost**: viditelný focus, sémantika, ARIA u lightboxu, klávesová navigace v galerii',
             '**jednotný design systém** v CSS custom properties',
-            '**dvě varianty nasazení**: rychlý statický náhled i produkční SPA z jednoho zdroje',
             '**ukázkový obsah a kontakty** na živém webu; značka Arboris je v portfoliu označena jako koncept',
           ],
         },
@@ -947,13 +946,12 @@ export const translations = {
             'The aim was a **marketing one-page** for premium timber homes: a **hero**, **values**, a **project gallery** with lightbox, a **collaboration process**, and a **contact CTA**. Copy is in Czech. **The Arboris brand and contact details are fictional**; this is a transparent concept piece, not a live commercial site. The portfolio preview matches the **live build** on Vercel.',
           solutionTitle: 'Solution',
           solution:
-            'Built with **React 19**, **TypeScript**, and **Vite 8**. Styling uses **CSS Modules** on **design tokens** (color, spacing, typography). **Motion** handles animation with respect for **prefers-reduced-motion**. Czech copy uses a **czechNbsp**-style utility for non-breaking spaces after short prepositions. The repo ships both a **static index.html** and a **built SPA** under `web/`; **vercel.json** targets the `web/` build. **ESLint** enforces code quality.',
+            'Built with **React 19**, **TypeScript**, and **Vite 8**. Styling uses **CSS Modules** on **design tokens** (color, spacing, typography). **Motion** handles animation with respect for **prefers-reduced-motion**. Czech copy uses a **czechNbsp**-style utility for non-breaking spaces after short prepositions.',
           benefitsTitle: 'Outcome',
           benefits: [
             '**responsive grid**: hero, cards, and gallery keep hierarchy from phone to desktop',
             '**accessibility**: visible focus, semantics, ARIA on the lightbox, keyboard control in the gallery',
             '**one design system** in CSS custom properties',
-            '**two deployment paths**: quick static preview and production SPA from the same source',
             '**sample copy and contacts** on the live site; Arboris is labelled as a concept in the portfolio',
           ],
         },
