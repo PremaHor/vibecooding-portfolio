@@ -344,6 +344,7 @@ export const translations = {
       },
       'kviz-pwa': {
         category: 'PWA',
+        videoEmbedTitle: 'Kvíz PWA: průchod aplikací (YouTube)',
         subtitle:
           'Česká PWA pro generování kvízů z konfigurace (cíl, téma, délka, přístupnost). Otázky připravuje LLM na serveru; klient je lehký průvodce a přehrávač.',
         subtitleLine2: '',
@@ -794,6 +795,7 @@ export const translations = {
       },
       'kviz-pwa': {
         category: 'PWA',
+        videoEmbedTitle: 'Quiz PWA: app walkthrough (YouTube)',
         subtitle:
           'A Czech PWA that generates quizzes from configuration (audience, topic, length, accessibility). Questions are produced by an LLM on the server; the client is a lightweight wizard and player.',
         subtitleLine2: '',

@@ -90,6 +90,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     client: "Vlastní projekt",
     role: "Fullstack (UI + API)",
+    youtubeVideoId: "v_upqf3a-zA",
   },
   {
     id: 4,
