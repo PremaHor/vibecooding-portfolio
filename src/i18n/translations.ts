@@ -271,6 +271,7 @@ export const translations = {
         risklightPwa: 'Aplikace (PWA) — risklight.app',
         dduOriginalWeb: 'Původní web — dduolomouc.cz',
         dduRedesignPreview: 'Návrh redesignu — ddu-olomouc-web.vercel.app',
+        arborisDemo: 'Ukázkový web — bez-nazvu.vercel.app',
       },
       prototype: 'Prototyp',
       videoUserFlow: 'User flow: průlet aplikací',
@@ -453,12 +454,12 @@ export const translations = {
       arboris: {
         category: 'Ukázkový web',
         subtitle:
-          'Marketingový one-page pro prémiové dřevostavby: hero, hodnoty, galerie s lightboxem, proces a kontakt; ukázková značka Arboris a obsah v češtině.',
+          'Marketingový one-page pro prémiové dřevostavby: hero, hodnoty, galerie s lightboxem, proces a kontakt; ukázková značka Arboria a obsah v češtině.',
         subtitleLine2: '',
         description:
-          'Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie s lightboxem, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboris je ukázková.',
+          'Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie s lightboxem, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboria je ukázková.',
         fullDescription:
-          'Arboris spojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.',
+          'Arboria propojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.',
         quote:
           'Sladit prémiový vizuál, chování galerie a českou typografii v kódu tak, aby stránka působila jako reálný byznys, přestože jde o ukázkový obsah, byl hlavní cíl.',
         techNote:
@@ -466,7 +467,7 @@ export const translations = {
         structured: {
           goalTitle: 'Kontext a záměr',
           goal:
-            'Cílem byl **marketingový one-page** pro prémiové dřevostavby: **hero**, sekce **hodnot**, **galerie realizací** s lightboxem, **proces spolupráce** a **kontaktní CTA**. Texty jsou v češtině. **Značka Arboris a kontaktní údaje jsou fiktivní**; jde o transparentní ukázku konceptu, ne o živý obchodní web. Vizuály jsou z **Unsplash** jako ukázkový obsah.',
+            'Cílem byl **marketingový one-page** pro prémiové dřevostavby: **hero**, sekce **hodnot**, **galerie realizací** s lightboxem, **proces spolupráce** a **kontaktní CTA**. Texty jsou v češtině. **Značka Arboria a kontaktní údaje jsou fiktivní**; jde o transparentní ukázku konceptu, ne o živý obchodní web. Náhled na portfoliu odpovídá **živé verzi** na Vercelu.',
           solutionTitle: 'Řešení',
           solution:
             'Implementace běží na **Reactu 19**, **TypeScriptu** a **Vite 8**. Stylování přes **CSS moduly** na **design tokeny** (barvy, mezery, typografie). Animace řeší **Motion** s respektem k **sníženému pohybu** v systémových preferencích. Pro české texty je v kódu utilita v duchu **czechNbsp** na nedělitelné mezery u krátkých předložek. Repozitář obsahuje paralelně **statický index.html** a **buildovanou SPA** ve složce `web/`; **vercel.json** cílí build z `web/`. Kvalitu kódu hlídá **ESLint**.',
@@ -476,7 +477,7 @@ export const translations = {
             '**přístupnost**: viditelný focus, sémantika, ARIA u lightboxu, klávesová navigace v galerii',
             '**jednotný design systém** v CSS custom properties',
             '**dvě varianty nasazení**: rychlý statický náhled i produkční SPA z jednoho zdroje',
-            '**ukázkový obsah** z Unsplash; značka Arboris je v portfoliu označena jako koncept',
+            '**ukázkový obsah a kontakty** na živém webu; značka Arboria je v portfoliu označena jako koncept',
           ],
         },
       },
@@ -752,6 +753,7 @@ export const translations = {
         risklightPwa: 'App (PWA) — risklight.app',
         dduOriginalWeb: 'Original website — dduolomouc.cz',
         dduRedesignPreview: 'Redesign proposal — ddu-olomouc-web.vercel.app',
+        arborisDemo: 'Demo site — bez-nazvu.vercel.app',
       },
       prototype: 'Prototype',
       videoUserFlow: 'User flow walkthrough',
@@ -933,12 +935,12 @@ export const translations = {
       arboris: {
         category: 'Sample one-page',
         subtitle:
-          'A marketing one-page for premium timber homes: hero, values, gallery with lightbox, process, and contact; sample Arboris brand with Czech copy.',
+          'A marketing one-page for premium timber homes: hero, values, gallery with lightbox, process, and contact; sample Arboria brand with Czech copy.',
         subtitleLine2: '',
         description:
-          'A single-page concept for premium timber construction: hero, values, gallery with lightbox, collaboration process, and contact CTA. Czech UI, responsive layout focused on readability and accessibility; Arboris is a sample brand.',
+          'A single-page concept for premium timber construction: hero, values, gallery with lightbox, collaboration process, and contact CTA. Czech UI, responsive layout focused on readability and accessibility; Arboria is a sample brand.',
         fullDescription:
-          'Arboris combines a premium visual intro, values, project gallery, collaboration story, and a contact call-to-action on one scrolling page.',
+          'Arboria connects a premium visual intro, values, project gallery, collaboration story, and a contact call-to-action on one scrolling page.',
         quote:
           'Balancing a premium visual, gallery behavior, and Czech typography in code so the page feels like a real business, even with sample content, was the main goal.',
         techNote:
@@ -946,7 +948,7 @@ export const translations = {
         structured: {
           goalTitle: 'Context and intent',
           goal:
-            'The aim was a **marketing one-page** for premium timber homes: a **hero**, **values**, a **project gallery** with lightbox, a **collaboration process**, and a **contact CTA**. Copy is in Czech. **The Arboris brand and contact details are fictional**; this is a transparent concept piece, not a live commercial site. Visuals are **Unsplash** placeholders.',
+            'The aim was a **marketing one-page** for premium timber homes: a **hero**, **values**, a **project gallery** with lightbox, a **collaboration process**, and a **contact CTA**. Copy is in Czech. **The Arboria brand and contact details are fictional**; this is a transparent concept piece, not a live commercial site. The portfolio preview matches the **live build** on Vercel.',
           solutionTitle: 'Solution',
           solution:
             'Built with **React 19**, **TypeScript**, and **Vite 8**. Styling uses **CSS Modules** on **design tokens** (color, spacing, typography). **Motion** handles animation with respect for **prefers-reduced-motion**. Czech copy uses a **czechNbsp**-style utility for non-breaking spaces after short prepositions. The repo ships both a **static index.html** and a **built SPA** under `web/`; **vercel.json** targets the `web/` build. **ESLint** enforces code quality.',
@@ -956,7 +958,7 @@ export const translations = {
             '**accessibility**: visible focus, semantics, ARIA on the lightbox, keyboard control in the gallery',
             '**one design system** in CSS custom properties',
             '**two deployment paths**: quick static preview and production SPA from the same source',
-            '**sample content** from Unsplash; Arboris is labelled as a concept in the portfolio',
+            '**sample copy and contacts** on the live site; Arboria is labelled as a concept in the portfolio',
           ],
         },
       },

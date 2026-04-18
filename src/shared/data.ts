@@ -17,7 +17,7 @@ export interface Project {
   notionCaseStudyUrl?: string;
   /** Keys map to `t.project.websiteLinkLabels` */
   websiteUrls?: {
-    labelKey: 'risklightLanding' | 'risklightPwa' | 'dduOriginalWeb' | 'dduRedesignPreview';
+    labelKey: 'risklightLanding' | 'risklightPwa' | 'dduOriginalWeb' | 'dduRedesignPreview' | 'arborisDemo';
     url: string;
   }[];
 }
@@ -130,12 +130,12 @@ export const PROJECTS: Project[] = [
   {
     id: 6,
     slug: "arboris",
-    title: "Arboris",
+    title: "Arboria",
     category: "Ukázkový web",
     description:
-      "Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie s lightboxem, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboris je ukázková.",
+      "Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie realizací, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboria je ukázková.",
     fullDescription:
-      "Arboris spojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.",
+      "Arboria propojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.",
     image: "/images/projects/arboris.webp",
     tags: [
       "React 19",
@@ -149,5 +149,6 @@ export const PROJECTS: Project[] = [
     year: "2026",
     client: "Vlastní koncept",
     role: "UI, frontend, CZ copy",
+    websiteUrls: [{ labelKey: "arborisDemo", url: "https://bez-nazvu.vercel.app/" }],
   },
 ];
