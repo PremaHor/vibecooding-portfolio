@@ -147,12 +147,12 @@ export const PROJECTS: Project[] = [
       "Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie realizací, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboris je ukázková.",
     fullDescription:
       "Arboris propojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.",
-    image: "/images/projects/arboria-card.webp",
-    imageWidth: 334,
-    imageHeight: 410,
-    detailImage: "/images/projects/arboria.webp",
-    detailImageWidth: 334,
-    detailImageHeight: 1024,
+    image: "/images/projects/arboris-card.webp",
+    imageWidth: 1440,
+    imageHeight: 1766,
+    detailImage: "/images/projects/arboris.webp",
+    detailImageWidth: 1440,
+    detailImageHeight: 4414,
     tags: [
       "React 19",
       "TypeScript",
