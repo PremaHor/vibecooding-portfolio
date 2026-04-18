@@ -136,7 +136,7 @@ export const PROJECTS: Project[] = [
       "Koncept jednostránkového webu pro prémiové dřevostavby: hero, hodnoty, galerie realizací, proces a kontaktní CTA. České rozhraní, responzivní layout s důrazem na čitelnost a přístupnost; značka Arboria je ukázková.",
     fullDescription:
       "Arboria propojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.",
-    image: "/images/projects/arboris.webp",
+    image: "/images/projects/arboria.webp",
     tags: [
       "React 19",
       "TypeScript",
