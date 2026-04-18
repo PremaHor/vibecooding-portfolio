@@ -19,6 +19,7 @@ export default async function handler(req, res) {
       'https://premyslhorak.cz/project/adcalc',
       'https://premyslhorak.cz/project/ddu-olomouc',
       'https://premyslhorak.cz/project/void-interface',
+      'https://premyslhorak.cz/project/arboris',
       'https://premyslhorak.cz/ochrana-soukromi',
       'https://premyslhorak.cz/llms.txt',
     ],

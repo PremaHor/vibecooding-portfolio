@@ -126,5 +126,28 @@ export const PROJECTS: Project[] = [
       { src: "/images/projects/DB1.webp", alt: "Decision Balance, DB1" },
       { src: "/images/projects/DB2.webp", alt: "Decision Balance, DB2" },
     ],
-  }
+  },
+  {
+    id: 6,
+    slug: "arboris",
+    title: "Arboris",
+    category: "Ukázkový web",
+    description:
+      "Koncept prémiového one-page webu pro dřevostavby: silný hero, hodnoty, galerie s lightboxem, proces a kontaktní CTA. Plně responzivní české rozhraní s důrazem na čitelnost, rytmus a přístupnost.",
+    fullDescription:
+      "Marketingový one-page jako vizuální a obsahový koncept fiktivní značky Arboris — od hlavního sdělení přes důvěru a proces až k akci.",
+    image: "/images/projects/arboris.webp",
+    tags: [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Motion",
+      "CSS Modules",
+      "A11y",
+      "Vercel",
+    ],
+    year: "2026",
+    client: "Vlastní koncept",
+    role: "UI, frontend, CZ copy",
+  },
 ];

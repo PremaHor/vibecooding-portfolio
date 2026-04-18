@@ -16,6 +16,7 @@ const urlList = [
   `${SITE_URL}/project/adcalc`,
   `${SITE_URL}/project/ddu-olomouc`,
   `${SITE_URL}/project/void-interface`,
+  `${SITE_URL}/project/arboris`,
   `${SITE_URL}/ochrana-soukromi`,
   `${SITE_URL}/llms.txt`,
   `${SITE_URL}/robots.txt`,

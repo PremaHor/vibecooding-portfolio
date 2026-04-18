@@ -450,6 +450,36 @@ export const translations = {
           ],
         },
       },
+      arboris: {
+        category: 'Ukázkový web',
+        subtitle:
+          'Arboris — prémiový landing pro dřevostavby. One-page jako ukázkový web a vizuální koncept značky (fiktivní obsah).',
+        subtitleLine2: '',
+        description:
+          'Koncept jednostránkového webu pro prémiové dřevostavby: výrazný hero, hodnoty značky, galerie realizací s lightboxem, proces spolupráce a kontaktní CTA. Rozhraní je v češtině, layout je plně responzivní — důraz na čitelnost, mezery a přístupnost.',
+        fullDescription:
+          'Marketingový one-page představuje fiktivní značku Arboris a vede návštěvníka od hlavního sdělení přes důvěryhodnost a proces až k akci. Galerie používá lightbox s klávesovou navigací; vizuály jsou z Unsplash jako ukázkový obsah.',
+        quote:
+          'Ukázkový projekt mi dal prostor vyladit rytmus stránky, chování galerie a českou typografii v kódu — bez tlaku reálného klienta, ale s požadavky reálného produktu.',
+        techNote:
+          'Zdůrazňuji **responzivní grid** (hero, karty, galerie) a **mobilní CTA** se safe area, **a11y** (focus, ARIA u lightboxu, **prefers-reduced-motion** u Motion), **konzistentní tokeny** v CSS proměnných a **praktické dvojí nasazení**: statický náhled i SPA build ve složce `web/` pro Vercel.',
+        structured: {
+          goalTitle: 'Zadání a obsah',
+          goal:
+            'Cílem byl **marketingový one-page** pro prémiové dřevostavby: hero s výraznou vizuální stopou, sekce **hodnot**, **galerie realizací** s lightboxem, **proces spolupráce** a závěrečné **CTA**. Obsah je v češtině. **Značka Arboris, texty i kontakty jsou fiktivní** — jde o transparentní ukázku konceptu, ne o živý obchodní web.',
+          solutionTitle: 'Řešení a stack',
+          solution:
+            'Implementace běží na **Reactu 19**, **TypeScriptu** a **Vite 8**. Stylování přes **CSS moduly** na **design tokenech** (barvy, mezery, typografie). Animace obstarává **Motion** s respektováním **sníženého pohybu** v systémových preferencích. Pro české texty je v kódu utilita typu **czechNbsp** (nedělitelné mezery u krátkých předložek). Repozitář obsahuje paralelně **statický index.html** a **buildovanou SPA** ve složce `web/`; **vercel.json** cílí build z `web/`. Kvalitu drží **ESLint**.',
+          benefitsTitle: 'Co z projektu bereš',
+          benefits: [
+            '**responzivní layout** od úzkého mobilu po široký desktop — galerie, karty i hero drží strukturu a hierarchii',
+            '**přístupnost v praxi**: viditelné focus stavy, sémantika, ARIA u lightboxu, klávesová ovládání v galerii',
+            '**jeden design systém** v CSS custom properties — méně ad hoc pixelů, více konzistence',
+            '**dvě varianty nasazení** — rychlý statický export i produkční SPA z jednoho zdroje',
+            '**ukázkový obsah s jasným rámcem** — Unsplash vizuály, fiktivní značka; v portfoliu je to na první pohled čitelné',
+          ],
+        },
+      },
     },
   },
   en: {
@@ -897,6 +927,36 @@ export const translations = {
             '**custom UI components** designed from scratch for a game-like experience',
             '**React Native** for native mobile performance on iOS and Android',
             '**result visualization** clearly showing the best choice',
+          ],
+        },
+      },
+      arboris: {
+        category: 'Sample one-page',
+        subtitle:
+          'Arboris — a premium landing page concept for timber homes. A fictional brand and sample content packaged as a polished one-page site.',
+        subtitleLine2: '',
+        description:
+          'A single-page concept for premium timber construction: a bold hero, brand values, a project gallery with lightbox, a collaboration process, and a contact CTA. Czech UI, fully responsive layout with emphasis on readability, spacing, and accessibility.',
+        fullDescription:
+          'A marketing one-page built as a presentation for the fictional Arboris brand, guiding visitors from the main message through trust and process to action. The gallery uses a lightbox with keyboard navigation; visuals are from Unsplash as sample content.',
+        quote:
+          'This sample project gave room to tune page rhythm, gallery behaviour, and Czech typography in code — real product constraints without a live client brief.',
+        techNote:
+          'I highlight the **responsive grid** (hero, cards, gallery) and **mobile CTA** with safe areas, **accessibility** (focus, ARIA on the lightbox, **prefers-reduced-motion** with Motion), **consistent tokens** in CSS variables, and **two deployment paths**: a static preview and an SPA build in `web/` for Vercel.',
+        structured: {
+          goalTitle: 'Brief and content',
+          goal:
+            'The goal was a **marketing one-page** for premium timber homes: a strong **hero**, **values**, a **project gallery** with lightbox, a **collaboration process**, and a closing **CTA**. Copy is in Czech. **Arboris, body copy, and contacts are fictional** — a transparent concept piece, not a live commercial site.',
+          solutionTitle: 'Implementation and stack',
+          solution:
+            'Built with **React 19**, **TypeScript**, and **Vite 8**. Styling uses **CSS Modules** on **design tokens** (color, spacing, typography). **Motion** handles animation with respect for **prefers-reduced-motion**. Czech copy uses a small **czechNbsp**-style utility for non-breaking spaces after short prepositions. The repo ships both a **static index.html** and a **built SPA** under `web/`; **vercel.json** targets the `web/` build. **ESLint** keeps quality in check.',
+          benefitsTitle: 'What stands out',
+          benefits: [
+            '**responsive layout** from narrow phones to wide desktops — gallery, cards, and hero keep hierarchy intact',
+            '**accessibility in practice**: visible focus, semantics, ARIA on the lightbox, keyboard control in the gallery',
+            '**one design system** in CSS custom properties — fewer one-off pixels, more consistency',
+            '**two deployment options** — quick static output and production SPA from the same source',
+            '**sample content with a clear frame** — Unsplash imagery, fictional brand; obvious in the portfolio context',
           ],
         },
       },
