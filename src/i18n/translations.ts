@@ -462,8 +462,6 @@ export const translations = {
           'Arboris propojuje prémiový vizuální úvod, sekci hodnot, galerii realizací, proces spolupráce a výzvu ke kontaktu na jedné stránce.',
         quote:
           'Sladit prémiový vizuál, chování galerie a českou typografii v kódu tak, aby stránka působila jako reálný byznys, přestože jde o ukázkový obsah, byl hlavní cíl.',
-        techNote:
-          '**Responzivní rozvržení** a **mobilní CTA**, **přístupnost** včetně lightboxu a **animace** s ohledem na **snížený pohyb**. Styly přes **CSS tokeny**; **statika i SPA** ve složce `web/` na **Vercelu**.',
         structured: {
           goalTitle: 'Kontext a záměr',
           goal:
@@ -943,8 +941,6 @@ export const translations = {
           'Arboris connects a premium visual intro, values, project gallery, collaboration story, and a contact call-to-action on one scrolling page.',
         quote:
           'Balancing a premium visual, gallery behavior, and Czech typography in code so the page feels like a real business, even with sample content, was the main goal.',
-        techNote:
-          '**Responsive layout** and **mobile CTA**, **accessibility** including the lightbox, and **motion** that respects **reduced motion**. **CSS tokens** for styling; **static and SPA** builds in `web/` on **Vercel**.',
         structured: {
           goalTitle: 'Context and intent',
           goal:
