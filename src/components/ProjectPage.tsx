@@ -5,7 +5,7 @@ import { ArrowRight, ExternalLink, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
 import { translations } from '../i18n/translations';
-import { PROJECTS, getImageSrcSet } from '../shared/data';
+import { PROJECTS, getImageSrcSet, getProjectImageSrcSet } from '../shared/data';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 
@@ -255,9 +255,12 @@ export const ProjectPage = () => {
             >
               <img
                 src={project.detailImage ?? project.image}
-                srcSet={getImageSrcSet(
+                srcSet={getProjectImageSrcSet(
+                  project,
                   project.detailImage ?? project.image,
-                  project.detailImage ? (project.detailImageWidth ?? 1200) : 1200,
+                  project.detailImage
+                    ? (project.detailImageWidth ?? 1200)
+                    : (project.imageWidth ?? 1200),
                 )}
                 sizes={
                   project.detailImage
@@ -434,7 +437,8 @@ export const ProjectPage = () => {
           <div className="absolute inset-0 z-0">
             <img
               src={nextProject.thumbImage ?? nextProject.image}
-              srcSet={getImageSrcSet(
+              srcSet={getProjectImageSrcSet(
+                nextProject,
                 nextProject.thumbImage ?? nextProject.image,
                 nextProject.thumbImageWidth ?? nextProject.imageWidth,
               )}

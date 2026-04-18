@@ -6,7 +6,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { translations } from '../i18n/translations';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useGoToContactForm } from '../hooks/useGoToContactForm';
-import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, type Project } from '../shared/data';
+import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, getProjectImageSrcSet, type Project } from '../shared/data';
 import {
   Code2, Zap, Globe, ArrowRight, ArrowDown, ArrowLeft, Rocket, ShieldCheck, Brain,
   ClipboardCheck, Palette, Lightbulb, PenTool, Layers, Server, Cpu, Target,
@@ -189,7 +189,7 @@ function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: P
         <div className="relative aspect-[16/10] overflow-hidden bg-gray-50 backface-hidden">
           <img
             src={thumbSrc}
-            srcSet={getImageSrcSet(thumbSrc, thumbW)}
+            srcSet={getProjectImageSrcSet(project, thumbSrc, thumbW)}
             sizes="(max-width: 768px) 100vw, 50vw"
             alt={lang === 'cs' ? `${fixCzechTypography(project.title)}, ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)}, ${fixDashes(category)}, ${project.year}`}
             width={thumbW ?? 1200}

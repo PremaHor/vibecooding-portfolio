@@ -17,6 +17,11 @@ export interface Project {
   thumbImageHeight?: number;
   /** Work grid `img` object-fit; default `cover` */
   thumbObjectFit?: 'cover' | 'contain';
+  /**
+   * When false, listing/detail/next-project images use only `src` (no `-640`/`-960` in srcset).
+   * Use when the main file is replaced often so the browser never picks stale responsive derivatives.
+   */
+  useResponsiveImageVariants?: boolean;
   /** Optional full-width hero on project detail (e.g. full-page screenshot) */
   detailImage?: string;
   /** Intrinsic pixel size of `detailImage` (for layout / CLS); optional */
@@ -42,6 +47,15 @@ export function getImageSrcSet(imagePath: string, intrinsicWidth?: number): stri
   const base = imagePath.replace(/\.(webp|jpg|jpeg|png)$/i, '');
   const w = intrinsicWidth ?? 1200;
   return `${base}-640.webp 640w, ${base}-960.webp 960w, ${imagePath} ${w}w`;
+}
+
+export function getProjectImageSrcSet(
+  project: Pick<Project, 'useResponsiveImageVariants'>,
+  imagePath: string,
+  intrinsicWidth?: number,
+): string | undefined {
+  if (project.useResponsiveImageVariants === false) return undefined;
+  return getImageSrcSet(imagePath, intrinsicWidth);
 }
 
 export { CONTACT_EMAIL } from './constants';
@@ -160,6 +174,7 @@ export const PROJECTS: Project[] = [
     detailImageWidth: 1440,
     detailImageHeight: 4414,
     thumbObjectFit: "contain",
+    useResponsiveImageVariants: false,
     tags: [
       "React 19",
       "TypeScript",
