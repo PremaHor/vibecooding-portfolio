@@ -11,6 +11,12 @@ export interface Project {
   imageWidth?: number;
   /** Actual height in px of `image` (img dimensions hint); omit for 800 */
   imageHeight?: number;
+  /** Work grid only: override image path (e.g. full screenshot with `thumbObjectFit: 'contain'`) */
+  thumbImage?: string;
+  thumbImageWidth?: number;
+  thumbImageHeight?: number;
+  /** Work grid `img` object-fit; default `cover` */
+  thumbObjectFit?: 'cover' | 'contain';
   /** Optional full-width hero on project detail (e.g. full-page screenshot) */
   detailImage?: string;
   /** Intrinsic pixel size of `detailImage` (for layout / CLS); optional */
@@ -153,6 +159,10 @@ export const PROJECTS: Project[] = [
     detailImage: "/images/projects/arboris.webp",
     detailImageWidth: 1440,
     detailImageHeight: 4414,
+    thumbImage: "/images/projects/arboris.webp",
+    thumbImageWidth: 1440,
+    thumbImageHeight: 4414,
+    thumbObjectFit: "contain",
     tags: [
       "React 19",
       "TypeScript",

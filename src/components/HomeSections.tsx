@@ -169,6 +169,10 @@ function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: P
   const t = translations[lang];
   const tr = t.projects[project.slug as keyof typeof t.projects];
   const category = tr?.category ?? project.category;
+  const thumbSrc = project.thumbImage ?? project.image;
+  const thumbW = project.thumbImageWidth ?? project.imageWidth;
+  const thumbH = project.thumbImageHeight ?? project.imageHeight;
+  const thumbFit = project.thumbObjectFit ?? "cover";
 
   return (
     <motion.article
@@ -184,16 +188,18 @@ function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: P
       >
         <div className="relative aspect-[16/10] overflow-hidden bg-gray-50 backface-hidden">
           <img
-            src={project.image}
-            srcSet={getImageSrcSet(project.image, project.imageWidth)}
+            src={thumbSrc}
+            srcSet={getImageSrcSet(thumbSrc, thumbW)}
             sizes="(max-width: 768px) 100vw, 50vw"
             alt={lang === 'cs' ? `${fixCzechTypography(project.title)}, ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)}, ${fixDashes(category)}, ${project.year}`}
-            width={project.imageWidth ?? 1200}
-            height={project.imageHeight ?? 800}
+            width={thumbW ?? 1200}
+            height={thumbH ?? 800}
             loading={index === 0 && !isMobile ? 'eager' : 'lazy'}
             fetchPriority={index === 0 && !isMobile ? 'high' : undefined}
             decoding="async"
-            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.08] backface-hidden"
+            className={`w-full h-full object-top transition-transform duration-700 group-hover:scale-[1.08] backface-hidden ${
+              thumbFit === "contain" ? "object-contain" : "object-cover"
+            }`}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col items-center justify-center ios-backdrop-blur backface-hidden">

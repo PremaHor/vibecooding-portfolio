@@ -433,16 +433,28 @@ export const ProjectPage = () => {
         <Link to={`/project/${nextProject.slug}`} className="group block relative py-24 sm:py-32 md:py-40 px-4 sm:px-6 md:px-8 lg:px-12 bg-white text-black overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
-              src={nextProject.image}
-              srcSet={getImageSrcSet(nextProject.image, nextProject.imageWidth)}
+              src={nextProject.thumbImage ?? nextProject.image}
+              srcSet={getImageSrcSet(
+                nextProject.thumbImage ?? nextProject.image,
+                nextProject.thumbImageWidth ?? nextProject.imageWidth,
+              )}
               sizes="100vw"
               alt=""
-              width={nextProject.imageWidth ?? 1200}
-              height={nextProject.imageHeight ?? 800}
+              width={nextProject.thumbImageWidth ?? nextProject.imageWidth ?? 1200}
+              height={nextProject.thumbImageHeight ?? nextProject.imageHeight ?? 800}
               decoding="async"
-              className="w-full h-full object-cover object-top scale-105 group-hover:scale-100 transition-transform duration-700 ease-out"
+              className={`w-full h-full object-top scale-105 group-hover:scale-100 transition-transform duration-700 ease-out ${
+                nextProject.thumbObjectFit === "contain" ? "object-contain" : "object-cover"
+              }`}
             />
-            <div className="absolute inset-0 bg-white/80 group-hover:bg-white/70 transition-colors duration-500" aria-hidden />
+            <div
+              className={`absolute inset-0 transition-colors duration-500 ${
+                nextProject.thumbObjectFit === "contain"
+                  ? "bg-white/55 group-hover:bg-white/45"
+                  : "bg-white/80 group-hover:bg-white/70"
+              }`}
+              aria-hidden
+            />
           </div>
           <div className="absolute inset-0 z-[1] bg-[var(--color-vibe-orange)] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]" />
           <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
