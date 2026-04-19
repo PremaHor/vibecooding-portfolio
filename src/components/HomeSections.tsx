@@ -369,6 +369,12 @@ const AboutSection = () => {
             <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
               {lang === 'cs' ? fixCzechTypography(t.about.p2) : fixDashes(t.about.p2)}
             </p>
+            <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
+              {lang === 'cs' ? fixCzechTypography(t.about.p3) : fixDashes(t.about.p3)}
+            </p>
+            <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
+              {lang === 'cs' ? fixCzechTypography(t.about.p4) : fixDashes(t.about.p4)}
+            </p>
           </motion.div>
         </div>
 
