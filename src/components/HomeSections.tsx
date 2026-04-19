@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from '../router';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
 import { translations } from '../i18n/translations';
@@ -319,9 +319,25 @@ const WorkSection = () => {
 
 // --- About ---
 
+const ABOUT_PARAGRAPH_IDS = ['p1', 'p2', 'p3', 'p4'] as const;
+
 const AboutSection = () => {
   const { lang } = useLanguage();
   const t = translations[lang];
+  const reduceMotion = useReducedMotion();
+
+  const paragraphMotionProps = (index: number) => {
+    if (reduceMotion) {
+      return {};
+    }
+    return {
+      initial: { opacity: 0, y: 22 } as const,
+      whileInView: { opacity: 1, y: 0 } as const,
+      viewport: { once: true, amount: 0.25, margin: '0px 0px -48px 0px' as const },
+      transition: { duration: 0.55, delay: 0.08 + index * 0.14, ease: [0.22, 1, 0.36, 1] as const },
+    };
+  };
+
   return (
     <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden backface-hidden">
       <div className="absolute inset-0 bg-[var(--color-vibe-black)] backface-hidden" />
@@ -350,32 +366,25 @@ const AboutSection = () => {
               />
             </div>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="lg:col-span-7 space-y-6 sm:space-y-8"
-          >
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase leading-[1.08] text-white">
               {lang === 'cs' ? fixCzechTypography(t.about.title) : fixDashes(t.about.title)}
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl font-bold text-white/95 leading-[1.4]">
               {lang === 'cs' ? fixCzechTypography(t.about.subtitle) : fixDashes(t.about.subtitle)}
             </p>
-            <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
-              {lang === 'cs' ? fixCzechTypography(t.about.p1) : fixDashes(t.about.p1)}
-            </p>
-            <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
-              {lang === 'cs' ? fixCzechTypography(t.about.p2) : fixDashes(t.about.p2)}
-            </p>
-            <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
-              {lang === 'cs' ? fixCzechTypography(t.about.p3) : fixDashes(t.about.p3)}
-            </p>
-            <p className="text-base sm:text-lg text-white/75 leading-[1.75] font-light">
-              {lang === 'cs' ? fixCzechTypography(t.about.p4) : fixDashes(t.about.p4)}
-            </p>
-          </motion.div>
+            {ABOUT_PARAGRAPH_IDS.map((key, i) => (
+              <motion.p
+                key={key}
+                className="text-base sm:text-lg text-white/75 leading-[1.75] font-light"
+                {...paragraphMotionProps(i)}
+              >
+                {lang === 'cs'
+                  ? fixCzechTypography(t.about[key])
+                  : fixDashes(t.about[key])}
+              </motion.p>
+            ))}
+          </div>
         </div>
 
         {/* "Co ode mě čekat" — Bento Grid */}
