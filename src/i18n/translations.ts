@@ -16,10 +16,9 @@ export const translations = {
     },
     hero: {
       available: 'Hledám tým, se kterým budu tvořit budoucnost',
-      h1: 'Stavím produkty. Ne backlogy.',
-      subheadlineLead: 'Hledám tým, kde využiju svůj přesah napříč obory.',
-      subheadlineAccent:
-        'Ne jako nájemný kodér, ale jako parťák, který staví produkty, které dávají smysl.',
+      h1: 'Pomáhám navrhovat digitální produkty tak, aby je lidé opravdu pochopili a chtěli používat.',
+      subheadlineLead: 'Vycházím z praxe s lidmi, ne jen z designu.',
+      subheadlineAccent: '',
       ctaPrimary: 'Pojďme se potkat',
       ctaSecondary: 'Prohlédnout projekty',
       workedWith: 'Spolupracovali se mnou',
@@ -495,10 +494,9 @@ export const translations = {
     },
     hero: {
       available: 'Looking for a team to build the future with',
-      h1: 'I build products. Not backlogs.',
-      subheadlineLead: 'I am looking for a team where I can put my cross-disciplinary edge to work.',
-      subheadlineAccent:
-        'Not as a hired gun, but as a partner who builds products that make sense.',
+      h1: 'I help design digital products so people truly understand them and want to use them.',
+      subheadlineLead: 'I draw on real-world experience with people, not just design.',
+      subheadlineAccent: '',
       ctaPrimary: 'Let\'s meet',
       ctaSecondary: 'View projects',
       workedWith: 'Worked with me',

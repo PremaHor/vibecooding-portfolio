@@ -26,6 +26,7 @@ const Hero = () => {
         : fixDashes(t.hero.subheadlineAccent),
     [lang, t.hero.subheadlineAccent],
   );
+  const showAccent = accentText.trim().length > 0;
 
   return (
     <section className="hero-section relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden backface-hidden">
@@ -33,21 +34,22 @@ const Hero = () => {
       <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08] backface-hidden will-change-transform" />
 
       <div className="hero-content relative z-10 max-w-4xl mx-auto w-full text-center">
-        <h1 className="font-display text-[clamp(2rem,6vw,3.5rem)] sm:text-[clamp(2.5rem,7vw,4.25rem)] md:text-[clamp(3rem,8vw,5rem)] font-bold leading-[1.1] mb-6 sm:mb-8">
-          <span className="block text-sm sm:text-base font-bold tracking-[0.22em] sm:tracking-[0.28em] uppercase text-white/70 mb-3 sm:mb-4 hero-anim">
-            {lang === 'cs' ? fixCzechTypography(t.hero.brandedName) : fixDashes(t.hero.brandedName)}
-          </span>
+        <h1 className="font-display text-[clamp(1.65rem,4.2vw,2.75rem)] sm:text-[clamp(1.85rem,4.5vw,3.25rem)] md:text-[clamp(2rem,4.8vw,3.75rem)] font-bold leading-[1.15] mb-6 sm:mb-8 text-balance">
           <span className="hero-h1-tagline block bg-gradient-to-br from-white via-white to-slate-300 bg-clip-text text-transparent hero-anim hero-anim-d1">
             {lang === 'cs' ? fixCzechTypography(t.hero.h1) : fixDashes(t.hero.h1)}
           </span>
         </h1>
 
-        <p className="text-base sm:text-lg md:text-xl font-normal text-gray-400 mb-4 max-w-2xl mx-auto leading-relaxed text-center hero-anim hero-anim-d2">
+        <p
+          className={`text-base sm:text-lg md:text-xl font-normal text-gray-400 max-w-2xl mx-auto leading-relaxed text-center hero-anim hero-anim-d2 text-balance ${showAccent ? 'mb-4' : 'mb-10 sm:mb-12'}`}
+        >
           {lang === 'cs' ? fixCzechTypography(t.hero.subheadlineLead) : fixDashes(t.hero.subheadlineLead)}
         </p>
-        <p className="max-w-2xl mx-auto text-center text-[var(--color-vibe-orange)] font-semibold tracking-wider uppercase text-xs sm:text-sm md:text-base leading-relaxed text-balance mb-10 sm:mb-12 hero-anim hero-anim-d2">
-          <HeroAccentTypewriter text={accentText} />
-        </p>
+        {showAccent && (
+          <p className="max-w-2xl mx-auto text-center text-[var(--color-vibe-orange)] font-semibold tracking-wider uppercase text-xs sm:text-sm md:text-base leading-relaxed text-balance mb-10 sm:mb-12 hero-anim hero-anim-d2">
+            <HeroAccentTypewriter text={accentText} />
+          </p>
+        )}
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5 hero-anim hero-anim-d2">
           <button
