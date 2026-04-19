@@ -52,8 +52,8 @@ const Hero = () => {
         >
           <HeroAccentTypewriter
             text={leadTypewriterText}
-            startDelayMs={720}
-            charIntervalMs={28}
+            startDelayMs={900}
+            charIntervalMs={48}
             caretClassName="bg-gray-400"
           />
         </p>
