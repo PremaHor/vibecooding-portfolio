@@ -18,12 +18,15 @@ type HeroAccentTypewriterProps = {
   startDelayMs?: number;
   /** Mezera mezi znaky. */
   charIntervalMs?: number;
+  /** Tailwind / vlastní třídy pro kurzor (výchozí oranžová akcent). */
+  caretClassName?: string;
 };
 
 export function HeroAccentTypewriter({
   text,
   startDelayMs = 640,
   charIntervalMs = 44,
+  caretClassName = 'bg-[var(--color-vibe-orange)]',
 }: HeroAccentTypewriterProps) {
   const reducedMotion = usePrefersReducedMotion();
   const [shown, setShown] = useState(() => (reducedMotion ? text.length : 0));
@@ -64,7 +67,7 @@ export function HeroAccentTypewriter({
         {visible}
         {!done && (
           <span
-            className="hero-typewriter-caret ml-0.5 inline-block h-[0.85em] w-[2px] translate-y-px align-middle bg-[var(--color-vibe-orange)]"
+            className={`hero-typewriter-caret ml-0.5 inline-block h-[0.85em] w-[2px] translate-y-px align-middle ${caretClassName}`}
             aria-hidden
           />
         )}

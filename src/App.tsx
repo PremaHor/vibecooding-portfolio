@@ -19,6 +19,13 @@ const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => 
 const Hero = () => {
   const { t, lang } = useLanguage();
   const goToContactForm = useGoToContactForm();
+  const leadTypewriterText = useMemo(
+    () =>
+      lang === 'cs'
+        ? fixCzechTypography(t.hero.subheadlineLead)
+        : fixDashes(t.hero.subheadlineLead),
+    [lang, t.hero.subheadlineLead],
+  );
   const accentText = useMemo(
     () =>
       lang === 'cs'
@@ -41,9 +48,14 @@ const Hero = () => {
         </h1>
 
         <p
-          className={`text-base sm:text-lg md:text-xl font-normal text-gray-400 max-w-2xl mx-auto leading-relaxed text-center hero-anim hero-anim-d2 text-balance ${showAccent ? 'mb-4' : 'mb-10 sm:mb-12'}`}
+          className={`text-base sm:text-lg md:text-xl font-normal text-gray-400 max-w-2xl mx-auto leading-relaxed text-center hero-anim hero-anim-d2 text-balance min-h-[4.5rem] sm:min-h-[5rem] ${showAccent ? 'mb-4' : 'mb-10 sm:mb-12'}`}
         >
-          {lang === 'cs' ? fixCzechTypography(t.hero.subheadlineLead) : fixDashes(t.hero.subheadlineLead)}
+          <HeroAccentTypewriter
+            text={leadTypewriterText}
+            startDelayMs={720}
+            charIntervalMs={28}
+            caretClassName="bg-gray-400"
+          />
         </p>
         {showAccent && (
           <p className="max-w-2xl mx-auto text-center text-[var(--color-vibe-orange)] font-semibold tracking-wider uppercase text-xs sm:text-sm md:text-base leading-relaxed text-balance mb-10 sm:mb-12 hero-anim hero-anim-d2">

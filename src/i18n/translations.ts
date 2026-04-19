@@ -17,7 +17,8 @@ export const translations = {
     hero: {
       available: 'Hledám tým, se kterým budu tvořit budoucnost',
       h1: 'Pomáhám navrhovat digitální produkty tak, aby je lidé opravdu pochopili a chtěli používat.',
-      subheadlineLead: 'Vycházím z praxe s lidmi, ne jen z designu.',
+      subheadlineLead:
+        'Hledám tým, kde můžu růst v UX a podílet se na smysluplných produktech.',
       subheadlineAccent: '',
       ctaPrimary: 'Pojďme se potkat',
       ctaSecondary: 'Prohlédnout projekty',
@@ -495,7 +496,8 @@ export const translations = {
     hero: {
       available: 'Looking for a team to build the future with',
       h1: 'I help design digital products so people truly understand them and want to use them.',
-      subheadlineLead: 'I draw on real-world experience with people, not just design.',
+      subheadlineLead:
+        "I'm looking for a team where I can grow in UX and help build meaningful products.",
       subheadlineAccent: '',
       ctaPrimary: 'Let\'s meet',
       ctaSecondary: 'View projects',
