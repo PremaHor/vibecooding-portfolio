@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
 import { translations } from '../i18n/translations';
+import { projectLocaleField } from '../i18n/projectLocale';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useGoToContactForm } from '../hooks/useGoToContactForm';
 import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, getProjectImageSrcSet, type Project } from '../shared/data';
@@ -168,6 +169,7 @@ function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: P
   const { lang } = useLanguage();
   const t = translations[lang];
   const tr = t.projects[project.slug as keyof typeof t.projects];
+  const displayTitle = projectLocaleField(lang, tr, 'title', project);
   const category = tr?.category ?? project.category;
   const thumbSrc = project.thumbImage ?? project.image;
   const thumbW = project.thumbImageWidth ?? project.imageWidth;
@@ -191,7 +193,7 @@ function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: P
             src={thumbSrc}
             srcSet={getProjectImageSrcSet(project, thumbSrc, thumbW)}
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt={lang === 'cs' ? `${fixCzechTypography(project.title)}, ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(project.title)}, ${fixDashes(category)}, ${project.year}`}
+            alt={lang === 'cs' ? `${fixCzechTypography(displayTitle)}, ${fixCzechTypography(category)}, ${project.year}` : `${fixDashes(displayTitle)}, ${fixDashes(category)}, ${project.year}`}
             width={thumbW ?? 1200}
             height={thumbH ?? 800}
             loading={index === 0 && !isMobile ? 'eager' : 'lazy'}
@@ -226,7 +228,7 @@ function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: P
           </div>
           <h3 className="flex items-center justify-between gap-3 text-2xl sm:text-3xl md:text-4xl font-display uppercase leading-[1.05]">
             <span className="group-hover:translate-x-1 transition-transform duration-300">
-              {lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
+              {lang === 'cs' ? fixCzechTypography(displayTitle) : fixDashes(displayTitle)}
             </span>
             <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 text-black/30 group-hover:text-[var(--color-vibe-orange)] transition-colors duration-300" />
           </h3>

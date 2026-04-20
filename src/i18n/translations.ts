@@ -774,6 +774,8 @@ export const translations = {
     projects: {
       risklight: {
         category: 'PWA',
+        client: 'Personal project',
+        role: 'End-to-end (UX, UI, dev, product)',
         description: 'Modular mobile-first app for risk tracking, client management and real-time team collaboration.',
         fullDescription: 'RiskLight combines life safety with clear record keeping.',
         notionCaseStudyLabel: 'Case study (Notion)',
@@ -828,6 +830,9 @@ export const translations = {
       },
       'kviz-pwa': {
         category: 'PWA',
+        title: 'Quiz PWA',
+        client: 'Personal project',
+        role: 'Fullstack (UI + API)',
         videoEmbedTitle: 'Quiz PWA: app walkthrough (YouTube)',
         subtitle:
           'A Czech PWA that generates quizzes from configuration (audience, topic, length, accessibility). Questions are produced by an LLM on the server; the client is a lightweight wizard and player.',
@@ -859,6 +864,8 @@ export const translations = {
       },
       adcalc: {
         category: 'Internal tool',
+        client: 'REKLY',
+        role: 'Product logic, UI/UX, frontend, Firebase, PDF',
         videoEmbedTitle: 'AdCalc: app walkthrough (YouTube)',
         subtitle:
           'From line-item estimates and saved jobs to a client-ready PDF: one app, one source of truth for the whole team.',
@@ -890,6 +897,8 @@ export const translations = {
       },
       'ddu-olomouc': {
         category: 'Web redesign',
+        client: 'DDÚ Olomouc',
+        role: 'Developer & designer',
         subtitle: 'Redesign and restructuring of a web portal with focus on accessibility and information architecture.',
         subtitleLine2: '',
         description: 'Complete website redesign for the Children\'s Diagnostic Institute in Olomouc. Replacing an outdated table layout with modern, semantic and accessible code.',
@@ -913,6 +922,8 @@ export const translations = {
       },
       'decision-balance': {
         category: 'Concept',
+        client: 'Personal concept',
+        role: 'Creative UX/UI & developer',
         subtitle: 'A mobile app concept for objective decision-making with a visual style inspired by RPG interfaces.',
         subtitleLine2: '',
         description: 'Mobile app for structured decision-making with a unique Fantasy/RPG design. Mathematical criteria-weighting model in a game-like package.',
@@ -935,6 +946,8 @@ export const translations = {
       },
       arboris: {
         category: 'Sample one-page',
+        client: 'Personal concept',
+        role: 'UI, frontend, Czech copy',
         subtitle:
           'A marketing one-page for premium timber homes: hero, values, gallery with lightbox, process, and contact; sample Arboris brand with Czech copy.',
         subtitleLine2: '',

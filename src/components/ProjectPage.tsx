@@ -5,6 +5,7 @@ import { ArrowRight, ExternalLink, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
 import { translations } from '../i18n/translations';
+import { projectLocaleField } from '../i18n/projectLocale';
 import { PROJECTS, getImageSrcSet, getProjectImageSrcSet } from '../shared/data';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
@@ -159,6 +160,11 @@ export const ProjectPage = () => {
   const project = PROJECTS[projectIndex];
   const nextProject = PROJECTS[(projectIndex + 1) % PROJECTS.length];
   const tr = project ? t.projects[project.slug as keyof typeof t.projects] : null;
+  const displayTitle = project ? projectLocaleField(lang, tr, 'title', project) : '';
+  const displayClient = project ? projectLocaleField(lang, tr, 'client', project) : '';
+  const displayRole = project ? projectLocaleField(lang, tr, 'role', project) : '';
+  const nextTr = t.projects[nextProject.slug as keyof typeof t.projects];
+  const nextDisplayTitle = projectLocaleField(lang, nextTr, 'title', nextProject);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
@@ -176,7 +182,7 @@ export const ProjectPage = () => {
     const absImage = `${origin}${previewPath}`;
     const absUrl = `${origin}/project/${project.slug}`;
     const brandTitle = lang === 'cs' ? 'Přemysl Horák' : 'Premysl Horak';
-    const pageTitle = `${project.title} | ${brandTitle}`;
+    const pageTitle = `${displayTitle} | ${brandTitle}`;
 
     const patches: { attr: 'property' | 'name'; key: string; value: string }[] = [
       { attr: 'property', key: 'og:url', value: absUrl },
@@ -208,7 +214,7 @@ export const ProjectPage = () => {
         else el.setAttribute('content', prev);
       }
     };
-  }, [project, lang]);
+  }, [project, lang, displayTitle]);
 
   useEffect(() => {
     if (lightboxIndex !== null) {
@@ -233,7 +239,7 @@ export const ProjectPage = () => {
               </motion.span>
             </div>
             <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }} className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.08] mb-4 sm:mb-6">
-              {lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
+              {lang === 'cs' ? fixCzechTypography(displayTitle) : fixDashes(displayTitle)}
             </motion.h1>
             {tr && 'subtitle' in tr && tr.subtitle ? (
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }} className="text-base sm:text-lg text-white/50 font-light max-w-2xl mb-12 sm:mb-20">
@@ -267,7 +273,7 @@ export const ProjectPage = () => {
                     ? '(max-width: 768px) 100vw, (max-width: 1920px) min(96vw, 1680px), 1800px'
                     : '(max-width: 768px) 100vw, 1200px'
                 }
-                alt={lang === 'cs' ? fixCzechTypography(project.title) : fixDashes(project.title)}
+                alt={lang === 'cs' ? fixCzechTypography(displayTitle) : fixDashes(displayTitle)}
                 width={project.detailImage ? (project.detailImageWidth ?? 1200) : 1200}
                 height={project.detailImage ? (project.detailImageHeight ?? 800) : 800}
                 fetchPriority="high"
@@ -364,11 +370,11 @@ export const ProjectPage = () => {
               <div className="grid grid-cols-2 gap-10 sm:gap-14 md:gap-20 border-t border-white/5 pt-14 sm:pt-20">
                 <div>
                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(t.project.client) : fixDashes(t.project.client)}</h4>
-                  <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{lang === 'cs' ? fixCzechTypography(project.client) : fixDashes(project.client)}</p>
+                  <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{lang === 'cs' ? fixCzechTypography(displayClient) : fixDashes(displayClient)}</p>
                 </div>
                 <div>
                   <h4 className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] sm:tracking-[0.5em] font-bold text-white/50 mb-3 sm:mb-4">{lang === 'cs' ? fixCzechTypography(t.project.role) : fixDashes(t.project.role)}</h4>
-                  <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{lang === 'cs' ? fixCzechTypography(project.role) : fixDashes(project.role)}</p>
+                  <p className="text-lg sm:text-xl md:text-2xl font-display uppercase">{lang === 'cs' ? fixCzechTypography(displayRole) : fixDashes(displayRole)}</p>
                 </div>
               </div>
             </div>
@@ -464,7 +470,7 @@ export const ProjectPage = () => {
           <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
             <span className="text-[10px] font-bold uppercase tracking-[0.35em] mb-6 text-black/60 group-hover:text-white transition-all">{lang === 'cs' ? fixCzechTypography(t.project.nextProject) : fixDashes(t.project.nextProject)}</span>
             <h2 className="font-display text-[clamp(1.75rem,8vw,3rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase leading-[1.05] mb-10 sm:mb-14 group-hover:text-white transition-colors">
-              {lang === 'cs' ? fixCzechTypography(nextProject.title) : fixDashes(nextProject.title)}
+              {lang === 'cs' ? fixCzechTypography(nextDisplayTitle) : fixDashes(nextDisplayTitle)}
             </h2>
             <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border border-black/10 flex items-center justify-center group-hover:border-white/20 group-hover:scale-110 transition-all duration-500">
               <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 group-hover:text-white transition-colors" />
