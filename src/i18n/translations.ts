@@ -166,7 +166,7 @@ export const translations = {
     faq: {
       title: 'Časté otázky',
       subtitle: 'Narovinu, bez marketingových řečí.',
-      q1: 'Používáte AI? Nebude to plné chyb?',
+      q1: 'Používáš AI? Nebude to plné chyb?',
       a1: 'AI za mě kód nepíše naslepo. Používám ji jako extrémně výkonného asistenta (např. Cursor) k odbavení rutiny, psaní boilerplate kódu a hledání chyb. Architekturu, složitou logiku a finální kontrolu dělám vždy já. Výsledek? Rychlejší dodání a čistší kód, protože mi zbývá víc času na to podstatné – přemýšlet nad architekturou a produktem.',
       q2: 'Hledáte jen dlouhodobou spolupráci, nebo i jednorázové projekty?',
       a2: 'Mým hlavním cílem je najít tým nebo startup, se kterým si sednu lidsky a zakotvím u něj jako stabilní parťák. Pokud ale stavíte smysluplné MVP a potřebujete ho rychle dostat na trh, rád do toho půjdu i projektově. Podmínkou ale je, abychom o tom mohli přemýšlet produktově, nechci fungovat jen jako továrna na kód podle přesného diktátu.',
