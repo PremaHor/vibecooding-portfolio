@@ -86,11 +86,11 @@ export const criticalTranslations = {
       pageTitle: 'Premysl Horak | Digital products people understand',
       twitterTitle: 'Premysl Horak | Digital products people understand',
       metaDescription:
-        'Premysl Horak (Přemysl Horák) — developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák): developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       ogDescription:
-        'Premysl Horak (Přemysl Horák) — developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák): developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       jsonLdDescription:
-        'Premysl Horak (Přemysl Horák) — developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák): developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
       ogLocale: 'en_US',
       ogLocaleAlternate: 'cs_CZ',
     },
