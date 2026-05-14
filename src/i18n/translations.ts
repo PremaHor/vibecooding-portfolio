@@ -19,6 +19,12 @@ export const translations = {
       h1: 'Rychle stavím funkční prototypy digitálních produktů pomocí AI nástrojů',
       subheadlineLead:
         'Pomůžu vám proměnit nápad v jednoduchou aplikaci, kterou si můžete reálně vyzkoušet, ukázat zákazníkům nebo týmu a ověřit, jestli má smysl ji dál rozvíjet.',
+      subheadlineStatement: [
+        [{ text: 'Pomůžu vám proměnit nápad v ' }, { text: 'jednoduchou aplikaci', emphasis: true }, { text: ',' }],
+        [{ text: 'kterou si můžete ' }, { text: 'reálně vyzkoušet', emphasis: true }, { text: ',' }],
+        [{ text: 'ukázat zákazníkům nebo týmu' }],
+        [{ text: 'a ' }, { text: 'ověřit', emphasis: true }, { text: ', jestli má smysl ji dál rozvíjet.' }],
+      ],
       subheadlineAccent: '',
       ctaPrimary: 'Pojďme se potkat',
       ctaSecondary: 'Prohlédnout projekty',
@@ -502,6 +508,12 @@ export const translations = {
       h1: 'I quickly build functional prototypes of digital products using AI tools',
       subheadlineLead:
         'I will help you turn an idea into a simple app you can try for real, show to clients or teammates, and see whether it makes sense to develop it further.',
+      subheadlineStatement: [
+        [{ text: 'I will help you turn an idea into ' }, { text: 'a simple app', emphasis: true }, { text: ',' }],
+        [{ text: 'something you can ' }, { text: 'try for real', emphasis: true }, { text: ',' }],
+        [{ text: 'show to clients or teammates' }],
+        [{ text: 'and ' }, { text: 'validate', emphasis: true }, { text: ' before building further.' }],
+      ],
       subheadlineAccent: '',
       ctaPrimary: 'Let\'s meet',
       ctaSecondary: 'View projects',

@@ -3,7 +3,6 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useGoToContactForm } from '../hooks/useGoToContactForm';
-import { HeroAccentTypewriter } from './HeroAccentTypewriter';
 import { SparkCtaButton } from './SparkCtaButton';
 
 const FRAME_COUNT = 60;
@@ -126,13 +125,19 @@ type HeroShellProps = {
   overlays?: ReactNode;
 };
 
+type HeroStatementPart = {
+  text: string;
+  emphasis?: boolean;
+};
+
+function formatHeroCopy(text: string, lang: 'cs' | 'en') {
+  return lang === 'cs' ? fixCzechTypography(text) : fixDashes(text);
+}
+
 function HeroShell({ scrollHint, canvas, overlays }: HeroShellProps) {
   const { t, lang } = useLanguage();
   const goToContactForm = useGoToContactForm();
-  const leadText = useMemo(
-    () => (lang === 'cs' ? fixCzechTypography(t.hero.subheadlineLead) : fixDashes(t.hero.subheadlineLead)),
-    [lang, t.hero.subheadlineLead],
-  );
+  const statementLines = t.hero.subheadlineStatement as HeroStatementPart[][];
 
   const hintTranslated =
     scrollHint && (lang === 'cs' ? fixCzechTypography(scrollHint) : fixDashes(scrollHint));
@@ -157,8 +162,31 @@ function HeroShell({ scrollHint, canvas, overlays }: HeroShellProps) {
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl font-normal text-gray-300 max-w-2xl mx-auto leading-relaxed text-center hero-anim hero-anim-d2 text-balance min-h-[4.5rem] sm:min-h-[5rem] mb-10 sm:mb-12">
-            <HeroAccentTypewriter text={leadText} startDelayMs={900} charIntervalMs={48} caretClassName="bg-gray-300" />
+          <p
+            className="hero-statement mx-auto mb-10 sm:mb-12 max-w-[46rem] rounded-[1.75rem] border border-white/10 bg-black/25 px-5 py-5 text-center text-[clamp(1.05rem,2.2vw,1.65rem)] font-medium leading-[1.35] text-white/88 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-md sm:px-7 sm:py-6 md:leading-[1.32]"
+          >
+            <span className="sr-only">{formatHeroCopy(t.hero.subheadlineLead, lang)}</span>
+            {statementLines.map((line, lineIndex) => (
+              <span
+                key={lineIndex}
+                className="hero-statement-line block"
+                style={{ animationDelay: `${780 + lineIndex * 135}ms` }}
+                aria-hidden
+              >
+                {line.map((part, partIndex) => (
+                  <span
+                    key={partIndex}
+                    className={
+                      part.emphasis
+                        ? 'bg-gradient-to-r from-white via-white to-[var(--color-vibe-orange)] bg-clip-text font-semibold text-transparent'
+                        : ''
+                    }
+                  >
+                    {formatHeroCopy(part.text, lang)}
+                  </span>
+                ))}
+              </span>
+            ))}
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5 hero-anim hero-anim-d2">
