@@ -36,7 +36,7 @@ export function HeroScrollSequence() {
     [lang, t.hero.subheadlineLead],
   );
 
-  // --- Draw a single frame onto the canvas (cover-fit) ---
+  // --- Draw a single frame onto the canvas (cover-fit, HiDPI-aware) ---
   const drawFrame = useCallback((index: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -48,12 +48,15 @@ export function HeroScrollSequence() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    // Cover-fit using physical canvas pixels (DPR-scaled)
     const cw = canvas.width;
     const ch = canvas.height;
     const iw = img.naturalWidth;
     const ih = img.naturalHeight;
 
-    // cover-fit: scale to fill canvas, center-crop
     const scale = Math.max(cw / iw, ch / ih);
     const sw = iw * scale;
     const sh = ih * scale;
@@ -64,14 +67,17 @@ export function HeroScrollSequence() {
     ctx.drawImage(img, sx, sy, sw, sh);
   }, []);
 
-  // --- Resize canvas to viewport ---
+  // --- Resize canvas to viewport (DPR-aware for Retina/HiDPI) ---
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
       const f = currentFrameRef.current;
       if (f >= 0) {
         currentFrameRef.current = -1;
