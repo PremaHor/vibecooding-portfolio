@@ -89,8 +89,6 @@ export function SparkCtaButton({
       </svg>
 
       <div className="spark-cta-slot">
-        <div className="spark-cta-big-backdrop" aria-hidden />
-
         <div className={`spark-cta-shell relative inline-flex max-w-full ${fullWidth ? 'w-full justify-center' : ''}`}>
           <div className="spark-cta-spin spark-cta-spin-blur" style={{ filter: `blur(2em) ${f1}` }} aria-hidden />
 

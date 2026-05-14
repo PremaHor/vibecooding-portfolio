@@ -396,15 +396,6 @@ button:focus-visible {
   width: 100%;
 }
 
-.spark-cta-big-backdrop {
-  position: absolute;
-  inset: -9900%;
-  pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, #0000 0, #0000 20%, #111111aa 50%);
-  background-size: 3px 3px;
-  z-index: -1;
-}
-
 .spark-cta-shell {
   position: relative;
 }
