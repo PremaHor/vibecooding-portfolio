@@ -67,17 +67,29 @@ export function HeroScrollSequence() {
     ctx.drawImage(img, sx, sy, sw, sh);
   }, []);
 
-  // --- Resize canvas to viewport (DPR-aware for Retina/HiDPI) ---
+  // --- Resize canvas — contained size, not full viewport ---
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.round(window.innerWidth * dpr);
-      canvas.height = Math.round(window.innerHeight * dpr);
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
+      // Source frames are 720×1280 (9:16 portrait).
+      // Constrain to a window that avoids heavy upscaling:
+      // - max height = 82 % of viewport, max width = 52 % of viewport
+      const SRC_W = 720;
+      const SRC_H = 1280;
+      const maxH = Math.min(window.innerHeight * 0.82, SRC_H);
+      const maxW = Math.min(window.innerWidth * 0.52, SRC_W * (maxH / SRC_H));
+      // Recalculate height from constrained width keeping ratio
+      const finalH = maxW * (SRC_H / SRC_W);
+      const finalW = maxW;
+
+      canvas.width = Math.round(finalW * dpr);
+      canvas.height = Math.round(finalH * dpr);
+      canvas.style.width = `${finalW}px`;
+      canvas.style.height = `${finalH}px`;
+
       const f = currentFrameRef.current;
       if (f >= 0) {
         currentFrameRef.current = -1;
@@ -161,30 +173,28 @@ export function HeroScrollSequence() {
       aria-label={lang === 'cs' ? 'Úvod' : 'Hero'}
     >
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
 
-        {/* Canvas — scroll-driven frames, fades out at edges via mask */}
+        {/* Canvas — contained size, centered, fades at edges */}
         <canvas
           ref={canvasRef}
-          className="absolute inset-0"
+          className="relative z-[0] block flex-shrink-0"
           style={{
-            width: '100%',
-            height: '100%',
             willChange: 'contents',
             WebkitMaskImage:
-              'radial-gradient(ellipse 72% 80% at 50% 52%, black 20%, transparent 78%)',
+              'radial-gradient(ellipse 78% 82% at 50% 50%, black 30%, transparent 85%)',
             maskImage:
-              'radial-gradient(ellipse 72% 80% at 50% 52%, black 20%, transparent 78%)',
+              'radial-gradient(ellipse 78% 82% at 50% 50%, black 30%, transparent 85%)',
           }}
           aria-hidden
         />
 
-        {/* Subtle bottom gradient for text legibility */}
+        {/* Bottom gradient for text legibility */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              'linear-gradient(to top, rgba(5,5,5,0.6) 0%, rgba(5,5,5,0.1) 35%, transparent 65%)',
+              'linear-gradient(to top, rgba(5,5,5,0.7) 0%, rgba(5,5,5,0.1) 30%, transparent 55%)',
           }}
         />
 
