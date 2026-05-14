@@ -348,3 +348,146 @@ button:focus-visible {
     opacity: 0 !important;
   }
 }
+
+/* —— Spark / Uiverse-style CTA (SelfMadeSystem–like), spark-cta-* —— */
+
+.spark-cta {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  vertical-align: middle;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.spark-cta:focus-visible {
+  outline: 2px solid var(--color-vibe-orange);
+  outline-offset: 3px;
+}
+
+.spark-cta--disabled {
+  cursor: not-allowed;
+}
+
+.spark-cta--full {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.spark-cta-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.spark-cta-slot {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.spark-cta--full .spark-cta-slot {
+  width: 100%;
+}
+
+.spark-cta-big-backdrop {
+  position: absolute;
+  inset: -9900%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, #0000 0, #0000 20%, #111111aa 50%);
+  background-size: 3px 3px;
+  z-index: -1;
+}
+
+.spark-cta-shell {
+  position: relative;
+}
+
+.spark-cta-spin {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.5;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.spark-cta:active:not(:disabled) .spark-cta-spin {
+  opacity: 1;
+}
+
+.spark-cta-spin-intense {
+  inset: -0.125rem;
+  border-radius: 0.75rem;
+}
+
+.spark-cta-spin-inside {
+  inset: -2px;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.spark-cta-spin::before {
+  content: '';
+  position: absolute;
+  inset: -150%;
+  animation:
+    spark-cta-speen 8s cubic-bezier(0.56, 0.15, 0.28, 0.86) infinite,
+    spark-cta-woah 4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.spark-cta:hover:not(:disabled) .spark-cta-spin::before {
+  animation-play-state: running;
+}
+
+.spark-cta-spin-blur::before {
+  background: linear-gradient(90deg, #f27d26 28%, transparent 50%, #2563eb 72%);
+}
+
+.spark-cta-spin-intense::before {
+  background: linear-gradient(90deg, #fb923c 20%, transparent 45% 55%, #38bdf8 80%);
+}
+
+.spark-cta-spin-inside::before {
+  background: linear-gradient(90deg, #fcd34d 28%, transparent 45% 55%, #93c5fd 72%);
+}
+
+@keyframes spark-cta-speen {
+  0% {
+    rotate: 10deg;
+  }
+  50% {
+    rotate: 190deg;
+  }
+  100% {
+    rotate: 370deg;
+  }
+}
+
+@keyframes spark-cta-woah {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spark-cta-spin::before {
+    animation: none !important;
+  }
+
+  .spark-cta-spin {
+    opacity: 0.38;
+  }
+}

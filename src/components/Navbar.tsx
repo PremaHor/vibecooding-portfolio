@@ -4,6 +4,7 @@ import { ArrowRight, ArrowLeft, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useGoToContactForm } from '../hooks/useGoToContactForm';
+import { SparkCtaButton } from './SparkCtaButton';
 
 export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isProjectPage?: boolean }) => {
   const { t, lang } = useLanguage();
@@ -90,17 +91,14 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <button
+          <SparkCtaButton
             type="button"
+            size="nav"
             onClick={goToContactForm}
-            className={`nav-cta hidden lg:inline-flex px-6 lg:px-8 py-2.5 lg:py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 shadow-lg cursor-pointer ${
-              theme === 'dark'
-                ? 'bg-white text-black hover:bg-[var(--color-vibe-orange)] hover:text-white'
-                : 'bg-black text-white hover:bg-[var(--color-vibe-orange)]'
-            }`}
+            className="nav-cta hidden lg:inline-flex"
           >
             {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
-          </button>
+          </SparkCtaButton>
 
           <button
             onClick={() => setMobileMenuOpen(v => !v)}
@@ -165,17 +163,19 @@ export const Navbar = ({ theme, isProjectPage }: { theme: 'light' | 'dark'; isPr
           className="absolute bottom-0 left-0 right-0 px-5 pt-4 pb-5 bg-[var(--color-vibe-black)]"
           style={{ paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
         >
-          <button
+          <SparkCtaButton
             type="button"
+            size="compact"
+            fullWidth
             onClick={() => {
               close();
               goToContactForm();
             }}
-            className="flex items-center justify-center gap-2.5 w-full min-h-[54px] rounded-2xl bg-[var(--color-vibe-orange)] text-black text-sm font-bold uppercase tracking-[0.15em] hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer"
+            className="min-h-[54px]"
+            iconAfter={<ArrowRight className="w-4 h-4 shrink-0" aria-hidden />}
           >
             {lang === 'cs' ? fixCzechTypography(t.nav.start) : fixDashes(t.nav.start)}
-            <ArrowRight className="w-4 h-4 shrink-0" />
-          </button>
+          </SparkCtaButton>
         </div>
 
         <nav

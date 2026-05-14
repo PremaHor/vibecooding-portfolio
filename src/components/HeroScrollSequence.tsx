@@ -4,6 +4,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useGoToContactForm } from '../hooks/useGoToContactForm';
 import { HeroAccentTypewriter } from './HeroAccentTypewriter';
+import { SparkCtaButton } from './SparkCtaButton';
 
 const FRAME_COUNT = 60;
 /** Coarse-pointer devices: sticky height; usable scroll span = FALLBACK − 100vh */
@@ -133,14 +134,14 @@ function HeroShell({ scrollHint, canvas, overlays }: HeroShellProps) {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5 hero-anim hero-anim-d2">
-            <button
+            <SparkCtaButton
               type="button"
               onClick={goToContactForm}
-              className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 shadow-lg cursor-pointer"
+              size="hero"
+              iconAfter={<ArrowRight className="w-4 h-4" aria-hidden />}
             >
               {lang === 'cs' ? fixCzechTypography(t.hero.ctaPrimary) : fixDashes(t.hero.ctaPrimary)}
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            </SparkCtaButton>
             <a
               href="#work"
               className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-[background-color,border-color] duration-300"

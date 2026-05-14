@@ -7,6 +7,7 @@ import { translations } from '../i18n/translations';
 import { projectLocaleField } from '../i18n/projectLocale';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useGoToContactForm } from '../hooks/useGoToContactForm';
+import { SparkCtaButton } from './SparkCtaButton';
 import { CONTACT_EMAIL, PROJECTS, getImageSrcSet, getProjectImageSrcSet, type Project } from '../shared/data';
 import {
   Code2, Zap, Globe, ArrowRight, ArrowDown, ArrowLeft, Rocket, ShieldCheck, Brain,
@@ -504,31 +505,48 @@ const ServicesPricingSection = () => {
             );
           })}
         </div>
-        <motion.button
-          type="button"
+        <motion.div
+          role="button"
+          tabIndex={0}
           onClick={goToContactForm}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              goToContactForm();
+            }
+          }}
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0, margin: '0px 0px -60px 0px' }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-[border-color,background-color] duration-300 group w-full text-left cursor-pointer"
+          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 sm:p-8 rounded-2xl border-2 border-[var(--color-vibe-orange)]/40 bg-[var(--color-vibe-orange)]/5 hover:border-[var(--color-vibe-orange)]/60 hover:bg-[var(--color-vibe-orange)]/10 transition-[border-color,background-color] duration-300 group w-full text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-vibe-orange)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-vibe-black)]"
+          aria-labelledby="services-audit-heading"
         >
           <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--color-vibe-orange)]/20 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
             <ClipboardCheck className="w-6 h-6 sm:w-7 sm:h-7" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-display text-lg sm:text-xl uppercase text-white mb-1">
+            <h3 id="services-audit-heading" className="font-display text-lg sm:text-xl uppercase text-white mb-1">
               {lang === 'cs' ? fixCzechTypography(t.services.auditTitle) : fixDashes(t.services.auditTitle)}
             </h3>
             <p className="text-sm sm:text-base text-white/75 leading-[1.6]">
               {lang === 'cs' ? fixCzechTypography(t.services.auditSubtitle) : fixDashes(t.services.auditSubtitle)}
             </p>
           </div>
-          <span className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3.5 rounded-full text-sm font-bold uppercase tracking-[0.15em] bg-[var(--color-vibe-orange)] text-black group-hover:bg-[var(--color-vibe-orange)]/90 transition-colors shrink-0 min-h-[44px]">
+          <SparkCtaButton
+            type="button"
+            size="compact"
+            fullWidth
+            className="sm:w-auto sm:max-w-none shrink-0 min-h-0"
+            onClick={(e) => {
+              e.stopPropagation();
+              goToContactForm();
+            }}
+            iconAfter={<ArrowRight className="w-4 h-4" aria-hidden />}
+          >
             {lang === 'cs' ? fixCzechTypography(t.services.auditCta) : fixDashes(t.services.auditCta)}
-            <ArrowRight className="w-4 h-4" />
-          </span>
-        </motion.button>
+          </SparkCtaButton>
+        </motion.div>
       </div>
     </section>
   );
@@ -568,14 +586,15 @@ const CtaSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5"
         >
-          <button
+          <SparkCtaButton
             type="button"
+            size="hero"
             onClick={goToContactForm}
-            className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 min-w-[180px] sm:min-w-0 justify-center cursor-pointer"
+            className="min-w-[180px] sm:min-w-0 justify-center"
+            iconAfter={<ArrowRight className="w-4 h-4" aria-hidden />}
           >
             {lang === 'cs' ? fixCzechTypography(t.cta.ctaPrimary) : fixDashes(t.cta.ctaPrimary)}
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          </SparkCtaButton>
           <a
             href="#work"
             className="inline-flex items-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-[background-color,border-color] duration-300 min-w-[180px] sm:min-w-0 justify-center"
