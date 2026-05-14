@@ -398,10 +398,10 @@ button:focus-visible {
 }
 
 .spark-cta--nav {
-  --spark-width: 9.75rem;
+  --spark-width: 10.75rem;
   --spark-circle: 2.75rem;
   --spark-radius: 1.5rem;
-  --spark-text-left: 1.65rem;
+  --spark-text-left: 2.45rem;
 }
 
 .spark-cta.w-full {
