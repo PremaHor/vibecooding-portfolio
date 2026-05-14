@@ -258,7 +258,7 @@ function HeroMobile() {
           <canvas
             ref={canvasRef}
             className="absolute inset-0"
-            style={{ WebkitMaskImage: VIGNETTE, maskImage: VIGNETTE, willChange: 'contents' }}
+            style={{ willChange: 'contents' }}
             aria-hidden
           />
         }
