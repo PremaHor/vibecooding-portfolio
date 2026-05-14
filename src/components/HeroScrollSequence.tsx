@@ -74,21 +74,10 @@ export function HeroScrollSequence() {
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
-      // Source frames are 720×1280 (9:16 portrait).
-      // Constrain to a window that avoids heavy upscaling:
-      // - max height = 82 % of viewport, max width = 52 % of viewport
-      const SRC_W = 720;
-      const SRC_H = 1280;
-      const maxH = Math.min(window.innerHeight * 0.95, SRC_H);
-      const maxW = Math.min(window.innerWidth * 0.72, SRC_W * (maxH / SRC_H));
-      // Recalculate height from constrained width keeping ratio
-      const finalH = maxW * (SRC_H / SRC_W);
-      const finalW = maxW;
-
-      canvas.width = Math.round(finalW * dpr);
-      canvas.height = Math.round(finalH * dpr);
-      canvas.style.width = `${finalW}px`;
-      canvas.style.height = `${finalH}px`;
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
 
       const f = currentFrameRef.current;
       if (f >= 0) {
@@ -173,38 +162,28 @@ export function HeroScrollSequence() {
       aria-label={lang === 'cs' ? 'Úvod' : 'Hero'}
     >
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
+      <div className="sticky top-0 h-screen overflow-hidden">
 
-        {/* Canvas — contained size, centered, fades at edges */}
+        {/* Canvas — full viewport, vignette mask fades edges to nothing */}
         <canvas
           ref={canvasRef}
-          className="relative z-[0] block flex-shrink-0"
+          className="absolute inset-0 w-full h-full"
           style={{
             willChange: 'contents',
             WebkitMaskImage:
-              'radial-gradient(ellipse 80% 84% at 50% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)',
+              'radial-gradient(ellipse 62% 68% at 50% 50%, black 0%, black 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 70%, transparent 88%)',
             maskImage:
-              'radial-gradient(ellipse 80% 84% at 50% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)',
+              'radial-gradient(ellipse 62% 68% at 50% 50%, black 0%, black 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 70%, transparent 88%)',
           }}
           aria-hidden
         />
 
-        {/* Full-screen vignette overlay — fades canvas into page */}
-        <div
-          className="absolute inset-0 z-[1] pointer-events-none"
-          style={{
-            background: `
-              radial-gradient(ellipse 70% 75% at 50% 50%, transparent 30%, rgba(5,5,5,0.55) 65%, rgba(5,5,5,0.92) 90%)
-            `,
-          }}
-        />
-
         {/* Bottom gradient for text legibility */}
         <div
-          className="absolute inset-0 z-[2]"
+          className="absolute inset-0 z-[1]"
           style={{
             background:
-              'linear-gradient(to top, rgba(5,5,5,0.75) 0%, rgba(5,5,5,0.15) 30%, transparent 50%)',
+              'linear-gradient(to top, rgba(5,5,5,0.8) 0%, rgba(5,5,5,0.2) 28%, transparent 48%)',
           }}
         />
 
