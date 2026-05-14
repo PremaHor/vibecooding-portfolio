@@ -374,10 +374,9 @@ button:focus-visible {
   cursor: not-allowed;
 }
 
-.spark-cta--full {
-  display: flex;
+/* Šířka „full-width“ řeší jen Tailwind utilities (např. w-full + sm:w-auto), aby je šlo přebít. */
+.spark-cta.w-full .spark-cta-slot {
   width: 100%;
-  justify-content: center;
 }
 
 .spark-cta-filters {
@@ -390,10 +389,6 @@ button:focus-visible {
   position: relative;
   display: inline-block;
   max-width: 100%;
-}
-
-.spark-cta--full .spark-cta-slot {
-  width: 100%;
 }
 
 .spark-cta-shell {

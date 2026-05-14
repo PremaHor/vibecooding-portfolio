@@ -537,7 +537,7 @@ const ServicesPricingSection = () => {
             type="button"
             size="compact"
             fullWidth
-            className="sm:w-auto sm:max-w-none shrink-0 min-h-0"
+            className="w-full shrink-0 sm:w-auto sm:max-w-none min-h-0"
             onClick={(e) => {
               e.stopPropagation();
               goToContactForm();

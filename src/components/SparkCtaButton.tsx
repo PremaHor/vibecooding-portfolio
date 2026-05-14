@@ -45,9 +45,9 @@ export function SparkCtaButton({
       disabled={disabled}
       {...props}
       className={[
-        'spark-cta inline-flex max-w-full',
+        'spark-cta max-w-full',
+        fullWidth ? 'flex w-full justify-center' : 'inline-flex',
         disabled ? 'spark-cta--disabled opacity-55 pointer-events-none' : '',
-        fullWidth ? 'spark-cta--full' : '',
         className,
       ]
         .filter(Boolean)

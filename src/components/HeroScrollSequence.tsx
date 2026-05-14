@@ -7,6 +7,12 @@ import { HeroAccentTypewriter } from './HeroAccentTypewriter';
 import { SparkCtaButton } from './SparkCtaButton';
 
 const FRAME_COUNT = 60;
+const LAST_FRAME_INDEX = FRAME_COUNT - 1;
+const HERO_SEQUENCE_STAGES = [
+  { frameStart: 0, frameEnd: 18, scrollWeight: 0.32 }, // mlzny dron nad lesem
+  { frameStart: 18, frameEnd: 40, scrollWeight: 0.36 }, // sestup k lesni silnici
+  { frameStart: 40, frameEnd: LAST_FRAME_INDEX, scrollWeight: 0.32 }, // AI/HUD overlay na ceste
+] as const;
 /** Coarse-pointer devices: sticky height; usable scroll span = FALLBACK − 100vh */
 const SECTION_VH_FALLBACK = 520;
 /** Kumulativní síla kolečka (+ dolů − nahoru): celá virtuální dráha mezi frame 0 a posledním */
@@ -25,6 +31,28 @@ const VIGNETTE =
 
 function frameUrl(i: number): string {
   return `/hero-frames/frame_${String(i + 1).padStart(3, '0')}.webp`;
+}
+
+function easeStage(t: number) {
+  return t * t * (3 - 2 * t);
+}
+
+function progressToHeroTimeline(progress01: number) {
+  const progress = Number.isFinite(progress01) ? Math.max(0, Math.min(1, progress01)) : 0;
+  let cursor = 0;
+
+  for (const stage of HERO_SEQUENCE_STAGES) {
+    const stageEnd = cursor + stage.scrollWeight;
+
+    if (progress <= stageEnd) {
+      const local = Math.max(0, Math.min(1, (progress - cursor) / stage.scrollWeight));
+      return stage.frameStart + easeStage(local) * (stage.frameEnd - stage.frameStart);
+    }
+
+    cursor = stageEnd;
+  }
+
+  return LAST_FRAME_INDEX;
 }
 
 function sizeCanvas(canvas: HTMLCanvasElement) {
@@ -63,7 +91,7 @@ function paintBlendedTimeline(
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
 
-  const maxIdx = FRAME_COUNT - 1;
+  const maxIdx = LAST_FRAME_INDEX;
   const clampedPos = Number.isFinite(timelinePosition)
     ? Math.max(0, Math.min(maxIdx, timelinePosition))
     : 0;
@@ -309,8 +337,10 @@ function useHeroSequenceCanvas() {
         const load = () => {
           img.src = frameUrl(idx);
         };
-        if ('requestIdleCallback' in window) {
-          (window as Window & { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(load);
+        const requestIdleCallback = (window as Window & { requestIdleCallback?: (cb: () => void) => void })
+          .requestIdleCallback;
+        if (requestIdleCallback) {
+          requestIdleCallback(load);
         } else {
           window.setTimeout(load, idx * 8);
         }
@@ -346,8 +376,6 @@ function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
   const drawTimelineRef = useRef(drawTimeline);
   drawTimelineRef.current = drawTimeline;
 
-  const maxIdx = FRAME_COUNT - 1;
-
   useEffect(() => {
     const full = WHEEL_DELTA_FOR_FULL_SEQUENCE;
     const FULL_EPS = 1e-3;
@@ -375,7 +403,7 @@ function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
       posRef.current = p;
       velRef.current = v;
 
-      drawTimelineRef.current((p / full) * maxIdx);
+      drawTimelineRef.current(progressToHeroTimeline(p / full));
 
       if (v !== 0) {
         rafLoopRef.current = requestAnimationFrame(tick);
@@ -453,15 +481,13 @@ function HeroDesktopScrollLinked({ scrollHint }: { scrollHint: string | null }) 
   const { canvasRef, drawTimeline, loadingLayers } = useHeroSequenceCanvas();
 
   const rafRef = useRef<number>(0);
-  const maxIdx = FRAME_COUNT - 1;
-
   useEffect(() => {
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
       const scrollDistance = Math.max(1, section.offsetHeight - window.innerHeight);
       const progress01 = Math.max(0, Math.min(1, (window.scrollY - section.offsetTop) / scrollDistance));
-      const tl = progress01 * maxIdx;
+      const tl = progressToHeroTimeline(progress01);
       cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => drawTimeline(tl));
     };
