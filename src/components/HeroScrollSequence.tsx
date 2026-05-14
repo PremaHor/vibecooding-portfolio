@@ -28,17 +28,61 @@ function sizeCanvas(canvas: HTMLCanvasElement) {
   canvas.style.height = `${window.innerHeight}px`;
 }
 
-function paintFrame(canvas: HTMLCanvasElement, img: HTMLImageElement) {
-  const ctx = canvas.getContext('2d');
-  if (!ctx || !img.complete || !img.naturalWidth) return;
+function paintCoverImage(ctx: CanvasRenderingContext2D, cw: number, ch: number, img: HTMLImageElement) {
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
-  const { width: cw, height: ch } = canvas;
   const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
   const sw = img.naturalWidth * scale;
   const sh = img.naturalHeight * scale;
-  ctx.clearRect(0, 0, cw, ch);
   ctx.drawImage(img, (cw - sw) / 2, (ch - sh) / 2, sw, sh);
+}
+
+function paintFrame(canvas: HTMLCanvasElement, img: HTMLImageElement) {
+  const ctx = canvas.getContext('2d');
+  if (!ctx || !img.complete || !img.naturalWidth) return;
+  const { width: cw, height: ch } = canvas;
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.clearRect(0, 0, cw, ch);
+  paintCoverImage(ctx, cw, ch, img);
+}
+
+/** Crossfade dvou sousedních framů podle dílčí pozice na ose od 0 … FRAME_COUNT − 1. */
+function paintBlendedTimeline(
+  canvas: HTMLCanvasElement,
+  images: Array<HTMLImageElement | undefined>,
+  timelinePosition: number,
+) {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const maxIdx = FRAME_COUNT - 1;
+  const clampedPos = Number.isFinite(timelinePosition)
+    ? Math.max(0, Math.min(maxIdx, timelinePosition))
+    : 0;
+
+  const i0 = Math.floor(clampedPos);
+  const i1 = Math.min(maxIdx, i0 + 1);
+  const fade = clampedPos - i0;
+
+  const img0 = images[i0];
+  const img1 = images[i1];
+  const { width: cw, height: ch } = canvas;
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalAlpha = 1;
+  ctx.clearRect(0, 0, cw, ch);
+
+  if (!img0?.complete || img0.naturalWidth === 0) {
+    return;
+  }
+
+  paintCoverImage(ctx, cw, ch, img0);
+
+  if (fade > 0.001 && i1 > i0 && img1?.complete && img1.naturalWidth > 0) {
+    ctx.globalAlpha = fade;
+    paintCoverImage(ctx, cw, ch, img1);
+    ctx.globalAlpha = 1;
+  }
 }
 
 type HeroShellProps = {
@@ -203,35 +247,28 @@ function HeroDesktopReducedMotion() {
   );
 }
 
-/** Předběžné načtení framů, canvas resize, drawFrame */
+/** Předběžné načtení framů + vykreslení s plynulým crossfade mezi sousedními snímky */
 function useHeroSequenceCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const frameIndexShown = useRef<number>(-1);
+  const imagesRef = useRef<Array<HTMLImageElement | undefined>>([]);
+  const lastTimelineRef = useRef(0);
 
   const [loaded, setLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
 
-  const drawFrame = useCallback((index: number) => {
+  const drawTimeline = useCallback((timelinePosition: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const img = imagesRef.current[index];
-    if (!img?.complete || !img.naturalWidth) return;
-    if (frameIndexShown.current === index) return;
-    frameIndexShown.current = index;
-    paintFrame(canvas, img);
+    lastTimelineRef.current = timelinePosition;
+    paintBlendedTimeline(canvas, imagesRef.current, timelinePosition);
   }, []);
 
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     sizeCanvas(canvas);
-    const f = frameIndexShown.current;
-    if (f >= 0) {
-      frameIndexShown.current = -1;
-      drawFrame(f);
-    }
-  }, [drawFrame]);
+    paintBlendedTimeline(canvas, imagesRef.current, lastTimelineRef.current);
+  }, []);
 
   useEffect(() => {
     resizeCanvas();
@@ -251,7 +288,7 @@ function useHeroSequenceCanvas() {
       img.onload = () => {
         count++;
         setLoadProgress(count / FRAME_COUNT);
-        if (idx === 0) drawFrame(0);
+        drawTimeline(lastTimelineRef.current);
         if (count === FRAME_COUNT) setLoaded(true);
       };
       img.onerror = () => {
@@ -272,7 +309,7 @@ function useHeroSequenceCanvas() {
         }
       }
     }
-  }, [drawFrame]);
+  }, [drawTimeline]);
 
   const loadingLayers = (
     <>
@@ -288,28 +325,28 @@ function useHeroSequenceCanvas() {
     </>
   );
 
-  return { canvasRef, drawFrame, loadingLayers };
+  return { canvasRef, drawTimeline, loadingLayers };
 }
 
 // ─── Desktop: kolečko (fine pointer) — dokument se nehybne dokud nedoběhne sekce framů ─
 
 function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
-  const { canvasRef, drawFrame, loadingLayers } = useHeroSequenceCanvas();
+  const { canvasRef, drawTimeline, loadingLayers } = useHeroSequenceCanvas();
   const accumRef = useRef(0);
-  const drawRef = useRef(drawFrame);
-  drawRef.current = drawFrame;
+  const drawTimelineRef = useRef(drawTimeline);
+  drawTimelineRef.current = drawTimeline;
 
   const rafRef = useRef<number>(0);
+  const maxIdx = FRAME_COUNT - 1;
 
   useEffect(() => {
     const full = WHEEL_DELTA_FOR_FULL_SEQUENCE;
     const FULL_EPS = 1e-3;
 
-    const applyFrameDraw = () => {
-      const p = accumRef.current / full;
-      const idx = Math.min(FRAME_COUNT - 1, Math.floor(p * FRAME_COUNT));
+    const applyTimelineDraw = () => {
+      const tl = (accumRef.current / full) * maxIdx;
       cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => drawRef.current(idx));
+      rafRef.current = requestAnimationFrame(() => drawTimelineRef.current(tl));
     };
 
     const onWheel = (e: WheelEvent) => {
@@ -330,7 +367,7 @@ function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
       accumRef.current = tentative;
       e.preventDefault();
       e.stopPropagation();
-      applyFrameDraw();
+      applyTimelineDraw();
 
       if (accumRef.current >= full - FULL_EPS) {
         accumRef.current = full;
@@ -338,7 +375,7 @@ function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
     };
 
     window.addEventListener('wheel', onWheel, { capture: true, passive: false });
-    applyFrameDraw();
+    applyTimelineDraw();
 
     return () => {
       window.removeEventListener('wheel', onWheel, { capture: true });
@@ -370,19 +407,20 @@ function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
 
 function HeroDesktopScrollLinked({ scrollHint }: { scrollHint: string | null }) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { canvasRef, drawFrame, loadingLayers } = useHeroSequenceCanvas();
+  const { canvasRef, drawTimeline, loadingLayers } = useHeroSequenceCanvas();
 
   const rafRef = useRef<number>(0);
+  const maxIdx = FRAME_COUNT - 1;
 
   useEffect(() => {
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
       const scrollDistance = Math.max(1, section.offsetHeight - window.innerHeight);
-      const progress = Math.max(0, Math.min(1, (window.scrollY - section.offsetTop) / scrollDistance));
-      const idx = Math.min(FRAME_COUNT - 1, Math.floor(progress * FRAME_COUNT));
+      const progress01 = Math.max(0, Math.min(1, (window.scrollY - section.offsetTop) / scrollDistance));
+      const tl = progress01 * maxIdx;
       cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => drawFrame(idx));
+      rafRef.current = requestAnimationFrame(() => drawTimeline(tl));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -391,7 +429,7 @@ function HeroDesktopScrollLinked({ scrollHint }: { scrollHint: string | null }) 
       window.removeEventListener('scroll', handleScroll);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [drawFrame]);
+  }, [drawTimeline]);
 
   return (
     <section
