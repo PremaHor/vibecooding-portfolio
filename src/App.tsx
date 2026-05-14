@@ -1,88 +1,14 @@
-import { useState, useEffect, useRef, useMemo, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useLocation, useRouteMatch } from './router';
-import { ArrowRight } from 'lucide-react';
-import { fixCzechTypography, fixDashes } from './utils/czechTypography';
-import { useLanguage } from './i18n/LanguageContext';
-import { useGoToContactForm } from './hooks/useGoToContactForm';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
-import { HeroAccentTypewriter } from './components/HeroAccentTypewriter';
+import { HeroScrollSequence } from './components/HeroScrollSequence';
 
 const HomeSections = lazy(() => import('./components/HomeSections'));
 const LazyProjectPage = lazy(() => import('./components/ProjectPage').then(m => ({ default: m.ProjectPage })));
 const PrivacyPage = lazy(() => import('./components/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
-
-// --- Hero (hlavní animace CSS; accent = typewriter v komponentě) ---
-
-const Hero = () => {
-  const { t, lang } = useLanguage();
-  const goToContactForm = useGoToContactForm();
-  const leadTypewriterText = useMemo(
-    () =>
-      lang === 'cs'
-        ? fixCzechTypography(t.hero.subheadlineLead)
-        : fixDashes(t.hero.subheadlineLead),
-    [lang, t.hero.subheadlineLead],
-  );
-  const accentText = useMemo(
-    () =>
-      lang === 'cs'
-        ? fixCzechTypography(t.hero.subheadlineAccent)
-        : fixDashes(t.hero.subheadlineAccent),
-    [lang, t.hero.subheadlineAccent],
-  );
-  const showAccent = accentText.trim().length > 0;
-
-  return (
-    <section className="hero-section relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24 overflow-hidden backface-hidden">
-      <div className="absolute top-1/4 -right-10 sm:-right-20 w-[50vw] sm:w-[40vw] h-[50vw] sm:h-[40vw] bg-[var(--color-vibe-orange)] rounded-full blur-[80px] sm:blur-[120px] opacity-[0.12] backface-hidden will-change-transform" />
-      <div className="absolute bottom-1/4 -left-10 sm:-left-20 w-[40vw] sm:w-[30vw] h-[40vw] sm:h-[30vw] bg-blue-600 rounded-full blur-[80px] sm:blur-[120px] opacity-[0.08] backface-hidden will-change-transform" />
-
-      <div className="hero-content relative z-10 max-w-4xl mx-auto w-full text-center">
-        <h1 className="font-display text-[clamp(1.65rem,4.2vw,2.75rem)] sm:text-[clamp(1.85rem,4.5vw,3.25rem)] md:text-[clamp(2rem,4.8vw,3.75rem)] font-bold leading-[1.15] mb-6 sm:mb-8 text-balance">
-          <span className="hero-h1-tagline block bg-gradient-to-br from-white via-white to-slate-300 bg-clip-text text-transparent hero-anim hero-anim-d1">
-            {lang === 'cs' ? fixCzechTypography(t.hero.h1) : fixDashes(t.hero.h1)}
-          </span>
-        </h1>
-
-        <p
-          className={`text-base sm:text-lg md:text-xl font-normal text-gray-400 max-w-2xl mx-auto leading-relaxed text-center hero-anim hero-anim-d2 text-balance min-h-[4.5rem] sm:min-h-[5rem] ${showAccent ? 'mb-4' : 'mb-10 sm:mb-12'}`}
-        >
-          <HeroAccentTypewriter
-            text={leadTypewriterText}
-            startDelayMs={900}
-            charIntervalMs={48}
-            caretClassName="bg-gray-400"
-          />
-        </p>
-        {showAccent && (
-          <p className="max-w-2xl mx-auto text-center text-[var(--color-vibe-orange)] font-semibold tracking-wider uppercase text-xs sm:text-sm md:text-base leading-relaxed text-balance mb-10 sm:mb-12 hero-anim hero-anim-d2">
-            <HeroAccentTypewriter text={accentText} />
-          </p>
-        )}
-
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-5 hero-anim hero-anim-d2">
-          <button
-            type="button"
-            onClick={goToContactForm}
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold bg-[var(--color-vibe-orange)] text-black hover:bg-[var(--color-vibe-orange)]/90 hover:shadow-[0_0_30px_rgba(242,125,38,0.4)] active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-300 shadow-lg min-w-[180px] sm:min-w-0 cursor-pointer"
-          >
-            {lang === 'cs' ? fixCzechTypography(t.hero.ctaPrimary) : fixDashes(t.hero.ctaPrimary)}
-            <ArrowRight className="w-4 h-4" />
-          </button>
-          <a
-            href="#work"
-            className="inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-semibold border-2 border-white/25 text-white/90 hover:bg-white/5 hover:border-white/40 transition-[background-color,border-color] duration-300 min-w-[180px] sm:min-w-0"
-          >
-            {lang === 'cs' ? fixCzechTypography(t.hero.ctaSecondary) : fixDashes(t.hero.ctaSecondary)}
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 // --- Pages ---
 
@@ -90,7 +16,7 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
   <>
     <Navbar theme={navTheme} />
     <main id="main-content" role="main">
-      <Hero />
+      <HeroScrollSequence />
       <Suspense fallback={<div className="min-h-[min(70vh,32rem)]" aria-hidden />}>
         <HomeSections />
       </Suspense>
