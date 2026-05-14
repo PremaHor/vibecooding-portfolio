@@ -23,6 +23,8 @@ export const translations = {
       ctaPrimary: 'Pojďme se potkat',
       ctaSecondary: 'Prohlédnout projekty',
       workedWith: 'Spolupracovali se mnou',
+      wheelScrollHint:
+        'Roluj kolečkem, dokud doběhnou všechny záběry. Potom stránku posune běžný scroll.',
     },
     process: {
       title: 'Jak přistupuji k produktům',
@@ -504,6 +506,8 @@ export const translations = {
       ctaPrimary: 'Let\'s meet',
       ctaSecondary: 'View projects',
       workedWith: 'Worked with me',
+      wheelScrollHint:
+        'Scroll with the wheel through every frame first. Ordinary page scrolling starts after.',
     },
     process: {
       title: 'How I approach products',
