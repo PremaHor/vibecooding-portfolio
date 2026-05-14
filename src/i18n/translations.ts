@@ -33,6 +33,16 @@ export const translations = {
         'Kolečkem dolů jsi dál v záběrech, kolečkem nahoru zpět. Po posledním snímku už klasický scroll stránku posune níž.',
     },
     process: {
+      storyEyebrow: 'Od nápadu k ověření',
+      storyTitle: 'Nejdřív zjistíme, jestli má smysl stavět dál.',
+      storyText:
+        'Místo dlouhých debat vytvořím rychlou, použitelnou verzi produktu. Tým i zákazníci si ji mohou osahat a rozhodnutí pak stojí na realitě, ne na dojmu.',
+      storySteps: [
+        { title: 'Nápad', text: 'Ujasníme problém, hodnotu a první scénář použití.' },
+        { title: 'Prototyp', text: 'Z myšlenky vznikne konkrétní rozhraní, které jde projít.' },
+        { title: 'Ověření', text: 'Ukážete ho týmu nebo zákazníkům a získáte rychlou zpětnou vazbu.' },
+        { title: 'Rozhodnutí', text: 'Je jasnější, co dál stavět, upravit nebo úplně zahodit.' },
+      ],
       title: 'Jak přistupuji k produktům',
       subtitle: 'Nejdřív pochopím problém, pak teprve píšu kód.',
       subtitle2: 'Design, vývoj i produktové myšlení v jedné osobě.',
@@ -522,6 +532,16 @@ export const translations = {
         'Scroll down to advance frames; scroll up at the top to rewind. After the reel finishes, ordinary page scrolling works.',
     },
     process: {
+      storyEyebrow: 'From idea to proof',
+      storyTitle: 'First we learn whether it is worth building further.',
+      storyText:
+        'Instead of weeks of discussion, I create a fast, usable version of the product. Your team and customers can try it, so decisions are based on reality, not assumptions.',
+      storySteps: [
+        { title: 'Idea', text: 'We clarify the problem, value, and first usage scenario.' },
+        { title: 'Prototype', text: 'The idea becomes a concrete interface people can walk through.' },
+        { title: 'Validation', text: 'You show it to your team or customers and collect fast feedback.' },
+        { title: 'Decision', text: 'It becomes clearer what to build, adjust, or leave behind.' },
+      ],
       title: 'How I approach products',
       subtitle: 'First I understand the problem, then I write code.',
       subtitle2: 'Design, development, and product thinking in one person.',

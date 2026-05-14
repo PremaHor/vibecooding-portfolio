@@ -27,6 +27,13 @@ const BENTO_STEPS = [
   { icon: Server,    key: 'step5' as const },
 ];
 
+const STORY_STEPS = [
+  { icon: Lightbulb },
+  { icon: Layers },
+  { icon: Rocket },
+  { icon: CheckCircle },
+];
+
 const BentoCard = ({ children, className = '', delay = 0, dark = false }: { children: React.ReactNode; className?: string; delay?: number; dark?: boolean }) => (
   <motion.article
     initial={{ opacity: 0, y: 20 }}
@@ -42,6 +49,76 @@ const BentoCard = ({ children, className = '', delay = 0, dark = false }: { chil
     {children}
   </motion.article>
 );
+
+const StorySection = () => {
+  const { lang } = useLanguage();
+  const t = translations[lang];
+  const tx = (v: string) => lang === 'cs' ? fixCzechTypography(v) : fixDashes(v);
+
+  return (
+    <section className="relative overflow-hidden bg-[var(--color-vibe-black)] px-4 py-20 text-white sm:px-6 sm:py-28 md:px-8 md:py-36 lg:px-12" aria-labelledby="story-heading">
+      <div className="absolute left-1/2 top-0 h-px w-[min(72rem,86vw)] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/15 to-transparent" aria-hidden />
+      <div className="absolute left-1/2 top-20 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(242,125,38,0.16)_0%,rgba(242,125,38,0.06)_34%,transparent_68%)] blur-2xl" aria-hidden />
+      <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] translate-x-1/3 rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.10)_0%,transparent_68%)] blur-2xl" aria-hidden />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 18, filter: 'blur(10px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, amount: 0.45 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto mb-14 max-w-4xl text-center sm:mb-18 md:mb-20"
+        >
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-[var(--color-vibe-orange)]">
+            {tx(t.process.storyEyebrow)}
+          </p>
+          <h2 id="story-heading" className="font-display text-[clamp(2rem,6vw,4.75rem)] uppercase leading-[0.98] tracking-[0.02em] text-balance">
+            {tx(t.process.storyTitle)}
+          </h2>
+          <p className="mx-auto mt-7 max-w-2xl text-base leading-[1.75] text-white/70 sm:text-lg">
+            {tx(t.process.storyText)}
+          </p>
+        </motion.div>
+
+        <div className="relative grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-4">
+          <div className="pointer-events-none absolute left-0 right-0 top-1/2 hidden h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-white/18 to-transparent lg:block" aria-hidden />
+          {t.process.storySteps.map((step, index) => {
+            const Icon = STORY_STEPS[index]?.icon ?? Lightbulb;
+            return (
+              <motion.article
+                key={step.title}
+                initial={{ opacity: 0, y: 24, filter: 'blur(12px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, amount: 0.35, margin: '0px 0px -80px 0px' }}
+                transition={{ duration: 0.65, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative min-h-[17rem] overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-6 shadow-[0_24px_90px_rgba(0,0,0,0.24)] backdrop-blur-xl transition-[border-color,background-color,transform] duration-500 hover:-translate-y-1 hover:border-[var(--color-vibe-orange)]/40 hover:bg-white/[0.055] sm:p-7"
+              >
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/24 to-transparent opacity-70" aria-hidden />
+                <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full bg-[var(--color-vibe-orange)]/0 blur-2xl transition-colors duration-500 group-hover:bg-[var(--color-vibe-orange)]/18" aria-hidden />
+                <div className="relative z-10 flex h-full flex-col">
+                  <div className="mb-8 flex items-center justify-between gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-black/30 text-[var(--color-vibe-orange)] shadow-inner">
+                      <Icon className="h-5 w-5" aria-hidden />
+                    </div>
+                    <span className="font-display text-4xl text-white/[0.08] transition-colors duration-500 group-hover:text-[var(--color-vibe-orange)]/25">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-xl uppercase leading-[1.1] text-white sm:text-2xl">
+                    {tx(step.title)}
+                  </h3>
+                  <p className="mt-4 text-sm leading-[1.7] text-white/66 sm:text-base">
+                    {tx(step.text)}
+                  </p>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const ProcessSection = () => {
   const { lang } = useLanguage();
@@ -901,6 +978,7 @@ export default function HomeSections() {
   useScrollToContactFromHash();
   return (
     <>
+      <StorySection />
       <ProcessSection />
       <WorkSection />
       <AboutSection />
