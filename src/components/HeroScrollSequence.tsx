@@ -163,20 +163,28 @@ export function HeroScrollSequence() {
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen overflow-hidden">
 
-        {/* Canvas — scroll-driven frames */}
+        {/* Canvas — scroll-driven frames, fades out at edges via mask */}
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 w-full h-full"
-          style={{ willChange: 'contents' }}
+          className="absolute inset-0"
+          style={{
+            width: '100%',
+            height: '100%',
+            willChange: 'contents',
+            WebkitMaskImage:
+              'radial-gradient(ellipse 72% 80% at 50% 52%, black 20%, transparent 78%)',
+            maskImage:
+              'radial-gradient(ellipse 72% 80% at 50% 52%, black 20%, transparent 78%)',
+          }}
           aria-hidden
         />
 
-        {/* Gradient overlay for text legibility */}
+        {/* Subtle bottom gradient for text legibility */}
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              'linear-gradient(to top, rgba(5,5,5,0.75) 0%, rgba(5,5,5,0.35) 40%, rgba(5,5,5,0.15) 100%)',
+              'linear-gradient(to top, rgba(5,5,5,0.6) 0%, rgba(5,5,5,0.1) 35%, transparent 65%)',
           }}
         />
 
