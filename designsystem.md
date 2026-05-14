@@ -114,7 +114,6 @@ Maximální šířka obsahu: často `max-w-7xl mx-auto`.
 - **Fixed nav:** `z-50`; po scrollu `bg-black/10` + **backdrop blur 24px** (`.nav-blur-active`).
 - **Mobilní menu:** `z-[100]`, pozadí `--color-vibe-black`.
 - **Skip link:** oranžové pozadí, černý text, zaoblení `0.5rem` (viz `.skip-link`).
-- **Noise overlay:** `.noise-overlay` — fixed, `opacity: 0.03`, SVG šum (`z-index: 9999`).
 
 ---
 

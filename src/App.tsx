@@ -118,7 +118,6 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen selection:bg-[var(--color-vibe-orange)] selection:text-black backface-hidden">
-      <div className="noise-overlay" />
       <div key={location.pathname} className="page-fade-in">
         {match.name === 'home' && <HomePage navTheme={navTheme} />}
         {match.name === 'project' && (
