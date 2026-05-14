@@ -79,8 +79,8 @@ export function HeroScrollSequence() {
       // - max height = 82 % of viewport, max width = 52 % of viewport
       const SRC_W = 720;
       const SRC_H = 1280;
-      const maxH = Math.min(window.innerHeight * 0.82, SRC_H);
-      const maxW = Math.min(window.innerWidth * 0.52, SRC_W * (maxH / SRC_H));
+      const maxH = Math.min(window.innerHeight * 0.95, SRC_H);
+      const maxW = Math.min(window.innerWidth * 0.72, SRC_W * (maxH / SRC_H));
       // Recalculate height from constrained width keeping ratio
       const finalH = maxW * (SRC_H / SRC_W);
       const finalW = maxW;
@@ -182,24 +182,34 @@ export function HeroScrollSequence() {
           style={{
             willChange: 'contents',
             WebkitMaskImage:
-              'radial-gradient(ellipse 78% 82% at 50% 50%, black 30%, transparent 85%)',
+              'radial-gradient(ellipse 80% 84% at 50% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)',
             maskImage:
-              'radial-gradient(ellipse 78% 82% at 50% 50%, black 30%, transparent 85%)',
+              'radial-gradient(ellipse 80% 84% at 50% 50%, black 25%, rgba(0,0,0,0.6) 55%, transparent 80%)',
           }}
           aria-hidden
         />
 
+        {/* Full-screen vignette overlay — fades canvas into page */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background: `
+              radial-gradient(ellipse 70% 75% at 50% 50%, transparent 30%, rgba(5,5,5,0.55) 65%, rgba(5,5,5,0.92) 90%)
+            `,
+          }}
+        />
+
         {/* Bottom gradient for text legibility */}
         <div
-          className="absolute inset-0 z-[1]"
+          className="absolute inset-0 z-[2]"
           style={{
             background:
-              'linear-gradient(to top, rgba(5,5,5,0.7) 0%, rgba(5,5,5,0.1) 30%, transparent 55%)',
+              'linear-gradient(to top, rgba(5,5,5,0.75) 0%, rgba(5,5,5,0.15) 30%, transparent 50%)',
           }}
         />
 
         {/* Hero text */}
-        <div className="absolute inset-0 z-[2] flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24">
+        <div className="absolute inset-0 z-[3] flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24">
           <div className="hero-content max-w-4xl mx-auto w-full text-center">
             <h1 className="font-display text-[clamp(1.65rem,4.2vw,2.75rem)] sm:text-[clamp(1.85rem,4.5vw,3.25rem)] md:text-[clamp(2rem,4.8vw,3.75rem)] font-bold leading-[1.15] mb-6 sm:mb-8 text-balance">
               <span className="hero-h1-tagline block bg-gradient-to-br from-white via-white to-slate-300 bg-clip-text text-transparent hero-anim hero-anim-d1">
@@ -236,7 +246,7 @@ export function HeroScrollSequence() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[3] flex flex-col items-center gap-1 opacity-60">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[4] flex flex-col items-center gap-1 opacity-60">
           <span className="text-[10px] uppercase tracking-[0.3em] text-white/70">
             {lang === 'cs' ? 'Scrolluj' : 'Scroll'}
           </span>
@@ -245,12 +255,12 @@ export function HeroScrollSequence() {
 
         {/* Loading overlay — disappears once first frame is ready */}
         {!loaded && loadProgress === 0 && (
-          <div className="absolute inset-0 z-[20] bg-[var(--color-vibe-black)]" />
+          <div className="absolute inset-0 z-[30] bg-[var(--color-vibe-black)]" />
         )}
 
         {/* Loading progress bar (thin, top) */}
         {!loaded && loadProgress > 0 && (
-          <div className="absolute top-0 left-0 right-0 z-[20] h-0.5 bg-white/10">
+          <div className="absolute top-0 left-0 right-0 z-[30] h-0.5 bg-white/10">
             <div
               className="h-full bg-[var(--color-vibe-orange)] transition-all duration-150"
               style={{ width: `${loadProgress * 100}%` }}
