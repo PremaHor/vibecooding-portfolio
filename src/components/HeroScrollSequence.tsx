@@ -178,7 +178,7 @@ function HeroShell({ scrollHint, canvas, overlays }: HeroShellProps) {
                     key={partIndex}
                     className={
                       part.emphasis
-                        ? 'bg-gradient-to-r from-white via-white to-[var(--color-vibe-orange)] bg-clip-text font-semibold text-transparent'
+                        ? 'font-semibold text-white underline decoration-white/25 decoration-2 underline-offset-[0.18em]'
                         : ''
                     }
                   >
