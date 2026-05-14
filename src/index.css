@@ -361,169 +361,161 @@ button:focus-visible {
   }
 }
 
-/* Marquee CTA — calm premium pill with motion on intent */
+/* Learn-more CTA - expanding circle arrow */
 
 .spark-cta {
+  --spark-width: 12rem;
+  --spark-circle: 3rem;
+  --spark-radius: 1.625rem;
+  --spark-text-left: 1.85rem;
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 999rem;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)),
-    #07080a;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 18px 48px rgba(0, 0, 0, 0.28);
+  display: inline-block;
+  width: var(--spark-width);
+  height: auto;
+  border: 0;
+  background: transparent;
+  color: #fff;
   cursor: pointer;
   font: inherit;
-  color: #fff;
+  outline: none;
+  padding: 0;
+  text-decoration: none;
   vertical-align: middle;
-  isolation: isolate;
-  transition:
-    border-color 220ms ease,
-    background-color 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms ease;
   -webkit-tap-highlight-color: transparent;
-  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
 }
 
-.spark-cta::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  z-index: -1;
-  border-radius: inherit;
-  background: linear-gradient(110deg, rgba(242, 125, 38, 0), rgba(242, 125, 38, 0.58), rgba(56, 189, 248, 0.18), rgba(242, 125, 38, 0));
-  opacity: 0;
-  transition: opacity 220ms ease;
+.spark-cta--hero {
+  --spark-width: 15rem;
+  --spark-circle: 3.25rem;
+  --spark-radius: 1.75rem;
+  --spark-text-left: 2rem;
 }
 
-.spark-cta::after {
-  content: '';
-  position: absolute;
-  inset: 1px;
-  z-index: -1;
-  border-radius: inherit;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.13), transparent 42%),
-    #07080a;
+.spark-cta--compact {
+  --spark-width: 13.5rem;
+  --spark-circle: 3rem;
+  --spark-radius: 1.625rem;
 }
 
-.spark-cta:hover:not(:disabled) {
-  border-color: rgba(242, 125, 38, 0.45);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 22px 70px rgba(242, 125, 38, 0.22),
-    0 14px 42px rgba(0, 0, 0, 0.38);
-  transform: translateY(-1px);
+.spark-cta--nav {
+  --spark-width: 9.75rem;
+  --spark-circle: 2.75rem;
+  --spark-radius: 1.5rem;
+  --spark-text-left: 1.65rem;
 }
 
-.spark-cta:hover:not(:disabled)::before {
-  opacity: 1;
-}
-
-.spark-cta:active:not(:disabled) {
-  transform: translateY(0) scale(0.98);
+.spark-cta.w-full {
+  --spark-width: 100%;
 }
 
 .spark-cta:focus-visible {
   outline: 2px solid var(--color-vibe-orange);
-  outline-offset: 3px;
+  outline-offset: 4px;
 }
 
 .spark-cta--disabled {
   cursor: not-allowed;
 }
 
-.spark-cta-text,
-.spark-cta-marquee {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  min-width: 0;
-  transition:
-    opacity 180ms ease,
-    transform 220ms ease;
+.spark-cta-circle {
+  position: relative;
+  display: block;
+  width: var(--spark-circle);
+  height: var(--spark-circle);
+  margin: 0;
+  border-radius: var(--spark-radius);
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.16), transparent 34%),
+    #282936;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 42px rgba(0, 0, 0, 0.32);
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+}
+
+.spark-cta-circle::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(110deg, transparent, rgba(242, 125, 38, 0.15), transparent 58%);
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+}
+
+.spark-cta-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.625rem;
+  z-index: 1;
+  width: 1.125rem;
+  height: 0.125rem;
+  margin: auto;
+  background: none;
+  color: #fff;
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+}
+
+.spark-cta-arrow::before {
+  content: '';
+  position: absolute;
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid currentColor;
+  border-right: 0.125rem solid currentColor;
+  transform: rotate(45deg);
 }
 
 .spark-cta-text {
-  position: relative;
-  z-index: 1;
-}
-
-.spark-cta-marquee {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(0.35em);
-  white-space: nowrap;
-}
-
-.spark-cta-marquee-track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  animation: spark-cta-marquee 1.15s linear infinite;
-  animation-play-state: paused;
-}
-
-.spark-cta-marquee-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  padding-inline: 1.75rem;
+  margin: 0 0 0 var(--spark-text-left);
+  padding: 0.75rem 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: inherit;
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+}
+
+.spark-cta:hover:not(:disabled) .spark-cta-circle {
+  width: 100%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 22px 62px rgba(242, 125, 38, 0.18),
+    0 18px 46px rgba(0, 0, 0, 0.38);
+}
+
+.spark-cta:hover:not(:disabled) .spark-cta-circle::after {
+  opacity: 1;
+}
+
+.spark-cta:hover:not(:disabled) .spark-cta-arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
 }
 
 .spark-cta:hover:not(:disabled) .spark-cta-text {
-  opacity: 0;
-  transform: translateY(-0.35em);
+  color: #fff;
 }
 
-.spark-cta:hover:not(:disabled) .spark-cta-marquee {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.spark-cta:hover:not(:disabled) .spark-cta-marquee-track {
-  animation-play-state: running;
-}
-
-@keyframes spark-cta-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-33.333%);
-  }
+.spark-cta:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .spark-cta,
-  .spark-cta::before,
-  .spark-cta-text,
-  .spark-cta-marquee {
+  .spark-cta-circle,
+  .spark-cta-circle::after,
+  .spark-cta-arrow,
+  .spark-cta-text {
     transition: none;
-  }
-
-  .spark-cta-marquee-track {
-    animation: none;
-  }
-
-  .spark-cta:hover:not(:disabled) .spark-cta-text {
-    opacity: 1;
-    transform: none;
-  }
-
-  .spark-cta:hover:not(:disabled) .spark-cta-marquee {
-    opacity: 0;
-    transform: none;
   }
 }
