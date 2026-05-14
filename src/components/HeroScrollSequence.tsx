@@ -8,8 +8,10 @@ import { HeroAccentTypewriter } from './HeroAccentTypewriter';
 const FRAME_COUNT = 60;
 /** Coarse-pointer devices: sticky height; usable scroll span = FALLBACK − 100vh */
 const SECTION_VH_FALLBACK = 520;
-/** Kumulativní síla kolečka (deltaY px) dokud poběží pouze měnění framů bez posunu stránky */
+/** Kumulativní síla kolečka (+ dolů − nahoru): celá virtuální dráha mezi frame 0 a posledním */
 const WHEEL_DELTA_FOR_FULL_SEQUENCE = 5400;
+/** Nad touto hodnotou scrollY už nekrotíme kolečko (uživatel jde po stránce) */
+const HERO_WHEEL_SCROLL_Y_LEAVE = 88;
 
 const VIGNETTE =
   'radial-gradient(ellipse 62% 68% at 50% 50%, black 0%, black 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 70%, transparent 88%)';
@@ -297,45 +299,52 @@ function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
   const drawRef = useRef(drawFrame);
   drawRef.current = drawFrame;
 
-  const [sequenceDone, setSequenceDone] = useState(false);
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    if (!sequenceDone) return;
-    accumRef.current = WHEEL_DELTA_FOR_FULL_SEQUENCE;
-    drawFrame(FRAME_COUNT - 1);
-  }, [sequenceDone, drawFrame]);
-
-  useEffect(() => {
-    if (sequenceDone) return undefined;
-
     const full = WHEEL_DELTA_FOR_FULL_SEQUENCE;
+    const FULL_EPS = 1e-3;
 
-    const onWheel = (e: WheelEvent) => {
-      if (window.scrollY > 64) return;
-      if (!e.deltaY) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      accumRef.current = Math.min(full, Math.max(0, accumRef.current + e.deltaY));
+    const applyFrameDraw = () => {
       const p = accumRef.current / full;
       const idx = Math.min(FRAME_COUNT - 1, Math.floor(p * FRAME_COUNT));
       cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => drawRef.current(idx));
+    };
 
-      if (accumRef.current >= full - 1e-6) {
+    const onWheel = (e: WheelEvent) => {
+      if (window.scrollY > HERO_WHEEL_SCROLL_Y_LEAVE) return;
+      if (!e.deltaY) return;
+
+      const prev = accumRef.current;
+      const tentative = Math.min(full, Math.max(0, prev + e.deltaY));
+      const scrollingDown = e.deltaY > 0;
+      /** Na konci virtuální dráhy: dolů pusť stránku, nahoru zpět odvíjej framery */
+      const wasAtEnd = prev >= full - FULL_EPS;
+
+      if (wasAtEnd && tentative >= full - FULL_EPS && scrollingDown) {
         accumRef.current = full;
-        setSequenceDone(true);
+        return;
+      }
+
+      accumRef.current = tentative;
+      e.preventDefault();
+      e.stopPropagation();
+      applyFrameDraw();
+
+      if (accumRef.current >= full - FULL_EPS) {
+        accumRef.current = full;
       }
     };
 
     window.addEventListener('wheel', onWheel, { capture: true, passive: false });
+    applyFrameDraw();
+
     return () => {
       window.removeEventListener('wheel', onWheel, { capture: true });
       cancelAnimationFrame(rafRef.current);
     };
-  }, [sequenceDone]);
+  }, []);
 
   return (
     <section className="relative shrink-0" aria-label="Hero">

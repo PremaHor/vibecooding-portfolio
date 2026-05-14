@@ -24,7 +24,7 @@ export const translations = {
       ctaSecondary: 'Prohlédnout projekty',
       workedWith: 'Spolupracovali se mnou',
       wheelScrollHint:
-        'Roluj kolečkem, dokud doběhnou všechny záběry. Potom stránku posune běžný scroll.',
+        'Kolečkem dolů jsi dál v záběrech, kolečkem nahoru zpět. Po posledním snímku už klasický scroll stránku posune níž.',
     },
     process: {
       title: 'Jak přistupuji k produktům',
@@ -507,7 +507,7 @@ export const translations = {
       ctaSecondary: 'View projects',
       workedWith: 'Worked with me',
       wheelScrollHint:
-        'Scroll with the wheel through every frame first. Ordinary page scrolling starts after.',
+        'Scroll down to advance frames; scroll up at the top to rewind. After the reel finishes, ordinary page scrolling works.',
     },
     process: {
       title: 'How I approach products',
