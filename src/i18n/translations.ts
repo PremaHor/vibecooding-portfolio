@@ -18,7 +18,7 @@ export const translations = {
       available: 'Hledám tým, se kterým budu tvořit budoucnost',
       h1: 'Rychle stavím funkční prototypy digitálních produktů pomocí AI nástrojů',
       subheadlineLead:
-        'Hledám tým, kde můžu růst v UX a podílet se na smysluplných produktech.',
+        'Pomůžu vám proměnit nápad v jednoduchou aplikaci, kterou si můžete reálně vyzkoušet, ukázat zákazníkům nebo týmu a ověřit, jestli má smysl ji dál rozvíjet.',
       subheadlineAccent: '',
       ctaPrimary: 'Pojďme se potkat',
       ctaSecondary: 'Prohlédnout projekty',
@@ -501,7 +501,7 @@ export const translations = {
       available: 'Looking for a team to build the future with',
       h1: 'I quickly build functional prototypes of digital products using AI tools',
       subheadlineLead:
-        "I'm looking for a team where I can grow in UX and help build meaningful products.",
+        'I will help you turn an idea into a simple app you can try for real, show to clients or teammates, and see whether it makes sense to develop it further.',
       subheadlineAccent: '',
       ctaPrimary: 'Let\'s meet',
       ctaSecondary: 'View projects',
