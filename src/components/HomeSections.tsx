@@ -613,8 +613,7 @@ const ServicesPricingSection = () => {
           <SparkCtaButton
             type="button"
             size="compact"
-            fullWidth
-            className="w-full shrink-0 sm:w-auto sm:max-w-none min-h-0"
+            className="spark-cta--mobile-full shrink-0 min-h-0"
             onClick={(e) => {
               e.stopPropagation();
               goToContactForm();

@@ -408,6 +408,28 @@ button:focus-visible {
   --spark-width: 100%;
 }
 
+.spark-cta.hidden {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .spark-cta.hidden.lg\:inline-flex {
+    display: inline-block;
+  }
+}
+
+.spark-cta--mobile-full {
+  --spark-width: 100%;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .spark-cta--mobile-full {
+    --spark-width: 13.5rem;
+    width: var(--spark-width);
+  }
+}
+
 .spark-cta:focus-visible {
   outline: 2px solid var(--color-vibe-orange);
   outline-offset: 4px;
