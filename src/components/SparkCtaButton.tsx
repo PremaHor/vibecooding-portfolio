@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes, type ReactNode, useId } from 'react';
+import { type ButtonHTMLAttributes, type ReactNode } from 'react';
 
 export type SparkCtaButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children'> & {
   children: ReactNode;
@@ -11,10 +11,6 @@ export type SparkCtaButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 
   fullWidth?: boolean;
 };
 
-/**
- * Glow / gradient border efekt podle konceptu Uiverse (SelfMadeSystem),
- * zabalený v jednom skutečném `<button>` pro přístupnost.
- */
 export function SparkCtaButton({
   children,
   iconAfter,
@@ -25,19 +21,14 @@ export function SparkCtaButton({
   type = 'button',
   ...props
 }: SparkCtaButtonProps) {
-  const rid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
-  const fid = rid.length > 0 ? `sc-${rid}` : 'sc-filter';
-
-  const f1 = `url(#${fid}-unopaq)`;
-  const f2 = `url(#${fid}-unopaq2)`;
-  const f3 = `url(#${fid}-unopaq3)`;
-
-  const sizeFace =
+  const sizeClass =
     size === 'nav'
-      ? 'spark-cta-face--nav px-6 lg:px-8 py-2.5 lg:py-3 text-[11px] lg:text-xs font-bold uppercase tracking-[0.22em]'
+      ? 'spark-cta--nav min-h-[42px] px-6 lg:px-8 py-2.5 lg:py-3 text-[11px] lg:text-xs font-bold uppercase tracking-[0.22em]'
       : size === 'compact'
-        ? 'spark-cta-face--compact px-5 py-3.5 text-sm font-bold uppercase tracking-[0.15em]'
-        : 'spark-cta-face--hero px-8 sm:px-10 py-4 sm:py-5 text-sm sm:text-base font-semibold tracking-normal';
+        ? 'spark-cta--compact min-h-[50px] px-5 py-3.5 text-sm font-bold uppercase tracking-[0.15em]'
+        : 'spark-cta--hero min-h-[56px] px-8 py-4 text-sm font-semibold tracking-normal sm:min-h-[60px] sm:px-10 sm:py-5 sm:text-base';
+
+  const marqueeCopies = [0, 1, 2];
 
   return (
     <button
@@ -46,76 +37,29 @@ export function SparkCtaButton({
       {...props}
       className={[
         'spark-cta max-w-full',
-        fullWidth ? 'flex w-full justify-center' : 'inline-flex',
+        sizeClass,
+        fullWidth ? 'w-full justify-center' : '',
         disabled ? 'spark-cta--disabled opacity-55 pointer-events-none' : '',
         className,
       ]
         .filter(Boolean)
         .join(' ')}
     >
-      <svg className="spark-cta-filters" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-        <defs>
-          <filter id={`${fid}-unopaq`} width="300%" x="-100%" height="300%" y="-100%">
-            <feColorMatrix
-              values="
-                1 0 0 0 0
-                0 1 0 0 0
-                0 0 1 0 0
-                0 0 0 9 0
-              "
-            />
-          </filter>
-          <filter id={`${fid}-unopaq2`} width="300%" x="-100%" height="300%" y="-100%">
-            <feColorMatrix
-              values="
-                1 0 0 0 0
-                0 1 0 0 0
-                0 0 1 0 0
-                0 0 0 3 0
-              "
-            />
-          </filter>
-          <filter id={`${fid}-unopaq3`} width="300%" x="-100%" height="300%" y="-100%">
-            <feColorMatrix
-              values="
-                1 0 0 0.2 0
-                0 1 0 0.2 0
-                0 0 1 0.2 0
-                0 0 0 2 0
-              "
-            />
-          </filter>
-        </defs>
-      </svg>
+      <span className="spark-cta-text">
+        <span className="min-w-0 leading-snug">{children}</span>
+        {iconAfter ? <span className="spark-cta-icon shrink-0">{iconAfter}</span> : null}
+      </span>
 
-      <div className="spark-cta-slot">
-        <div className={`spark-cta-shell relative inline-flex max-w-full ${fullWidth ? 'w-full justify-center' : ''}`}>
-          <div className="spark-cta-spin spark-cta-spin-blur" style={{ filter: `blur(2em) ${f1}` }} aria-hidden />
-
-          <div className="spark-cta-spin spark-cta-spin-intense" style={{ filter: `blur(0.25em) ${f2}` }} aria-hidden />
-
-          <div
-            className={`spark-cta-ring rounded-full bg-black/25 p-[3px] relative inline-flex max-w-full ${
-              fullWidth ? 'w-full sm:w-auto' : ''
-            }`}
-          >
-            <div
-              className="spark-cta-spin spark-cta-spin-inside rounded-[inherit]"
-              style={{ filter: `blur(2px) ${f3}` }}
-              aria-hidden
-            />
-
-            <div
-              className={`spark-cta-face relative z-[1] flex min-h-[52px] w-full shrink-0 items-center justify-center gap-2 rounded-[calc(9999px-3px)] bg-[#111215] text-center text-white ${
-                sizeFace
-              } ${fullWidth ? 'w-full' : ''}`}
-            >
-              <span className="min-w-0 leading-snug">{children}</span>
+      <span className="spark-cta-marquee" aria-hidden>
+        <span className="spark-cta-marquee-track">
+          {marqueeCopies.map((copy) => (
+            <span className="spark-cta-marquee-item" key={copy}>
+              <span>{children}</span>
               {iconAfter ? <span className="spark-cta-icon shrink-0">{iconAfter}</span> : null}
-            </div>
-          </div>
-        </div>
-      </div>
+            </span>
+          ))}
+        </span>
+      </span>
     </button>
   );
 }

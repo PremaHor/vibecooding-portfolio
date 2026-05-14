@@ -377,20 +377,73 @@ button:focus-visible {
   }
 }
 
-/* —— Spark / Uiverse-style CTA (SelfMadeSystem–like), spark-cta-* —— */
+/* Marquee CTA — calm premium pill with motion on intent */
 
 .spark-cta {
   position: relative;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)),
+    #07080a;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 48px rgba(0, 0, 0, 0.28);
   cursor: pointer;
   font: inherit;
-  color: inherit;
+  color: #fff;
   vertical-align: middle;
   isolation: isolate;
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
   -webkit-tap-highlight-color: transparent;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+}
+
+.spark-cta::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(110deg, rgba(242, 125, 38, 0), rgba(242, 125, 38, 0.58), rgba(56, 189, 248, 0.18), rgba(242, 125, 38, 0));
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.spark-cta::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.13), transparent 42%),
+    #07080a;
+}
+
+.spark-cta:hover:not(:disabled) {
+  border-color: rgba(242, 125, 38, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 22px 70px rgba(242, 125, 38, 0.22),
+    0 14px 42px rgba(0, 0, 0, 0.38);
+  transform: translateY(-1px);
+}
+
+.spark-cta:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.spark-cta:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
 }
 
 .spark-cta:focus-visible {
@@ -402,106 +455,91 @@ button:focus-visible {
   cursor: not-allowed;
 }
 
-/* Šířka „full-width“ řeší jen Tailwind utilities (např. w-full + sm:w-auto), aby je šlo přebít. */
-.spark-cta.w-full .spark-cta-slot {
-  width: 100%;
+.spark-cta-text,
+.spark-cta-marquee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-width: 0;
+  transition:
+    opacity 180ms ease,
+    transform 220ms ease;
 }
 
-.spark-cta-filters {
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.spark-cta-slot {
+.spark-cta-text {
   position: relative;
-  display: inline-block;
-  max-width: 100%;
+  z-index: 1;
 }
 
-.spark-cta-shell {
-  position: relative;
-}
-
-.spark-cta-spin {
+.spark-cta-marquee {
   position: absolute;
   inset: 0;
-  z-index: -2;
-  opacity: 0.5;
+  z-index: 2;
   overflow: hidden;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  opacity: 0;
+  transform: translateY(0.35em);
+  white-space: nowrap;
 }
 
-.spark-cta:active:not(:disabled) .spark-cta-spin {
-  opacity: 1;
-}
-
-.spark-cta-spin-intense {
-  inset: -0.125rem;
-  border-radius: 0.75rem;
-}
-
-.spark-cta-spin-inside {
-  inset: -2px;
-  border-radius: inherit;
-  z-index: 0;
-}
-
-.spark-cta-spin::before {
-  content: '';
-  position: absolute;
-  inset: -150%;
-  animation:
-    spark-cta-speen 8s cubic-bezier(0.56, 0.15, 0.28, 0.86) infinite,
-    spark-cta-woah 4s ease-in-out infinite;
+.spark-cta-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: spark-cta-marquee 1.15s linear infinite;
   animation-play-state: paused;
 }
 
-.spark-cta:hover:not(:disabled) .spark-cta-spin::before {
+.spark-cta-marquee-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding-inline: 1.75rem;
+}
+
+.spark-cta:hover:not(:disabled) .spark-cta-text {
+  opacity: 0;
+  transform: translateY(-0.35em);
+}
+
+.spark-cta:hover:not(:disabled) .spark-cta-marquee {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.spark-cta:hover:not(:disabled) .spark-cta-marquee-track {
   animation-play-state: running;
 }
 
-.spark-cta-spin-blur::before {
-  background: linear-gradient(90deg, #f27d26 28%, transparent 50%, #2563eb 72%);
-}
-
-.spark-cta-spin-intense::before {
-  background: linear-gradient(90deg, #fb923c 20%, transparent 45% 55%, #38bdf8 80%);
-}
-
-.spark-cta-spin-inside::before {
-  background: linear-gradient(90deg, #fcd34d 28%, transparent 45% 55%, #93c5fd 72%);
-}
-
-@keyframes spark-cta-speen {
-  0% {
-    rotate: 10deg;
+@keyframes spark-cta-marquee {
+  from {
+    transform: translateX(0);
   }
-  50% {
-    rotate: 190deg;
-  }
-  100% {
-    rotate: 370deg;
-  }
-}
-
-@keyframes spark-cta-woah {
-  0%,
-  100% {
-    scale: 1;
-  }
-  50% {
-    scale: 0.75;
+  to {
+    transform: translateX(-33.333%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spark-cta-spin::before {
-    animation: none !important;
+  .spark-cta,
+  .spark-cta::before,
+  .spark-cta-text,
+  .spark-cta-marquee {
+    transition: none;
   }
 
-  .spark-cta-spin {
-    opacity: 0.38;
+  .spark-cta-marquee-track {
+    animation: none;
+  }
+
+  .spark-cta:hover:not(:disabled) .spark-cta-text {
+    opacity: 1;
+    transform: none;
+  }
+
+  .spark-cta:hover:not(:disabled) .spark-cta-marquee {
+    opacity: 0;
+    transform: none;
   }
 }
