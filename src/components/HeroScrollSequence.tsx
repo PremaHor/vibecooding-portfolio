@@ -7,7 +7,7 @@ import { HeroAccentTypewriter } from './HeroAccentTypewriter';
 
 const FRAME_COUNT = 60;
 /** Total section height in vh. Scroll band = SECTION_VH − 100vh; higher ⇒ slower progression through frames. */
-const SECTION_VH = 580;
+const SECTION_VH = 920;
 
 const VIGNETTE =
   'radial-gradient(ellipse 62% 68% at 50% 50%, black 0%, black 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 70%, transparent 88%)';
