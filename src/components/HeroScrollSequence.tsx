@@ -10,6 +10,12 @@ const FRAME_COUNT = 60;
 const SECTION_VH_FALLBACK = 520;
 /** Kumulativní síla kolečka (+ dolů − nahoru): celá virtuální dráha mezi frame 0 a posledním */
 const WHEEL_DELTA_FOR_FULL_SEQUENCE = 5400;
+/** Impulz z wheel deltaY (stejné jednotky jako dráha výše) */
+const WHEEL_IMPULSE_SCALE = 1.05;
+/** Tření na snímek (čím blíž 1, tím déle „dojíždí“) */
+const WHEEL_FRICTION = 0.885;
+/** Pod touto rychlostí animaci zastavíme */
+const WHEEL_VELOCITY_EPS = 0.14;
 /** Nad touto hodnotou scrollY už nekrotíme kolečko (uživatel jde po stránce) */
 const HERO_WHEEL_SCROLL_Y_LEAVE = 88;
 
@@ -332,54 +338,90 @@ function useHeroSequenceCanvas() {
 
 function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
   const { canvasRef, drawTimeline, loadingLayers } = useHeroSequenceCanvas();
-  const accumRef = useRef(0);
+  const posRef = useRef(0);
+  const velRef = useRef(0);
+  const rafLoopRef = useRef(0);
+  const tickingRef = useRef(false);
   const drawTimelineRef = useRef(drawTimeline);
   drawTimelineRef.current = drawTimeline;
 
-  const rafRef = useRef<number>(0);
   const maxIdx = FRAME_COUNT - 1;
 
   useEffect(() => {
     const full = WHEEL_DELTA_FOR_FULL_SEQUENCE;
     const FULL_EPS = 1e-3;
 
-    const applyTimelineDraw = () => {
-      const tl = (accumRef.current / full) * maxIdx;
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => drawTimelineRef.current(tl));
+    const stopLoop = () => {
+      if (rafLoopRef.current) {
+        cancelAnimationFrame(rafLoopRef.current);
+        rafLoopRef.current = 0;
+      }
+      tickingRef.current = false;
+    };
+
+    const tick = () => {
+      let p = posRef.current;
+      let v = velRef.current;
+
+      p += v;
+      p = Math.max(0, Math.min(full, p));
+      if (p <= 0) v = Math.max(0, v);
+      if (p >= full) v = Math.min(0, v);
+
+      v *= WHEEL_FRICTION;
+      if (Math.abs(v) < WHEEL_VELOCITY_EPS) v = 0;
+
+      posRef.current = p;
+      velRef.current = v;
+
+      drawTimelineRef.current((p / full) * maxIdx);
+
+      if (v !== 0) {
+        rafLoopRef.current = requestAnimationFrame(tick);
+      } else {
+        tickingRef.current = false;
+        rafLoopRef.current = 0;
+      }
+    };
+
+    const ensureLoop = () => {
+      if (!tickingRef.current) {
+        tickingRef.current = true;
+        rafLoopRef.current = requestAnimationFrame(tick);
+      }
     };
 
     const onWheel = (e: WheelEvent) => {
       if (window.scrollY > HERO_WHEEL_SCROLL_Y_LEAVE) return;
       if (!e.deltaY) return;
 
-      const prev = accumRef.current;
-      const tentative = Math.min(full, Math.max(0, prev + e.deltaY));
+      const p = posRef.current;
       const scrollingDown = e.deltaY > 0;
-      /** Na konci virtuální dráhy: dolů pusť stránku, nahoru zpět odvíjej framery */
-      const wasAtEnd = prev >= full - FULL_EPS;
+      const wasAtEnd = p >= full - FULL_EPS;
 
-      if (wasAtEnd && tentative >= full - FULL_EPS && scrollingDown) {
-        accumRef.current = full;
+      if (wasAtEnd && scrollingDown && Math.abs(velRef.current) < 0.25) {
+        posRef.current = full;
+        velRef.current = 0;
         return;
       }
 
-      accumRef.current = tentative;
       e.preventDefault();
       e.stopPropagation();
-      applyTimelineDraw();
 
-      if (accumRef.current >= full - FULL_EPS) {
-        accumRef.current = full;
-      }
+      let dy = e.deltaY;
+      if (e.deltaMode === 1) dy *= 16;
+      else if (e.deltaMode === 2) dy *= 120;
+
+      velRef.current += dy * WHEEL_IMPULSE_SCALE;
+      ensureLoop();
     };
 
     window.addEventListener('wheel', onWheel, { capture: true, passive: false });
-    applyTimelineDraw();
+    drawTimelineRef.current(0);
 
     return () => {
       window.removeEventListener('wheel', onWheel, { capture: true });
-      cancelAnimationFrame(rafRef.current);
+      stopLoop();
     };
   }, []);
 
