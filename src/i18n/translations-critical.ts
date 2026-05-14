@@ -16,7 +16,7 @@ export const criticalTranslations = {
     },
     hero: {
       available: 'Hledám tým, se kterým budu tvořit budoucnost',
-      h1: 'Pomáhám navrhovat digitální produkty tak, aby je lidé opravdu pochopili a chtěli používat.',
+      h1: 'Rychle stavím funkční prototypy digitálních produktů pomocí AI nástrojů',
       subheadlineLead:
         'Hledám tým, kde můžu růst v UX a podílet se na smysluplných produktech.',
       subheadlineAccent: '',
@@ -36,14 +36,14 @@ export const criticalTranslations = {
       privacyLink: 'Zásady ochrany soukromí',
     },
     seo: {
-      pageTitle: 'Přemysl Horák | Pomáhám navrhovat digitální produkty',
-      twitterTitle: 'Přemysl Horák | Pomáhám navrhovat digitální produkty',
+      pageTitle: 'Přemysl Horák | Funkční prototypy digitálních produktů s AI',
+      twitterTitle: 'Přemysl Horák | Funkční prototypy digitálních produktů s AI',
       metaDescription:
-        'Přemysl Horák — vývojář a designér. Pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák — vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
       ogDescription:
-        'Přemysl Horák — vývojář a designér. Pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák — vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
       jsonLdDescription:
-        'Přemysl Horák — vývojář a designér. Pomáhá firmám a startupům vytvořit web nebo produkt od první myšlenky až po spuštění. Design, vývoj i produkt v jednom.',
+        'Přemysl Horák — vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
       ogLocale: 'cs_CZ',
       ogLocaleAlternate: 'en_US',
     },
@@ -63,7 +63,7 @@ export const criticalTranslations = {
     },
     hero: {
       available: 'Looking for a team to build the future with',
-      h1: 'I help design digital products so people truly understand them and want to use them.',
+      h1: 'I quickly build functional prototypes of digital products using AI tools',
       subheadlineLead:
         "I'm looking for a team where I can grow in UX and help build meaningful products.",
       subheadlineAccent: '',
@@ -83,14 +83,14 @@ export const criticalTranslations = {
       privacyLink: 'Privacy policy',
     },
     seo: {
-      pageTitle: 'Premysl Horak | Digital products people understand',
-      twitterTitle: 'Premysl Horak | Digital products people understand',
+      pageTitle: 'Premysl Horak | Functional digital product prototypes with AI',
+      twitterTitle: 'Premysl Horak | Functional digital product prototypes with AI',
       metaDescription:
-        'Premysl Horak (Přemysl Horák): developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák): developer and designer. Builds functional prototypes of digital products fast with AI tooling, from idea through design to launch.',
       ogDescription:
-        'Premysl Horak (Přemysl Horák): developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák): developer and designer. Builds functional prototypes of digital products fast with AI tooling, from idea through design to launch.',
       jsonLdDescription:
-        'Premysl Horak (Přemysl Horák): developer and designer. Helps companies and startups build a website or product from the first idea to launch. Design, development, and product in one.',
+        'Premysl Horak (Přemysl Horák): developer and designer. Builds functional prototypes of digital products fast with AI tooling, from idea through design to launch.',
       ogLocale: 'en_US',
       ogLocaleAlternate: 'cs_CZ',
     },
