@@ -66,10 +66,13 @@ function progressToHeroTimeline(progress01: number) {
 
 function sizeCanvas(canvas: HTMLCanvasElement) {
   const dpr = Math.min(window.devicePixelRatio || 1, HERO_CANVAS_MAX_DPR);
-  canvas.width = Math.round(window.innerWidth * dpr);
-  canvas.height = Math.round(window.innerHeight * dpr);
-  canvas.style.width = `${window.innerWidth}px`;
-  canvas.style.height = `${window.innerHeight}px`;
+  // Čte skutečnou vykreslenou CSS velikost kontejneru (absolute inset-0),
+  // takže buffer přesně odpovídá tomu, co je vidět – žádný černý pruh dole.
+  const w = canvas.clientWidth || window.innerWidth;
+  const h = canvas.clientHeight || window.innerHeight;
+  canvas.width = Math.round(w * dpr);
+  canvas.height = Math.round(h * dpr);
+  // Inline style záměrně nestavíme – CSS (absolute inset-0 / h-full) to řídí.
 }
 
 function paintCoverImage(ctx: CanvasRenderingContext2D, cw: number, ch: number, img: HTMLImageElement) {
@@ -262,12 +265,12 @@ function HeroMobile() {
   const ariaLabel = lang === 'cs' ? 'Úvod' : 'Hero';
 
   return (
-    <section className="relative h-screen overflow-hidden" aria-label={ariaLabel}>
+    <section className="relative overflow-hidden" style={{ height: '100dvh' }} aria-label={ariaLabel}>
       <HeroShell
         canvas={
           <canvas
             ref={canvasRef}
-            className="absolute inset-0"
+            className="absolute inset-0 w-full h-full"
             style={{ willChange: 'contents' }}
             aria-hidden
           />
@@ -305,12 +308,12 @@ function HeroDesktopReducedMotion({ useVignette }: { useVignette: boolean }) {
   const ariaLabel = lang === 'cs' ? 'Úvod' : 'Hero';
 
   return (
-    <section className="relative max-h-none min-h-screen shrink-0 overflow-hidden" aria-label={ariaLabel}>
+    <section className="relative shrink-0 overflow-hidden" style={{ height: '100dvh' }} aria-label={ariaLabel}>
       <HeroShell
         canvas={
           <canvas
             ref={canvasRef}
-            className="absolute inset-0 min-h-[100dvh]"
+            className="absolute inset-0 w-full h-full"
             style={canvasStyleWithOptionalVignette(useVignette)}
             aria-hidden
           />
@@ -339,6 +342,15 @@ function useHeroSequenceCanvas() {
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    // Počkáme jeden frame, pokud canvas ještě nemá CSS rozměry (první mount).
+    if (canvas.clientWidth === 0) {
+      requestAnimationFrame(() => {
+        if (!canvasRef.current) return;
+        sizeCanvas(canvasRef.current);
+        paintBlendedTimeline(canvasRef.current, imagesRef.current, lastTimelineRef.current);
+      });
+      return;
+    }
     sizeCanvas(canvas);
     paintBlendedTimeline(canvas, imagesRef.current, lastTimelineRef.current);
   }, []);
@@ -522,7 +534,8 @@ function HeroDesktopWheelLock({ wheelHint, useVignette }: { wheelHint: string; u
 
   return (
     <section className="relative shrink-0" aria-label="Hero">
-      <div className="relative h-[min(100dvh,100svh,100vh)] min-h-[100vh] overflow-hidden">
+      {/* 100dvh = dynamic viewport height = přesně to co je vidět bez lišt prohlížeče */}
+      <div className="relative overflow-hidden" style={{ height: '100dvh' }}>
         <HeroShell
           scrollHint={wheelHint}
           overlays={loadingLayers}
@@ -582,7 +595,8 @@ function HeroDesktopScrollLinked({ scrollHint, useVignette }: { scrollHint: stri
     >
       <div
         ref={stickyRef}
-        className="sticky top-0 h-[min(100dvh,100svh,100vh)] min-h-screen overflow-hidden"
+        className="sticky top-0 overflow-hidden"
+        style={{ height: '100dvh' }}
       >
         <HeroShell
           scrollHint={scrollHint}
