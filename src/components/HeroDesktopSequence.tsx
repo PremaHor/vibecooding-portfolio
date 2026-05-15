@@ -1,8 +1,8 @@
 /**
  * Desktop hero with 60-frame WebP scroll sequence painted on canvas.
- * Lazy-loaded by HeroScrollSequence so mobile doesn't pay for this code.
+ * Imported only on fine-pointer desktop from HeroScrollSequence.
  */
-import { useEffect, useRef, useState, useCallback, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, useState, useCallback, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { HeroShell, VIGNETTE, frameUrl, FRAME_COUNT, LAST_FRAME_INDEX } from './HeroScrollSequenceShared';
 
@@ -187,7 +187,6 @@ function useHeroSequenceCanvas() {
 
   const loadingLayers: ReactNode = (
     <>
-      {!loaded && loadProgress === 0 ? <div className="absolute inset-0 z-[30] bg-[var(--color-vibe-black)]" /> : null}
       {!loaded && loadProgress > 0 ? (
         <div className="absolute top-0 left-0 right-0 z-[30] h-0.5 bg-white/10">
           <div
@@ -200,6 +199,31 @@ function useHeroSequenceCanvas() {
   );
 
   return { canvasRef, drawTimeline, loadingLayers };
+}
+
+function HeroPosterUnderCanvas({
+  canvasRef,
+  canvasStyle,
+}: {
+  canvasRef: RefObject<HTMLCanvasElement | null>;
+  canvasStyle: CSSProperties;
+}) {
+  return (
+    <>
+      <img
+        src={frameUrl(0)}
+        alt=""
+        width={1920}
+        height={1080}
+        decoding="async"
+        fetchPriority="high"
+        loading="eager"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        aria-hidden
+      />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" style={canvasStyle} aria-hidden />
+    </>
+  );
 }
 
 function HeroDesktopWheelLock({ wheelHint, useVignette }: { wheelHint: string; useVignette: boolean }) {
@@ -280,11 +304,9 @@ function HeroDesktopWheelLock({ wheelHint, useVignette }: { wheelHint: string; u
           scrollHint={wheelHint}
           overlays={loadingLayers}
           canvas={
-            <canvas
-              ref={canvasRef}
-              className="absolute inset-0 w-full h-full"
-              style={canvasStyleWithOptionalVignette(useVignette)}
-              aria-hidden
+            <HeroPosterUnderCanvas
+              canvasRef={canvasRef}
+              canvasStyle={canvasStyleWithOptionalVignette(useVignette)}
             />
           }
         />
@@ -339,11 +361,9 @@ function HeroDesktopScrollLinked({ scrollHint, useVignette }: { scrollHint: stri
           scrollHint={scrollHint}
           overlays={loadingLayers}
           canvas={
-            <canvas
-              ref={canvasRef}
-              className="absolute inset-0 h-full w-full"
-              style={canvasStyleWithOptionalVignette(useVignette)}
-              aria-hidden
+            <HeroPosterUnderCanvas
+              canvasRef={canvasRef}
+              canvasStyle={canvasStyleWithOptionalVignette(useVignette)}
             />
           }
         />

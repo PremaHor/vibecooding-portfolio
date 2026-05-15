@@ -12,7 +12,7 @@
       @font-face{font-family:"Inter";font-style:normal;font-display:swap;font-weight:100 900;src:url(/fonts/inter-latin.woff2) format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
       html,body{background-color:#050505!important;color:#fff;margin:0;min-height:100%;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
       #root{min-height:100vh}
-      @media(min-width:768px){.no-fouc #root{opacity:0!important;pointer-events:none}}
+      /* Nepoužívat opacity:0 na #root — Lighthouse pak často nedetekuje LCP (NO_LCP). */
       /* LCP hero + navbar (FOUC-free při async CSS) */
       .font-display{font-family:"Montserrat",system-ui,sans-serif;font-weight:700;letter-spacing:.03em}
       .hero-section .hero-content h1 .hero-h1-tagline{display:block;background:linear-gradient(to bottom right,#fff,#fff,#94a3b8);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -20,10 +20,10 @@
       nav a:not(.nav-cta),nav button{color:inherit}
       .nav-cta.bg-white{color:#000}
       .nav-cta.bg-black{color:#fff}
-      @keyframes hfi{from{opacity:0;transform:translateY(1.5rem)}to{opacity:1;transform:none}}
+      @keyframes hfi{from{opacity:1;transform:translateY(1.25rem)}to{opacity:1;transform:none}}
       @keyframes pfi{from{opacity:0}to{opacity:1}}
       @media(min-width:768px){
-        .hero-anim{opacity:0;animation:hfi .7s cubic-bezier(.16,1,.3,1) both}
+        .hero-anim{animation:hfi .7s cubic-bezier(.16,1,.3,1) both}
         .hero-anim-d1{animation-delay:.12s}
         .hero-anim-d2{animation-delay:.24s}
       }
@@ -40,7 +40,6 @@
       (function(){
         var l=(navigator.language||navigator.userLanguage||'').toLowerCase();
         document.documentElement.lang=(l.startsWith('cs')||l.startsWith('sk'))?'cs':'en';
-        document.documentElement.classList.add('no-fouc');
       })();
     </script>
     <meta charset="UTF-8" />

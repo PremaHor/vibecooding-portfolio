@@ -1,13 +1,12 @@
 /**
- * Hero entry point. Renders a lightweight static <img> hero on mobile / reduced
- * motion / first paint, and lazy-loads the canvas-based scroll sequence only
- * on desktops that benefit from it. Keeps the initial JS bundle small.
+ * Hero entry point. Static <img> hero on mobile / tablet / reduced motion;
+ * canvas scroll sequence on fine-pointer desktop. Desktop module is bundled
+ * with the main chunk so LCP isn't delayed by lazy-loading.
  */
-import { lazy, Suspense, useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { HeroShell, VIGNETTE, frameUrl } from './HeroScrollSequenceShared';
-
-const HeroDesktopSequence = lazy(() => import('./HeroDesktopSequence'));
+import HeroDesktopSequence from './HeroDesktopSequence';
 
 function StaticHeroFrame({
   ariaLabel,
@@ -92,9 +91,5 @@ export function HeroScrollSequence() {
     return <StaticHeroFrame ariaLabel={ariaLabel} vignetteStyle={vignetteStyle} />;
   }
 
-  return (
-    <Suspense fallback={<StaticHeroFrame ariaLabel={ariaLabel} />}>
-      <HeroDesktopSequence coarsePointer={false} useVignette={heroCanvasVignette} />
-    </Suspense>
-  );
+  return <HeroDesktopSequence coarsePointer={false} useVignette={heroCanvasVignette} />;
 }
