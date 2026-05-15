@@ -1,13 +1,14 @@
+import { use } from 'react';
 import { Link } from '../router';
 import { motion } from 'motion/react';
 import { MousePointer2 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
-import { translations } from '../i18n/translations';
+import { translationsPromise } from '../i18n/translations';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 
 export function NotFoundPage() {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const tr = t.notFound;
   const fmt = (s: string) => (lang === 'cs' ? fixCzechTypography(s) : fixDashes(s));
 

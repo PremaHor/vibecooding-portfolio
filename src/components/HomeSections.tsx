@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { use, useState, useEffect, useRef } from 'react';
 import { Link } from '../router';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
-import { translations } from '../i18n/translations';
+import { translationsPromise } from '../i18n/translations';
 import { projectLocaleField } from '../i18n/projectLocale';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useGoToContactForm } from '../hooks/useGoToContactForm';
@@ -52,7 +52,7 @@ const BentoCard = ({ children, className = '', delay = 0, dark = false }: { chil
 
 const StorySection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const tx = (v: string) => lang === 'cs' ? fixCzechTypography(v) : fixDashes(v);
 
   return (
@@ -122,7 +122,7 @@ const StorySection = () => {
 
 const ProcessSection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const tx = (v: string) => lang === 'cs' ? fixCzechTypography(v) : fixDashes(v);
 
   return (
@@ -245,7 +245,7 @@ const ProcessSection = () => {
 
 function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: Project; index: number; isMobile: boolean }) {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const tr = t.projects[project.slug as keyof typeof t.projects];
   const displayTitle = projectLocaleField(lang, tr, 'title', project);
   const category = tr?.category ?? project.category;
@@ -326,7 +326,7 @@ function ProjectCard({ project, index, isMobile }: { key?: React.Key; project: P
 
 const WorkSection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const isMobile = useIsMobile();
   return (
     <section id="work" className="cv-section-deferred relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="work-heading">
@@ -403,7 +403,7 @@ const ABOUT_PARAGRAPH_IDS = ['p1', 'p2', 'p3', 'p4'] as const;
 
 const AboutSection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const reduceMotion = useReducedMotion();
 
   const paragraphMotionProps = (index: number) => {
@@ -526,7 +526,7 @@ const SERVICES_CARDS = [
 
 const ServicesPricingSection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const goToContactForm = useGoToContactForm();
   return (
     <section id="services" className="cv-section-deferred py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden backface-hidden">
@@ -632,7 +632,7 @@ const ServicesPricingSection = () => {
 
 const CtaSection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const goToContactForm = useGoToContactForm();
   return (
     <section id="cta" className="cv-section-deferred py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)] text-white relative overflow-hidden backface-hidden">
@@ -695,7 +695,7 @@ const COMPETITIVE_CARDS = [
 
 const CompetitiveAdvantageSection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   return (
     <section id="competitive-advantage" className="cv-section-deferred relative py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden backface-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-vibe-black)] via-[#0a0a0a] to-[var(--color-vibe-black)] backface-hidden" />
@@ -751,7 +751,7 @@ const CompetitiveAdvantageSection = () => {
 
 const FAQSection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const [openId, setOpenId] = useState<number | null>(null);
 
   const items = [
@@ -843,7 +843,7 @@ const FORMSPREE_URL = 'https://formspree.io/f/mjkebwwp';
 
 const ContactSection = () => {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const formRef = useRef<HTMLFormElement>(null);
 

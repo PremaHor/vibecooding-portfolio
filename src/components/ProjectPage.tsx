@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { use, useState, useEffect } from 'react';
 import { useParams, Link } from '../router';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ExternalLink, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
-import { translations } from '../i18n/translations';
+import { translationsPromise } from '../i18n/translations';
 import { projectLocaleField } from '../i18n/projectLocale';
 import { PROJECTS, getImageSrcSet, getProjectImageSrcSet } from '../shared/data';
 import { Navbar } from './Navbar';
@@ -154,7 +154,7 @@ const ProjectStructuredContent = ({ tr, lang }: { tr: StructuredBase; lang: 'cs'
 export const ProjectPage = () => {
   const { slug } = useParams();
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const projectIndex = PROJECTS.findIndex(p => p.slug === slug);
   const project = PROJECTS[projectIndex];

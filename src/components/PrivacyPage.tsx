@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { use, useEffect } from 'react';
 import { Link } from '../router';
 import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
-import { translations } from '../i18n/translations';
+import { translationsPromise } from '../i18n/translations';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 
 export function PrivacyPage() {
   const { lang } = useLanguage();
-  const t = translations[lang];
+  const t = use(translationsPromise);
 
   useEffect(() => {
     window.scrollTo(0, 0);
