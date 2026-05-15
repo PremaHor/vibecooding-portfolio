@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback, useMemo, type ReactNode } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo, type CSSProperties, type ReactNode } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
@@ -27,6 +27,14 @@ const HERO_WHEEL_SCROLL_Y_LEAVE = 88;
 
 const VIGNETTE =
   'radial-gradient(ellipse 62% 68% at 50% 50%, black 0%, black 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 70%, transparent 88%)';
+
+/** Maska na canvas – na tabletu / primárním dotyku bez viněty (čistší fotka při scroll sekvenci). */
+function canvasStyleWithOptionalVignette(useVignette: boolean): CSSProperties {
+  return {
+    willChange: 'contents',
+    ...(useVignette ? { WebkitMaskImage: VIGNETTE, maskImage: VIGNETTE } : {}),
+  };
+}
 
 function frameUrl(i: number): string {
   return `/hero-frames/frame_${String(i + 1).padStart(3, '0')}.webp`;
@@ -269,7 +277,7 @@ function HeroMobile() {
 
 // ─── Reduced-motion desktop ────────────────────────────────────────────────
 
-function HeroDesktopReducedMotion() {
+function HeroDesktopReducedMotion({ useVignette }: { useVignette: boolean }) {
   const { lang } = useLanguage();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -301,7 +309,7 @@ function HeroDesktopReducedMotion() {
           <canvas
             ref={canvasRef}
             className="absolute inset-0 min-h-[100dvh]"
-            style={{ WebkitMaskImage: VIGNETTE, maskImage: VIGNETTE, willChange: 'contents' }}
+            style={canvasStyleWithOptionalVignette(useVignette)}
             aria-hidden
           />
         }
@@ -395,7 +403,7 @@ function useHeroSequenceCanvas() {
 
 // ─── Desktop: kolečko (fine pointer) — dokument se nehybne dokud nedoběhne sekce framů ─
 
-function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
+function HeroDesktopWheelLock({ wheelHint, useVignette }: { wheelHint: string; useVignette: boolean }) {
   const { canvasRef, drawTimeline, loadingLayers } = useHeroSequenceCanvas();
   const posRef = useRef(0);
   const velRef = useRef(0);
@@ -492,7 +500,7 @@ function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
             <canvas
               ref={canvasRef}
               className="absolute inset-0 w-full h-full"
-              style={{ WebkitMaskImage: VIGNETTE, maskImage: VIGNETTE, willChange: 'contents' }}
+              style={canvasStyleWithOptionalVignette(useVignette)}
               aria-hidden
             />
           }
@@ -504,8 +512,9 @@ function HeroDesktopWheelLock({ wheelHint }: { wheelHint: string }) {
 
 // ─── Desktop coarse pointer: sticky sekce (dotykové tablety…) ─────────────────
 
-function HeroDesktopScrollLinked({ scrollHint }: { scrollHint: string | null }) {
+function HeroDesktopScrollLinked({ scrollHint, useVignette }: { scrollHint: string | null; useVignette: boolean }) {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
   const { canvasRef, drawTimeline, loadingLayers } = useHeroSequenceCanvas();
 
   const rafRef = useRef<number>(0);
@@ -513,17 +522,23 @@ function HeroDesktopScrollLinked({ scrollHint }: { scrollHint: string | null }) 
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
-      const scrollDistance = Math.max(1, section.offsetHeight - window.innerHeight);
-      const progress01 = Math.max(0, Math.min(1, (window.scrollY - section.offsetTop) / scrollDistance));
+      const rect = section.getBoundingClientRect();
+      const stickyH = stickyRef.current?.offsetHeight ?? window.visualViewport?.height ?? window.innerHeight;
+      const scrollDistance = Math.max(1, rect.height - stickyH);
+      const progress01 = Math.max(0, Math.min(1, -rect.top / scrollDistance));
       const tl = progressToHeroTimeline(progress01);
       cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => drawTimeline(tl));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.visualViewport?.addEventListener('resize', handleScroll, { passive: true });
+    window.visualViewport?.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.visualViewport?.removeEventListener('resize', handleScroll);
+      window.visualViewport?.removeEventListener('scroll', handleScroll);
       cancelAnimationFrame(rafRef.current);
     };
   }, [drawTimeline]);
@@ -535,7 +550,10 @@ function HeroDesktopScrollLinked({ scrollHint }: { scrollHint: string | null }) 
       className="relative"
       aria-label="Hero"
     >
-      <div className="sticky top-0 h-[min(100dvh,100svh,100vh)] min-h-screen overflow-hidden">
+      <div
+        ref={stickyRef}
+        className="sticky top-0 h-[min(100dvh,100svh,100vh)] min-h-screen overflow-hidden"
+      >
         <HeroShell
           scrollHint={scrollHint}
           overlays={loadingLayers}
@@ -543,7 +561,7 @@ function HeroDesktopScrollLinked({ scrollHint }: { scrollHint: string | null }) 
             <canvas
               ref={canvasRef}
               className="absolute inset-0 h-full w-full"
-              style={{ WebkitMaskImage: VIGNETTE, maskImage: VIGNETTE, willChange: 'contents' }}
+              style={canvasStyleWithOptionalVignette(useVignette)}
               aria-hidden
             />
           }
@@ -559,6 +577,12 @@ export function HeroScrollSequence() {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const [coarsePointer, setCoarsePointer] = useState(() =>
     typeof window !== 'undefined' ? window.matchMedia('(pointer: coarse)').matches : false,
+  );
+  /** Viněta jen na „myšové“ desktopu; tablet / dotyk / iPad bez ohledu na připojenou myš */
+  const [heroCanvasVignette, setHeroCanvasVignette] = useState(() =>
+    typeof window !== 'undefined'
+      ? !window.matchMedia('(min-width: 768px) and ((hover: none) or (pointer: coarse))').matches
+      : true,
   );
   const prefersReducedMotion = useMemo(
     () => (typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false),
@@ -581,15 +605,27 @@ export function HeroScrollSequence() {
     return () => mq.removeEventListener('change', onChange);
   }, []);
 
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px) and ((hover: none) or (pointer: coarse))');
+    const onChange = () => setHeroCanvasVignette(!mq.matches);
+    mq.addEventListener('change', onChange);
+    onChange();
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
   if (isMobile) {
     return <HeroMobile />;
   }
 
   if (prefersReducedMotion) {
-    return <HeroDesktopReducedMotion />;
+    return <HeroDesktopReducedMotion useVignette={heroCanvasVignette} />;
   }
 
   const wheelHint = t.hero.wheelScrollHint ?? '';
 
-  return coarsePointer ? <HeroDesktopScrollLinked scrollHint={null} /> : <HeroDesktopWheelLock wheelHint={wheelHint} />;
+  return coarsePointer ? (
+    <HeroDesktopScrollLinked scrollHint={null} useVignette={heroCanvasVignette} />
+  ) : (
+    <HeroDesktopWheelLock wheelHint={wheelHint} useVignette={heroCanvasVignette} />
+  );
 }

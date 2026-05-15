@@ -41,7 +41,9 @@ export default function App() {
 
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
-    if (isMobile) return;
+    /** Lenis + dotyk (tablet) často rozháže scrub hero sekvence – nativní scroll dává stabilnější scrollY. */
+    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    if (isMobile || isCoarsePointer) return;
 
     const initLenis = () => {
       import('@studio-freight/lenis').then(({ default: Lenis }) => {
