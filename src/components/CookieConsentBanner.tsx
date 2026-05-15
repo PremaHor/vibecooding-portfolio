@@ -63,8 +63,8 @@ export function CookieConsentBanner() {
             >
               {lang === 'cs' ? fixCzechTypography(t.cookieConsent.description) : fixDashes(t.cookieConsent.description)}
             </p>
-            <p className="text-xs text-white/50 mb-5 sm:mb-6">
-              <Link to="/ochrana-soukromi" className="underline hover:text-white/70 transition-colors">
+            <p className="text-xs text-white/70 mb-5 sm:mb-6">
+              <Link to="/ochrana-soukromi" className="underline hover:text-white/85 transition-colors">
                 {lang === 'cs' ? fixCzechTypography(t.cookieConsent.privacyLink) : fixDashes(t.cookieConsent.privacyLink)}
               </Link>
             </p>

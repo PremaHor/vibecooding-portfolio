@@ -58,7 +58,7 @@ const StorySection = () => {
   return (
     <section className="relative overflow-hidden bg-[var(--color-vibe-black)] px-4 py-20 text-white sm:px-6 sm:py-28 md:px-8 md:py-36 lg:px-12" aria-labelledby="story-heading">
       <div className="absolute left-1/2 top-0 h-px w-[min(72rem,86vw)] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/15 to-transparent" aria-hidden />
-      <div className="absolute left-1/2 top-20 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(242,125,38,0.16)_0%,rgba(242,125,38,0.06)_34%,transparent_68%)] blur-2xl" aria-hidden />
+      <div className="absolute left-1/2 top-20 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(158,240,26,0.16)_0%,rgba(158,240,26,0.06)_34%,transparent_68%)] blur-2xl" aria-hidden />
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] translate-x-1/3 rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.10)_0%,transparent_68%)] blur-2xl" aria-hidden />
 
       <div className="relative z-10 mx-auto max-w-7xl">
@@ -421,7 +421,7 @@ const AboutSection = () => {
   return (
     <section id="about" className="cv-section-deferred relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden backface-hidden">
       <div className="absolute inset-0 bg-[var(--color-vibe-black)] backface-hidden" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(242,125,38,0.06),transparent_50%)] backface-hidden" aria-hidden />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(158,240,26,0.06),transparent_50%)] backface-hidden" aria-hidden />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 lg:gap-20 items-start">
@@ -924,7 +924,7 @@ const ContactSection = () => {
                   <label htmlFor="message" className="block text-sm font-bold uppercase tracking-[0.15em] mb-2">{f.message} *</label>
                   <textarea id="message" name="message" required rows={5} placeholder={f.messagePlaceholder} className="w-full px-4 py-3.5 rounded-xl bg-white/60 border border-black/10 text-black placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-black/30 focus:bg-white/80 transition-all duration-200 resize-y min-h-[120px]" />
                 </div>
-                <input type="text" name="_gotcha" autoComplete="off" className="hidden" tabIndex={-1} aria-hidden="true" />
+                <input type="text" name="_gotcha" autoComplete="off" className="hidden" tabIndex={-1} />
                 <motion.button type="submit" disabled={formStatus === 'sending'} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-4.5 rounded-full text-sm sm:text-base font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-white hover:text-black transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
                   {formStatus === 'sending' ? <>{f.sending}</> : <><Send className="w-4 h-4" /> {f.submit}</>}
                 </motion.button>

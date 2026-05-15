@@ -10,16 +10,16 @@ Definováno v `@theme` v `src/index.css` a používáno jako `var(--color-…)` 
 
 | Token | Hodnota | Použití |
 |--------|---------|---------|
-| `--color-vibe-orange` | `#F27D26` | Akcent, CTA, hover, selection, značkové zvýraznění, focus ring |
+| `--color-vibe-orange` | `#9ef01a` | Akcent (limetková), CTA, hover, selection, značkové zvýraznění; text na `#050505` ~14.5:1 (WCAG AAA) |
 | `--color-vibe-black` | `#050505` | Pozadí celého webu, tmavé stránky projektů, scrollbar track |
 | `--color-vibe-green` | `#00FF00` | Rezervovaný token v theme; v UI se aktuálně nepoužívá |
 
 **Doplňkové barvy mimo `@theme` (v kódu):**
 
-- Hero nadpis (gradient text): `#fff` → `#94a3b8` (viz kritický CSS v `index.html`).
-- Oranžový glow na primárních tlačítkách: `rgba(242, 125, 38, 0.4)` — např. `hover:shadow-[0_0_30px_rgba(242,125,38,0.4)]`.
+- Hero nadpis (gradient text): `#fff` → `#b8c5d6` (viz kritický CSS v `index.html`).
+- Zelený glow u Spark CTA / glitch: `rgba(158, 240, 26, …)` odvozeno od akcentu `#9ef01a`.
 - Scrollbar thumb: `#333`, hover: `--color-vibe-orange`.
-- `theme-color` v HTML: `#050505`.
+- `theme-color` v HTML: `#9ef01a` (soulad s `--color-vibe-orange`; lišta prohlížeče / PWA).
 
 ---
 
@@ -113,7 +113,7 @@ Maximální šířka obsahu: často `max-w-7xl mx-auto`.
 
 - **Fixed nav:** `z-50`; po scrollu `bg-black/10` + **backdrop blur 24px** (`.nav-blur-active`).
 - **Mobilní menu:** `z-[100]`, pozadí `--color-vibe-black`.
-- **Skip link:** oranžové pozadí, černý text, zaoblení `0.5rem` (viz `.skip-link`).
+- **Skip link:** pozadí `--color-vibe-orange`, černý text, focus ring `outline` v barvě `--color-vibe-black` (kontrast na limetce), zaoblení `0.5rem` (viz `.skip-link`).
 
 ---
 
@@ -122,7 +122,7 @@ Maximální šířka obsahu: často `max-w-7xl mx-auto`.
 ### Primární CTA
 
 - `bg-[var(--color-vibe-orange)]`, `text-black`, `rounded-full`, tučné **uppercase** s širším `tracking`.
-- Hover: `bg-…/90`, někdy oranžový glow; `active:scale-[0.98]`.
+- Hover: `bg-…/90`, někdy akcentový glow; `active:scale-[0.98]`.
 - Minimální výška pro touch: často **`min-h-[44px]`** nebo větší.
 
 ### Sekundární / duchové tlačítka (tmavý režim)
@@ -132,7 +132,7 @@ Maximální šířka obsahu: často `max-w-7xl mx-auto`.
 ### Témata stránek
 
 - **`Navbar`:** `theme="light"` (úvod — text černý na světlém) vs `theme="dark"` (stránky projektů — bílý text).
-- **Stránka projektu:** pozadí `bg-[var(--color-vibe-black)]`, akcenty oranžové; **„Next project“** pás: `bg-white text-black` s plnou výplní `--color-vibe-orange` při hoveru.
+- **Stránka projektu:** pozadí `bg-[var(--color-vibe-black)]`, akcenty v barvě `--color-vibe-orange`; **„Next project“** pás: `bg-white text-black` s plnou výplní `--color-vibe-orange` při hoveru.
 
 ### Kontaktní sekce
 
@@ -151,7 +151,7 @@ Maximální šířka obsahu: často `max-w-7xl mx-auto`.
 
 ## 10. Ikony
 
-- **Lucide React** (`lucide-react`) — velikosti typicky `w-4 h-4` až `w-6 h-6`, barvy v souladu s textem / oranžovým akcentem.
+- **Lucide React** (`lucide-react`) — velikosti typicky `w-4 h-4` až `w-6 h-6`, barvy v souladu s textem / akcentem `--color-vibe-orange`.
 
 ---
 

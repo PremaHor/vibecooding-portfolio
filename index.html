@@ -15,7 +15,7 @@
       /* Nepoužívat opacity:0 na #root — Lighthouse pak často nedetekuje LCP (NO_LCP). */
       /* LCP hero + navbar (FOUC-free při async CSS) */
       .font-display{font-family:"Montserrat",system-ui,sans-serif;font-weight:700;letter-spacing:.03em}
-      .hero-section .hero-content h1 .hero-h1-tagline{display:block;background:linear-gradient(to bottom right,#fff,#fff,#94a3b8);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .hero-section .hero-content h1 .hero-h1-tagline{display:block;background:linear-gradient(to bottom right,#fff,#fff,#b8c5d6);-webkit-background-clip:text;background-clip:text;color:transparent}
       nav{position:fixed;top:0;left:0;width:100%;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;color:rgba(255,255,255,.9);gap:.5rem}
       nav a:not(.nav-cta),nav button{color:inherit}
       .nav-cta.bg-white{color:#000}
@@ -35,16 +35,13 @@
       .pt-nav-safe{padding-top:calc(6rem + env(safe-area-inset-top,0))}
       @media(min-width:640px){.pt-nav-safe{padding-top:calc(7rem + env(safe-area-inset-top,0))}}
       @media(min-width:768px){.pt-nav-safe{padding-top:calc(8rem + env(safe-area-inset-top,0))}}
+      .skip-link{position:absolute;top:-100%;left:1rem;z-index:10000;padding:0.75rem 1.25rem;background:#9ef01a;color:#000;font-weight:700;text-decoration:none;border-radius:0.5rem;transition:top .2s ease}
+      .skip-link:focus{top:1rem;outline:2px solid #050505;outline-offset:2px}
     </style>
-    <script>
-      (function(){
-        var l=(navigator.language||navigator.userLanguage||'').toLowerCase();
-        document.documentElement.lang=(l.startsWith('cs')||l.startsWith('sk'))?'cs':'en';
-      })();
-    </script>
+    <script src="/js/html-lang.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#050505" />
+    <meta name="theme-color" content="#9ef01a" />
     <meta name="description" content="Přemysl Horák — vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Design, vývoj a produkt při tom drží pohromadě." />
     <meta name="author" content="Přemysl Horák" />
     <meta name="creator" content="Přemysl Horák" />
@@ -121,26 +118,16 @@
     }
     </script>
     <!-- Google Consent Mode v2 - gtag stub only. gtag.js se načte AŽ po souhlasu uživatele. -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('consent', 'default', {
-        analytics_storage: 'denied',
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied'
-      });
-      gtag('js', new Date());
-    </script>
+    <script defer src="/js/gtag-stub.js"></script>
     <!-- Script v head = dřívější discovery, type=module = defer, parser neblokuje -->
     <script type="module" src="/src/main.tsx"></script>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Přeskočit na obsah · Skip to content</a>
     <!-- Static privacy link for crawlers/AI agents (React renders the same link in Footer) -->
-    <a href="/ochrana-soukromi" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0" tabindex="-1" aria-hidden="true">Zásady ochrany soukromí / Privacy policy</a>
-    <div id="root"><div id="pre" style="min-height:100dvh;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1rem 4rem"><div style="max-width:56rem;margin:0 auto;width:100%"><h1 class="font-display" style="font-size:clamp(1.65rem,4.2vw,2.75rem);line-height:1.15;margin-bottom:1.5rem"><span class="hero-h1-tagline" style="display:block;background:linear-gradient(to bottom right,#fff,#fff,#94a3b8);-webkit-background-clip:text;background-clip:text;color:transparent" id="ph1"></span></h1><p style="color:#94a3b8;max-width:42rem;margin:0 auto;line-height:1.65;font-size:clamp(.875rem,2.5vw,1.125rem)" id="pp"></p></div></div></div>
-    <script>!function(){var l=document.documentElement.lang,h=document.getElementById('ph1'),p=document.getElementById('pp');if(l==='cs'){h.textContent='Rychle stavím funkční prototypy digitálních produktů pomocí AI nástrojů';p.textContent='Pomůžu vám proměnit nápad v jednoduchou aplikaci, kterou si můžete reálně vyzkoušet, ukázat zákazníkům nebo týmu a ověřit, jestli má smysl ji dál rozvíjet.'}else{h.textContent='I quickly build functional prototypes of digital products using AI tools';p.textContent='I will help you turn an idea into a simple app you can try for real, show to clients or teammates, and see whether it makes sense to develop it further.'}}()</script>
+    <a href="/ochrana-soukromi" hidden>Zásady ochrany soukromí / Privacy policy</a>
+    <div id="root"><div id="pre" style="min-height:100dvh;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1rem 4rem"><div style="max-width:56rem;margin:0 auto;width:100%"><h1 class="font-display" style="font-size:clamp(1.65rem,4.2vw,2.75rem);line-height:1.15;margin-bottom:1.5rem"><span class="hero-h1-tagline" style="display:block;background:linear-gradient(to bottom right,#fff,#fff,#b8c5d6);-webkit-background-clip:text;background-clip:text;color:transparent" id="ph1"></span></h1><p style="color:#b8c5d6;max-width:42rem;margin:0 auto;line-height:1.65;font-size:clamp(.875rem,2.5vw,1.125rem)" id="pp"></p></div></div></div>
+    <script src="/js/pre-hero.js"></script>
   </body>
 </html>
 
