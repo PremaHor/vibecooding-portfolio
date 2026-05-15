@@ -5,7 +5,12 @@ import { Footer } from './components/Footer';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { HeroScrollSequence } from './components/HeroScrollSequence';
 
-const HomeSections = lazy(() => import('./components/HomeSections'));
+// Kick off heavy chunks as soon as this module is evaluated — long before
+// the user can scroll to them, so the Suspense boundary never shows.
+const homeSectionsPreload = import('./components/HomeSections');
+import('./i18n/translations'); // translation loader → triggers cs/en chunk
+
+const HomeSections = lazy(() => homeSectionsPreload);
 const LazyProjectPage = lazy(() => import('./components/ProjectPage').then(m => ({ default: m.ProjectPage })));
 const PrivacyPage = lazy(() => import('./components/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
@@ -17,7 +22,7 @@ const HomePage = ({ navTheme }: { navTheme: 'light' | 'dark' }) => (
     <Navbar theme={navTheme} />
     <main id="main-content" role="main">
       <HeroScrollSequence />
-      <Suspense fallback={<div className="min-h-[min(70vh,32rem)]" aria-hidden />}>
+      <Suspense fallback={null}>
         <HomeSections />
       </Suspense>
     </main>
@@ -39,9 +44,9 @@ export default function App() {
   const lenisRef = useRef<{ destroy: () => void } | null>(null);
   const lenisFrameCancelRef = useRef<(() => void) | null>(null);
 
+  // Lenis smooth scroll – only for fine-pointer (mouse) desktops.
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
-    /** Lenis + dotyk (tablet) často rozháže scrub hero sekvence – nativní scroll dává stabilnější scrollY. */
     const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
     if (isMobile || isCoarsePointer) return;
 
@@ -73,6 +78,16 @@ export default function App() {
       setTimeout(initLenis, 200);
     }
 
+    return () => {
+      lenisFrameCancelRef.current?.();
+      lenisFrameCancelRef.current = null;
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
+
+  // Navbar theme – runs on all devices incl. tablets.
+  useEffect(() => {
     let scrollTicking = false;
     const handleScroll = () => {
       if (scrollTicking) return;
@@ -108,14 +123,7 @@ export default function App() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      lenisFrameCancelRef.current?.();
-      lenisFrameCancelRef.current = null;
-      lenisRef.current?.destroy();
-      lenisRef.current = null;
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (

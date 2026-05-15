@@ -82,20 +82,19 @@ export function HeroScrollSequence() {
     return () => mq.removeEventListener('change', onChange);
   }, []);
 
-  if (isMobile) {
-    return <StaticHeroFrame ariaLabel={ariaLabel} />;
-  }
-
-  if (prefersReducedMotion) {
-    const vignetteStyle: CSSProperties = heroCanvasVignette
-      ? { WebkitMaskImage: VIGNETTE, maskImage: VIGNETTE }
-      : {};
+  // Mobile + tablet (coarse pointer) + reduced motion → lightweight static img.
+  // Canvas scroll sequence only on mouse-driven desktops where GPU/CPU can keep up.
+  if (isMobile || coarsePointer || prefersReducedMotion) {
+    const vignetteStyle: CSSProperties =
+      !isMobile && heroCanvasVignette
+        ? { WebkitMaskImage: VIGNETTE, maskImage: VIGNETTE }
+        : {};
     return <StaticHeroFrame ariaLabel={ariaLabel} vignetteStyle={vignetteStyle} />;
   }
 
   return (
     <Suspense fallback={<StaticHeroFrame ariaLabel={ariaLabel} />}>
-      <HeroDesktopSequence coarsePointer={coarsePointer} useVignette={heroCanvasVignette} />
+      <HeroDesktopSequence coarsePointer={false} useVignette={heroCanvasVignette} />
     </Suspense>
   );
 }
