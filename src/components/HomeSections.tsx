@@ -126,7 +126,7 @@ const ProcessSection = () => {
   const tx = (v: string) => lang === 'cs' ? fixCzechTypography(v) : fixDashes(v);
 
   return (
-    <section id="process" className="relative bg-slate-50 text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="process-heading">
+    <section id="process" className="cv-section-deferred relative bg-slate-50 text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="process-heading">
       <h2 id="process-heading" className="sr-only">{tx(t.process.title)}</h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <motion.div
@@ -329,7 +329,7 @@ const WorkSection = () => {
   const t = translations[lang];
   const isMobile = useIsMobile();
   return (
-    <section id="work" className="relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="work-heading">
+    <section id="work" className="cv-section-deferred relative bg-white text-black py-20 sm:py-28 md:py-36 lg:py-48" aria-labelledby="work-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -419,7 +419,7 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden backface-hidden">
+    <section id="about" className="cv-section-deferred relative py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden backface-hidden">
       <div className="absolute inset-0 bg-[var(--color-vibe-black)] backface-hidden" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(242,125,38,0.06),transparent_50%)] backface-hidden" aria-hidden />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden />
@@ -529,7 +529,7 @@ const ServicesPricingSection = () => {
   const t = translations[lang];
   const goToContactForm = useGoToContactForm();
   return (
-    <section id="services" className="py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden backface-hidden">
+    <section id="services" className="cv-section-deferred py-20 sm:py-28 md:py-36 lg:py-48 px-3 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden backface-hidden">
       <div id="pricing" className="absolute top-0 left-0 -translate-y-24" aria-hidden />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial from-white/[0.02] to-transparent pointer-events-none backface-hidden" />
       <div className="max-w-7xl mx-auto relative z-10">
@@ -635,7 +635,7 @@ const CtaSection = () => {
   const t = translations[lang];
   const goToContactForm = useGoToContactForm();
   return (
-    <section id="cta" className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)] text-white relative overflow-hidden backface-hidden">
+    <section id="cta" className="cv-section-deferred py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)] text-white relative overflow-hidden backface-hidden">
       <div className="max-w-3xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -697,7 +697,7 @@ const CompetitiveAdvantageSection = () => {
   const { lang } = useLanguage();
   const t = translations[lang];
   return (
-    <section id="competitive-advantage" className="relative py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden backface-hidden">
+    <section id="competitive-advantage" className="cv-section-deferred relative py-20 sm:py-28 md:py-36 lg:py-48 px-4 sm:px-6 md:px-8 lg:px-12 overflow-hidden backface-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-vibe-black)] via-[#0a0a0a] to-[var(--color-vibe-black)] backface-hidden" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,var(--color-vibe-orange)/8_0%,transparent_70%)] pointer-events-none backface-hidden" />
       <div className="absolute inset-0 border border-white/5 rounded-3xl mx-4 sm:mx-6 md:mx-8 lg:mx-12 pointer-events-none backface-hidden" />
@@ -765,7 +765,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section id="faq" className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)]">
+    <section id="faq" className="cv-section-deferred py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-black)]">
       <div className="max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -882,7 +882,7 @@ const ContactSection = () => {
   const f = t.contact.form;
 
   return (
-    <section id="contact" className="py-24 sm:py-32 md:py-40 lg:py-52 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-orange)] text-black relative overflow-hidden">
+    <section id="contact" className="cv-section-deferred py-24 sm:py-32 md:py-40 lg:py-52 px-4 sm:px-6 md:px-8 lg:px-12 bg-[var(--color-vibe-orange)] text-black relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/5 to-transparent" />
       <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-black/10 rounded-full blur-3xl" />
       <div className="max-w-7xl mx-auto relative z-10">

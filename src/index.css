@@ -541,3 +541,11 @@ button:focus-visible {
     transition: none;
   }
 }
+
+/* Sekce pod „story“: prohlížeč může přeskočit layout mimo viewport (menší práce při cold startu) */
+@supports (content-visibility: auto) {
+  .cv-section-deferred {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+}

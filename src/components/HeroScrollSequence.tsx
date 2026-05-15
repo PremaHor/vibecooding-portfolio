@@ -24,6 +24,8 @@ const WHEEL_FRICTION = 0.885;
 const WHEEL_VELOCITY_EPS = 0.14;
 /** Nad touto hodnotou scrollY už nekrotíme kolečko (uživatel jde po stránce) */
 const HERO_WHEEL_SCROLL_Y_LEAVE = 88;
+/** Omezí rozlišení canvasu (3× DPR = až 9× pixelů oproti 1×); výrazně lepší TBT / kreslení při zachovaném vzhledu */
+const HERO_CANVAS_MAX_DPR = 2;
 
 const VIGNETTE =
   'radial-gradient(ellipse 62% 68% at 50% 50%, black 0%, black 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 70%, transparent 88%)';
@@ -63,7 +65,7 @@ function progressToHeroTimeline(progress01: number) {
 }
 
 function sizeCanvas(canvas: HTMLCanvasElement) {
-  const dpr = window.devicePixelRatio || 1;
+  const dpr = Math.min(window.devicePixelRatio || 1, HERO_CANVAS_MAX_DPR);
   canvas.width = Math.round(window.innerWidth * dpr);
   canvas.height = Math.round(window.innerHeight * dpr);
   canvas.style.width = `${window.innerWidth}px`;
@@ -348,40 +350,68 @@ function useHeroSequenceCanvas() {
   }, [resizeCanvas]);
 
   useEffect(() => {
+    let cancelled = false;
     const images: HTMLImageElement[] = new Array(FRAME_COUNT);
     imagesRef.current = images;
     let count = 0;
 
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new Image();
-      images[i] = img;
-      const idx = i;
-      img.onload = () => {
-        count++;
-        setLoadProgress(count / FRAME_COUNT);
-        drawTimeline(lastTimelineRef.current);
-        if (count === FRAME_COUNT) setLoaded(true);
-      };
-      img.onerror = () => {
-        count++;
-        if (count === FRAME_COUNT) setLoaded(true);
-      };
+    const bump = () => {
+      if (cancelled) return;
+      count++;
+      setLoadProgress(count / FRAME_COUNT);
+      drawTimeline(lastTimelineRef.current);
+      if (count === FRAME_COUNT) setLoaded(true);
+    };
 
-      if (i === 0) {
-        img.src = frameUrl(i);
-      } else {
-        const load = () => {
-          img.src = frameUrl(idx);
-        };
-        const requestIdleCallback = (window as Window & { requestIdleCallback?: (cb: () => void) => void })
-          .requestIdleCallback;
-        if (requestIdleCallback) {
-          requestIdleCallback(load);
-        } else {
-          window.setTimeout(load, idx * 8);
-        }
-      }
+    const requestIdleCallbackCompat = (
+      cb: IdleRequestCallback,
+      opts?: IdleRequestOptions,
+    ): number => {
+      const ric = window.requestIdleCallback;
+      if (ric) return ric(cb, opts);
+      return window.setTimeout(
+        () => cb({ didTimeout: true, timeRemaining: () => 0 } as IdleDeadline),
+        opts?.timeout ?? 1,
+      ) as unknown as number;
+    };
+
+    for (let i = 0; i < FRAME_COUNT; i++) {
+      images[i] = new Image();
     }
+
+    let firstDone = false;
+    const onFirstFrame = () => {
+      if (cancelled || firstDone) return;
+      firstDone = true;
+      bump();
+      requestIdleCallbackCompat(() => !cancelled && loadNext(1), { timeout: 6000 });
+    };
+
+    const loadNext = (idx: number) => {
+      if (cancelled || idx >= FRAME_COUNT) return;
+      const img = images[idx];
+      let settled = false;
+      const advance = () => {
+        if (cancelled || settled) return;
+        settled = true;
+        bump();
+        requestIdleCallbackCompat(() => !cancelled && loadNext(idx + 1), { timeout: 6000 });
+      };
+      img.onload = advance;
+      img.onerror = advance;
+      img.src = frameUrl(idx);
+      if (img.complete && img.naturalWidth) advance();
+    };
+
+    const img0 = images[0];
+    img0.onload = onFirstFrame;
+    img0.onerror = onFirstFrame;
+    img0.src = frameUrl(0);
+    if (img0.complete && img0.naturalWidth) onFirstFrame();
+
+    return () => {
+      cancelled = true;
+    };
   }, [drawTimeline]);
 
   const loadingLayers = (
