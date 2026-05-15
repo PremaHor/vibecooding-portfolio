@@ -94,9 +94,9 @@ export const PROJECTS: Project[] = [
     title: "AdCalc",
     category: "Interní nástroj",
     description:
-      "Interní webová aplikace pro REKLY: kalkulace položek, uložené zakázky a PDF nabídka pro zákazníka v jednom. Celý tým pracuje se stejnými daty, bez roztříštěných tabulek.",
+      "Interní nástroj pro REKLY: kalkulace z ceníku, sdílené zakázky podle fáze, adresář s prioritami pro návratnost klientů, archiv hotových a PDF připravené k odeslání — jedna data pro celý tým.",
     fullDescription:
-      "AdCalc pro reklamní výrobu sjednocuje materiál, tisk, práci i dopravu, sdílený ceník ve Firebase a PDF export ve firemním vizuálu.",
+      "AdCalc pokrývá životní cyklus zakázky od nezávazné nabídky po výrobu, sdílený ceník ve Firebase, adresář napojený na zakázky a tisknutelné PDF bez interních řádků.",
     image: "/images/projects/addcalc.webp",
     tags: ["React 19", "TypeScript", "Vite", "Tailwind", "Motion", "Firebase", "jsPDF"],
     year: "2026",

@@ -397,30 +397,32 @@ const cs = {
         category: 'Interní nástroj',
         videoEmbedTitle: 'AdCalc: průchod aplikací (YouTube)',
         subtitle:
-          'Od řádků kalkulace přes uložené zakázky až po PDF pro klienta: jedna aplikace, jedna data pro celý tým.',
+          'Kalkulačka, sdílený ceník a adresář v jednom — včetně přehledu, které kontakty stojí za znovu oslovením.',
         subtitleLine2: '',
         description:
-          'Interní webová aplikace pro REKLY: kalkulace položek (materiál, tisk, práce, doprava…), sdílené zakázky a PDF nabídka v jednom. Navrženo tak, aby nikdo neřešil roztříštěné tabulky.',
+          'Interní nástroj pro **REKLY**: rychlá kalkulace z ceníku, sdílené zakázky v celém životním cyklu — od nezávazné nabídky po schválenou výrobu —, archiv hotových prací a **PDF připravené k odeslání**. **Adresář** propojuje kontakty s historií zakázek a pracuje s prioritami tak, aby bylo jasné, kde má smysl znovu se ozvat — bez chaosu v tabulkách.',
         fullDescription:
-          'AdCalc sjednocuje reklamní kalkulaci, cloudové úložiště zakázek a zákaznický PDF výstup ve vizuálním stylu značky.',
+          'AdCalc spojuje reklamní kalkulaci, **jednu pravdu o zakázkách** pro celý tým, **adresář s prioritami** a zákaznické PDF ve vizuálním stylu značky — v rozhraní, které obstojí i na mobilu v terénu.',
         quote:
-          'Nástroj není o tom mít víc polí ve formuláři, ale aby se celý tým díval na stejná čísla a zákazník dostal dokument, za kterým se firma nebude stydět stát.',
+          'Nejde o přidat další políčka. Jde o to, aby se celý tým díval na **stejná čísla** a zákazník dostal dokument, za kterým se firma nezastydí — ne export, který vypadá interně.',
         techNote:
           'Od produktové logiky a UI/UX přes implementaci ve **Reactu 19** a napojení na **Firebase** až po **PDF pipeline** (jsPDF, vložené fonty) a nasazení s **CSP**.',
         structured: {
           goalTitle: 'Kontext a výzva',
           goal:
-            'Reklamní výroba spojuje **desítky typů položek**, slevy, marže a DPH, a zároveň potřebuje rychlý výstup pro klienta, který vypadá jako od firmy, ne jako export z Excelu. Cílem bylo **nahradit nebo doplnit chaotické postupy** jedním přehledným, **mobilně použitelným** nástrojem s přihlášením a cloudovým úložištěm.\n\nBylo potřeba **sjednotit kalkulaci**: materiál, tisk, kooperace, práce, montáž i doprava v jedné logice. **Ceník a zakázky** musely zůstat dostupné pro více lidí v jedné firmě, ne izolovaně pod jedním účtem. **PDF** muselo nést brand barvy a typografii, bez „interních“ řádků (marže, interní poznámky), aby šlo rovnou odeslat. **Bezpečnost a provoz**: ověření e-mailu, cache v prohlížeči vázaná na účet, účty zakládá jen administrátor ve Firebase.',
+            'Reklamní výroba spojuje **desítky typů položek**, slevy, marže i DPH — a přitom potřebuje výstup, který vypadá jako od firmy, ne jako nekonečný Excel.\n\n**Cíl:** nahradit nebo doplnit roztříštěné postupy **jedním** přehledným a **mobilně použitelným** nástrojem s přihlášením a úložištěm v cloudu.\n\n**Samotná kalkulace už nestačila.** Tým potřeboval **jednu pravdu o zakázkách** a zároveň přehled o komunikaci s klienty — kdo je dlouho bez aktivity, komu se ozvat po poslední zakázce nebo po ručním kontaktu. Proto vznikl vedle kalkulačky **adresář s prioritami** napojený na uložené zakázky.\n\nV jedné logice musely sedět **materiál, tisk, kooperace, práce, montáž i doprava**; **ceník a zakázky** musely být dostupné **více lidem ve firmě**, ne uzavřené pod jedním účtem. **PDF** má nést barvy a typografii značky — **bez** řádků s marží a interních poznámek, aby šlo dokument **hned odeslat**. **Provoz a bezpečnost:** ověření e-mailu, cache v prohlížeči vázaná na účet, přístupové účty zakládá jen administrátor ve Firebase.',
           solutionTitle: 'Řešení',
           solution:
-            '**AdCalc (REKLY)** je single-page nástroj postavený na **Reactu 19** a **TypeScriptu**, stylování **Tailwind 4** s vlastní brand paletou (akcent např. **#00c4b7**). UI používá font **Prompt**; PDF export běží přes **jsPDF** s vloženými fonty **Poppins** pro konzistentní tisk.\n\n**Firebase Authentication** (e-mail a heslo): účty lze zakládat jen ve Firebase Console. **Firestore** drží sdílený workspace pod **orgs/…**, takže všichni přihlášení členové týmu vidí stejné zakázky a ceník. **localStorage** je vázaný na uživatele pro rychlou práci, s migrací ze starších úložišť.\n\n**PDF pro zákazníka** respektuje pravidla výstupu: v souhrnu například sleva jen u stálého klienta, **bez marže a bez interní poznámky**, aby byl dokument přímo k odeslání. **Nasazení**: statický frontend na **Vercelu** s bezpečnostními hlavičkami (**CSP**, včetně Google Fonts), proměnné prostředí pro Firebase a volitelné **App Check**.',
+            '**AdCalc (REKLY)** je single-page nástroj na **Reactu 19** a **TypeScriptu**, stylování **Tailwind 4** a vlastní brand paleta (akcent např. **#00c4b7**). UI používá **Prompt**; PDF export běží přes **jsPDF** s fonty **Poppins** pro konzistentní tisk.\n\n**Firebase Authentication** (e-mail a heslo) — účty zakládá jen administrátor ve **Firebase Console**. Data zakázek, ceníku i adresáře jsou ve **Firestore** jako **sdílený pracovní prostor** pro celý tým. **localStorage** je vázaný na přihlášeného uživatele pro rychlou práci z mezipaměti, včetně migrace ze starších klíčů.\n\nAplikace pokrývá **životní cyklus zakázky**: přepínání mezi **nezávaznou kalkulací** a **schválenou výrobou**, přehled zakázek s **filtrováním podle fáze**, označení hotových a **archiv dokončených** s vlastním vyhledáváním — aktivní práce zůstává v hlavním seznamu, starší zakázky nepřekáží.\n\n**Adresář klientů** propojuje kontakty s uloženými zakázkami a pracuje s **prioritou a připomínkami** — v přehledu je vidět, které kontakty jsou z pohledu nedávných zakázek nebo ručně zaznamenaného kontaktu vhodné **znovu oslovit**. (Jde o **řazení a značky v rozhraní adresáře**, nikoli o systémové notifikace do zařízení.) Vyhledávání v adresáři i v seznamech podporuje každodenní práci v terénu i v kanceláři.\n\n**PDF pro zákazníka** respektuje pravidla výstupu — například sleva jen u stálého klienta, **bez marže a interní poznámky** v souhrnu. Nasazení: statický frontend na **Vercelu** s bezpečnostními hlavičkami (**CSP**, včetně Google Fonts), proměnné prostředí pro Firebase a volitelné **App Check**.',
           benefitsTitle: 'Výsledek',
           benefits: [
-            '**jedna pravda o zakázkách** v týmu: méně duplicit a hádky o tom, kdo má poslední verzi',
-            '**rychlá kalkulace** z ceníku a úpravy přímo v řádcích',
-            '**PDF na pár kliknutí** ve vizuálním stylu značky',
-            '**provoz bez veřejné registrace**: přístup pod kontrolou administrátora',
-            '**přesné výpočty a validace vstupů** v reálném čase díky TypeScriptu a sjednocené logice',
+            '**Jedna pravda o zakázkách** — méně duplicit a hádek o tom, kdo má poslední verzi.',
+            '**Adresář s prioritami** — uživatel vidí, které kontakty stojí za znovu oslovením.',
+            '**Fáze zakázky** (kalkulace vs. výroba), přehled aktivních prací a **archiv hotových** bez přeplnění seznamu.',
+            '**Rychlá kalkulace** z ceníku s úpravami v řádcích včetně **pevných cen bez marže**, kde to dává smysl.',
+            '**PDF na pár kliknutí** ve vizuálním stylu značky, bez „interních“ řádků — připravené k odeslání.',
+            '**Bez veřejné registrace** — přístup jen se souhlasem administrátora.',
+            '**Validace a výpočty v reálném čase** díky TypeScriptu a jedné sjednocené logice.',
           ],
         },
       },

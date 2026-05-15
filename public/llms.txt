@@ -22,7 +22,7 @@
 ## Projekty
 
 - [RiskLight](https://premyslhorak.cz/project/risklight): PWA pro terénní sociální pracovníky, evidence, SOS, týmový chat
-- [AdCalc](https://premyslhorak.cz/project/adcalc): Prototyp kalkulačky pro reklamní výrobu
+- [AdCalc](https://premyslhorak.cz/project/adcalc): Kalkulace, sdílený ceník a adresář s prioritami pro REKLY; zakázky podle fáze, archiv, PDF.
 - [DDÚ Olomouc](https://premyslhorak.cz/project/ddu-olomouc): Redesign webu Dětského diagnostického ústavu
 - [Arboris](https://premyslhorak.cz/project/arboris): Ukázkový prémiový one-page pro dřevostavby (fiktivní značka, React, CSS Modules, Motion)
 

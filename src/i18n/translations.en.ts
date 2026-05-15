@@ -403,30 +403,32 @@ const en = {
         role: 'Product logic, UI/UX, frontend, Firebase, PDF',
         videoEmbedTitle: 'AdCalc: app walkthrough (YouTube)',
         subtitle:
-          'From line-item estimates and saved jobs to a client-ready PDF: one app, one source of truth for the whole team.',
+          'Estimating, a shared price list, and a client directory in one place — including who is due a follow-up.',
         subtitleLine2: '',
         description:
-          'Internal web app for REKLY: pricing items (materials, print, labour, shipping…), shared jobs, and a customer PDF in one place. Built so the team stops living in scattered spreadsheets.',
+          'An internal tool for **REKLY**: fast line-item quoting from a shared catalogue, **jobs across their full lifecycle** — from a non-binding estimate to approved production — plus a finished-job archive and **customer-ready PDFs**. The **client directory** links contacts to saved work and surfaces **priorities** so the team sees who to re-engage — without living in scattered spreadsheets.',
         fullDescription:
-          'AdCalc unifies advertising production pricing, cloud job storage, and on-brand PDF output customers can receive with confidence.',
+          'AdCalc brings ad-production pricing, **one source of truth for jobs**, a **priority-aware directory**, and on-brand customer PDFs together — in a UI that still works on a phone in the field.',
         quote:
-          'The goal is not more form fields, it is making sure the whole team sees the same numbers and the customer gets a document the company can stand behind.',
+          'This is not about cramming in more fields. It is about the whole team sharing **the same numbers** and customers receiving a document the business can stand behind — not something that looks like an internal export.',
         techNote:
           'Product logic and UI/UX, **React 19** implementation, **Firebase** integration, **PDF pipeline** (jsPDF, embedded fonts), and deployment with **CSP** headers.',
         structured: {
           goalTitle: 'Context and challenge',
           goal:
-            'Advertising production combines **dozens of line types**, discounts, margins, and VAT, while still needing a fast client deliverable that looks like a company document, not an Excel export. The aim was to **replace or complement chaotic workflows** with one clear, **mobile-friendly** tool with sign-in and cloud storage.\n\nWe had to **unify pricing** for materials, print, subcontractors, labour, installation, and shipping in one model. **Price lists and jobs** had to stay available to multiple people in one company, not locked to a single account. **PDFs** needed brand colours and typography, without “internal” rows (margins, internal notes) so they could be sent as-is. **Security and operations**: email verification, per-account browser cache, and accounts created only by an admin in Firebase.',
+            'Advertising production mixes **dozens of line types**, discounts, margins, and VAT — yet still needs a deliverable that looks like a company document, not a never-ending spreadsheet.\n\n**Goal:** replace or complement fractured workflows with **one** clear, **mobile-friendly** tool with sign-in and cloud storage.\n\n**Quoting alone was not enough.** The team needed **one source of truth for jobs** and visibility into client follow-up — who has gone quiet, who to contact after the last job or a manual touchpoint. That is why a **priority-aware directory** tied to saved jobs sits next to the calculator.\n\n**Materials, print, subcontracting, labour, install, and freight** had to follow one model. **Price lists and jobs** had to be available to **multiple people in the company**, not locked to a single login. **PDFs** needed brand colour and typography, **without** margin rows or internal notes so files are **ready to send**. **Security and ops:** email verification, browser cache tied to the signed-in user, and accounts created only by an admin in Firebase.',
           solutionTitle: 'Solution',
           solution:
-            '**AdCalc (REKLY)** is a single-page app built with **React 19** and **TypeScript**, styled with **Tailwind 4** and a custom brand palette (accent e.g. **#00c4b7**). The UI uses the **Prompt** typeface; PDF export runs through **jsPDF** with embedded **Poppins** for consistent print output.\n\n**Firebase Authentication** (email and password): accounts are provisioned only in the Firebase Console. **Firestore** provides a shared workspace under **orgs/…**, so every signed-in team member sees the same jobs and price list. **localStorage** is scoped to the user for speed, with migration from older storage keys.\n\n**Customer-facing PDFs** follow output rules: for example discounts only for returning clients, **no margin rows and no internal notes** in the summary so the file is ready to send. **Hosting**: static frontend on **Vercel** with security headers (**CSP**, including Google Fonts), environment variables for Firebase, and optional **App Check**.',
+            '**AdCalc (REKLY)** is a single-page app on **React 19** and **TypeScript**, **Tailwind 4**, and a custom palette (accent e.g. **#00c4b7**). UI typography: **Prompt**; PDFs via **jsPDF** with embedded **Poppins** for consistent print.\n\n**Firebase Authentication** (email and password) — accounts are created only in the **Firebase Console**. Jobs, catalogue, and directory data live in **Firestore** as a **shared workspace** for the team. **localStorage** is scoped to the signed-in user for fast, cached work, including migrations from older keys.\n\nThe product covers the **job lifecycle**: switching between a **non-binding estimate** and **approved production**, a job list with **phase filters**, marking work complete, and a **finished archive** with its own search — active work stays front and centre; older jobs do not clog the daily list.\n\nThe **client directory** connects contacts to saved jobs and surfaces **priority and reminders** — it highlights who is a strong candidate to **re-engage** from recent activity or a manually logged touchpoint. (**Priority ranking and in-app cues**, not device push notifications.) Search in the directory and lists supports everyday work in the field and at the desk.\n\n**Customer PDFs** respect export rules — e.g. discounts only for returning clients, **no margin or internal note rows** in the summary. **Hosting:** static frontend on **Vercel** with security headers (**CSP**, including Google Fonts), environment variables for Firebase, and optional **App Check**.',
           benefitsTitle: 'Outcome',
           benefits: [
-            '**one source of truth for jobs** across the team: fewer duplicates and “who has the latest version” debates',
-            '**fast quoting** from the price list with inline edits on each line',
-            '**PDF in a few clicks** in the brand’s visual language',
-            '**no public self-signup**: access controlled by an administrator',
-            '**accurate calculations and live validation** thanks to TypeScript and a single pricing model',
+            '**One source of truth for jobs** — less duplication and fewer “who has the latest file?” debates.',
+            '**A priority-aware directory** — the team sees which contacts merit a follow-up.',
+            '**Job phases** (estimate vs. production), an active overview, and a **finished archive** that does not overwhelm the main list.',
+            '**Fast quoting** from the price list with inline edits, including **fixed prices without margin** where that makes sense.',
+            '**PDF in a few clicks** in the brand look, without “internal” rows — ready to send.',
+            '**No public self-signup** — access only with administrator approval.',
+            '**Live validation and calculations** through TypeScript and one unified pricing model.',
           ],
         },
       },
