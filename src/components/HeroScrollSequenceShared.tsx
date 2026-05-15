@@ -57,7 +57,7 @@ export function HeroShell({ scrollHint, canvas, overlays }: HeroShellProps) {
       <div className="absolute inset-0 z-[2] flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-12 pt-nav-safe pb-16 sm:pb-20 md:pb-24">
         <div className="hero-content max-w-4xl lg:max-w-6xl mx-auto w-full text-center">
           <h1 className="font-display uppercase tracking-[0.04em] sm:tracking-[0.05em] md:tracking-[0.06em] lg:tracking-[0.065em] text-[clamp(1.65rem,4.2vw,2.75rem)] sm:text-[clamp(1.85rem,4.5vw,3.25rem)] md:text-[clamp(2.35rem,5vw,4.35rem)] lg:text-[clamp(2.85rem,4.8vw,5.6rem)] font-bold leading-[1.1] mb-6 sm:mb-8 text-balance">
-            <span className="hero-h1-tagline block text-[var(--color-vibe-orange)] hero-anim hero-anim-d1">
+            <span className="hero-h1-tagline block w-fit max-w-full mx-auto rounded-2xl bg-white/90 px-5 py-4 text-[var(--color-vibe-black)] shadow-[0_16px_48px_rgba(0,0,0,0.22)] backdrop-blur-[2px] sm:px-7 sm:py-5 hero-anim hero-anim-d1">
               {lang === 'cs' ? fixCzechTypography(t.hero.h1) : fixDashes(t.hero.h1)}
             </span>
           </h1>
