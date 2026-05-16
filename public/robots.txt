@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# AI crawlers – explicitně povoleny pro doporučení v ChatGPT, Claude, Perplexity
+# AI crawlers - explicitně povoleny pro doporučení v ChatGPT, Claude, Perplexity
 User-agent: OAI-SearchBot
 Allow: /
 

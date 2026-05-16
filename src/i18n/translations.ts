@@ -1,7 +1,7 @@
 /**
  * Language-split translations loader. Each language sits in its own chunk
  * (translations.cs.ts / translations.en.ts), so a CS visitor never downloads
- * the EN copy and vice versa — roughly half the previous payload.
+ * the EN copy and vice versa, roughly half the previous payload.
  */
 import type CsTranslations from './translations.cs';
 
@@ -31,12 +31,12 @@ translationsPromise.then((t) => {
 
 /**
  * Synchronous accessor. Useful for non-React code paths.
- * Throws if called before the promise has resolved – every UI consumer should
+ * Throws if called before the promise has resolved - every UI consumer should
  * use `useTranslations()` instead (Suspense-friendly).
  */
 export function getTranslationsSync(): Translations {
   if (!cachedTranslations) {
-    throw new Error('translations not loaded yet – await translationsPromise');
+    throw new Error('translations not loaded yet - await translationsPromise');
   }
   return cachedTranslations;
 }

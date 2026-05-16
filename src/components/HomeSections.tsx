@@ -147,7 +147,7 @@ const ProcessSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {/* Card 1 — Stack & Tooling (wide) */}
+          {/* Card 1 - Stack & Tooling (wide) */}
           <BentoCard className="md:col-span-2 lg:col-span-2" dark delay={0}>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
@@ -164,7 +164,7 @@ const ProcessSection = () => {
             </div>
           </BentoCard>
 
-          {/* Card 2 — Pochopení problému (dominant, tall) */}
+          {/* Card 2 - Pochopení problému (dominant, tall) */}
           <BentoCard className="md:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col bg-gradient-to-br from-[var(--color-vibe-orange)]/[0.04] to-transparent" delay={0.06}>
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-5 shrink-0">
               <Lightbulb className="w-6 h-6 sm:w-7 sm:h-7" />
@@ -177,7 +177,7 @@ const ProcessSection = () => {
             </p>
           </BentoCard>
 
-          {/* Card 3 — UI/UX Design */}
+          {/* Card 3 - UI/UX Design */}
           <BentoCard delay={0.12}>
             <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
               <PenTool className="w-5 h-5" />
@@ -186,7 +186,7 @@ const ProcessSection = () => {
             <p className="text-sm text-black/70 leading-[1.6]">{tx(t.process.step2Text)}</p>
           </BentoCard>
 
-          {/* Card 4 — Validace */}
+          {/* Card 4 - Validace */}
           <BentoCard delay={0.18}>
             <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
               <Layers className="w-5 h-5" />
@@ -195,7 +195,7 @@ const ProcessSection = () => {
             <p className="text-sm text-black/70 leading-[1.6]">{tx(t.process.step3Text)}</p>
           </BentoCard>
 
-          {/* Card 5 — Vývoj s AI */}
+          {/* Card 5 - Vývoj s AI */}
           <BentoCard delay={0.24}>
             <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
               <Code2 className="w-5 h-5" />
@@ -204,7 +204,7 @@ const ProcessSection = () => {
             <p className="text-sm text-black/70 leading-[1.6]">{tx(t.process.step4Text)}</p>
           </BentoCard>
 
-          {/* Card 6 — Produkce */}
+          {/* Card 6 - Produkce */}
           <BentoCard delay={0.30}>
             <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
               <Server className="w-5 h-5" />
@@ -213,7 +213,7 @@ const ProcessSection = () => {
             <p className="text-sm text-black/70 leading-[1.6]">{tx(t.process.step5Text)}</p>
           </BentoCard>
 
-          {/* Card 7 — AI & Automatizace */}
+          {/* Card 7 - AI & Automatizace */}
           <BentoCard className="md:col-span-1 lg:col-span-2" delay={0.36}>
             <div className="w-10 h-10 rounded-xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] mb-4 shrink-0">
               <Cpu className="w-5 h-5" />
@@ -222,7 +222,7 @@ const ProcessSection = () => {
             <p className="text-sm sm:text-base text-black/70 leading-[1.6]">{tx(t.process.aiText)}</p>
           </BentoCard>
 
-          {/* Card 8 — Můj cíl (full-width bottom) */}
+          {/* Card 8 - Můj cíl (full-width bottom) */}
           <BentoCard className="md:col-span-2 lg:col-span-4" dark delay={0.42}>
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
               <div className="w-12 h-12 rounded-2xl bg-[var(--color-vibe-orange)]/15 flex items-center justify-center text-[var(--color-vibe-orange)] shrink-0">
@@ -467,7 +467,7 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* "Co ode mě čekat" — Bento Grid */}
+        {/* "Co ode mě čekat" - Bento Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

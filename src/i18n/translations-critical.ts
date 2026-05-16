@@ -45,11 +45,11 @@ export const criticalTranslations = {
       pageTitle: 'Přemysl Horák | Funkční prototypy digitálních produktů s AI',
       twitterTitle: 'Přemysl Horák | Funkční prototypy digitálních produktů s AI',
       metaDescription:
-        'Přemysl Horák — vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
+        'Přemysl Horák: vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
       ogDescription:
-        'Přemysl Horák — vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
+        'Přemysl Horák: vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
       jsonLdDescription:
-        'Přemysl Horák — vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
+        'Přemysl Horák: vývojář a designér. Rychle staví funkční prototypy digitálních produktů pomocí AI nástrojů. Od nápadu přes design až po spuštění.',
       ogLocale: 'cs_CZ',
       ogLocaleAlternate: 'en_US',
     },

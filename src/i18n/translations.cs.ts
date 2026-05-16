@@ -265,7 +265,7 @@ const cs = {
       formDataTitle: 'Jaká data formulář sbírá',
       formDataList: [
         'Jméno (nepovinné)',
-        'E-mailová adresa (povinné – pro odpověď)',
+        'E-mailová adresa (povinné, pro odpověď)',
         'Předmět zprávy (nepovinné)',
         'Text zprávy (povinné)',
       ],
@@ -285,11 +285,11 @@ const cs = {
       tech: 'Technologie',
       relatedLinks: 'Související odkazy',
       websiteLinkLabels: {
-        risklightLanding: 'Landing page — risklight.cz',
-        risklightPwa: 'Aplikace (PWA) — risklight.app',
-        dduOriginalWeb: 'Původní web — dduolomouc.cz',
-        dduRedesignPreview: 'Návrh redesignu — ddu-olomouc-web.vercel.app',
-        arborisDemo: 'Ukázkový web — bez-nazvu.vercel.app',
+        risklightLanding: 'Landing page: risklight.cz',
+        risklightPwa: 'Aplikace (PWA): risklight.app',
+        dduOriginalWeb: 'Původní web: dduolomouc.cz',
+        dduRedesignPreview: 'Návrh redesignu: ddu-olomouc-web.vercel.app',
+        arborisDemo: 'Ukázkový web: bez-nazvu.vercel.app',
       },
       prototype: 'Prototyp',
       videoUserFlow: 'User flow: průlet aplikací',
@@ -397,31 +397,31 @@ const cs = {
         category: 'Interní nástroj',
         videoEmbedTitle: 'AdCalc: průchod aplikací (YouTube)',
         subtitle:
-          'Kalkulačka, sdílený ceník a adresář v jednom — včetně přehledu, které kontakty stojí za znovu oslovením.',
+          'Kalkulačka, sdílený ceník a adresář v jednom, včetně přehledu, které kontakty stojí za znovu oslovením.',
         subtitleLine2: '',
         description:
-          'Interní nástroj pro **REKLY**: rychlá kalkulace z ceníku, sdílené zakázky v celém životním cyklu — od nezávazné nabídky po schválenou výrobu —, archiv hotových prací a **PDF připravené k odeslání**. **Adresář** propojuje kontakty s historií zakázek a pracuje s prioritami tak, aby bylo jasné, kde má smysl znovu se ozvat — bez chaosu v tabulkách.',
+          'Interní nástroj pro **REKLY**: rychlá kalkulace z ceníku, sdílené zakázky v celém životním cyklu, od nezávazné nabídky po schválenou výrobu, archiv hotových prací a **PDF připravené k odeslání**. **Adresář** propojuje kontakty s historií zakázek a pracuje s prioritami tak, aby bylo jasné, kde má smysl znovu se ozvat, bez chaosu v tabulkách.',
         fullDescription:
-          'AdCalc spojuje reklamní kalkulaci, **jednu pravdu o zakázkách** pro celý tým, **adresář s prioritami** a zákaznické PDF ve vizuálním stylu značky — v rozhraní, které obstojí i na mobilu v terénu.',
+          'AdCalc spojuje reklamní kalkulaci, **jednu pravdu o zakázkách** pro celý tým, **adresář s prioritami** a zákaznické PDF ve vizuálním stylu značky, v rozhraní, které obstojí i na mobilu v terénu.',
         quote:
-          'Nejde o přidat další políčka. Jde o to, aby se celý tým díval na **stejná čísla** a zákazník dostal dokument, za kterým se firma nezastydí — ne export, který vypadá interně.',
+          'Nejde o přidat další políčka. Jde o to, aby se celý tým díval na **stejná čísla** a zákazník dostal dokument, za kterým se firma nezastydí, ne export, který vypadá interně.',
         techNote:
           'Od produktové logiky a UI/UX přes implementaci ve **Reactu 19** a napojení na **Firebase** až po **PDF pipeline** (jsPDF, vložené fonty) a nasazení s **CSP**.',
         structured: {
           goalTitle: 'Kontext a výzva',
           goal:
-            'Reklamní výroba spojuje **desítky typů položek**, slevy, marže i DPH — a přitom potřebuje výstup, který vypadá jako od firmy, ne jako nekonečný Excel.\n\n**Cíl:** nahradit nebo doplnit roztříštěné postupy **jedním** přehledným a **mobilně použitelným** nástrojem s přihlášením a úložištěm v cloudu.\n\n**Samotná kalkulace už nestačila.** Tým potřeboval **jednu pravdu o zakázkách** a zároveň přehled o komunikaci s klienty — kdo je dlouho bez aktivity, komu se ozvat po poslední zakázce nebo po ručním kontaktu. Proto vznikl vedle kalkulačky **adresář s prioritami** napojený na uložené zakázky.\n\nV jedné logice musely sedět **materiál, tisk, kooperace, práce, montáž i doprava**; **ceník a zakázky** musely být dostupné **více lidem ve firmě**, ne uzavřené pod jedním účtem. **PDF** má nést barvy a typografii značky — **bez** řádků s marží a interních poznámek, aby šlo dokument **hned odeslat**. **Provoz a bezpečnost:** ověření e-mailu, cache v prohlížeči vázaná na účet, přístupové účty zakládá jen administrátor ve Firebase.',
+            'Reklamní výroba spojuje **desítky typů položek**, slevy, marže i DPH, a přitom potřebuje výstup, který vypadá jako od firmy, ne jako nekonečný Excel.\n\n**Cíl:** nahradit nebo doplnit roztříštěné postupy **jedním** přehledným a **mobilně použitelným** nástrojem s přihlášením a úložištěm v cloudu.\n\n**Samotná kalkulace už nestačila.** Tým potřeboval **jednu pravdu o zakázkách** a zároveň přehled o komunikaci s klienty, kdo je dlouho bez aktivity, komu se ozvat po poslední zakázce nebo po ručním kontaktu. Proto vznikl vedle kalkulačky **adresář s prioritami** napojený na uložené zakázky.\n\nV jedné logice musely sedět **materiál, tisk, kooperace, práce, montáž i doprava**; **ceník a zakázky** musely být dostupné **více lidem ve firmě**, ne uzavřené pod jedním účtem. **PDF** má nést barvy a typografii značky, **bez** řádků s marží a interních poznámek, aby šlo dokument **hned odeslat**. **Provoz a bezpečnost:** ověření emailu, cache v prohlížeči vázaná na účet, přístupové účty zakládá jen administrátor ve Firebase.',
           solutionTitle: 'Řešení',
           solution:
-            '**AdCalc (REKLY)** je single-page nástroj na **Reactu 19** a **TypeScriptu**, stylování **Tailwind 4** a vlastní brand paleta (akcent např. **#00c4b7**). UI používá **Prompt**; PDF export běží přes **jsPDF** s fonty **Poppins** pro konzistentní tisk.\n\n**Firebase Authentication** (e-mail a heslo) — účty zakládá jen administrátor ve **Firebase Console**. Data zakázek, ceníku i adresáře jsou ve **Firestore** jako **sdílený pracovní prostor** pro celý tým. **localStorage** je vázaný na přihlášeného uživatele pro rychlou práci z mezipaměti, včetně migrace ze starších klíčů.\n\nAplikace pokrývá **životní cyklus zakázky**: přepínání mezi **nezávaznou kalkulací** a **schválenou výrobou**, přehled zakázek s **filtrováním podle fáze**, označení hotových a **archiv dokončených** s vlastním vyhledáváním — aktivní práce zůstává v hlavním seznamu, starší zakázky nepřekáží.\n\n**Adresář klientů** propojuje kontakty s uloženými zakázkami a pracuje s **prioritou a připomínkami** — v přehledu je vidět, které kontakty jsou z pohledu nedávných zakázek nebo ručně zaznamenaného kontaktu vhodné **znovu oslovit**. (Jde o **řazení a značky v rozhraní adresáře**, nikoli o systémové notifikace do zařízení.) Vyhledávání v adresáři i v seznamech podporuje každodenní práci v terénu i v kanceláři.\n\n**PDF pro zákazníka** respektuje pravidla výstupu — například sleva jen u stálého klienta, **bez marže a interní poznámky** v souhrnu. Nasazení: statický frontend na **Vercelu** s bezpečnostními hlavičkami (**CSP**, včetně Google Fonts), proměnné prostředí pro Firebase a volitelné **App Check**.',
+            '**AdCalc (REKLY)** je jednostránkový nástroj na **Reactu 19** a **TypeScriptu**, stylování **Tailwind 4** a vlastní brand paleta (akcent např. **#00c4b7**). UI používá **Prompt**; PDF export běží přes **jsPDF** s fonty **Poppins** pro konzistentní tisk.\n\n**Firebase Authentication** (email a heslo), účty zakládá jen administrátor ve **Firebase Console**. Data zakázek, ceníku i adresáře jsou ve **Firestore** jako **sdílený pracovní prostor** pro celý tým. **localStorage** je vázaný na přihlášeného uživatele pro rychlou práci z mezipaměti, včetně migrace ze starších klíčů.\n\nAplikace pokrývá **životní cyklus zakázky**: přepínání mezi **nezávaznou kalkulací** a **schválenou výrobou**, přehled zakázek s **filtrováním podle fáze**, označení hotových a **archiv dokončených** s vlastním vyhledáváním, aktivní práce zůstává v hlavním seznamu, starší zakázky nepřekáží.\n\n**Adresář klientů** propojuje kontakty s uloženými zakázkami a pracuje s **prioritou a připomínkami**, v přehledu je vidět, které kontakty jsou z pohledu nedávných zakázek nebo ručně zaznamenaného kontaktu vhodné **znovu oslovit**. (Jde o **řazení a značky v rozhraní adresáře**, nikoli o systémové notifikace do zařízení.) Vyhledávání v adresáři i v seznamech podporuje každodenní práci v terénu i v kanceláři.\n\n**PDF pro zákazníka** respektuje pravidla výstupu, například sleva jen u stálého klienta, **bez marže a interní poznámky** v souhrnu. Nasazení: statický frontend na **Vercelu** s bezpečnostními hlavičkami (**CSP**, včetně Google Fonts), proměnné prostředí pro Firebase a volitelné **App Check**.',
           benefitsTitle: 'Výsledek',
           benefits: [
-            '**Jedna pravda o zakázkách** — méně duplicit a hádek o tom, kdo má poslední verzi.',
-            '**Adresář s prioritami** — uživatel vidí, které kontakty stojí za znovu oslovením.',
+            '**Jedna pravda o zakázkách**, méně duplicit a hádek o tom, kdo má poslední verzi.',
+            '**Adresář s prioritami**, uživatel vidí, které kontakty stojí za znovu oslovením.',
             '**Fáze zakázky** (kalkulace vs. výroba), přehled aktivních prací a **archiv hotových** bez přeplnění seznamu.',
             '**Rychlá kalkulace** z ceníku s úpravami v řádcích včetně **pevných cen bez marže**, kde to dává smysl.',
-            '**PDF na pár kliknutí** ve vizuálním stylu značky, bez „interních“ řádků — připravené k odeslání.',
-            '**Bez veřejné registrace** — přístup jen se souhlasem administrátora.',
+            '**PDF na pár kliknutí** ve vizuálním stylu značky, bez „interních“ řádků, připravené k odeslání.',
+            '**Bez veřejné registrace**, přístup jen se souhlasem administrátora.',
             '**Validace a výpočty v reálném čase** díky TypeScriptu a jedné sjednocené logice.',
           ],
         },

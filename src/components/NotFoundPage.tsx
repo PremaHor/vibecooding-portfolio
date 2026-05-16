@@ -29,12 +29,12 @@ export function NotFoundPage() {
       {/* Vertical guide line */}
       <div className="absolute top-0 bottom-0 left-1/2 w-px bg-violet-400/50 hidden md:block" />
 
-      {/* Dimension label — top-left */}
+      {/* Dimension label - top-left */}
       <span className="absolute top-4 left-4 sm:top-6 sm:left-6 text-[10px] sm:text-xs font-mono text-violet-400/80 select-none">
         {tr.dimensions}
       </span>
 
-      {/* Dimension label — bottom-right */}
+      {/* Dimension label - bottom-right */}
       <span className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 text-[10px] sm:text-xs font-mono text-violet-400/80 select-none">
         X: 0  Y: NaN
       </span>
@@ -67,7 +67,7 @@ export function NotFoundPage() {
           </span>
         </div>
 
-        {/* The card — looks like a selected Figma frame */}
+        {/* The card - looks like a selected Figma frame */}
         <div className="relative bg-white rounded-lg shadow-sm border-2 border-blue-400 p-8 sm:p-10 md:p-12">
           {/* Selection handles */}
           <span className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-blue-400 rounded-sm" />
@@ -75,7 +75,7 @@ export function NotFoundPage() {
           <span className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-blue-400 rounded-sm" />
           <span className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-blue-400 rounded-sm" />
 
-          {/* Title — slightly rotated for "draft" feel */}
+          {/* Title - slightly rotated for "draft" feel */}
           <motion.h1
             initial={{ rotate: -2 }}
             animate={{ rotate: [-2, -1.5, -2] }}
@@ -89,7 +89,7 @@ export function NotFoundPage() {
             {fmt(tr.description)}
           </p>
 
-          {/* Button — styled as a selected object with handles */}
+          {/* Button - styled as a selected object with handles */}
           <div className="relative inline-block">
             <span className="absolute -top-1 -left-1 w-2 h-2 border border-blue-400 bg-white rounded-sm" />
             <span className="absolute -top-1 -right-1 w-2 h-2 border border-blue-400 bg-white rounded-sm" />

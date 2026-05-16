@@ -5,7 +5,7 @@ import { Footer } from './components/Footer';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { HeroScrollSequence } from './components/HeroScrollSequence';
 
-// Kick off heavy chunks as soon as this module is evaluated — long before
+// Kick off heavy chunks as soon as this module is evaluated, long before
 // the user can scroll to them, so the Suspense boundary never shows.
 const homeSectionsPreload = import('./components/HomeSections');
 import('./i18n/translations'); // translation loader → triggers cs/en chunk
@@ -44,7 +44,7 @@ export default function App() {
   const lenisRef = useRef<{ destroy: () => void } | null>(null);
   const lenisFrameCancelRef = useRef<(() => void) | null>(null);
 
-  // Lenis smooth scroll – only for fine-pointer (mouse) desktops.
+  // Lenis smooth scroll - only for fine-pointer (mouse) desktops.
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
     const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
@@ -86,7 +86,7 @@ export default function App() {
     };
   }, []);
 
-  // Navbar theme – runs on all devices incl. tablets.
+  // Navbar theme - runs on all devices incl. tablets.
   useEffect(() => {
     let scrollTicking = false;
     const handleScroll = () => {

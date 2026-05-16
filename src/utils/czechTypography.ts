@@ -1,7 +1,7 @@
 /**
  * Nahrazuje obyčejné mezery za nedělitelné (nbsp) po českých předložkách a spojkách,
  * aby nezůstávaly na konci řádku při responzivním zalamování.
- * fixDashes slouží jako fallback pro anglické texty (nenahrazuje pomlčky, jen projde textem).
+ * fixDashes slouží jako fallback pro anglické texty (vrací text beze změny).
  */
 const NBSP = '\u00A0';
 
@@ -9,7 +9,7 @@ const PREPOSITIONS_SINGLE = ['a', 'i', 'k', 'o', 's', 'u', 'v', 'z'];
 const PREPOSITIONS_DOUBLE = ['do', 'na', 'od', 'po', 'pro', 'při', 'za', 'ze', 'bez', 'nad', 'pod', 'před', 'mezi', 'přes'];
 const CONJUNCTIONS = ['ale', 'ani', 'že', 'aby', 'nebo', 'což', 'když', 'proto', 'totiž', 'také', 'jenže'];
 
-/** Pro anglické texty: vrací text beze změny (pomlčky jsou odstraněny v překladech). */
+/** Pro anglické texty: vrací text beze změny. */
 export function fixDashes(text: string): string {
   if (!text || typeof text !== 'string') return text;
   return text;

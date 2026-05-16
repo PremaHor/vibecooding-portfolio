@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
     title: "RiskLight",
     category: "PWA",
     description: "Modulární mobil-first aplikace pro sledování rizik, správu klientů a týmovou spolupráci v reálném čase. End-to-end vývoj od výzkumu po nasazení.",
-    fullDescription: "RiskLight je modulární a škálovatelná aplikace pro organizace pracující s lidmi a jejich stavem, prioritami nebo riziky v čase. Navrhl a vyvinul jsem ji kompletně sám — od terénního výzkumu přes UX/UI design až po finální vývoj v Reactu a Supabase.",
+    fullDescription: "RiskLight je modulární a škálovatelná aplikace pro organizace pracující s lidmi a jejich stavem, prioritami nebo riziky v čase. Navrhl a vyvinul jsem ji kompletně sám, od terénního výzkumu přes UX/UI design až po finální vývoj v Reactu a Supabase.",
     image: "/images/projects/5.webp",
     tags: ["React", "TypeScript", "Supabase", "Tailwind", "Figma"],
     year: "2025",
@@ -94,7 +94,7 @@ export const PROJECTS: Project[] = [
     title: "AdCalc",
     category: "Interní nástroj",
     description:
-      "Interní nástroj pro REKLY: kalkulace z ceníku, sdílené zakázky podle fáze, adresář s prioritami pro návratnost klientů, archiv hotových a PDF připravené k odeslání — jedna data pro celý tým.",
+      "Interní nástroj pro REKLY: kalkulace z ceníku, sdílené zakázky podle fáze, adresář s prioritami pro návratnost klientů, archiv hotových a PDF připravené k odeslání, jedna data pro celý tým.",
     fullDescription:
       "AdCalc pokrývá životní cyklus zakázky od nezávazné nabídky po výrobu, sdílený ceník ve Firebase, adresář napojený na zakázky a tisknutelné PDF bez interních řádků.",
     image: "/images/projects/addcalc.webp",

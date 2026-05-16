@@ -6,7 +6,7 @@
   --font-display: "Montserrat", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  /* Brand akcent — #9ef01a: text na #050505 ~14.5:1 (AAA), černý text na akcentu ~14.5:1 (AA+) */
+  /* Brand akcent (#9ef01a): text na #050505 ~14.5:1 (AAA), černý text na akcentu ~14.5:1 (AA+) */
   --color-vibe-orange: #9ef01a;
   --color-vibe-green: #00FF00;
   --color-vibe-black: #050505;
@@ -285,7 +285,7 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* Profile photo glitch — CSS only, desktop only, zero runtime cost */
+/* Profile photo glitch - CSS only, desktop only, zero runtime cost */
 @media (min-width: 768px) {
   .photo-glitch {
     position: relative;
