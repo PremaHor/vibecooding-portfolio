@@ -241,16 +241,16 @@ export const PROJECTS: Project[] = [
   {
     id: 8,
     slug: "brand-identity-playground",
-    title: "Brand Identity Playground",
-    category: "Branding koncept",
+    title: "Brand Identity Studio",
+    category: "Koncept prototypu",
     description:
-      "Koncept prototypu pro rychlé testování brand identity v digitálním prostředí: barvy, typografie, tón komunikace a UI komponenty v jednom flow.",
+      "Nástroj pro designéry, kteří chtějí předávat brand manuály jinak. Interaktivní koncept prototypu místo statického PDF.",
     fullDescription:
-      "Brand Identity Playground je koncept prototypu, ve kterém ověřuji, jak se brand identita chová v reálných produktových scénářích.",
+      "Brand Identity Studio je vlastní projekt a koncept prototypu pro interaktivní schvalování vizuální identity.",
     image: "/images/projects/backround.webp",
     tags: ["Brand Strategy", "Visual System", "UI Design", "Figma", "Prototype"],
     year: "2026",
-    client: "Vlastní koncept",
-    role: "Branding, UI systém, prototyp",
+    client: "Vlastní projekt",
+    role: "Produkt, branding, UI systém",
   },
 ];

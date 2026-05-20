@@ -543,33 +543,33 @@ const en = {
         },
       },
       'brand-identity-playground': {
-        title: 'Brand Identity Playground',
-        category: 'Branding concept',
-        client: 'Personal concept',
-        role: 'Branding, UI system, prototyping',
-        subtitle: 'A concept prototype for testing brand identity in real product context.',
+        title: 'Brand Identity Studio',
+        category: 'Concept prototype',
+        client: 'Personal project',
+        role: 'Product, branding, UI system',
+        subtitle: 'A tool for designers who want to deliver brand manuals in a better way.',
         subtitleLine2: '',
         description:
-          'Brand Identity Playground is a space to validate how a brand behaves in practice: from colors and typography to components and communication tone.',
+          'Brand Identity Studio is a concept prototype web app that replaces static PDF brand manuals with an interactive approval flow between designer and client.',
         fullDescription:
-          'The project connects brand strategy with UI design and an interactive prototype so identity direction can be validated quickly before production.',
+          'This is a personal concept prototype focused on faster and clearer brand identity approval.',
         quote:
-          'A strong brand is not built by moodboards alone. It must hold up across real screens, states, and product decisions.',
+          'A brand manual should be a living document, not an archive.',
         techNote:
-          'The output is prepared as a concept prototype focused on design system consistency, information hierarchy, and scalable use in a digital product.',
+          'Under the hood: React, TypeScript, Tailwind CSS tokens mapped to CSS variables, Zustand with localStorage persistence, optional Supabase, Vite, and Vercel.',
         structured: {
-          goalTitle: 'Project goal',
+          goalTitle: 'What it is and who it is for',
           goal:
-            'The goal is to verify whether the proposed identity works inside a product, not just in presentation slides. That means testing readability, contrast, emotional brand expression, and cross-screen consistency.',
-          solutionTitle: 'Solution',
+            'The product is built mainly for graphic designers and brand designers who present identity systems to clients. It also helps founders and marketing leads understand and approve identity with context.',
+          solutionTitle: 'What it solves and how it works',
           solution:
-            'Brand Identity Playground is built on modularity. Identity elements are assembled into real UI scenarios where variants can be compared quickly and decisions can be made based on actual product usage.',
-          benefitsTitle: 'Highlights',
+            'Instead of sending static PDFs and collecting chaotic email comments, designers share an interactive client link. Clients review section by section, approve or request changes, and send structured feedback.',
+          benefitsTitle: 'Benefits',
           benefits: [
-            '**Fast validation of brand direction** in real UI situations',
-            '**Brand strategy and product alignment** in one design flow',
-            '**Consistent design system** ready for future extension',
-            '**Concept prototype** suitable for internal alignment and client presentation',
+            '**Faster iteration cycles** for designers and cleaner decision flow',
+            '**Better client understanding** thanks to contextual review',
+            '**Structured feedback** without email thread noise',
+            '**Concept prototype of a personal product** ready for deeper validation',
           ],
         },
       },

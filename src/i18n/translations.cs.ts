@@ -528,30 +528,31 @@ const cs = {
         },
       },
       'brand-identity-playground': {
-        category: 'Branding koncept',
-        subtitle: 'Koncept prototypu pro testování brand identity v reálném produktovém kontextu.',
+        title: 'Brand Identity Studio',
+        category: 'Koncept prototypu',
+        subtitle: 'Nástroj pro designéry, kteří chtějí předávat brand manuály jinak.',
         subtitleLine2: '',
         description:
-          'Brand Identity Playground je prostor, kde se ověřuje, jak se značka chová v praxi: od barev a typografie přes komponenty až po tón komunikace.',
+          'Brand Identity Studio je webová aplikace, která mění způsob, jakým designéři prezentují vizuální identitu klientům. Místo statického PDF dostane klient interaktivní brand manuál, ve kterém může v reálném čase prozkoumat značku a odeslat zpětnou vazbu přímo designérovi.',
         fullDescription:
-          'Projekt propojuje strategii značky s UI návrhem a interaktivním prototypem, aby bylo možné rychle validovat směr identity ještě před produkcí.',
+          'Projekt je vlastní koncept prototypu. Cílem je ověřit rychlejší a přehlednější schvalování brand identity mezi designérem a klientem.',
         quote:
-          'Silná značka nevzniká jen moodboardem. Potřebuje obstát v konkrétních obrazovkách, stavech a rozhodnutích.',
+          'Brand manuál má být živý dokument, ne archiv.',
         techNote:
-          'Výstup je připravený jako koncept prototypu s důrazem na konzistenci design systému, hierarchii informací a škálovatelné použití v digitálním produktu.',
+          'Pod kapotou: React a TypeScript pro komponentovou architekturu, Tailwind CSS pro tokeny mapované na CSS proměnné, Zustand s localStorage persistencí, volitelně Supabase s PostgreSQL a RLS, Vite pro rychlý build a Vercel pro deploy. Architektura je navržená tak, aby aplikace fungovala lokálně i jako SaaS podle jediné env proměnné.',
         structured: {
-          goalTitle: 'Cíl projektu',
+          goalTitle: 'Co to je a pro koho je',
           goal:
-            'Cílem je ověřit, jestli navržená identita opravdu funguje v produktu, nejen v prezentaci. Proto se testuje čitelnost, kontrast, práce s emocí značky i konzistence napříč obrazovkami.',
-          solutionTitle: 'Řešení',
+            'Primárně je nástroj určený pro grafické designéry a brand designéry, kteří tvoří vizuální identitu pro klienty. Hodí se pro freelancery i menší studia. Sekundárně pomáhá klientům, tedy zakladatelům, marketingovým manažerům a zadavatelům, kteří potřebují manuál nejen vidět, ale opravdu pochopit a schválit.',
+          solutionTitle: 'Co řeší a jak funguje',
           solution:
-            'Brand Identity Playground staví na modularitě. Jednotlivé prvky identity se skládají do reálných UI scénářů, kde je možné rychle porovnávat varianty a dělat rozhodnutí nad konkrétním používáním.',
-          benefitsTitle: 'Highlights',
+            'Tradiční schvalování identity bývá pomalé a nepřehledné. Klient dostane PDF bez kontextu a zpětná vazba se ztratí v e mailech. Brand Identity Studio zkracuje celý proces: designér vytvoří projekt, naplní manuál obsahem, nastaví co může klient upravit, sdílí klientský odkaz bez registrace a dostane strukturovaný feedback po sekcích.',
+          benefitsTitle: 'Přínos',
           benefits: [
-            '**Rychlá validace směru značky** v reálných UI situacích',
-            '**Propojení brand strategie a produktu** v jednom návrhovém flow',
-            '**Konzistentní design systém** připravený pro další rozvoj',
-            '**Koncept prototypu** vhodný pro interní alignment i prezentaci klientovi',
+            '**Rychlejší iterace pro designéra** a profesionálnější prezentace práce',
+            '**Lepší porozumění pro klienta**, protože schvaluje v kontextu a ne nad statickými obrázky',
+            '**Strukturovaná zpětná vazba** po sekcích bez chaosu v e mailových vláknech',
+            '**Koncept prototypu vlastního produktu**, který je připravený pro další validaci i rozšíření',
           ],
         },
       },
