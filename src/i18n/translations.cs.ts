@@ -290,6 +290,7 @@ const cs = {
         dduOriginalWeb: 'Původní web: dduolomouc.cz',
         dduRedesignPreview: 'Návrh redesignu: ddu-olomouc-web.vercel.app',
         arborisDemo: 'Ukázkový web: bez-nazvu.vercel.app',
+        trhnisiLiveDemo: 'Ukázka v provozu: trhnisi.vercel.app',
       },
       prototype: 'Prototyp',
       videoUserFlow: 'User flow: průlet aplikací',
@@ -499,22 +500,32 @@ const cs = {
         },
       },
       trhnisi: {
-        category: 'B2C SaaS',
-        subtitle: 'Produkt pro moderní barterovou směnu a komunitní výměnu hodnot v digitálním prostředí.',
+        category: 'Směnný marketplace',
+        subtitle: 'Platforma pro bezpeněžní domluvu výměn: nabídky v okolí, přímá komunikace a jasný proces od zájmu až po potvrzené obchody.',
         subtitleLine2: '',
-        description: 'Vlastní B2C SaaS aplikace pro moderní barterovou směnu. Přetvářím komunitní dynamiku do digitálního světa.',
-        fullDescription: 'Stránka projektu TrhniSi je připravená jako strukturovaný základ. Finální obsah bude doplněn následně.',
-        quote: 'Obsah projektu doplním v dalším kroku. Struktura stránky je připravená stejně jako u ostatních case studies.',
+        description:
+          'TrhniSi je mobilně-first marketplace, kde hodnota mění majitele - ne peněženku. Procházejte nabídky, ukládejte inspiration, začněte výměnu a domluvte detaily přímo s druhou stranou. Aplikace je navržená jako rychlý, spolehlivý prototyp připravený k použití - včetně chráněného uživatelského účtu, správy nabídek a živého chatu.',
+        fullDescription:
+          'TrhniSi - směnný marketplace: nabídky, zájem přes swipe nebo uložení a domluva výměny v mobilní PWA.',
+        quote:
+          'Lidé často nevědí, kde bezpečně a jednoduše vyměnit věci nebo služby. TrhniSi to řeší tokem objevovat - uchovat zájem - napsat - domluvit výměnu.',
+        techNote:
+          'Za rozhraním stojí moderní frontend (React, Vite) a Firebase pro autentizaci a realtime komunikaci. Design vychází z návrhu ve Figmě, implementace řeší responzivitu, práci s formuláři a péči o právní i informační stránky aplikace. Výsledek ukazuje, že umím spojit designový intent, produktový flow a funkční doručení.',
+        prototypeOnRequest:
+          'Návrh UI a uživatelský research mohu doplnit odkazem na Figmu podle README repozitáře.',
         structured: {
-          goalTitle: 'Kontext',
-          goal: 'Tato sekce je připravená pro doplnění finálního obsahu projektu **TrhniSi**.',
+          goalTitle: 'Proč to dává smysl',
+          goal:
+            'Lidé často nevědí, kde bezpečně a jednoduše vyměnit věci nebo služby. TrhniSi to řeší srozumitelným tokem: objevovat -> uchovat zájem -> napsat -> domluvit výměnu. Důraz je na přehled, důvěru v komunikaci a na to, aby celý zážitek seděl hlavně na mobilu - tam, kde reálně vzniká první kontakt.',
           solutionTitle: 'Řešení',
-          solution: 'Po dodání podkladů bude tato část aktualizovaná konkrétním popisem produktu, přístupu a implementace.',
-          benefitsTitle: 'Výstupy',
+          solution:
+            'TrhniSi staví jasný proces od objevení nabídky až po potvrzení výměny. Uživatel nejdřív objevuje relevantní nabídky, ukládá zájem, pak navazuje přímou komunikaci a domlouvá detaily v chatu. Tím se snižuje chaos v domluvě a každá výměna má srozumitelný stav.',
+          benefitsTitle: 'Highlights',
           benefits: [
-            'Připravená **struktura case study** kompatibilní s ostatními projekty',
-            'Aktivní a **rozklikávací karta** v seznamu projektů',
-            'Možnost průběžně doplňovat obsah bez dalších změn layoutu',
+            '**Zažitek jako z nativní appky**: PWA, rychlé ovládání, orientace "na palubě".',
+            '**End-to-end cesta obchodu**: nabídka -> zájem -> domluva v chatu -> žádosti o výměnu a správa stavu nabídek.',
+            '**Důvěryhodný backend pro chat**: strukturovaná data a pravidla přístupu, aby konverzace i účasti zůstaly pod kontrolou.',
+            '**Produkční myšlení**: oddělení veřejného prohlížení a chráněných částí pro přihlášené uživatele, stejně jako v reálných produktech.',
           ],
         },
       },

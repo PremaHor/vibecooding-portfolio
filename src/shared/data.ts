@@ -38,7 +38,13 @@ export interface Project {
   notionCaseStudyUrl?: string;
   /** Keys map to `t.project.websiteLinkLabels` */
   websiteUrls?: {
-    labelKey: 'risklightLanding' | 'risklightPwa' | 'dduOriginalWeb' | 'dduRedesignPreview' | 'arborisDemo';
+    labelKey:
+      | 'risklightLanding'
+      | 'risklightPwa'
+      | 'dduOriginalWeb'
+      | 'dduRedesignPreview'
+      | 'arborisDemo'
+      | 'trhnisiLiveDemo';
     url: string;
   }[];
 }
@@ -198,16 +204,29 @@ export const PROJECTS: Project[] = [
   {
     id: 7,
     slug: "trhnisi",
-    title: "TrhniSi",
-    category: "B2C SaaS",
+    title: "TrhniSi - směnný marketplace jako mobilní aplikace v prohlížeči",
+    category: "Směnný marketplace",
     description:
-      "Vlastní B2C SaaS aplikace pro moderní barterovou směnu. Přetvářím komunitní dynamiku do digitálního světa.",
+      "TrhniSi je mobilně-first marketplace, kde hodnota mění majitele, ne peněženku. Procházej nabídky, ulož zájem a domluv výměnu přímo s druhou stranou.",
     fullDescription:
-      "TrhniSi je produkt pro moderní barterovou směnu. Struktura projektu je připravená pro doplnění finálního obsahu.",
+      "TrhniSi - směnný marketplace: nabídky, zájem přes swipe nebo uložení a domluva výměny v mobilní PWA.",
     image: "/images/projects/backround.webp",
-    tags: ["React Native", "Expo Go", "Firebase"],
+    tags: ["React", "Vite", "PWA", "Firebase", "Figma"],
     year: "2026",
     client: "Vlastní projekt",
-    role: "Produkt, UX/UI, vývoj",
+    role: "Produkt, UX/UI, frontend",
+    websiteUrls: [{ labelKey: "trhnisiLiveDemo", url: "https://trhnisi.vercel.app/" }],
+    galleryImages: [
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 1" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 2" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 3" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 4" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 5" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 6" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 7" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 8" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 9" },
+      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 10" },
+    ],
   },
 ];

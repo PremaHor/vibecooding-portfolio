@@ -1,7 +1,7 @@
 import React, { use, useState, useEffect } from 'react';
 import { useParams, Link } from '../router';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ExternalLink, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, X } from 'lucide-react';
 import { fixCzechTypography, fixDashes } from '../utils/czechTypography';
 import { useLanguage } from '../i18n/LanguageContext';
 import { translationsPromise } from '../i18n/translations';
@@ -163,6 +163,7 @@ export const ProjectPage = () => {
   const displayTitle = project ? projectLocaleField(lang, tr, 'title', project) : '';
   const displayClient = project ? projectLocaleField(lang, tr, 'client', project) : '';
   const displayRole = project ? projectLocaleField(lang, tr, 'role', project) : '';
+  const hasGallery = Boolean(project?.galleryImages && project.galleryImages.length > 0);
   const nextTr = t.projects[nextProject.slug as keyof typeof t.projects];
   const nextDisplayTitle = projectLocaleField(lang, nextTr, 'title', nextProject);
 
@@ -219,11 +220,23 @@ export const ProjectPage = () => {
   useEffect(() => {
     if (lightboxIndex !== null) {
       document.body.style.overflow = 'hidden';
-      const onEscape = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightboxIndex(null); };
+      const onEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setLightboxIndex(null);
+          return;
+        }
+        if (!project?.galleryImages || project.galleryImages.length <= 1) return;
+        if (e.key === 'ArrowRight') {
+          setLightboxIndex((prev) => (prev === null ? 0 : (prev + 1) % project.galleryImages!.length));
+        }
+        if (e.key === 'ArrowLeft') {
+          setLightboxIndex((prev) => (prev === null ? 0 : (prev - 1 + project.galleryImages!.length) % project.galleryImages!.length));
+        }
+      };
       window.addEventListener('keydown', onEscape);
       return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onEscape); };
     } else { document.body.style.overflow = ''; }
-  }, [lightboxIndex]);
+  }, [lightboxIndex, project]);
 
   if (!project) return <div>{lang === 'cs' ? fixCzechTypography(t.project.notFound) : fixDashes(t.project.notFound)}</div>;
 
@@ -255,9 +268,23 @@ export const ProjectPage = () => {
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className={
                 project.detailImage
-                  ? 'w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl flex justify-center items-start'
-                  : 'aspect-[16/9] w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl'
+                  ? `w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl flex justify-center items-start ${hasGallery ? 'cursor-zoom-in' : ''}`
+                  : `aspect-[16/9] w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl ${hasGallery ? 'cursor-zoom-in' : ''}`
               }
+              onClick={hasGallery ? () => setLightboxIndex(0) : undefined}
+              role={hasGallery ? 'button' : undefined}
+              tabIndex={hasGallery ? 0 : undefined}
+              onKeyDown={
+                hasGallery
+                  ? (e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setLightboxIndex(0);
+                      }
+                    }
+                  : undefined
+              }
+              aria-label={hasGallery ? (lang === 'cs' ? 'Otevřít galerii obrázků' : 'Open image gallery') : undefined}
             >
               <img
                 src={project.detailImage ?? project.image}
@@ -333,7 +360,7 @@ export const ProjectPage = () => {
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }} className="mt-12 sm:mt-16 md:mt-20">
                 <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                   {project.galleryImages.map((img, idx) => (
-                    <motion.button key={img.src} type="button" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }} onClick={() => setLightboxIndex(idx)} className="overflow-hidden rounded-xl sm:rounded-2xl text-left w-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-vibe-orange)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-vibe-black)]" aria-label={lang === 'cs' ? `Zvětšit obrázek ${idx + 1}` : `Enlarge image ${idx + 1}`}>
+                    <motion.button key={`${img.src}-${idx}`} type="button" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }} onClick={() => setLightboxIndex(idx)} className="overflow-hidden rounded-xl sm:rounded-2xl text-left w-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-vibe-orange)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-vibe-black)]" aria-label={lang === 'cs' ? `Zvětšit obrázek ${idx + 1}` : `Enlarge image ${idx + 1}`}>
                       <img src={img.src} srcSet={getImageSrcSet(img.src)} sizes={idx === 0 ? '(max-width: 768px) 100vw, 1200px' : '(max-width: 768px) 50vw, 600px'} alt={img.alt} width={1200} height={800} loading="lazy" decoding="async" className="w-full h-auto object-contain" referrerPolicy="no-referrer" />
                     </motion.button>
                   ))}
@@ -347,6 +374,32 @@ export const ProjectPage = () => {
                   <button type="button" onClick={() => setLightboxIndex(null)} className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label={lang === 'cs' ? 'Zavřít' : 'Close'}>
                     <X className="w-6 h-6" />
                   </button>
+                  {project.galleryImages.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setLightboxIndex((prev) => (prev === null ? 0 : (prev - 1 + project.galleryImages!.length) % project.galleryImages!.length));
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                        aria-label={lang === 'cs' ? 'Předchozí obrázek' : 'Previous image'}
+                      >
+                        <ArrowLeft className="w-6 h-6" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setLightboxIndex((prev) => (prev === null ? 0 : (prev + 1) % project.galleryImages!.length));
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                        aria-label={lang === 'cs' ? 'Další obrázek' : 'Next image'}
+                      >
+                        <ArrowRight className="w-6 h-6" />
+                      </button>
+                    </>
+                  )}
                   <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} transition={{ duration: 0.25 }} className="relative max-w-full max-h-[90vh] w-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
                     <img src={project.galleryImages[lightboxIndex].src} srcSet={getImageSrcSet(project.galleryImages[lightboxIndex].src)} sizes="100vw" alt={project.galleryImages[lightboxIndex].alt} className="max-w-full max-h-[90vh] w-auto h-auto object-contain" />
                   </motion.div>

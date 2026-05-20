@@ -290,6 +290,7 @@ const en = {
         dduOriginalWeb: 'Original website: dduolomouc.cz',
         dduRedesignPreview: 'Redesign proposal: ddu-olomouc-web.vercel.app',
         arborisDemo: 'Demo site: bez-nazvu.vercel.app',
+        trhnisiLiveDemo: 'Live demo: trhnisi.vercel.app',
       },
       prototype: 'Prototype',
       videoUserFlow: 'User flow walkthrough',
@@ -512,24 +513,34 @@ const en = {
       },
       trhnisi: {
         title: 'TrhniSi',
-        category: 'B2C SaaS',
+        category: 'Barter marketplace',
         client: 'Personal project',
-        role: 'Product, UX/UI, development',
-        subtitle: 'A product for modern barter exchange and community value trading in a digital environment.',
+        role: 'Product, UX/UI, frontend',
+        subtitle: 'A platform for cashless exchange: nearby offers, direct communication, and a clear path from interest to confirmed trades.',
         subtitleLine2: '',
-        description: 'A personal B2C SaaS app for modern barter exchange. Bringing community dynamics into the digital world.',
-        fullDescription: 'The TrhniSi project page is prepared as a structured base. Final content will be added next.',
-        quote: 'Project content will be added in the next step. The page structure is ready in the same format as other case studies.',
+        description:
+          'TrhniSi is a mobile-first marketplace where value changes hands, not money. Browse offers, save interest, start an exchange, and agree details directly with the other side. The app is built as a fast and reliable prototype ready for use, including protected accounts, listing management, and live chat.',
+        fullDescription:
+          'TrhniSi - barter marketplace: offers, interest via swipe or save, and exchange negotiation in a mobile PWA.',
+        quote:
+          'People often do not know where to exchange things or services safely and simply. TrhniSi solves this with a clear flow: discover, save interest, message, agree exchange.',
+        techNote:
+          'Behind the interface is a modern frontend stack (React, Vite) and Firebase for authentication and realtime communication. The design follows Figma and the implementation covers responsiveness, form handling, and legal and information pages. The outcome shows I can connect design intent, product flow, and functional delivery.',
+        prototypeOnRequest:
+          'I can share UI proposal and user research via the Figma link referenced in the repository README.',
         structured: {
-          goalTitle: 'Context',
-          goal: 'This section is ready for the final **TrhniSi** project content.',
+          goalTitle: 'Why this makes sense',
+          goal:
+            'People often do not know where to exchange things or services safely and simply. TrhniSi solves this with a clear flow: discover -> save interest -> message -> agree exchange. The focus is clarity, trust in communication, and a mobile-first experience where first contact really happens.',
           solutionTitle: 'Solution',
-          solution: 'Once source material is provided, this section will be updated with concrete product, process, and implementation details.',
-          benefitsTitle: 'Deliverables',
+          solution:
+            'TrhniSi sets a clear process from offer discovery to confirmed exchange. Users discover relevant offers, save interest, open direct conversation, and agree details in chat. This reduces negotiation chaos and gives every exchange a clear status.',
+          benefitsTitle: 'Highlights',
           benefits: [
-            'Prepared **case study structure** consistent with other projects',
-            'Active and **clickable card** in the projects listing',
-            'Content can be added iteratively without further layout changes',
+            '**Native-like experience**: PWA, fast interactions, and "on-board" navigation.',
+            '**End-to-end trade flow**: offer -> interest -> chat negotiation -> exchange requests and listing state management.',
+            '**Trustworthy chat backend**: structured data and access rules to keep conversations and participants controlled.',
+            '**Production thinking**: split between public browsing and protected areas for signed-in users, like real products.',
           ],
         },
       },
