@@ -510,6 +510,29 @@ const en = {
           ],
         },
       },
+      trhnisi: {
+        title: 'TrhniSi',
+        category: 'B2C SaaS',
+        client: 'Personal project',
+        role: 'Product, UX/UI, development',
+        subtitle: 'A product for modern barter exchange and community value trading in a digital environment.',
+        subtitleLine2: '',
+        description: 'A personal B2C SaaS app for modern barter exchange. Bringing community dynamics into the digital world.',
+        fullDescription: 'The TrhniSi project page is prepared as a structured base. Final content will be added next.',
+        quote: 'Project content will be added in the next step. The page structure is ready in the same format as other case studies.',
+        structured: {
+          goalTitle: 'Context',
+          goal: 'This section is ready for the final **TrhniSi** project content.',
+          solutionTitle: 'Solution',
+          solution: 'Once source material is provided, this section will be updated with concrete product, process, and implementation details.',
+          benefitsTitle: 'Deliverables',
+          benefits: [
+            'Prepared **case study structure** consistent with other projects',
+            'Active and **clickable card** in the projects listing',
+            'Content can be added iteratively without further layout changes',
+          ],
+        },
+      },
     },
 } as const;
 

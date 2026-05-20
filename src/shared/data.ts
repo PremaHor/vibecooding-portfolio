@@ -195,4 +195,19 @@ export const PROJECTS: Project[] = [
     role: "UI, frontend, CZ copy",
     websiteUrls: [{ labelKey: "arborisDemo", url: "https://bez-nazvu.vercel.app/" }],
   },
+  {
+    id: 7,
+    slug: "trhnisi",
+    title: "TrhniSi",
+    category: "B2C SaaS",
+    description:
+      "Vlastní B2C SaaS aplikace pro moderní barterovou směnu. Přetvářím komunitní dynamiku do digitálního světa.",
+    fullDescription:
+      "TrhniSi je produkt pro moderní barterovou směnu. Struktura projektu je připravená pro doplnění finálního obsahu.",
+    image: "/images/projects/backround.webp",
+    tags: ["React Native", "Expo Go", "Firebase"],
+    year: "2026",
+    client: "Vlastní projekt",
+    role: "Produkt, UX/UI, vývoj",
+  },
 ];

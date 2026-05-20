@@ -351,45 +351,6 @@ const WorkSection = () => {
           {PROJECTS.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} isMobile={isMobile} />
           ))}
-          <motion.article
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0, margin: '0px 0px -80px 0px' }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="relative rounded-2xl sm:rounded-[1.75rem] border border-white/[0.08] overflow-hidden bg-gray-950 cursor-default select-none">
-              <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-gray-900 via-gray-950 to-black flex items-center justify-center">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
-                <div className="relative text-center px-6">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full border border-white/10 flex items-center justify-center">
-                    <span className="text-lg">🔨</span>
-                  </div>
-                  <p className="text-white/30 text-sm font-mono uppercase tracking-widest">Coming soon</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-4 sm:gap-5 p-5 sm:p-6">
-                <div className="flex items-center gap-4">
-                  <span className="w-8 h-px bg-white/20" />
-                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] text-white/40 whitespace-nowrap">
-                    {t.work.comingSoonBadge}
-                  </span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-display uppercase leading-[1.05] text-white">
-                  {t.work.comingSoonTitle}
-                </h3>
-                <p className="text-sm text-white/50 leading-relaxed">
-                  {lang === 'cs' ? fixCzechTypography(t.work.comingSoonDescription) : fixDashes(t.work.comingSoonDescription)}
-                </p>
-                <div className="flex flex-wrap items-center gap-3">
-                  {['React Native', 'Expo Go', 'Firebase'].map(tag => (
-                    <span key={tag} className="text-[10px] px-3 py-1.5 border border-white/10 rounded-full font-mono uppercase tracking-[0.15em] text-white/40">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.article>
         </div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent" aria-hidden />

@@ -498,6 +498,26 @@ const cs = {
           ],
         },
       },
+      trhnisi: {
+        category: 'B2C SaaS',
+        subtitle: 'Produkt pro moderní barterovou směnu a komunitní výměnu hodnot v digitálním prostředí.',
+        subtitleLine2: '',
+        description: 'Vlastní B2C SaaS aplikace pro moderní barterovou směnu. Přetvářím komunitní dynamiku do digitálního světa.',
+        fullDescription: 'Stránka projektu TrhniSi je připravená jako strukturovaný základ. Finální obsah bude doplněn následně.',
+        quote: 'Obsah projektu doplním v dalším kroku. Struktura stránky je připravená stejně jako u ostatních case studies.',
+        structured: {
+          goalTitle: 'Kontext',
+          goal: 'Tato sekce je připravená pro doplnění finálního obsahu projektu **TrhniSi**.',
+          solutionTitle: 'Řešení',
+          solution: 'Po dodání podkladů bude tato část aktualizovaná konkrétním popisem produktu, přístupu a implementace.',
+          benefitsTitle: 'Výstupy',
+          benefits: [
+            'Připravená **struktura case study** kompatibilní s ostatními projekty',
+            'Aktivní a **rozklikávací karta** v seznamu projektů',
+            'Možnost průběžně doplňovat obsah bez dalších změn layoutu',
+          ],
+        },
+      },
     },
 } as const;
 
