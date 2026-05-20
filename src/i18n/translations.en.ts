@@ -516,14 +516,14 @@ const en = {
         category: 'Barter marketplace',
         client: 'Personal project',
         role: 'Product, UX/UI, frontend',
-        subtitle: 'A platform for cashless exchange: nearby offers, direct communication, and a clear path from interest to confirmed trades.',
+        subtitle: 'A concept prototype of a cashless exchange platform: nearby offers, direct communication, and a clear path from interest to confirmed trades.',
         subtitleLine2: '',
         description:
-          'TrhniSi is a mobile-first marketplace where value changes hands, not money. Browse offers, save interest, start an exchange, and agree details directly with the other side. The app is built as a fast and reliable prototype ready for use, including protected accounts, listing management, and live chat.',
+          'TrhniSi is a concept prototype of a mobile-first marketplace where value changes hands, not money. Browse offers, save interest, start an exchange, and agree details directly with the other side. The prototype is built as a fast and reliable product demonstration, including protected accounts, listing management, and live chat.',
         fullDescription:
-          'TrhniSi - barter marketplace: offers, interest via swipe or save, and exchange negotiation in a mobile PWA.',
+          'TrhniSi - concept prototype of a barter marketplace: offers, interest via swipe or save, and exchange negotiation in a mobile PWA.',
         quote:
-          'People often do not know where to exchange things or services safely and simply. TrhniSi solves this with a clear flow: discover, save interest, message, agree exchange.',
+          'People often do not know where to exchange things or services safely and simply. This concept prototype solves it with a clear flow: discover, save interest, message, agree exchange.',
         techNote:
           'Behind the interface is a modern frontend stack (React, Vite) and Firebase for authentication and realtime communication. The design follows Figma and the implementation covers responsiveness, form handling, and legal and information pages. The outcome shows I can connect design intent, product flow, and functional delivery.',
         structured: {
@@ -539,6 +539,37 @@ const en = {
             '**End-to-end trade flow**: offer -> interest -> chat negotiation -> exchange requests and listing state management.',
             '**Trustworthy chat backend**: structured data and access rules to keep conversations and participants controlled.',
             '**Production thinking**: split between public browsing and protected areas for signed-in users, like real products.',
+          ],
+        },
+      },
+      'brand-identity-playground': {
+        title: 'Brand Identity Playground',
+        category: 'Branding concept',
+        client: 'Personal concept',
+        role: 'Branding, UI system, prototyping',
+        subtitle: 'A concept prototype for testing brand identity in real product context.',
+        subtitleLine2: '',
+        description:
+          'Brand Identity Playground is a space to validate how a brand behaves in practice: from colors and typography to components and communication tone.',
+        fullDescription:
+          'The project connects brand strategy with UI design and an interactive prototype so identity direction can be validated quickly before production.',
+        quote:
+          'A strong brand is not built by moodboards alone. It must hold up across real screens, states, and product decisions.',
+        techNote:
+          'The output is prepared as a concept prototype focused on design system consistency, information hierarchy, and scalable use in a digital product.',
+        structured: {
+          goalTitle: 'Project goal',
+          goal:
+            'The goal is to verify whether the proposed identity works inside a product, not just in presentation slides. That means testing readability, contrast, emotional brand expression, and cross-screen consistency.',
+          solutionTitle: 'Solution',
+          solution:
+            'Brand Identity Playground is built on modularity. Identity elements are assembled into real UI scenarios where variants can be compared quickly and decisions can be made based on actual product usage.',
+          benefitsTitle: 'Highlights',
+          benefits: [
+            '**Fast validation of brand direction** in real UI situations',
+            '**Brand strategy and product alignment** in one design flow',
+            '**Consistent design system** ready for future extension',
+            '**Concept prototype** suitable for internal alignment and client presentation',
           ],
         },
       },

@@ -238,4 +238,19 @@ export const PROJECTS: Project[] = [
       { src: "/images/projects/trhnisi-screen-08.webp", alt: "TrhniSi screen 08" },
     ],
   },
+  {
+    id: 8,
+    slug: "brand-identity-playground",
+    title: "Brand Identity Playground",
+    category: "Branding koncept",
+    description:
+      "Koncept prototypu pro rychlé testování brand identity v digitálním prostředí: barvy, typografie, tón komunikace a UI komponenty v jednom flow.",
+    fullDescription:
+      "Brand Identity Playground je koncept prototypu, ve kterém ověřuji, jak se brand identita chová v reálných produktových scénářích.",
+    image: "/images/projects/backround.webp",
+    tags: ["Brand Strategy", "Visual System", "UI Design", "Figma", "Prototype"],
+    year: "2026",
+    client: "Vlastní koncept",
+    role: "Branding, UI systém, prototyp",
+  },
 ];

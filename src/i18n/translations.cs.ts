@@ -501,14 +501,14 @@ const cs = {
       },
       trhnisi: {
         category: 'Směnný marketplace',
-        subtitle: 'Platforma pro bezpeněžní domluvu výměn: nabídky v okolí, přímá komunikace a jasný proces od zájmu až po potvrzené obchody.',
+        subtitle: 'Koncept prototypu platformy pro bezpeněžní domluvu výměn: nabídky v okolí, přímá komunikace a jasný proces od zájmu až po potvrzené obchody.',
         subtitleLine2: '',
         description:
-          'TrhniSi je mobilně-first marketplace, kde hodnota mění majitele - ne peněženku. Procházejte nabídky, ukládejte inspiration, začněte výměnu a domluvte detaily přímo s druhou stranou. Aplikace je navržená jako rychlý, spolehlivý prototyp připravený k použití - včetně chráněného uživatelského účtu, správy nabídek a živého chatu.',
+          'TrhniSi je koncept prototypu mobilně-first marketplace, kde hodnota mění majitele - ne peněženku. Procházejte nabídky, ukládejte inspiration, začněte výměnu a domluvte detaily přímo s druhou stranou. Prototyp je navržený jako rychlá a spolehlivá ukázka produktu - včetně chráněného uživatelského účtu, správy nabídek a živého chatu.',
         fullDescription:
-          'TrhniSi - směnný marketplace: nabídky, zájem přes swipe nebo uložení a domluva výměny v mobilní PWA.',
+          'TrhniSi - koncept prototypu směnného marketplace: nabídky, zájem přes swipe nebo uložení a domluva výměny v mobilní PWA.',
         quote:
-          'Lidé často nevědí, kde bezpečně a jednoduše vyměnit věci nebo služby. TrhniSi to řeší tokem objevovat - uchovat zájem - napsat - domluvit výměnu.',
+          'Lidé často nevědí, kde bezpečně a jednoduše vyměnit věci nebo služby. Tento koncept prototypu to řeší tokem objevovat - uchovat zájem - napsat - domluvit výměnu.',
         techNote:
           'Za rozhraním stojí moderní frontend (React, Vite) a Firebase pro autentizaci a realtime komunikaci. Design vychází z návrhu ve Figmě, implementace řeší responzivitu, práci s formuláři a péči o právní i informační stránky aplikace. Výsledek ukazuje, že umím spojit designový intent, produktový flow a funkční doručení.',
         structured: {
@@ -524,6 +524,34 @@ const cs = {
             '**End-to-end cesta obchodu**: nabídka -> zájem -> domluva v chatu -> žádosti o výměnu a správa stavu nabídek.',
             '**Důvěryhodný backend pro chat**: strukturovaná data a pravidla přístupu, aby konverzace i účasti zůstaly pod kontrolou.',
             '**Produkční myšlení**: oddělení veřejného prohlížení a chráněných částí pro přihlášené uživatele, stejně jako v reálných produktech.',
+          ],
+        },
+      },
+      'brand-identity-playground': {
+        category: 'Branding koncept',
+        subtitle: 'Koncept prototypu pro testování brand identity v reálném produktovém kontextu.',
+        subtitleLine2: '',
+        description:
+          'Brand Identity Playground je prostor, kde se ověřuje, jak se značka chová v praxi: od barev a typografie přes komponenty až po tón komunikace.',
+        fullDescription:
+          'Projekt propojuje strategii značky s UI návrhem a interaktivním prototypem, aby bylo možné rychle validovat směr identity ještě před produkcí.',
+        quote:
+          'Silná značka nevzniká jen moodboardem. Potřebuje obstát v konkrétních obrazovkách, stavech a rozhodnutích.',
+        techNote:
+          'Výstup je připravený jako koncept prototypu s důrazem na konzistenci design systému, hierarchii informací a škálovatelné použití v digitálním produktu.',
+        structured: {
+          goalTitle: 'Cíl projektu',
+          goal:
+            'Cílem je ověřit, jestli navržená identita opravdu funguje v produktu, nejen v prezentaci. Proto se testuje čitelnost, kontrast, práce s emocí značky i konzistence napříč obrazovkami.',
+          solutionTitle: 'Řešení',
+          solution:
+            'Brand Identity Playground staví na modularitě. Jednotlivé prvky identity se skládají do reálných UI scénářů, kde je možné rychle porovnávat varianty a dělat rozhodnutí nad konkrétním používáním.',
+          benefitsTitle: 'Highlights',
+          benefits: [
+            '**Rychlá validace směru značky** v reálných UI situacích',
+            '**Propojení brand strategie a produktu** v jednom návrhovém flow',
+            '**Konzistentní design systém** připravený pro další rozvoj',
+            '**Koncept prototypu** vhodný pro interní alignment i prezentaci klientovi',
           ],
         },
       },
