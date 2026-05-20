@@ -33,6 +33,8 @@ export interface Project {
   role: string;
   quote?: string;
   galleryImages?: { src: string; alt: string }[];
+  /** When true, gallery thumbnails are hidden on detail page and only lightbox is used (e.g. opened from hero). */
+  hideGalleryPreviewGrid?: boolean;
   /** YouTube video ID (embed), e.g. MC0M3jmvmBE from youtu.be/... */
   youtubeVideoId?: string;
   notionCaseStudyUrl?: string;
@@ -204,7 +206,7 @@ export const PROJECTS: Project[] = [
   {
     id: 7,
     slug: "trhnisi",
-    title: "TrhniSi - směnný marketplace jako mobilní aplikace v prohlížeči",
+    title: "TrhniSi",
     category: "Směnný marketplace",
     description:
       "TrhniSi je mobilně-first marketplace, kde hodnota mění majitele, ne peněženku. Procházej nabídky, ulož zájem a domluv výměnu přímo s druhou stranou.",
@@ -214,25 +216,23 @@ export const PROJECTS: Project[] = [
     imageWidth: 627,
     imageHeight: 627,
     thumbObjectFit: "contain",
-    detailImage: "/images/projects/trhnisi-logo.webp",
-    detailImageWidth: 627,
-    detailImageHeight: 627,
+    detailImage: "/images/projects/trhnisi-screen-01.webp",
+    detailImageWidth: 1170,
+    detailImageHeight: 2532,
     tags: ["React", "Vite", "PWA", "Firebase", "Figma"],
     year: "2026",
     client: "Vlastní projekt",
     role: "Produkt, UX/UI, frontend",
-    websiteUrls: [{ labelKey: "trhnisiLiveDemo", url: "https://trhnisi.vercel.app/" }],
+    hideGalleryPreviewGrid: true,
     galleryImages: [
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 1" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 2" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 3" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 4" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 5" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 6" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 7" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 8" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 9" },
-      { src: "/images/projects/backround.webp", alt: "TrhniSi placeholder 10" },
+      { src: "/images/projects/trhnisi-screen-01.webp", alt: "TrhniSi screen 01" },
+      { src: "/images/projects/trhnisi-screen-02.webp", alt: "TrhniSi screen 02" },
+      { src: "/images/projects/trhnisi-screen-03.webp", alt: "TrhniSi screen 03" },
+      { src: "/images/projects/trhnisi-screen-04.webp", alt: "TrhniSi screen 04" },
+      { src: "/images/projects/trhnisi-screen-05.webp", alt: "TrhniSi screen 05" },
+      { src: "/images/projects/trhnisi-screen-06.webp", alt: "TrhniSi screen 06" },
+      { src: "/images/projects/trhnisi-screen-07.webp", alt: "TrhniSi screen 07" },
+      { src: "/images/projects/trhnisi-screen-08.webp", alt: "TrhniSi screen 08" },
     ],
   },
 ];

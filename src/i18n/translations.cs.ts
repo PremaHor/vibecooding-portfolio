@@ -511,8 +511,6 @@ const cs = {
           'Lidé často nevědí, kde bezpečně a jednoduše vyměnit věci nebo služby. TrhniSi to řeší tokem objevovat - uchovat zájem - napsat - domluvit výměnu.',
         techNote:
           'Za rozhraním stojí moderní frontend (React, Vite) a Firebase pro autentizaci a realtime komunikaci. Design vychází z návrhu ve Figmě, implementace řeší responzivitu, práci s formuláři a péči o právní i informační stránky aplikace. Výsledek ukazuje, že umím spojit designový intent, produktový flow a funkční doručení.',
-        prototypeOnRequest:
-          'Návrh UI a uživatelský research mohu doplnit odkazem na Figmu podle README repozitáře.',
         structured: {
           goalTitle: 'Proč to dává smysl',
           goal:

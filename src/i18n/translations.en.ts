@@ -526,8 +526,6 @@ const en = {
           'People often do not know where to exchange things or services safely and simply. TrhniSi solves this with a clear flow: discover, save interest, message, agree exchange.',
         techNote:
           'Behind the interface is a modern frontend stack (React, Vite) and Firebase for authentication and realtime communication. The design follows Figma and the implementation covers responsiveness, form handling, and legal and information pages. The outcome shows I can connect design intent, product flow, and functional delivery.',
-        prototypeOnRequest:
-          'I can share UI proposal and user research via the Figma link referenced in the repository README.',
         structured: {
           goalTitle: 'Why this makes sense',
           goal:

@@ -356,7 +356,7 @@ export const ProjectPage = () => {
               </motion.div>
             )}
 
-            {project.galleryImages && project.galleryImages.length > 0 && (
+            {project.galleryImages && project.galleryImages.length > 0 && !project.hideGalleryPreviewGrid && (
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }} className="mt-12 sm:mt-16 md:mt-20">
                 <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                   {project.galleryImages.map((img, idx) => (
