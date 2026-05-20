@@ -164,6 +164,7 @@ export const ProjectPage = () => {
   const displayClient = project ? projectLocaleField(lang, tr, 'client', project) : '';
   const displayRole = project ? projectLocaleField(lang, tr, 'role', project) : '';
   const hasGallery = Boolean(project?.galleryImages && project.galleryImages.length > 0);
+  const compactDetailPreview = Boolean(project?.compactDetailPreview);
   const nextTr = t.projects[nextProject.slug as keyof typeof t.projects];
   const nextDisplayTitle = projectLocaleField(lang, nextTr, 'title', nextProject);
 
@@ -267,7 +268,11 @@ export const ProjectPage = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className={
-                project.detailImage
+                compactDetailPreview
+                  ? `mx-auto w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] rounded-2xl sm:rounded-[2rem] overflow-hidden bg-white/5 shadow-2xl ${
+                      hasGallery ? 'cursor-zoom-in' : ''
+                    }`
+                  : project.detailImage
                   ? `w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl flex justify-center items-start ${hasGallery ? 'cursor-zoom-in' : ''}`
                   : `aspect-[16/9] w-full rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-white/5 shadow-2xl ${hasGallery ? 'cursor-zoom-in' : ''}`
               }
@@ -296,7 +301,9 @@ export const ProjectPage = () => {
                     : (project.imageWidth ?? 1200),
                 )}
                 sizes={
-                  project.detailImage
+                  compactDetailPreview
+                    ? '(max-width: 640px) 280px, (max-width: 768px) 320px, 360px'
+                    : project.detailImage
                     ? '(max-width: 768px) 100vw, (max-width: 1920px) min(96vw, 1680px), 1800px'
                     : '(max-width: 768px) 100vw, 1200px'
                 }
@@ -306,7 +313,9 @@ export const ProjectPage = () => {
                 fetchPriority="high"
                 decoding="async"
                 className={
-                  project.detailImage
+                  compactDetailPreview
+                    ? 'w-full h-auto object-contain'
+                    : project.detailImage
                     ? 'w-full h-auto max-w-[min(100%,min(96vw,1800px))] object-contain object-top rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]'
                     : 'w-full h-full object-cover rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem]'
                 }

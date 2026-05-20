@@ -27,6 +27,8 @@ export interface Project {
   /** Intrinsic pixel size of `detailImage` (for layout / CLS); optional */
   detailImageWidth?: number;
   detailImageHeight?: number;
+  /** Render a smaller, centered preview on project detail instead of full-width hero */
+  compactDetailPreview?: boolean;
   tags: string[];
   year: string;
   client: string;
@@ -219,6 +221,7 @@ export const PROJECTS: Project[] = [
     detailImage: "/images/projects/trhnisi-screen-01.webp",
     detailImageWidth: 1170,
     detailImageHeight: 2532,
+    compactDetailPreview: true,
     tags: ["React", "Vite", "PWA", "Firebase", "Figma"],
     year: "2026",
     client: "Vlastní projekt",
