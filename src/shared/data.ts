@@ -247,7 +247,12 @@ export const PROJECTS: Project[] = [
       "Nástroj pro designéry, kteří chtějí předávat brand manuály jinak. Interaktivní koncept prototypu místo statického PDF.",
     fullDescription:
       "Brand Identity Studio je vlastní projekt a koncept prototypu pro interaktivní schvalování vizuální identity.",
-    image: "/images/projects/backround.webp",
+    image: "/images/projects/brand-identity-studio.webp",
+    imageWidth: 1404,
+    imageHeight: 1219,
+    detailImage: "/images/projects/brand-identity-studio.webp",
+    detailImageWidth: 1404,
+    detailImageHeight: 1219,
     tags: ["Brand Strategy", "Visual System", "UI Design", "Figma", "Prototype"],
     year: "2026",
     client: "Vlastní projekt",
